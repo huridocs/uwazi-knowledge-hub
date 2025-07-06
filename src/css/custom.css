@@ -1,0 +1,68 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* Uwazi brand colors based on #42389D primary */
+:root {
+  --ifm-color-primary: #42389d;
+  --ifm-color-primary-dark: #3b328d;
+  --ifm-color-primary-darker: #382f85;
+  --ifm-color-primary-darkest: #2e276e;
+  --ifm-color-primary-light: #493ead;
+  --ifm-color-primary-lighter: #4c41b5;
+  --ifm-color-primary-lightest: #5651c5;
+  
+  /* Enhanced color palette for Uwazi */
+  --ifm-color-secondary: #6c5ce7;
+  --ifm-color-success: #00b894;
+  --ifm-color-info: #0984e3;
+  --ifm-color-warning: #fdcb6e;
+  --ifm-color-danger: #e17055;
+  
+  /* Typography and spacing */
+  --ifm-code-font-size: 95%;
+  --ifm-heading-color: #2d3748;
+  --ifm-font-color-base: #4a5568;
+  
+  /* Code highlighting */
+  --docusaurus-highlighted-code-line-bg: rgba(66, 56, 157, 0.1);
+  
+  /* Custom Uwazi variables */
+  --uwazi-purple-50: #f7f6fd;
+  --uwazi-purple-100: #eeebfa;
+  --uwazi-purple-200: #ddd6f3;
+  --uwazi-purple-300: #c4b5e9;
+  --uwazi-purple-400: #a688dc;
+  --uwazi-purple-500: #42389d;
+  --uwazi-purple-600: #3b328d;
+  --uwazi-purple-700: #322a76;
+  --uwazi-purple-800: #2a235f;
+  --uwazi-purple-900: #241e4f;
+}
+
+/* Dark mode with accessible purple variants */
+[data-theme='dark'] {
+  --ifm-color-primary: #7c6bff;
+  --ifm-color-primary-dark: #6b59ff;
+  --ifm-color-primary-darker: #6051ff;
+  --ifm-color-primary-darkest: #3f2eff;
+  --ifm-color-primary-light: #8d7dff;
+  --ifm-color-primary-lighter: #9885ff;
+  --ifm-color-primary-lightest: #b3a7ff;
+  
+  /* Dark mode enhancements */
+  --ifm-color-secondary: #8b7cf6;
+  --ifm-color-success: #10b981;
+  --ifm-color-info: #3b82f6;
+  --ifm-color-warning: #f59e0b;
+  --ifm-color-danger: #ef4444;
+  
+  /* Dark mode code highlighting */
+  --docusaurus-highlighted-code-line-bg: rgba(124, 107, 255, 0.2);
+  
+  /* Dark mode background adjustments */
+  --ifm-background-color: #1a1a2e;
+  --ifm-background-surface-color: #16213e;
+}
