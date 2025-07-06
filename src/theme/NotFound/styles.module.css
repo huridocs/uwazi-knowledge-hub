@@ -1,0 +1,104 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: 2rem;
+}
+
+.content {
+  text-align: center;
+  max-width: 600px;
+}
+
+.number {
+  font-size: 8rem;
+  font-weight: 900;
+  color: var(--ifm-color-primary);
+  line-height: 1;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--ifm-heading-color);
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1.2rem;
+  color: var(--ifm-font-color-base);
+  margin-bottom: 2.5rem;
+  opacity: 0.8;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.homeButton {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--ifm-color-primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.homeButton:hover {
+  background-color: var(--ifm-color-primary-dark);
+  color: white;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.docsButton {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  border: 2px solid var(--ifm-color-primary);
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.docsButton:hover {
+  background-color: var(--ifm-color-primary);
+  color: white;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .number {
+    font-size: 6rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .description {
+    font-size: 1.1rem;
+  }
+  
+  .actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .homeButton,
+  .docsButton {
+    width: 200px;
+    text-align: center;
+  }
+}
