@@ -4,7 +4,7 @@ Documentation portal implementing the Diátaxis framework for the Uwazi knowledg
 
 ## Prerequisites
 
-- Node.js >= 18.0
+- Node.js >= 20.0
 - npm or yarn
 
 ## Installation
