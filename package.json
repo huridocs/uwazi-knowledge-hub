@@ -12,8 +12,8 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md,mdx,json}\"",
     "type-check": "tsc --noEmit",
     "prepare": "husky"
@@ -23,7 +23,11 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{md,mdx,json}": [
+    "*.{md,mdx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.json": [
       "prettier --write"
     ],
     "*.{ts,tsx}": [

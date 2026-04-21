@@ -65,7 +65,7 @@ export default [
     }),
   },
   {
-    files: ['**/*.{md,mdx}'],
+    files: ['docs/**/*.{md,mdx}', 'blog/**/*.{md,mdx}'],
     rules: {
       'mdx/remark': 'error',
     },

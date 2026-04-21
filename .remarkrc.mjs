@@ -9,13 +9,17 @@ import remarkLintMaximumLineLength from 'remark-lint-maximum-line-length';
 
 function remarkRequireFrontmatter() {
   return (tree, file) => {
+    const rel = file.path ?? '';
+    if (!/[\\/](docs|blog)[\\/]/.test(rel)) return;
+
     const frontmatterNode = tree.children[0];
     if (!frontmatterNode || frontmatterNode.type !== 'yaml') {
-      file.fail(
+      file.message(
         'Missing frontmatter block',
         null,
         'remark-lint:require-frontmatter'
       );
+      return;
     }
     const { value } = frontmatterNode;
     if (!/^title\s*:/m.test(value)) {
