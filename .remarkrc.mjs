@@ -1,7 +1,11 @@
 import remarkFrontmatter from 'remark-frontmatter';
+import remarkPresetLintRecommended from 'remark-preset-lint-recommended';
+import remarkPresetLintConsistent from 'remark-preset-lint-consistent';
 import remarkLintHeadingIncrement from 'remark-lint-heading-increment';
 import remarkLintNoDuplicateHeadings from 'remark-lint-no-duplicate-headings';
 import remarkLintNoEmptyUrl from 'remark-lint-no-empty-url';
+import remarkLintNoMultipleToplevelHeadings from 'remark-lint-no-multiple-toplevel-headings';
+import remarkLintFirstHeadingLevel from 'remark-lint-first-heading-level';
 import remarkLintUnorderedListMarkerStyle from 'remark-lint-unordered-list-marker-style';
 import remarkLintNoTrailingSpaces from 'remark-lint-no-trailing-spaces';
 import remarkLintNoConsecutiveBlankLines from 'remark-lint-no-consecutive-blank-lines';
@@ -41,11 +45,15 @@ function remarkRequireFrontmatter() {
 
 export default {
   plugins: [
+    remarkPresetLintRecommended,
+    remarkPresetLintConsistent,
     remarkFrontmatter,
     remarkRequireFrontmatter,
     remarkLintHeadingIncrement,
     remarkLintNoDuplicateHeadings,
     remarkLintNoEmptyUrl,
+    remarkLintNoMultipleToplevelHeadings,
+    [remarkLintFirstHeadingLevel, 2],
     [remarkLintUnorderedListMarkerStyle, '-'],
     remarkLintNoTrailingSpaces,
     remarkLintNoConsecutiveBlankLines,
