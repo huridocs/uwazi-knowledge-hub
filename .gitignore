@@ -51,3 +51,8 @@ Thumbs.db
 *.backup
 *.bak
 
+# Claude Code specific
+.claude/
+
+# Git worktrees
+.worktrees/

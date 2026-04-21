@@ -1,6 +1,7 @@
 # Uwazi Knowledge Hub
 
-Documentation portal implementing the Diátaxis framework for the Uwazi knowledge hub.
+Documentation portal implementing the Diátaxis framework for the Uwazi knowledge
+hub.
 
 ## Prerequisites
 

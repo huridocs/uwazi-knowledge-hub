@@ -1,11 +1,12 @@
-const js = require('@eslint/js');
-const typescript = require('@typescript-eslint/eslint-plugin');
-const typescriptParser = require('@typescript-eslint/parser');
-const react = require('eslint-plugin-react');
-const reactHooks = require('eslint-plugin-react-hooks');
-const prettier = require('eslint-plugin-prettier');
+import js from '@eslint/js';
+import typescript from '@typescript-eslint/eslint-plugin';
+import typescriptParser from '@typescript-eslint/parser';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import prettier from 'eslint-plugin-prettier';
+import * as mdx from 'eslint-plugin-mdx';
 
-module.exports = [
+export default [
   js.configs.recommended,
   {
     ignores: ['.docusaurus/**', 'build/**', 'node_modules/**'],
@@ -55,6 +56,18 @@ module.exports = [
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
+  {
+    ...mdx.flat,
+    processor: mdx.createRemarkProcessor({
+      lintCodeBlocks: true,
+    }),
+  },
+  {
+    files: ['docs/**/*.{md,mdx}', 'blog/**/*.{md,mdx}'],
+    rules: {
+      'mdx/remark': 'error',
     },
   },
   {
