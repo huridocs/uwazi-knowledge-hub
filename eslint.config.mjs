@@ -61,12 +61,14 @@ export default [
   {
     ...mdx.flat,
     processor: mdx.createRemarkProcessor({
-      lintCodeBlocks: false,
+      lintCodeBlocks: true,
     }),
   },
   {
     files: ['**/*.{md,mdx}'],
-    rules: {},
+    rules: {
+      'mdx/remark': 'error',
+    },
   },
   {
     files: ['**/*.js'],

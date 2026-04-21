@@ -56,7 +56,6 @@
     "lint-staged": "^16.1.2",
     "prettier": "^3.6.2",
     "remark-frontmatter": "^5.0.0",
-    "remark-lint": "^10.0.1",
     "remark-lint-heading-increment": "^4.0.1",
     "remark-lint-maximum-line-length": "^4.1.1",
     "remark-lint-no-consecutive-blank-lines": "^5.0.1",
