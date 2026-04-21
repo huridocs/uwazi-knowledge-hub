@@ -9,7 +9,7 @@ import * as mdx from 'eslint-plugin-mdx';
 export default [
   js.configs.recommended,
   {
-    ignores: ['.docusaurus/**', 'build/**', 'node_modules/**'],
+    ignores: ['.docusaurus/**', 'build/**', 'node_modules/**', '.claude/**'],
   },
   {
     files: ['**/*.{ts,tsx,js,jsx}'],
