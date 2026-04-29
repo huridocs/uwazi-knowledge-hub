@@ -1,0 +1,1026 @@
+---
+title: Uwazi documentation style guide
+description:
+  Guidelines for writing documentation content in the Uwazi Knowledge Hub
+author: aphilop
+last_update:
+  date: 2026-04-29
+  author: aphilop
+unlisted: true
+---
+
+## Overview
+
+This style guide is the single source of truth for creating Uwazi guides. It
+serves anyone who writes and reviews relevant content for our end users:
+non-technical people in civil society organizations (CSOs) who often speak
+English as a second language.
+
+### Goal
+
+Ensure all Uwazi documentation is clear and effortless to read. Respect users'
+expertise and time.
+
+### What this guide covers
+
+It defines and standardizes the following:
+
+- **Voice and tone:** How Uwazi documents sound and adapt to readers
+- **Branding and inclusive language:** Consistent terminology and respectful,
+  culturally aware language
+- **Content types:** Four formats and when to use each
+- **Core writing rules:** Six rules for clarity and accessibility
+- **Formatting rules:** Guidelines for consistent formatting of headings, lists,
+  code, tables, and more
+- **Readability metrics:** Target scores to ensure content is readable for
+  non-native English speakers
+
+## Voice and tone
+
+Voice represents our personality in writing, while tone conveys our message's
+emotional temperature. Together, they create a friendly conversational style for
+our partners. This section explains Uwazi's voice and how to adjust tone for
+different situations.
+
+### Uwazi's voice
+
+Uwazi's voice has three main characteristics:
+
+1. **Clear**: Use straightforward, jargon-free language. Explain not just what
+   needs to happen but also why.
+   - ✓ "Select **Add entity** to create a new record."
+   - ✗ "Instantiate a new entity via the UI widget."
+
+2. **Respectful**: Recognize the user's expertise without assuming technical
+   knowledge. Assume intelligence, not familiarity with technology.
+   - ✓ "Human rights defenders often track cases, events, and sources. Uwazi
+     calls these entities."
+   - ✗ "Even non-technical users can use this software."
+
+3. **Practical**: Focus on helping users complete their tasks. Include examples
+   and next steps, valuing their time.
+   - ✓ "After uploading 100 documents, you'll see them listed as entities in the
+     **Library** page."
+   - ✗ "Uwazi supports document management through many features."
+
+### How tone changes by audience
+
+- **End-user guides** (for investigators, researchers, advocates)
+  - Tone: Supportive, encouraging, step-by-step
+  - Focus: How to perform real work tasks
+  - Example:
+
+    ```text
+    Creating your first case file needs a few steps. This guide walks you
+    through each one. Once you understand the workflow, the process is
+    straightforward.
+    ```
+
+- **Administrator guides** (for Uwazi instance owners or managers)
+  - Tone: Professional, direct, technical where needed
+  - Focus: Configuration, permissions, maintenance
+  - Example:
+
+    ```text
+    Configure the contact form recipient. Go to **Settings > Collection**, enter
+    an email address in the **Contact form email** field, and save.
+    ```
+
+- **Developer guides** (for engineers extending Uwazi)
+  - Tone: Precise, example-driven, patterns-focused
+  - Focus: APIs, architecture, integration patterns
+  - Example:
+
+    ```text
+    Use the Entity API to create, update, and delete entities. See the example
+    below for the needed request format.
+    ```
+
+- **System administrator guides** (for self-hosted installations)
+  - Tone: Clear, safety-conscious, thorough
+  - Focus: Installation, configuration, troubleshooting, backups
+  - Example:
+
+    ```text
+    Before upgrading, back up your database. If the upgrade fails, you can
+    restore from this backup."
+    ```
+
+## Branding considerations
+
+Consistent branding builds trust with our partners.
+
+### Brand naming
+
+Use these terms consistently:
+
+- **Uwazi**: The product name. Always capitalized. Exception when using it in a
+  URL or a slug.
+  - ✓ "Uwazi is a free, open-source platform..."
+  - ✓ "Visit [uwazi.io](https://uwazi.io) to learn more."
+  - ✓ slug: "uwazi-documentation-style-guide"
+  - ✗ "uwazi is..." or "the Uwazi system is..."
+
+- **HURIDOCS**: The organization that develops Uwazi. Always use capital
+  letters, as it is an acronym for "Human Rights Information and Documentation
+  Systems."
+  - ✓ "HURIDOCS developed Uwazi to help human rights defenders."
+  - ✗ "Huridocs" or "huridocs"
+
+- **Instance**: A separate installation of Uwazi for one partner.
+  - ✓ "Your instance is a dedicated installation of Uwazi."
+  - ✗ "Your account" or "Your workspace"
+
+### Inclusive and respectful language
+
+Uwazi guides must be welcoming and unbiased, reflecting users' expertise
+worldwide.
+
+**Respect expertise:**
+
+Our users are experts in their fields. Avoid language that undermines their
+knowledge or makes assumptions about them.
+
+- ✓ "Uwazi helps investigators document cases." (User is the expert.)
+- ✗ "Uwazi lets non-experts do complex work." (Othering language)
+- ✓ "Documenting sensitive material needs careful access control." (Serious
+  tone)
+- ✗ "Just control who sees what!" (Minimizing tone)
+
+**Use clear language:**
+
+Avoid using corporate or military terms. Instead, use straightforward language.
+
+- ✓ "Set up Uwazi on your server." or "Uwazi provides reliable protection for
+  sensitive documents."
+- ✗ "Deploy Uwazi" or "Uwazi is a fortress-like platform."
+
+**Be gender-neutral and inclusive:**
+
+- Use "they/them" for singular pronouns, or use plural forms.
+  - ✓ "A user can create entities. They can share them with colleagues."
+  - ✗ "A user can create entities. He/she can share them."
+- Don't make assumptions about gender based on job titles. Use neutral terms or
+  the specific title without pronouns.
+  - ✓ "The instance manager can assign permissions."
+  - ✗ "The instance manager and his team..."
+
+**Avoid ableist language:**
+
+Don’t use phrases that mock people with disabilities. Focus on neutral,
+capability-driven language.
+
+- ✓ "This feature is straightforward to use" or "This feature needs minimal
+  setup."
+- ✗ "This feature is a no-brainer" or "You'd have to be blind not to see..."
+
+**Use culturally sensitive examples:**
+
+- Include diverse names and situations that reflect the global nature of our
+  users.
+  - ✓ "Ahmad Al-Rashid," "Cairo Demonstration"
+  - ✗ Repetitive Western names or generic locations
+
+- Avoid idioms and cultural references that might confuse non-native speakers.
+  - ✓ "If the import fails, try again after checking the file format."
+  - ✗ "If the import fails, give it another shot."
+
+- Don’t assume a specific organizational structure. Remember, CSOs vary widely
+  in size and scope.
+  - ✓ "In a small organization, one person might manage the Uwazi instance. In
+    larger organizations, there may be a dedicated team."
+  - ✗ "Your IT department will manage the Uwazi instance."
+
+- Use realistic examples relevant to human rights work, like documenting cases,
+  tracking events, or managing sources.
+- ✓ "Link related incidents across locations to identify patterns of
+  violations."
+- ✗ "Link your documents together for better organization."
+
+## Content types
+
+Uwazi documentation uses four types based on the [Diátaxis](https://diataxis.fr)
+framework:
+
+### Tutorials
+
+**Definition:** A tutorial is a guided introduction that helps users complete
+their first meaningful task with Uwazi.
+
+**When to use it:** Use tutorials for major workflows that new users need to
+learn. Each tutorial focuses on one specific workflow.
+
+**Tone:** The tone should be encouraging, step-by-step, and reassuring, with a
+focus on guiding users through the process.
+
+### How-tos
+
+**Definition:** A how-to provides step-by-step instructions for completing a
+specific task. It assumes the user is somewhat familiar with Uwazi.
+
+**When to use it:** Use how-tos for features, settings, and specific tasks. Each
+how-to covers one individual task.
+
+**Tone:** The tone should be direct and practical, assuming that the reader
+knows the basics of Uwazi.
+
+### Explanations
+
+**Definition:** Explanations offer background information to help readers
+understand why something works the way it does. They focus on building
+understanding rather than teaching tasks.
+
+**When to use it:** Use explanations for concepts, architecture, and design
+decisions to help readers make informed choices.
+
+**Tone and voice:** The tone should be informative and thorough. It should
+appeal to the reader's curiosity rather than urgency.
+
+### References
+
+**Definition:** References describe how something works, including menus, APIs,
+settings, and configuration options. They focus on what something is rather than
+how to use it.
+
+**When to use it:** Use references for complete lists, API documentation,
+settings, and features. Readers typically come here to look up information.
+
+**Tone and voice:** The tone should be precise and concise, assuming the reader
+knows what they are looking for.
+
+### Choosing the right content type
+
+To determine the right content type to write, ask two questions:
+
+1. **Action or Cognition?** Does the user need to **do** something (action) or
+   **understand** something (cognition)?
+2. **Learning or Applying?** Is the user **learning new skills** (acquisition)
+   or **using existing knowledge** (application)?
+
+**Decision matrix:**
+
+- **Tutorial** = Action + Learning (Users learn by doing something for the first
+  time)
+- **How-to** = Action + Applying (Users do a specific task using existing
+  knowledge)
+- **Explanation** = Cognition + Learning (Users understand concepts and why
+  things work)
+- **Reference** = Cognition + Applying (Users look up facts about existing
+  features)
+
+## Core writing rules
+
+Follow these six core rules to make your content clear and concise. These
+guidelines help improve clarity, tone, and readability for non-native English
+speakers and non-technical readers.
+
+### 1. Use active voice
+
+**Rule:** Make clear who or what is performing a particular action not just what
+is happening.
+
+**Why it matters:** Active voice is clearer making it better for non-native
+readers to understand.
+
+**Before (passive):**
+
+```text
+Entities are created by selecting the **Add entity** button. A template must be
+selected from the dropdown.
+```
+
+**After (active):**
+
+```text
+Select the **Add entity** button to create an entity. Then select a template
+from the dropdown.
+```
+
+**How to apply:** Look for words like "is/are/was/were" in your sentences.
+Rewrite them to make the subject the doer of the action.
+
+### 2. Use common words
+
+**Rule:** Choose everyday words over complex ones.
+
+**Why it matters:** Common words are easier to understand and are more familiar
+to non-native speakers.
+
+**Simple word alternatives:**
+
+| Avoid       | Use                |
+| ----------- | ------------------ |
+| utilize     | use                |
+| facilitate  | help               |
+| require     | need               |
+| subsequent  | next               |
+| modify      | change             |
+| implement   | set up, use, or do |
+| allocate    | assign, set aside  |
+| commence    | start, begin       |
+| terminate   | end, stop, delete  |
+| proceed     | go, continue       |
+| prior to    | before             |
+| in order to | to                 |
+
+**How to apply:** If a word has a simpler synonym, use it. Read your sentences
+aloud; if they sound stiff, simplify them.
+
+### 3. Write short sentences
+
+**Rule:** Aim for sentences that average 15-20 words.
+
+**Why it matters:** Short sentences are easier to read, especially for
+non-native speakers.
+
+**Before (26 words):**
+
+```text
+Entities are records in Uwazi that can represent documents, people, events, or
+other objects relevant to your work and can be customized to fit your investigation.
+```
+
+**After (three sentences, average 7 words):**
+
+```text
+Entities are records in Uwazi. They can represent documents, people, or events.
+You can customize each entity for your investigation.
+```
+
+**How to apply:**
+
+1. Find sentences longer than 25 words.
+2. Break them into smaller sentences, each containing one idea.
+3. Remove connecting words like "and," "which," and "that can" where possible.
+
+### 4. One idea per paragraph
+
+**Rule:** Focus each paragraph on a single topic. Aim for 3-5 sentences.
+
+**Why it matters:** Focused paragraphs are easier to scan, helping readers
+quickly grasp the main point. Long paragraphs can confuse non-native readers.
+
+**Before (two ideas in one paragraph):**
+
+```text
+Entities can have properties like Name, Description, and Custom. You can export
+entities as CSV or JSON for analysis. Properties are defined by the template.
+```
+
+**After (separated by idea):**
+
+```text
+Entities have properties like Name, Description, and Custom. Each property is
+defined by the template. Customize templates to add properties you need.
+
+Export entities as CSV or JSON for analysis. This lets you use external tools to
+analyze your data.
+```
+
+**How to apply:**
+
+1. Identify the main topic of each paragraph.
+2. Split paragraphs covering two topics into separate ones.
+3. Keep each paragraph to about 3-5 sentences (roughly 50-100 words).
+
+### 5. Avoid idioms and cultural references
+
+**Rule:** Use literal language instead of idioms that may confuse non-native
+speakers.
+
+**Why it matters:** Non-native speakers may not understand idioms. Literal
+language is clear across cultures.
+
+**Avoid:**
+
+- "at the end of the day" (vague; means "ultimately")
+- "ballpark figure" (confusing metaphor for "rough estimate")
+- "in a nutshell" (unclear; means "briefly")
+- "piece of cake" (idiom; means "easy")
+- "heads up" (confusing; means "warning" or "notice")
+
+**Before (with idiom):**
+
+```text
+Creating an instance from scratch is a piece of cake. At the end of the day,
+you'll have a working system.
+```
+
+**After (literal):**
+
+```text
+Creating an instance is straightforward. You'll have a working system in about
+15 minutes.
+```
+
+**How to apply:** Read sentences aloud. If they don't make sense literally,
+rewrite them.
+
+### 6. Use contractions
+
+**Rule:** Use "don't," "you'll," and "can't" instead of "do not," "you will,"
+and "cannot."
+
+**Why it matters:** Contractions sound more natural and friendly, improving
+readability and making the text approachable.
+
+**Before (formal):**
+
+```text
+You will select the Create button. You cannot proceed without a template. If the
+upload does not work, do not panic.
+```
+
+**After (conversational):**
+
+```text
+You'll select the Create button. You can't proceed without a template. If the
+upload doesn't work, don't panic.
+```
+
+**How to apply:** Use contractions throughout your writing. Avoid contractions
+only in headings.
+
+## Formatting rules
+
+Consistent formatting improves scannability. This is critical for non-native
+English speakers reading on screen.
+
+### 1. Headings
+
+**Rule:** Start with H2 for main sections, H3 for subsections only. The
+frontmatter `title` field uses H1, so never use H1 in the document body. Always
+maintain the correct heading levels without skipping.
+
+**Capitalization:** Use sentence-style capitalization, meaning only capitalize
+the first word and proper nouns.
+
+**Example:**
+
+```text
+---
+title: How to create your first entity
+---
+
+## Understanding entities (H2: main section)
+
+### Types of entities (H3: subsection)
+```
+
+**What to avoid:**
+
+- ✗ H1 headings in the document body (title goes in frontmatter)
+- ✗ Title case headings (use sentence-style instead)
+- ✗ Headings without content below them
+
+### 2. Lists
+
+**Unordered lists:** Use there for choices or items with no order.
+
+```text
+When creating an entity, you might add:
+
+- A title and description
+- Properties like date or location
+- Relationships to other entities
+```
+
+**Ordered lists:** Use these for steps or sequences.
+
+```text
+To share an entity:
+
+1. Select the **Share** button.
+2. Type a colleague's name.
+3. Select their permission level.
+4. Select **Confirm**.
+```
+
+**Rules:**
+
+- Limit lists to 5-7 items (if longer, break it up).
+- Keep each item to 1-2 sentences.
+- Start each item with a capital letter.
+- Include introductory text before every list to explain its relevance.
+- If the elements in a list are complete sentences, end each one with a period
+  or a question mark. If they are sentence fragments, do not use periods.
+
+**What to avoid:**
+
+- ✗ Lists without introductory text
+- ✗ Lists longer than 7 items
+- ✗ Mixing sentence fragments and complete sentences in the same list
+- ✗ Nested lists that go more than 2 levels deep
+
+### 3. Code blocks and inline code
+
+**Inline code:** Use for file names, command names, or code snippets with less
+than 5 words.
+
+```text
+Run the command `npm start` to begin.
+
+The configuration file is named `config.json`.
+```
+
+**Code blocks:** Use for longer code, JSON, or commands spanning many lines.
+Always include a language tag for clarity.
+
+````text
+To start the development environment, run these commands in sequence:
+
+  ```bash
+  npm start
+  npm test
+  npm run build
+  ```
+
+````
+
+````text
+When you create an entity, the system stores it with metadata, including a
+unique ID and creation timestamp:
+
+  ```json
+  {
+   "id": "entity123",
+   "title": "Case File",
+   "createdAt": "2024-04-23"
+  }
+````
+
+**Always explain code:** After every code snippet, add a brief explanation of
+what it does or why it's important.
+
+**What to avoid:**
+
+- ✗ Code blocks without language tags
+- ✗ Code without explanation
+- ✗ Inline code for long snippets (use code blocks instead)
+
+### 4. Callouts
+
+**Callouts are blocks that draw attention to specific details.** Use them to
+highlight consequences of actions, provide helpful guidance, or share
+time-saving advice. Use callouts sparingly; too many can lose their
+effectiveness.
+
+**Info:** Extra details that might be useful.
+
+```text
+:::info
+
+You can create entities without uploading documents. Documents are optional.
+
+:::
+```
+
+**Tip:** Helpful advice that will save effort/time or best practices.
+
+```text
+:::tip
+
+Create templates for each entity type you use. This saves time and ensures
+consistency.
+
+:::
+```
+
+**Warning:** Safety-critical or important cautions. Use for irreversible actions
+or common pitfalls.
+
+```text
+:::warning
+
+Uninstalling a language will affect all users who have this language enabled.
+
+:::
+```
+
+**What to avoid:**
+
+- ✗ More than 3 callouts per `.md` file
+- ✗ Text in callouts longer than 2 sentences
+- ✗ Using notes for critical messages (use warnings instead)
+
+### 5. Links
+
+**Link text:** Use descriptive text. Avoid vague phrases like "here," "link," or
+"read more."
+
+**Before (vague):**
+
+```text
+For more details, see [here](link).
+```
+
+**After (descriptive):**
+
+```text
+Learn how to [create relationships between entities](link).
+```
+
+**External vs internal:**
+
+- **Internal links:** Link to other sections within a guide or other Uwazi docs.
+  Use relative paths.
+
+  ```text
+  See [Creating entities](/docs/how-to/create-entity.mdx)
+  ```
+
+- **External links:** Link to external resources (for example, Diátaxis
+  framework or GitHub). Use complete URLs.
+
+  ```text
+  Learn more about content types at [Diátaxis](https://diataxis.fr)
+  ```
+
+**What to avoid:**
+
+- ✗ Vague link text like "here," "link," or "read more"
+- ✗ Long URLs as link text
+- ✗ Overloading the text with links, which can confuse readers
+
+### 6. Images
+
+**Rule:** Minimize the use of screenshots and images. When needed, use them
+sparingly, ensuring they have descriptive alt text.
+
+**Why it matters:** Screenshots can create accessibility issues for screen
+reader users and are hard to localize. Always opt for text over images when
+possible. Never use images to communicate textual information, such as tables or
+code examples.
+
+**When to include images:**
+
+- To show specific UI elements users must interact with.
+- To explain workflows or relationships through diagrams.
+- For icons within the UI that require a description.
+
+**Alt text is mandatory.** Alt text supports screen reader users and appears
+when images do not load. For icons, describe their function rather than their
+appearance (for example, "Add" for a + icon, instead of "Plus sign").
+
+**Good alt text:** "The Uwazi toolbar with the 'Add entity' button highlighted
+in blue"
+
+**Bad alt text:** "screenshot," "image," "diagram"
+
+**Format:**
+
+```text
+![The Uwazi toolbar with the 'Add entity' button highlighted](/img/add-entity-button.png)
+```
+
+**Image file naming:**
+
+Name image files consistently. Use lowercase with hyphens, and include a
+description of what the image shows.
+
+- ✓ `entity-creation-form.png`
+- ✓ `instance-settings-permissions-table.png`
+- ✗ `Screenshot1.png`
+- ✗ `image_final_version_2.png`
+
+**Naming convention:** `feature-or-action-element-type.png`
+
+Examples:
+
+- `create-entity-button.png` (button location)
+- `permissions-dialog-form.png` (dialog or form)
+- `entity-list-columns.png` (list or table)
+- `workflow-diagram.png` (diagram or infographic)
+
+**What to avoid:**
+
+- ✗ Images without alt text
+- ✗ Images as the only explanation (include text too)
+- ✗ Generic alt text ("image," "screenshot")
+- ✗ Decorative images (remove them instead)
+- ✗ Screenshot filenames (use descriptive names instead)
+
+### 7. Highlighting
+
+**Bold:** Use for UI elements (buttons, properties, menus), key terms, and
+emphasis.
+
+```text
+Select the **Save** button.
+
+The **Entity** page shows all entities in your instance.
+
+This is **important** to remember.
+```
+
+**Italics:** Use italics when:
+
+- Introducing a new term that you're defining right away
+- Referring to a word, phrase, or letter in a self-referential way (often called
+  "words as words")
+
+```text
+An _entity_ is a record representing a document, person, or event.
+
+Don't use _&_ (ampersand) as a conjunction. Use the word _and_ instead.
+```
+
+**Rules:**
+
+- Don't overuse bold or italics; limit to 2-3 per page.
+- Never use all caps for emphasis (use bold instead).
+
+**What to avoid:**
+
+- ✗ Mixing highlighting styles (don't use both bold and italic for one word)
+
+### 8. Numbers
+
+**Rule:** Decide between spelling out words (one, two, ten) and using numerals
+(1, 2, 10) for numbers based on context.
+
+**Why it matters:** Consistent formatting enhances readability and supports
+non-native readers.
+
+**Rules:**
+
+- **Ordinal numbers:** Always spell out ordinal numbers in text.
+- ✓ "This guide will show you how to create your first template."
+- ✗ "This guide will show you how to create your 1st template."
+
+- **Numbers as words** Use words for numbers 1–9 in regular prose (except in
+  steps, code, or references).
+  - ✓ "Create three templates for different entity types."
+  - ✗ "Create 3 templates for different entity types."
+
+- **Numbers as numerals:** Always use numerals for numbers 10 and above.
+  - ✓ "Your instance can hold up to 100,000 entities."
+  - ✗ "Your instance can hold up to one hundred thousand entities."
+
+- **Use numerals in:**
+  - Step numbers (Step 1, Step 2)
+  - Code snippets, commands, JSON, or configuration (even single digits)
+  - Data measurements (5 MB, 2 minutes, 3 days)
+  - Percentages (25%, 100%)
+  - Dates (2024-04-23 or April 23, 2024)
+  - Page or section references (Page 5, Section 3)
+
+**Examples:**
+
+```text
+Follow these three steps to create your first entity.
+
+1. Select the **Add entity** button.
+2. Select a template.
+3. Fill in the fields.
+```
+
+```text
+Upload files up to 500 MB. The process takes about 2 minutes.
+```
+
+```text
+Your instance has 4,250 entities and counting.
+```
+
+**What to avoid:**
+
+- ✗ Mixing numbers as words and numerals inconsistently (don't write "5 apples
+  and six oranges")
+- ✗ Spelling out numbers 10 and above (always use numerals for these) (don't
+  write "ten templates")
+- ✗ Using numerals in regular narrative prose (don't write "Follow these 3
+  steps")
+
+### 9. UI interaction verbs
+
+Use these verbs consistently when describing how users interact with the
+interface. These are terms that work across keyboard, mouse, touch, and voice
+input methods.
+
+- **Select:** Choosing a button, checkbox, option from a dropdown, menu item, or
+  link. Use for any action the user chooses.
+  - "Select **Save** to confirm changes."
+  - "Select **Case File** from the template dropdown."
+  - "Select the **Include archived entities** checkbox."
+
+- **Clear:** Removing a selection from a checkbox or field. The opposite of
+  "Select" for checkboxes.
+  - "Clear the **Include archived entities** checkbox to hide archived items."
+  - "Clear the **Notify me** option if you don't want email notifications."
+
+- **Go to:** Navigating to a tab, page, section, or external resource.
+  - "Go to **Settings > Permissions > User Roles**."
+  - "Go to the Entities page to view all records."
+
+- **Open/Close:** Opening or closing files, applications, dialogs, or panels.
+  - "Open the **Create Entity** dialog."
+  - "Close the settings panel when finished."
+
+- **Press:** Activating keyboard keys or keyboard shortcuts.
+  - "Press **Enter** to submit the form."
+  - "Press **Ctrl+S** (or **Cmd+S** on Mac) to save."
+
+- **Enter/Type:** Typing text or values into a field.
+  - "Type your instance name in the **Name** field."
+  - "Enter a description for the entity."
+
+**What to avoid:**
+
+- ✗ "Click" (use "Select" for buttons and menus instead)
+- ✗ Lowercase button names (use exact capitalization from UI)
+- ✗ Vague references ("the button" instead of "the **Save** button")
+- ✗ Outdated or incorrect UI element names (keep them current with the product)
+
+### 10. Punctuation
+
+**Oxford comma:** Use the Oxford comma (serial comma before "and" in lists). It
+improves clarity for non-native readers.
+
+- ✓ "Entities, relationships, and templates are core concepts."
+- ✗ "Entities, relationships and templates are core concepts."
+
+**Periods:** Use one space after periods, not two. Single spacing is standard in
+modern technical writing.
+
+### 11. Tables
+
+**When to use tables:**
+
+- Comparing features or options
+- Showing properties with many columns
+- Displaying configuration settings
+- Organizing reference material with clear headers
+
+**Rules:**
+
+- Use a header row with bold or emphasized text for column titles.
+- Keep columns to 3-5 max (if more, consider using more tables or a list).
+- Align text left in most columns; right-align numbers.
+- Keep cell content concise: 1-2 sentences max.
+- Always include introductory text before the table explaining what it shows.
+
+**Example:**
+
+```text
+When choosing a permission level, consider what users need to do:
+
+| Permission | Can view | Can edit | Can delete | Can share |
+| ---------- | -------- | -------- | ---------- | --------- |
+| Viewer     | ✓        | ✗        | ✗          | ✗         |
+| Editor     | ✓        | ✓        | ✗          | ✗         |
+| Admin      | ✓        | ✓        | ✓          | ✓         |
+```
+
+**What to avoid:**
+
+- ✗ Tables without intro text
+- ✗ More than 5 columns (break into more tables)
+- ✗ Tables for information that works better as a list
+- ✗ Empty cells (use "—" or "N/A" if appropriate)
+
+### 12. Spelling and English variants
+
+**Rule:** Use Oxford English spelling consistently.
+
+**Why it matters:** Uwazi is a global platform serving an international
+community of partners. Oxford spelling is the standard in international
+technical writing and academic publishing (used by Nature, UNESCO, NATO, and
+major university presses). Consistent spelling improves professionalism and
+readability for international readers.
+
+**Oxford spelling key rules:**
+
+- **-ize endings:** Use "-ize" for Greek-derived words (not "-ise").
+  - "organize"
+  - "realize"
+  - "recognize"
+- **-lyse endings:** Keep "-lyse" (not "-lyze") for words from Greek noun stems.
+  - "analyse"
+  - "paralyse"
+  - "dialyse"
+- **-our endings:** Use "colour," "behaviour," "favour" (British standard, not
+  "-or").
+- **Dialog boxes:** Keep "dialog" (not "dialogue") when referencing UI elements,
+  as this is the standard term in software.
+
+**Examples in context:**
+
+- ✓ "Customize your templates to organize entities by type."
+- ✓ "Analyse the data to optimize performance."
+- ✓ "The dialogue between users and the system happens in the dialog box."
+- ✗ "Customise your templates to organise entities by type." (British, not
+  Oxford)
+- ✗ "Analyse the data to optimise performance." (mixing -lyse with -ise)
+
+**What to avoid:**
+
+- ✗ Mixing UK and US spellings in the same document
+- ✗ Using "-ise" endings for Greek-derived words (use "-ize" instead)
+- ✗ Using "-lyze" for Greek noun-stem words (use "-lyse" instead)
+- ✗ Assuming all readers are from the US or UK
+- ✗ "Dialog" in prose outside UI references (use "dialogue" in general writing)
+
+---
+
+## Readability metrics
+
+Three readability metrics ensure our guides are accessible for non-native
+English speakers. Keep in mind that these scores are unreliable for documents
+under 300 words.
+
+### Flesch Reading Ease: target 70 or above
+
+Measures readability on a scale of 0-100. Higher is easier.
+
+- 90-100: Very easy (elementary school level)
+- 70-89: Easy (plain English)
+- 60-69: Standard (high school level)
+- 0-59: Difficult (college level or higher)
+
+### Gunning Fog Index: target 10 or below
+
+Measures the years of education needed to understand the text. Lower is easier.
+
+- 6 or below: Easy (middle school)
+- 9-12: Moderate (high school)
+- 13-16: Difficult (college)
+- 17+: Very difficult (college graduate)
+
+### SMOG Grade: target 10 or below
+
+Estimates the years of education needed. Considered most accurate for healthcare
+and accessible writing. Lower is easier.
+
+- 6-8: Easy
+- 9-12: Moderate
+- 13-15: Difficult
+- 16+: Very difficult
+
+**Target: 10 or below** (moderate)
+
+### How to interpret conflicts
+
+Metrics sometimes give conflicting guidance. When they conflict, follow this
+priority:
+
+#### Priority 1: Gunning Fog Index (10 or below)
+
+- Prefer simple words and avoid complex terms.
+- Complex words hurt non-native readers more than longer sentences.
+- If you must choose, use simple words even if sentences get slightly longer.
+
+#### Priority 2: Flesch Reading Ease (70 or above)
+
+- After ensuring simple words, aim for shorter sentences.
+- Longer sentences with simple words are fine if needed.
+
+#### Priority 3: SMOG Grade (10 or below)
+
+- SMOG penalizes words with 3+ syllables.
+- Use as a tiebreaker when Gunning Fog and Flesch conflict.
+
+**Example conflict:**
+
+Your paragraph scores:
+
+- Flesch: 62 (too low; target 70+)
+- Gunning Fog: 11 (too high; target 10 or below)
+- SMOG: 11 (too high; target 10 or below)
+
+**Solution:** Focus on Gunning Fog first. Replace complex words with simpler
+alternatives. This will fix Flesch as a side effect.
+
+### Common fixes for low metrics
+
+#### If Flesch is too low (&lt;70)
+
+1. Check Gunning Fog; if it's high, simplify words (Priority 1).
+2. If Gunning Fog is fine, shorten sentences.
+3. Break long paragraphs into shorter ones.
+
+#### If Gunning Fog is too high (&gt;10)
+
+1. Replace complex words with common alternatives.
+2. Define technical terms on first use.
+3. Use shorter words: "use" not "utilize," "help" not "facilitate".
+
+#### If SMOG is too high (&gt;10)
+
+1. Replace 3+ syllable words with simpler alternatives.
+2. Use contractions: "don't" instead of "do not."
+3. Break long words into a few shorter words.
+
+**Note for style guide readers:** This style guide itself is for documentation
+writers, a more technical audience who can handle college-level complexity. The
+readability metrics above apply to **guides you write using this style guide**,
+not to the style guide itself.
+
+---
+
+**AI disclosure:** This document was drafted with the assistance of Claude Code
+(Anthropic). The tool was used to research documentation style guides, best
+practices, structure the guidelines, and identify redundancies and
+contradictions during review. All content was reviewed, edited, and finalised by
+a human. AI assistance was used in accordance with HURIDOCS’ Internal AI
+Governance Policy and Framework.
