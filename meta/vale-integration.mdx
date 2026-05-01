@@ -19,7 +19,7 @@ Complete these steps before vale runs on your machine.
 2. Download the third-party style packages:
 
    ```bash
-   vale --config meta/.vale.ini sync
+   vale sync
    ```
 
 3. Install `npm` dependencies (includes `mdx2vast` for MDX support):
@@ -45,13 +45,13 @@ caught until vale is set up.
 To check the full `docs/` directory:
 
 ```bash
-vale --config meta/.vale.ini --minAlertLevel warning docs/
+vale --minAlertLevel warning docs/
 ```
 
 To check a single file:
 
 ```bash
-vale --config meta/.vale.ini --minAlertLevel warning docs/how-to/my-guide.mdx
+vale --minAlertLevel warning docs/how-to/my-guide.mdx
 ```
 
 ## Rules reference

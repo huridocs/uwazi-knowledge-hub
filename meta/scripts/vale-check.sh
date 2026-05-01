@@ -12,8 +12,10 @@ fi
 # Make mdx2vast available to vale without requiring global install
 export PATH="$PROJECT_ROOT/node_modules/.bin:$PATH"
 
+TARGET="${*:-docs}"
+
 # Show all alerts (warnings + errors) for developer visibility
-vale --config meta/.vale.ini --minAlertLevel warning "$@" || true
+vale --minAlertLevel warning $TARGET || true
 
 # Block only on error-level alerts (MinAlertLevel = error in .vale.ini)
-vale --config meta/.vale.ini --minAlertLevel error "$@" > /dev/null 2>&1
+vale --minAlertLevel error $TARGET > /dev/null 2>&1
