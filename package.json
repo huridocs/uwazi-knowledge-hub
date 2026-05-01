@@ -25,6 +25,7 @@
       "prettier --write"
     ],
     "*.{md,mdx}": [
+      "bash meta/scripts/vale-check.sh",
       "eslint --fix",
       "prettier --write"
     ],
