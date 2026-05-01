@@ -16,7 +16,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md,mdx,json}\"",
     "type-check": "tsc --noEmit",
-    "prepare": "husky"
+    "prepare": "husky",
+    "vale:test": "bash meta/scripts/test-rules.sh"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
