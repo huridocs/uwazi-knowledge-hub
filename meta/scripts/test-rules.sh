@@ -15,6 +15,7 @@ PASS=0
 FAIL=0
 ERRORS=()
 
+shopt -s nullglob
 for fixture_dir in "$FIXTURES_DIR"/*/; do
   rule=$(basename "$fixture_dir")
 
