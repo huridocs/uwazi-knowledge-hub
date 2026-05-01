@@ -1,0 +1,12 @@
+extends: existence
+message: "Avoid the idiom '%s'. Use literal language instead."
+level: warning
+ignorecase: true
+tokens:
+  - 'at the end of the day'
+  - 'ballpark figure'
+  - 'in a nutshell'
+  - 'piece of cake'
+  - 'heads up'
+  - 'give it another shot'
+  - 'give\s+it\s+another\s+(?:shot|go|try)'
