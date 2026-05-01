@@ -3,11 +3,11 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-FIXTURES_DIR="$PROJECT_ROOT/meta/tests/fixtures"
+FIXTURES_DIR="$PROJECT_ROOT/vale/tests/fixtures"
 RULE_FILTER="${1:-}"
 
 if ! command -v vale &> /dev/null; then
-  echo "Error: vale not installed. See meta/vale-integration.mdx for setup."
+  echo "Error: vale not installed. See vale/vale-integration.mdx for setup."
   exit 1
 fi
 

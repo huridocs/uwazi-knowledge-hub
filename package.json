@@ -17,7 +17,7 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md,mdx,json}\"",
     "type-check": "tsc --noEmit",
     "prepare": "husky",
-    "vale:test": "bash meta/scripts/test-rules.sh"
+    "vale:test": "bash vale/scripts/test-rules.sh"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -25,7 +25,7 @@
       "prettier --write"
     ],
     "*.{md,mdx}": [
-      "bash meta/scripts/vale-check.sh",
+      "bash vale/scripts/vale-check.sh",
       "eslint --fix",
       "prettier --write"
     ],

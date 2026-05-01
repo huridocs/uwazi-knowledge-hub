@@ -58,6 +58,6 @@ Thumbs.db
 .worktrees/
 
 # Vale third-party packages (downloaded via vale sync)
-meta/styles/alex/
-meta/styles/write-good/
-meta/styles/Readability/
+vale/styles/alex/
+vale/styles/write-good/
+vale/styles/Readability/

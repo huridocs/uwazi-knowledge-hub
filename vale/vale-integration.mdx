@@ -31,7 +31,7 @@ Complete these steps before vale runs on your machine.
 ## How it works
 
 vale runs as part of `lint-staged` on every commit. The wrapper script
-`meta/scripts/vale-check.sh` runs vale twice:
+`vale/scripts/vale-check.sh` runs vale twice:
 
 - First pass: shows all warnings and errors for visibility.
 - Second pass: checks for errors only. A non-zero exit code blocks the commit.
@@ -76,8 +76,8 @@ vale --minAlertLevel warning docs/how-to/my-guide.mdx
 
 ## Adding a rule
 
-1. Create `meta/styles/Uwazi/RuleName.yml` with the rule definition.
-2. Create `meta/tests/fixtures/RuleName/` with `.vale.ini`, `invalid.md`, and
+1. Create `vale/styles/Uwazi/RuleName.yml` with the rule definition.
+2. Create `vale/tests/fixtures/RuleName/` with `.vale.ini`, `invalid.md`, and
    `valid.md`.
 3. Run `npm run vale:test` to confirm the rule fires correctly.
 
@@ -90,5 +90,5 @@ npm run vale:test
 To test a single rule:
 
 ```bash
-bash meta/scripts/test-rules.sh RuleName
+bash vale/scripts/test-rules.sh RuleName
 ```
