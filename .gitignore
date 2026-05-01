@@ -56,3 +56,8 @@ Thumbs.db
 
 # Git worktrees
 .worktrees/
+
+# Vale third-party packages (downloaded via vale sync)
+vale/styles/alex/
+vale/styles/write-good/
+vale/styles/Readability/

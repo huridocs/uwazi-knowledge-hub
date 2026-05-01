@@ -1,0 +1,17 @@
+extends: substitution
+message: "Use '%s' instead of '%s'."
+level: warning
+ignorecase: true
+swap:
+  '\butilize\b': 'use'
+  '\bfacilitate\b': 'help'
+  '\brequire\b': 'need'
+  '\bsubsequent\b': 'next'
+  '\bmodify\b': 'change'
+  '\bimplement\b': 'set up'
+  '\ballocate\b': 'assign'
+  '\bcommence\b': 'start'
+  '\bterminate\b': 'end'
+  '\bproceed\b': 'go'
+  '\bprior to\b': 'before'
+  '\bin order to\b': 'to'

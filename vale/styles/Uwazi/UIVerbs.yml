@@ -1,0 +1,9 @@
+extends: substitution
+message: "Use '%s' instead of '%s'."
+level: error
+ignorecase: true
+swap:
+  '\bclick(?:ed|ing|s)?\b': 'select'
+  '\btap(?:ped|ping|s)?\b': 'select'
+  '\bnavigate to\b': 'go to'
+  '\bhit\b': 'press'

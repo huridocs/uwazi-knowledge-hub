@@ -1,0 +1,94 @@
+---
+title: vale prose linting
+description: How vale checks prose quality in the Uwazi Knowledge Hub
+---
+
+## Overview
+
+vale checks `.md` and `.mdx` files for prose quality before each commit. It
+enforces the Uwazi style guide automatically. Error-level alerts block the
+commit. Warnings are visible but non-blocking.
+
+## Prerequisites
+
+Complete these steps before vale runs on your machine.
+
+1. Install vale. Follow the instructions for your operating system at
+   [vale.sh](https://vale.sh/docs/vale-cli/installation/).
+
+2. Download the third-party style packages:
+
+   ```bash
+   vale sync
+   ```
+
+3. Install `npm` dependencies (includes `mdx2vast` for MDX support):
+
+   ```bash
+   npm install
+   ```
+
+## How it works
+
+vale runs as part of `lint-staged` on every commit. The wrapper script
+`vale/scripts/vale-check.sh` runs vale twice:
+
+- First pass: shows all warnings and errors for visibility.
+- Second pass: checks for errors only. A non-zero exit code blocks the commit.
+
+If vale isn't installed, the pre-commit hook skips prose checking and shows a
+warning. Contributors without vale can still commit, but prose errors won't be
+caught until vale is set up.
+
+## Running vale manually
+
+To check the full `docs/` directory:
+
+```bash
+vale --minAlertLevel warning docs/
+```
+
+To check a single file:
+
+```bash
+vale --minAlertLevel warning docs/how-to/my-guide.mdx
+```
+
+## Rules reference
+
+| Rule                            | Level   | Checks                                             |
+| ------------------------------- | ------- | -------------------------------------------------- |
+| `Uwazi.Branding`                | error   | Incorrect brand names (`huridocs`, `your account`) |
+| `Uwazi.BrandingCase`            | error   | Lowercase `uwazi` in prose                         |
+| `Uwazi.UIVerbs`                 | error   | Banned UI verbs (`click`, `tap`)                   |
+| `Uwazi.LinkText`                | error   | Vague link text (`here`, `link`, `read more`)      |
+| `Vale.Spelling`                 | error   | Spelling against Oxford English dictionary         |
+| `Uwazi.WordSubstitutions`       | warning | Complex words with simpler alternatives            |
+| `Uwazi.Idioms`                  | warning | Idioms from the style guide's banned list          |
+| `Uwazi.Contractions`            | warning | Expanded forms that should be contracted           |
+| `write-good.Passive`            | warning | Passive voice                                      |
+| `write-good.Weasel`             | warning | Weasel words                                       |
+| `write-good.TooWordy`           | warning | Wordy phrases                                      |
+| `alex.Condescending`            | warning | Condescending language                             |
+| `Readability.FleschReadingEase` | warning | Score below 70                                     |
+| `Readability.GunningFog`        | warning | Score above 10                                     |
+| `Readability.SMOG`              | warning | Score above 10                                     |
+
+## Adding a rule
+
+1. Create `vale/styles/Uwazi/RuleName.yml` with the rule definition.
+2. Create `vale/tests/fixtures/RuleName/` with `.vale.ini`, `invalid.md`, and
+   `valid.md`.
+3. Run `npm run vale:test` to confirm the rule fires correctly.
+
+## Testing rules
+
+```bash
+npm run vale:test
+```
+
+To test a single rule:
+
+```bash
+bash vale/scripts/test-rules.sh RuleName
+```
