@@ -1,10 +1,12 @@
 extends: existence
 message: "Use descriptive link text instead of '%s'."
+scope: raw
 level: error
 ignorecase: true
+nonword: true
 tokens:
-  - '\bhere\b'
-  - '\blink\b'
-  - '\bread more\b'
-  - '\bclick here\b'
-  - '\bthis page\b'
+  - '\[here\]\('
+  - '\[link\]\('
+  - '\[read more\]\('
+  - '\[click here\]\('
+  - '\[this page\]\('
