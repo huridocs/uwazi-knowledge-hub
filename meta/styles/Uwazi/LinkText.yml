@@ -1,0 +1,10 @@
+extends: existence
+message: "Use descriptive link text instead of '%s'."
+level: error
+ignorecase: true
+tokens:
+  - '\bhere\b'
+  - '\blink\b'
+  - '\bread more\b'
+  - '\bclick here\b'
+  - '\bthis page\b'
