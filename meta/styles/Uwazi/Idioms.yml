@@ -8,5 +8,4 @@ tokens:
   - 'in a nutshell'
   - 'piece of cake'
   - 'heads up'
-  - 'give it another shot'
   - 'give\s+it\s+another\s+(?:shot|go|try)'
