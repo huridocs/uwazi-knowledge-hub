@@ -1,0 +1,9 @@
+extends: substitution
+message: "Use '%s' instead of '%s'."
+level: error
+ignorecase: false
+swap:
+  'huridocs': 'HURIDOCS'
+  'Huridocs': 'HURIDOCS'
+  'your account': 'your instance'
+  'your workspace': 'your instance'

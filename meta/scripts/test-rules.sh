@@ -33,7 +33,7 @@ for fixture_dir in "$FIXTURES_DIR"/*/; do
   fi
 
   # invalid.md must produce at least one alert
-  invalid_count=$(vale --output JSON --config "$config" "$invalid_file" 2>/dev/null \
+  invalid_count=$({ vale --output JSON --config "$config" "$invalid_file" 2>/dev/null || true; } \
     | python3 -c \
       "import json,sys; d=json.load(sys.stdin); print(sum(len(v) for v in d.values()))" \
     2>/dev/null || echo "0")
@@ -48,7 +48,7 @@ for fixture_dir in "$FIXTURES_DIR"/*/; do
   fi
 
   # valid.md must produce zero alerts
-  valid_count=$(vale --output JSON --config "$config" "$valid_file" 2>/dev/null \
+  valid_count=$({ vale --output JSON --config "$config" "$valid_file" 2>/dev/null || true; } \
     | python3 -c \
       "import json,sys; d=json.load(sys.stdin); print(sum(len(v) for v in d.values()))" \
     2>/dev/null || echo "0")
