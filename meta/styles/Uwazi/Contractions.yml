@@ -1,0 +1,15 @@
+extends: substitution
+message: "Use the contraction '%s' instead of '%s'."
+level: warning
+ignorecase: true
+swap:
+  '\bdo not\b': "don't"
+  '\byou will\b': "you'll"
+  '\bcannot\b': "can't"
+  '\bdoes not\b': "doesn't"
+  '\bwill not\b': "won't"
+  '\bit is\b': "it's"
+  '\bI am\b': "I'm"
+  '\bwe are\b': "we're"
+  '\byou are\b': "you're"
+  '\bthey are\b': "they're"
