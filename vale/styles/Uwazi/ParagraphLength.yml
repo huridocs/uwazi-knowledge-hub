@@ -1,0 +1,6 @@
+extends: occurrence
+message: 'Keep paragraphs to 5 sentences or fewer.'
+scope: paragraph
+level: warning
+max: 5
+token: '[.!?](?:\s|$)'
