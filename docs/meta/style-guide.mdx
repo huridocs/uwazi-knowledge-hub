@@ -114,6 +114,8 @@ Consistent branding builds trust with our partners.
 
 Use these terms consistently:
 
+{/* vale off */}
+
 - **Uwazi**: The product name. Always capitalized. Exception when using it in a
   URL or a slug.
   - ✓ "Uwazi is a free, open-source platform..."
@@ -130,6 +132,8 @@ Use these terms consistently:
 - **Instance**: A separate installation of Uwazi for one partner.
   - ✓ "Your instance is a dedicated installation of Uwazi."
   - ✗ "Your account" or "Your workspace"
+
+  {/* vale on */}
 
 ### Inclusive and respectful language
 
@@ -246,7 +250,7 @@ how to use it.
 settings, and features. Readers typically come here to look up information.
 
 **Tone and voice:** The tone should be precise and concise, assuming the reader
-knows what they are looking for.
+knows what they're looking for.
 
 ### Choosing the right content type
 
@@ -308,20 +312,20 @@ to non-native speakers.
 
 **Simple word alternatives:**
 
-| Avoid       | Use                |
-| ----------- | ------------------ |
-| utilize     | use                |
-| facilitate  | help               |
-| require     | need               |
-| subsequent  | next               |
-| modify      | change             |
-| implement   | set up, use, or do |
-| allocate    | assign, set aside  |
-| commence    | start, begin       |
-| terminate   | end, stop, delete  |
-| proceed     | go, continue       |
-| prior to    | before             |
-| in order to | to                 |
+| Avoid         | Use                |
+| ------------- | ------------------ |
+| `utilize`     | use                |
+| `facilitate`  | help               |
+| `require`     | need               |
+| `subsequent`  | next               |
+| `modify`      | change             |
+| `implement`   | set up, use, or do |
+| `allocate`    | assign, set aside  |
+| `commence`    | start, begin       |
+| `terminate`   | end, stop, delete  |
+| `proceed`     | go, continue       |
+| `prior to`    | before             |
+| `in order to` | to                 |
 
 **How to apply:** If a word has a simpler synonym, use it. Read your sentences
 aloud; if they sound stiff, simplify them.
@@ -393,11 +397,15 @@ language is clear across cultures.
 
 **Avoid:**
 
+{/* vale off */}
+
 - "at the end of the day" (vague; means "ultimately")
 - "ballpark figure" (confusing metaphor for "rough estimate")
 - "in a nutshell" (unclear; means "briefly")
 - "piece of cake" (idiom; means "easy")
 - "heads up" (confusing; means "warning" or "notice")
+
+{/* vale on */}
 
 **Before (with idiom):**
 
@@ -503,7 +511,7 @@ To share an entity:
 - Start each item with a capital letter.
 - Include introductory text before every list to explain its relevance.
 - If the elements in a list are complete sentences, end each one with a period
-  or a question mark. If they are sentence fragments, do not use periods.
+  or a question mark. If they're sentence fragments, don't use periods.
 
 **What to avoid:**
 
@@ -558,11 +566,11 @@ what it does or why it's important.
 - ✗ Code without explanation
 - ✗ Inline code for long snippets (use code blocks instead)
 
-### 4. Callouts
+### 4. Call-outs
 
-**Callouts are blocks that draw attention to specific details.** Use them to
+**Call-outs are blocks that draw attention to specific details.** Use them to
 highlight consequences of actions, provide helpful guidance, or share
-time-saving advice. Use callouts sparingly; too many can lose their
+time-saving advice. Use call-outs sparingly; too many can lose their
 effectiveness.
 
 **Info:** Extra details that might be useful.
@@ -599,8 +607,8 @@ Uninstalling a language will affect all users who have this language enabled.
 
 **What to avoid:**
 
-- ✗ More than 3 callouts per `.md` file
-- ✗ Text in callouts longer than 2 sentences
+- ✗ More than 3 call-outs per `.md` file
+- ✗ Text in call-outs longer than 2 sentences
 - ✗ Using notes for critical messages (use warnings instead)
 
 ### 5. Links
@@ -611,7 +619,7 @@ Uninstalling a language will affect all users who have this language enabled.
 **Before (vague):**
 
 ```text
-For more details, see [here](link).
+For more details, see [here][page-link].
 ```
 
 **After (descriptive):**
@@ -644,8 +652,8 @@ Learn how to [create relationships between entities](link).
 
 ### 6. Images
 
-**Rule:** Minimize the use of screenshots and images. When needed, use them
-sparingly, ensuring they have descriptive alt text.
+**Rule:** Limit screenshots and images. When needed, use them sparingly,
+ensuring they have descriptive alt text.
 
 **Why it matters:** Screenshots can create accessibility issues for screen
 reader users and are hard to localize. Always opt for text over images when
@@ -656,10 +664,10 @@ code examples.
 
 - To show specific UI elements users must interact with.
 - To explain workflows or relationships through diagrams.
-- For icons within the UI that require a description.
+- For icons within the UI that need a description.
 
 **Alt text is mandatory.** Alt text supports screen reader users and appears
-when images do not load. For icons, describe their function rather than their
+when images don't load. For icons, describe their function rather than their
 appearance (for example, "Add" for a + icon, instead of "Plus sign").
 
 **Good alt text:** "The Uwazi toolbar with the 'Add entity' button highlighted
@@ -798,10 +806,10 @@ Use these verbs consistently when describing how users interact with the
 interface. These are terms that work across keyboard, mouse, touch, and voice
 input methods.
 
-- **Select:** Choosing a button, checkbox, option from a dropdown, menu item, or
-  link. Use for any action the user chooses.
+- **Select:** Choosing a button, checkbox, option from a drop-down, menu item,
+  or link. Use for any action the user chooses.
   - "Select **Save** to confirm changes."
-  - "Select **Case File** from the template dropdown."
+  - "Select **Case File** from the template drop-down."
   - "Select the **Include archived entities** checkbox."
 
 - **Clear:** Removing a selection from a checkbox or field. The opposite of
@@ -1003,7 +1011,7 @@ alternatives. This will fix Flesch as a side effect.
 
 1. Replace complex words with common alternatives.
 2. Define technical terms on first use.
-3. Use shorter words: "use" not "utilize," "help" not "facilitate".
+3. Use shorter words: "use" not `utilize`, "help" not `facilitate`.
 
 #### If SMOG is too high (&gt;10)
 
@@ -1018,9 +1026,8 @@ not to the style guide itself.
 
 ---
 
-**AI disclosure:** This document was drafted with the assistance of Claude Code
-(Anthropic). The tool was used to research documentation style guides, best
-practices, structure the guidelines, and identify redundancies and
-contradictions during review. All content was reviewed, edited, and finalised by
-a human. AI assistance was used in accordance with HURIDOCS’ Internal AI
-Governance Policy and Framework.
+**AI disclosure:** Claude Code (Anthropic) helped draft this document. The tool
+researched documentation style guides and best practices, structured the
+guidelines, and flagged redundancies and contradictions during review. A human
+reviewed, edited, and finalized all content. This AI use followed HURIDOCS’
+Internal AI Governance Policy and Framework.
