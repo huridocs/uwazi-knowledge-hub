@@ -1,0 +1,15 @@
+# Synthesised from:
+#   Elastic/OxfordComma.yml   (nor conjunction, nonword flag, scope)
+#   Microsoft/OxfordComma.yml (end-punctuation anchor, core pattern)
+#   RedHat/OxfordComma.yml    (same core pattern as Microsoft)
+# Google/OxfordComma.yml was reviewed but omitted: no end-punctuation anchor
+# increases false positives in prose, and it lacks nor.
+# Elastic includes "then" as a conjunction; omitted here because "then" is not
+# a serial-list conjunction in technical documentation.
+extends: existence
+message: "Use the Oxford comma in '%s'. Add a comma before the final conjunction."
+level: error
+scope: sentence
+nonword: true
+tokens:
+  - '(?:[^\s,]+,){1,} \w+ (?:and|or|nor) \w+[.?!]'
