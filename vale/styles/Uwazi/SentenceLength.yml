@@ -1,0 +1,7 @@
+# Forked from https://github.com/vale-cli/Microsoft/blob/master/Microsoft/SentenceLength.yml
+extends: occurrence
+message: 'Try to keep sentences short (< 30 words).'
+scope: sentence
+level: warning
+max: 30
+token: \b(\w+)\b
