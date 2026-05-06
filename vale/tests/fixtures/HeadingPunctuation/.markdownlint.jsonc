@@ -1,0 +1,5 @@
+{
+  // Test fixtures intentionally contain heading punctuation violations.
+  // MD026 must be disabled so markdownlint does not auto-fix the test cases.
+  "MD026": false
+}
