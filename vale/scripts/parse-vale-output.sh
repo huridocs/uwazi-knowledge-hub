@@ -36,6 +36,7 @@ fi
 
 # Write JSON to a temp file so Python can read it independently of stdin
 TMPJSON=$(mktemp)
+trap 'rm -f "$TMPJSON"' EXIT INT TERM
 printf '%s' "$JSON" > "$TMPJSON"
 
 # Count errors and warnings using python3 (available on macOS by default)
@@ -81,8 +82,6 @@ if warnings:
         print(f"- Line {line}: {check} — {msg}")
 PYEOF
 )
-
-rm -f "$TMPJSON"
 
 echo "## Vale result"
 echo "$COUNTS"
