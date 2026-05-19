@@ -1,5 +1,5 @@
 ---
-title: Test
+title: Test with sentence-style capitalisation
 description: HeadingSentenceCase rule valid fixture
 ---
 

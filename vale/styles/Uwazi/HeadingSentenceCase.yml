@@ -1,7 +1,9 @@
 extends: capitalization
 message: "'%s' should use sentence-style capitalisation."
 level: warning
-scope: heading
+scope:
+  - heading
+  - text.frontmatter.title
 threshold: 1.0
 match: $sentence
 exceptions:
