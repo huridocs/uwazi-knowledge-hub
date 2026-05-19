@@ -1,3 +1,10 @@
+# Forked from:
+#   write-good/TooWordy.yml (curated subset for Uwazi docs)
+#
+# Common words rule from the style guide plus a curated set of wordy
+# phrases. Excluded from the upstream list: legitimate connectors
+# (however, therefore, shall, nevertheless), genuine technical terms
+# (economical, feasible, methodology), and filler phrases (in my opinion).
 extends: substitution
 message: "Use '%s' instead of '%s'."
 level: warning
@@ -15,3 +22,24 @@ swap:
   '\bproceed\b': 'go'
   '\bprior to\b': 'before'
   '\bin order to\b': 'to'
+  '\baccomplish\b': 'do'
+  '\badditional\b': 'more'
+  '\bascertain\b': 'find out'
+  '\bassistance\b': 'help'
+  '\battain\b': 'reach'
+  '\bcomply with\b': 'follow'
+  '\bconcerning\b': 'about'
+  '\bdemonstrate\b': 'show'
+  '\beliminate\b': 'remove'
+  '\bendeavor\b': 'try'
+  '\benumerate\b': 'list'
+  '\bexpedite\b': 'speed up'
+  '\bfinalize\b': 'finish'
+  '\bindicate\b': 'show'
+  '\binitiate\b': 'start'
+  '\bnumerous\b': 'many'
+  '\bobtain\b': 'get'
+  '\bparticipate\b': 'take part'
+  '\bpurchase\b': 'buy'
+  '\bregarding\b': 'about'
+  '\bretain\b': 'keep'
