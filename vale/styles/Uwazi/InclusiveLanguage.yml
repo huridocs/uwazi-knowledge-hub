@@ -1,0 +1,54 @@
+---
+extends: substitution
+message: "Consider '%s' instead of '%s'."
+ignorecase: true
+level: warning
+action:
+  name: replace
+swap:
+  '\bsanity check\b': check|validation|confidence check
+  '\bcrazy\b': unexpected|intense|surprising
+  '\binsane\b': unexpected|intense|surprising
+  '\binsanely\b': extremely|very
+  '\bdumb\b': unclear|confusing
+  '\blame\b': limited|ineffective
+  '\bcripple\b': degrade|slow down
+  '\bcrippled\b': degraded|slowed down
+  '\bblind to\b': unaware of
+  '\bdeaf to\b': ignoring
+  '\bdummy\b': placeholder|sample|test
+  '\bhandicapped\b': limited|restricted
+  '\bwheelchair[- ]bound\b': uses a wheelchair
+  '\bspecial needs\b': specific needs|additional support
+  '\bhe/she\b': they
+  '\bhis/her\b': their
+  '\bhe or she\b': they
+  '\bhis or her\b': their
+  '\bmanpower\b': staffing|workforce
+  '\bman-?made\b': manufactured|artificial|synthetic
+  '\bman-?hours?\b': work hours|person-hours
+  '\bchairman\b': chair|chairperson
+  '\bpoliceman\b': police officer
+  '\bfireman\b': firefighter
+  '\bsalesman\b': salesperson
+  '\bmankind\b': humanity|people
+  '\bmanned\b': staffed|crewed
+  '\bunmanned\b': automated|uncrewed
+  '\bblacklist\b': blocklist|denylist
+  '\bblacklisted\b': blocked|denied
+  '\bblacklisting\b': blocking
+  '\bwhitelist\b': allowlist|safelist
+  '\bwhitelisted\b': allowed
+  '\bwhitelisting\b': allowing
+  '\bmaster\b': primary|main|reference
+  '\bgrandfathered\b': legacy|exempted
+  '\bgrandfather clause\b': legacy clause|exemption
+  '\bhangs?\b': freezes|stops responding
+  '\bhung\b': froze|stopped responding
+  '\bhanged\b': froze|stopped responding
+  '\bdeploy\b': set up|install
+  '\bdeployment\b': setup|installation
+  '\bfortress-like\b': highly secure
+  '\bfortress\b': secure system
+  '\bbulletproof\b': reliable|dependable
+  '\bbombproof\b': reliable|dependable
