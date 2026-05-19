@@ -56,23 +56,44 @@ vale --minAlertLevel warning docs/how-to/my-guide.mdx
 
 ## Rules reference
 
-| Rule                            | Level   | Checks                                             |
-| ------------------------------- | ------- | -------------------------------------------------- |
-| `Uwazi.Branding`                | error   | Incorrect brand names (`huridocs`, `your account`) |
-| `Uwazi.BrandingCase`            | error   | Lowercase `uwazi` in prose                         |
-| `Uwazi.UIVerbs`                 | error   | Banned UI verbs (`click`, `tap`)                   |
-| `Uwazi.LinkText`                | error   | Vague link text (`here`, `link`, `read more`)      |
-| `Uwazi.Spelling`                | error   | Spelling against Oxford English dictionary         |
-| `Uwazi.WordSubstitutions`       | warning | Complex words with simpler alternatives            |
-| `Uwazi.Idioms`                  | warning | Idioms from the style guide's banned list          |
-| `Uwazi.Contractions`            | warning | Expanded forms that should be contracted           |
-| `write-good.Passive`            | warning | Passive voice                                      |
-| `write-good.Weasel`             | warning | Weasel words                                       |
-| `write-good.TooWordy`           | warning | Wordy phrases                                      |
-| `alex.Condescending`            | warning | Condescending language                             |
-| `Readability.FleschReadingEase` | warning | Score below 70                                     |
-| `Readability.GunningFog`        | warning | Score above 10                                     |
-| `Readability.SMOG`              | warning | Score above 10                                     |
+| Rule                        | Level   | Checks                                             |
+| --------------------------- | ------- | -------------------------------------------------- |
+| `Uwazi.Branding`            | error   | Incorrect brand names (`huridocs`, `your account`) |
+| `Uwazi.BrandingCase`        | error   | Lowercase `uwazi` in prose                         |
+| `Uwazi.UIVerbs`             | error   | Banned UI verbs (`click`, `tap`)                   |
+| `Uwazi.LinkText`            | error   | Vague link text (`here`, `link`, `read more`)      |
+| `Uwazi.Spelling`            | error   | Spelling against Oxford English dictionary         |
+| `Uwazi.ImageAltText`        | error   | Missing or generic image alt text                  |
+| `Uwazi.OxfordComma`         | error   | Missing Oxford comma in lists                      |
+| `Uwazi.Contractions`        | warning | Expanded forms that should be contracted           |
+| `Uwazi.FleschReadingEase`   | warning | Score below 70                                     |
+| `Uwazi.GunningFog`          | warning | Score above 10                                     |
+| `Uwazi.HeadingPunctuation`  | warning | End punctuation in headings                        |
+| `Uwazi.HeadingSentenceCase` | warning | Title-case headings                                |
+| `Uwazi.Idioms`              | warning | Idioms and business cliches                        |
+| `Uwazi.InclusiveLanguage`   | warning | Non-inclusive terms                                |
+| `Uwazi.OrdinalNumbers`      | warning | Ordinal numerals (`1st`, `2nd`) in prose           |
+| `Uwazi.ParagraphLength`     | warning | Paragraphs longer than 5 sentences                 |
+| `Uwazi.Passive`             | warning | Passive voice                                      |
+| `Uwazi.RespectfulTone`      | warning | Condescending or minimizing language               |
+| `Uwazi.SentenceLength`      | warning | Sentences longer than 25 words                     |
+| `Uwazi.SMOG`                | warning | SMOG grade above 10                                |
+| `Uwazi.SpelledOutNumbers`   | warning | Spelled numbers 10+ or numerals 1–9 in prose       |
+| `Uwazi.Weasel`              | warning | Hedge words (`clearly`, `obviously`, `simply`)     |
+| `Uwazi.WordSubstitutions`   | warning | Complex words with simpler alternatives            |
+
+## Not lint-checked
+
+vale cannot reliably detect the following style-guide rules. Reviewers enforce
+them by eye:
+
+- Lists: 5–7 item cap, intro text required, max 2-level nesting.
+- Code blocks: language tag missing, explanation required after block.
+- Call-outs: max 3 per file, max 2 sentences each.
+- Highlighting: limit 2–3 bold/italic per page.
+- Tables: intro text required, ≤5 columns.
+- Headings: no H1 in document body (the frontmatter `title` is the H1).
+- Periods: one space (not two) after period.
 
 ## Adding a rule
 
