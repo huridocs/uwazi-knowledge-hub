@@ -1,3 +1,10 @@
+# Forked from:
+#   write-good/Cliches.yml (curated subset for Uwazi docs)
+#
+# Idioms from the style guide's banned list plus a curated set of business
+# and software-prose idioms. Excluded from the upstream list: folk sayings
+# (raining cats and dogs, blood is thicker than water, etc.) that do not
+# realistically appear in software documentation.
 extends: existence
 message: "Avoid the idiom '%s'. Use literal language instead."
 level: warning
@@ -9,3 +16,24 @@ tokens:
   - 'piece of cake'
   - 'heads up'
   - 'give\s+it\s+another\s+(?:shot|go|try)'
+  - 'cut to the chase'
+  - 'hit the ground running'
+  - 'on the same page'
+  - 'low-hanging fruit'
+  - 'move the needle'
+  - 'circle back'
+  - 'deep dive'
+  - 'drill down'
+  - 'game changer'
+  - 'no-brainer'
+  - 'out of the box'
+  - 'plug and play'
+  - 'ramp up'
+  - 'reinvent the wheel'
+  - 'rule of thumb'
+  - 'silver bullet'
+  - 'state of the art'
+  - 'take a stab at'
+  - 'throw in the towel'
+  - 'under the hood'
+  - 'win-win'
