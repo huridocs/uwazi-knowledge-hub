@@ -1,8 +1,7 @@
 extends: existence
 message: "Images need descriptive alt text. Replace '%s' with a description of what the image shows."
-scope: raw
-level: error
 ignorecase: true
+scope: raw
 nonword: true
 tokens:
   - '!\[\s*\]\('

@@ -2,9 +2,8 @@
 #   RedHat/HeadingPunctuation.yml        — catches ., ?, ! at end; nonword; remove action
 extends: existence
 message: "Don't use end punctuation in headings."
-nonword: true
-level: warning
 scope: heading
+nonword: true
 action:
   name: remove
 tokens:

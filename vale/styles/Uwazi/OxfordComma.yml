@@ -8,7 +8,6 @@
 # a serial-list conjunction in technical documentation.
 extends: existence
 message: "Use the Oxford comma in '%s'. Add a comma before the final conjunction."
-level: error
 scope: sentence
 nonword: true
 tokens:

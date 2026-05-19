@@ -5,7 +5,6 @@
 #   write-good/Passive.yml  (warning level — stronger signal than suggestion)
 extends: existence
 message: "'%s' is passive voice. Use active voice so the reader knows who does the action."
-level: warning
 ignorecase: true
 # Exceptions from RedHat/PassiveVoice.yml: common tech-doc participles that
 # are better left in passive form (the agent is genuinely unknown or irrelevant).

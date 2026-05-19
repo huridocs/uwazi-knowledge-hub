@@ -7,8 +7,9 @@
 # (economical, feasible, methodology), and filler phrases (in my opinion).
 extends: substitution
 message: "Use '%s' instead of '%s'."
-level: warning
 ignorecase: true
+action:
+  name: replace
 swap:
   '\butilize\b': 'use'
   '\bfacilitate\b': 'help'
@@ -43,3 +44,4 @@ swap:
   '\bpurchase\b': 'buy'
   '\bregarding\b': 'about'
   '\bretain\b': 'keep'
+  '\bUwazi workspace\b': 'Uwazi instance'

@@ -1,8 +1,6 @@
----
 extends: existence
 message: "Using '%s' can sound condescending or othering. Rephrase to respect the reader's expertise."
 ignorecase: true
-level: warning
 tokens:
   - 'obviously'
   - 'of course'

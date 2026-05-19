@@ -7,7 +7,6 @@
 # realistically appear in software documentation.
 extends: existence
 message: "Avoid the idiom '%s'. Use literal language instead."
-level: warning
 ignorecase: true
 tokens:
   - 'at the end of the day'
@@ -25,7 +24,6 @@ tokens:
   - 'deep dive'
   - 'drill down'
   - 'game changer'
-  - 'no-brainer'
   - 'out of the box'
   - 'plug and play'
   - 'ramp up'

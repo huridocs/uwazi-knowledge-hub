@@ -1,6 +1,5 @@
 extends: substitution
 message: "Use the contraction '%s' instead of '%s'."
-level: warning
 ignorecase: true
 action:
   name: replace

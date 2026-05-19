@@ -7,7 +7,6 @@
 # and rare-in-docs adverbs (interestingly, remarkably, surprisingly).
 extends: existence
 message: "'%s' is a hedge word. Remove it or replace with something specific."
-level: warning
 ignorecase: true
 tokens:
   - actually
@@ -16,7 +15,6 @@ tokens:
   - essentially
   - fairly
   - just
-  - obviously
   - quite
   - really
   - simply
