@@ -1,0 +1,12 @@
+[global]
+flavor = "mdx"
+# MD041: Docusaurus frontmatter (title) supplies the H1; rule misfires here.
+disable = ["MD041"]
+
+[MD004]
+style = "dash"
+
+[MD013]
+line-length = 80
+code_blocks = false
+tables = false
