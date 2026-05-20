@@ -9,9 +9,24 @@ vale checks `.md` and `.mdx` files for prose quality before each commit. It
 enforces the Uwazi style guide automatically. Error-level alerts block the
 commit. Warnings are visible but non-blocking.
 
+## `rumdl` (Markdown structure and formatting)
+
+`rumdl` is a Rust-based Markdown linter that runs after vale in the pre-commit
+chain. It owns Markdown structure (headings, lists, links, fences) and layout
+(line wrap, blank lines, list markers). `ESLint` and Prettier no longer touch
+`.md` or `.mdx` files.
+
+Install `rumdl` locally:
+
+```bash
+brew install rumdl
+```
+
+Configuration lives in `.rumdl.toml` at the repo root.
+
 ## Prerequisites
 
-Complete these steps before vale runs on your machine.
+Complete these steps before the lint chain runs on your machine.
 
 1. Install vale. Follow the instructions for your operating system at
    [vale.sh](https://vale.sh/docs/vale-cli/installation/).
@@ -28,6 +43,12 @@ Complete these steps before vale runs on your machine.
    npm install
    ```
 
+4. Install `rumdl`:
+
+   ```bash
+   brew install rumdl
+   ```
+
 ## How it works
 
 vale runs as part of `lint-staged` on every commit. The wrapper script
@@ -35,6 +56,9 @@ vale runs as part of `lint-staged` on every commit. The wrapper script
 
 - First pass: shows all warnings and errors for visibility.
 - Second pass: checks for errors only. A non-zero exit code blocks the commit.
+
+`rumdl` runs after vale on the same staged files. `ESLint` and Prettier no
+longer touch Markdown, so structural and layout concerns now belong to `rumdl`.
 
 If vale isn't installed, the pre-commit hook skips prose checking and shows a
 warning. Contributors without vale can still commit, but prose errors won't be

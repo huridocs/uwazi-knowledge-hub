@@ -1,0 +1,17 @@
+{
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "[mdx]": {
+    "editor.defaultFormatter": null,
+    "editor.formatOnSave": false
+  },
+  "eslint.useFlatConfig": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  }
+}
