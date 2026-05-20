@@ -9,20 +9,9 @@ vale checks `.md` and `.mdx` files for prose quality before each commit. It
 enforces the Uwazi style guide automatically. Error-level alerts block the
 commit. Warnings are visible but non-blocking.
 
-## `rumdl` (Markdown structure and formatting)
-
-`rumdl` is a Rust-based Markdown linter that runs after vale in the pre-commit
-chain. It owns Markdown structure (headings, lists, links, fences) and layout
-(line wrap, blank lines, list markers). `ESLint` and Prettier no longer touch
-`.md` or `.mdx` files.
-
-Install `rumdl` locally:
-
-```bash
-brew install rumdl
-```
-
-Configuration lives in `.rumdl.toml` at the repo root.
+`rumdl` runs alongside vale and owns Markdown structure and layout. It replaces
+`ESLint` and Prettier on `.md` and `.mdx` files. Its configuration lives in
+`.rumdl.toml` at the repo root.
 
 ## Prerequisites
 
