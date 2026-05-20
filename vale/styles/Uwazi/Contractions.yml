@@ -1,7 +1,8 @@
 extends: substitution
 message: "Use the contraction '%s' instead of '%s'."
-level: warning
 ignorecase: true
+action:
+  name: replace
 swap:
   '\bdo not\b': "don't"
   '\byou will\b': "you'll"

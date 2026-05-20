@@ -1,6 +1,6 @@
 ---
 title: Test
-description: BrandingCase rule valid fixture
+description: UwaziCase rule valid fixture
 ---
 
 Get started with Uwazi today.

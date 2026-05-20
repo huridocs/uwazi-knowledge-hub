@@ -1,0 +1,10 @@
+# Synthesised from:
+#   RedHat/HeadingPunctuation.yml        — catches ., ?, ! at end; nonword; remove action
+extends: existence
+message: "Don't use end punctuation in headings."
+scope: heading
+nonword: true
+action:
+  name: remove
+tokens:
+  - '\w[.?!]\s*$'

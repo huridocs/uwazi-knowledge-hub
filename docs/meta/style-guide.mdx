@@ -46,7 +46,7 @@ different situations.
 
 Uwazi's voice has three main characteristics:
 
-1. **Clear**: Use straightforward, jargon-free language. Explain not just what
+1. **Clear**: Use straightforward, jargon-free language. Explain not only what
    needs to happen but also why.
    - ✓ "Select **Add entity** to create a new record."
    - ✗ "Instantiate a new entity via the UI widget."
@@ -114,6 +114,8 @@ Consistent branding builds trust with our partners.
 
 Use these terms consistently:
 
+{/* vale off */}
+
 - **Uwazi**: The product name. Always capitalized. Exception when using it in a
   URL or a slug.
   - ✓ "Uwazi is a free, open-source platform..."
@@ -130,6 +132,8 @@ Use these terms consistently:
 - **Instance**: A separate installation of Uwazi for one partner.
   - ✓ "Your instance is a dedicated installation of Uwazi."
   - ✗ "Your account" or "Your workspace"
+
+  {/* vale on */}
 
 ### Inclusive and respectful language
 
@@ -216,7 +220,7 @@ focus on guiding users through the process.
 ### How-tos
 
 **Definition:** A how-to provides step-by-step instructions for completing a
-specific task. It assumes the user is somewhat familiar with Uwazi.
+specific task. It assumes the user is enough familiar with Uwazi.
 
 **When to use it:** Use how-tos for features, settings, and specific tasks. Each
 how-to covers one individual task.
@@ -246,7 +250,7 @@ how to use it.
 settings, and features. Readers typically come here to look up information.
 
 **Tone and voice:** The tone should be precise and concise, assuming the reader
-knows what they are looking for.
+knows what they're looking for.
 
 ### Choosing the right content type
 
@@ -276,7 +280,7 @@ speakers and non-technical readers.
 
 ### 1. Use active voice
 
-**Rule:** Make clear who or what is performing a particular action not just what
+**Rule:** Make clear who or what is performing a particular action not only what
 is happening.
 
 **Why it matters:** Active voice is clearer making it better for non-native
@@ -308,20 +312,20 @@ to non-native speakers.
 
 **Simple word alternatives:**
 
-| Avoid       | Use                |
-| ----------- | ------------------ |
-| utilize     | use                |
-| facilitate  | help               |
-| require     | need               |
-| subsequent  | next               |
-| modify      | change             |
-| implement   | set up, use, or do |
-| allocate    | assign, set aside  |
-| commence    | start, begin       |
-| terminate   | end, stop, delete  |
-| proceed     | go, continue       |
-| prior to    | before             |
-| in order to | to                 |
+| Avoid         | Use                |
+| ------------- | ------------------ |
+| `utilize`     | use                |
+| `facilitate`  | help               |
+| `require`     | need               |
+| `subsequent`  | next               |
+| `modify`      | change             |
+| `implement`   | set up, use, or do |
+| `allocate`    | assign, set aside  |
+| `commence`    | start, begin       |
+| `terminate`   | end, stop, delete  |
+| `proceed`     | go, continue       |
+| `prior to`    | before             |
+| `in order to` | to                 |
 
 **How to apply:** If a word has a simpler synonym, use it. Read your sentences
 aloud; if they sound stiff, simplify them.
@@ -393,11 +397,15 @@ language is clear across cultures.
 
 **Avoid:**
 
+{/* vale off */}
+
 - "at the end of the day" (vague; means "ultimately")
 - "ballpark figure" (confusing metaphor for "rough estimate")
 - "in a nutshell" (unclear; means "briefly")
 - "piece of cake" (idiom; means "easy")
 - "heads up" (confusing; means "warning" or "notice")
+
+{/* vale on */}
 
 **Before (with idiom):**
 
@@ -418,8 +426,12 @@ rewrite them.
 
 ### 6. Use contractions
 
+{/* vale off */}
+
 **Rule:** Use "don't," "you'll," and "can't" instead of "do not," "you will,"
 and "cannot."
+
+{/* vale on */}
 
 **Why it matters:** Contractions sound more natural and friendly, improving
 readability and making the text approachable.
@@ -455,6 +467,9 @@ maintain the correct heading levels without skipping.
 **Capitalization:** Use sentence-style capitalization, meaning only capitalize
 the first word and proper nouns.
 
+**Punctuation:** Never end a heading with a period, question mark, or
+exclamation mark.
+
 **Example:**
 
 ```text
@@ -472,6 +487,7 @@ title: How to create your first entity
 - ✗ H1 headings in the document body (title goes in frontmatter)
 - ✗ Title case headings (use sentence-style instead)
 - ✗ Headings without content below them
+- ✗ End punctuation in headings (period, question mark, exclamation mark)
 
 ### 2. Lists
 
@@ -503,7 +519,7 @@ To share an entity:
 - Start each item with a capital letter.
 - Include introductory text before every list to explain its relevance.
 - If the elements in a list are complete sentences, end each one with a period
-  or a question mark. If they are sentence fragments, do not use periods.
+  or a question mark. If they're sentence fragments, don't use periods.
 
 **What to avoid:**
 
@@ -558,11 +574,11 @@ what it does or why it's important.
 - ✗ Code without explanation
 - ✗ Inline code for long snippets (use code blocks instead)
 
-### 4. Callouts
+### 4. Call-outs
 
-**Callouts are blocks that draw attention to specific details.** Use them to
+**Call-outs are blocks that draw attention to specific details.** Use them to
 highlight consequences of actions, provide helpful guidance, or share
-time-saving advice. Use callouts sparingly; too many can lose their
+time-saving advice. Use call-outs sparingly; too many can lose their
 effectiveness.
 
 **Info:** Extra details that might be useful.
@@ -599,8 +615,8 @@ Uninstalling a language will affect all users who have this language enabled.
 
 **What to avoid:**
 
-- ✗ More than 3 callouts per `.md` file
-- ✗ Text in callouts longer than 2 sentences
+- ✗ More than 3 call-outs per `.md` file
+- ✗ Text in call-outs longer than 2 sentences
 - ✗ Using notes for critical messages (use warnings instead)
 
 ### 5. Links
@@ -611,7 +627,7 @@ Uninstalling a language will affect all users who have this language enabled.
 **Before (vague):**
 
 ```text
-For more details, see [here](link).
+For more details, see [here][page-link].
 ```
 
 **After (descriptive):**
@@ -644,8 +660,8 @@ Learn how to [create relationships between entities](link).
 
 ### 6. Images
 
-**Rule:** Minimize the use of screenshots and images. When needed, use them
-sparingly, ensuring they have descriptive alt text.
+**Rule:** Limit screenshots and images. When needed, use them sparingly,
+ensuring they have descriptive alt text.
 
 **Why it matters:** Screenshots can create accessibility issues for screen
 reader users and are hard to localize. Always opt for text over images when
@@ -656,10 +672,10 @@ code examples.
 
 - To show specific UI elements users must interact with.
 - To explain workflows or relationships through diagrams.
-- For icons within the UI that require a description.
+- For icons within the UI that need a description.
 
 **Alt text is mandatory.** Alt text supports screen reader users and appears
-when images do not load. For icons, describe their function rather than their
+when images don't load. For icons, describe their function rather than their
 appearance (for example, "Add" for a + icon, instead of "Plus sign").
 
 **Good alt text:** "The Uwazi toolbar with the 'Add entity' button highlighted
@@ -736,8 +752,8 @@ Don't use _&_ (ampersand) as a conjunction. Use the word _and_ instead.
 
 ### 8. Numbers
 
-**Rule:** Decide between spelling out words (one, two, ten) and using numerals
-(1, 2, 10) for numbers based on context.
+**Rule:** Decide between spelling out words (one, two, three) and using numerals
+(1, 2, 3) for numbers based on context.
 
 **Why it matters:** Consistent formatting enhances readability and supports
 non-native readers.
@@ -788,9 +804,9 @@ Your instance has 4,250 entities and counting.
 - ✗ Mixing numbers as words and numerals inconsistently (don't write "5 apples
   and six oranges")
 - ✗ Spelling out numbers 10 and above (always use numerals for these) (don't
-  write "ten templates")
-- ✗ Using numerals in regular narrative prose (don't write "Follow these 3
-  steps")
+  write `ten templates`)
+- ✗ Using numerals in regular narrative prose (don't write
+  `Follow these 3 steps`)
 
 ### 9. UI interaction verbs
 
@@ -798,10 +814,10 @@ Use these verbs consistently when describing how users interact with the
 interface. These are terms that work across keyboard, mouse, touch, and voice
 input methods.
 
-- **Select:** Choosing a button, checkbox, option from a dropdown, menu item, or
-  link. Use for any action the user chooses.
+- **Select:** Choosing a button, checkbox, option from a drop-down, menu item,
+  or link. Use for any action the user chooses.
   - "Select **Save** to confirm changes."
-  - "Select **Case File** from the template dropdown."
+  - "Select **Case File** from the template drop-down."
   - "Select the **Include archived entities** checkbox."
 
 - **Clear:** Removing a selection from a checkbox or field. The opposite of
@@ -993,22 +1009,22 @@ alternatives. This will fix Flesch as a side effect.
 
 ### Common fixes for low metrics
 
-#### If Flesch is too low (&lt;70)
+#### If Flesch Reading Ease is too low (&lt;70)
 
 1. Check Gunning Fog; if it's high, simplify words (Priority 1).
 2. If Gunning Fog is fine, shorten sentences.
 3. Break long paragraphs into shorter ones.
 
-#### If Gunning Fog is too high (&gt;10)
+#### If Gunning Fog Index is too high (&gt;10)
 
 1. Replace complex words with common alternatives.
 2. Define technical terms on first use.
-3. Use shorter words: "use" not "utilize," "help" not "facilitate".
+3. Use shorter words: "use" not `utilize`, "help" not `facilitate`.
 
-#### If SMOG is too high (&gt;10)
+#### If SMOG Grade is too high (&gt;10)
 
 1. Replace 3+ syllable words with simpler alternatives.
-2. Use contractions: "don't" instead of "do not."
+2. Use contractions: "don't" instead of `do not.`
 3. Break long words into a few shorter words.
 
 **Note for style guide readers:** This style guide itself is for documentation
@@ -1018,9 +1034,8 @@ not to the style guide itself.
 
 ---
 
-**AI disclosure:** This document was drafted with the assistance of Claude Code
-(Anthropic). The tool was used to research documentation style guides, best
-practices, structure the guidelines, and identify redundancies and
-contradictions during review. All content was reviewed, edited, and finalised by
-a human. AI assistance was used in accordance with HURIDOCS’ Internal AI
-Governance Policy and Framework.
+**AI disclosure:** Claude Code (Anthropic) helped draft this document. The tool
+researched documentation style guides and best practices, structured the
+guidelines, and flagged redundancies and contradictions during review. A human
+reviewed, edited, and finalized all content. This AI use followed HURIDOCS’
+Internal AI Governance Policy and Framework.

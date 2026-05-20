@@ -1,0 +1,6 @@
+extends: existence
+message: "Use numerals for numbers 10 and above. Replace the spelled-out number '%s'."
+ignorecase: true
+tokens:
+  - '\b(?:ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)\b'
+  - '\b(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen)[\s-](?:hundred|thousand|million|billion|trillion)\b'

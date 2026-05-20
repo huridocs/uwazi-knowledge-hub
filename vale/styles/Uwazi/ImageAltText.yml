@@ -1,0 +1,8 @@
+extends: existence
+message: "Images need descriptive alt text. Replace '%s' with a description of what the image shows."
+ignorecase: true
+scope: raw
+nonword: true
+tokens:
+  - '!\[\s*\]\('
+  - '!\[\s*(?:screenshots?|images?|diagrams?|pictures?|photos?|screen ?captures?)\s*\]\('

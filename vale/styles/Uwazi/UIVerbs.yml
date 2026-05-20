@@ -1,9 +1,16 @@
 extends: substitution
 message: "Use '%s' instead of '%s'."
-level: error
 ignorecase: true
+action:
+  name: replace
 swap:
-  '\bclick(?:ed|ing|s)?\b': 'select'
-  '\btap(?:ped|ping|s)?\b': 'select'
+  '\bclick\b': 'select'
+  '\bclicks\b': 'selects'
+  '\bclicking\b': 'selecting'
+  '\bclicked\b': 'selected'
+  '\btap\b': 'select'
+  '\btaps\b': 'selects'
+  '\btapping\b': 'selecting'
+  '\btapped\b': 'selected'
   '\bnavigate to\b': 'go to'
   '\bhit\b': 'press'

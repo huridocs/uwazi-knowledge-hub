@@ -1,0 +1,20 @@
+extends: capitalization
+message: "'%s' should use sentence-style capitalisation."
+scope:
+  - heading
+  - text.frontmatter.title
+threshold: 1.0
+match: $sentence
+exceptions:
+  - Uwazi
+  - HURIDOCS
+  - PDF
+  - HTML
+  - CSV
+  - JSON
+  - URL
+  - API
+  - GitHub
+  - SMOG Grade
+  - Gunning Fog Index
+  - Flesch Reading Ease

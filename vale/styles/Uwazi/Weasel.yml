@@ -1,0 +1,22 @@
+# Forked from:
+#   write-good/Weasel.yml (curated subset for Uwazi docs)
+#
+# Hedge words that undermine the "Clear" and "Respectful" voice from the
+# Uwazi style guide. Excluded from the upstream list: quantifiers that are
+# legitimately useful in docs (several, various, mostly, usually, largely)
+# and rare-in-docs adverbs (interestingly, remarkably, surprisingly).
+extends: existence
+message: "'%s' is a hedge word. Remove it or replace with something specific."
+ignorecase: true
+tokens:
+  - actually
+  - basically
+  - clearly
+  - essentially
+  - fairly
+  - just
+  - quite
+  - really
+  - simply
+  - somewhat
+  - very

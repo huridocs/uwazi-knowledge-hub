@@ -1,6 +1,5 @@
 extends: existence
 message: "Capitalize 'Uwazi' in prose. Use lowercase only in URLs and slugs."
-level: error
 ignorecase: false
 tokens:
   - '\buwazi\b'

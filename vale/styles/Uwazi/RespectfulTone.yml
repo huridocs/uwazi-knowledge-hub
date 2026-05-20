@@ -1,0 +1,11 @@
+extends: existence
+message: "Using '%s' can sound condescending or othering. Rephrase to respect the reader's expertise."
+ignorecase: true
+tokens:
+  - 'obviously'
+  - 'of course'
+  - 'everyone knows'
+  - 'no-brainer'
+  - 'blind not to see'
+  - "you'd have to be blind"
+  - '\bnon-experts?\b'

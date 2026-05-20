@@ -1,0 +1,4 @@
+extends: spelling
+message: "'%s' misspelled according to Oxford English?"
+dictionaries:
+  - en_GB_oxendict

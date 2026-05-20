@@ -1,0 +1,5 @@
+extends: existence
+message: "Spell out the ordinal number '%s' in text (for example, 'first', 'second', 'third')."
+ignorecase: true
+tokens:
+  - '\b\d+(?:st|nd|rd|th)\b'
