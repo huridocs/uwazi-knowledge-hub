@@ -1,0 +1,32 @@
+# Replaces the custom `remarkRequireFrontmatter` plugin from the
+# previous `.remarkrc.mjs`: every doc must start with a YAML
+# frontmatter block containing both `title:` and `description:`.
+extends: script
+message: '%s'
+scope: raw
+level: error
+script: |
+  text := import("text")
+  matches := []
+
+  has_open := text.has_prefix(scope, "---\n") || text.has_prefix(scope, "---\r\n")
+  if !has_open {
+    matches = append(matches, {begin: 0, end: 0, message: "Missing frontmatter block"})
+  } else {
+    body := scope[4:]
+    if text.has_prefix(scope, "---\r\n") {
+      body = scope[5:]
+    }
+    close_idx := text.index(body, "\n---")
+    if close_idx < 0 {
+      matches = append(matches, {begin: 0, end: 0, message: "Missing frontmatter block"})
+    } else {
+      fm := body[0:close_idx]
+      if !text.re_match(`(?m)^title\s*:`, fm) {
+        matches = append(matches, {begin: 0, end: 0, message: "Frontmatter missing required field: title"})
+      }
+      if !text.re_match(`(?m)^description\s*:`, fm) {
+        matches = append(matches, {begin: 0, end: 0, message: "Frontmatter missing required field: description"})
+      }
+    }
+  }
