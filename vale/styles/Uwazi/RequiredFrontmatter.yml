@@ -4,7 +4,6 @@
 extends: script
 message: '%s'
 scope: raw
-level: error
 script: |
   text := import("text")
   matches := []
