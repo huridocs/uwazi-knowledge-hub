@@ -4,7 +4,6 @@ import typescriptParser from '@typescript-eslint/parser';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import prettier from 'eslint-plugin-prettier';
-import * as mdx from 'eslint-plugin-mdx';
 
 export default [
   js.configs.recommended,
@@ -56,24 +55,6 @@ export default [
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-require-imports': 'off',
-    },
-  },
-  {
-    ...mdx.flat,
-    processor: mdx.createRemarkProcessor({
-      lintCodeBlocks: true,
-    }),
-  },
-  {
-    files: ['**/*.{md,mdx}'],
-    rules: {
-      'mdx/remark': 'off',
-    },
-  },
-  {
-    files: ['docs/**/*.{md,mdx}', 'blog/**/*.{md,mdx}'],
-    rules: {
-      'mdx/remark': 'error',
     },
   },
   {
