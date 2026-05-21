@@ -19,7 +19,7 @@
     "prepare": "husky",
     "vale:test": "bash vale/scripts/test-rules.sh",
     "lint:md": "rumdl check",
-    "lint:md:fix": "rumdl fmt && rumdl npm runcheck --fix"
+    "lint:md:fix": "rumdl fmt && rumdl npm rungit check --fix"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
