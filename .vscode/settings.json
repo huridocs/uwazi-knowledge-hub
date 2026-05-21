@@ -1,8 +1,12 @@
 {
   "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "[markdown]": {
+    "editor.defaultFormatter": "rvben.rumdl",
+    "editor.formatOnSave": true
+  },
   "[mdx]": {
-    "editor.defaultFormatter": null,
-    "editor.formatOnSave": false
+    "editor.defaultFormatter": "rvben.rumdl",
+    "editor.formatOnSave": true
   },
   "eslint.useFlatConfig": true,
   "eslint.validate": [
@@ -12,6 +16,7 @@
     "typescriptreact"
   ],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.rumdl": "always"
   }
 }
