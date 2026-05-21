@@ -1,0 +1,136 @@
+---
+title: Contributor maintenance guide
+description: >-
+  Development environment setup, day-to-day workflow, dependency management, and
+  tooling for Uwazi Knowledge Hub contributors
+author: aphilop
+last_update:
+  date: 2026-05-21
+  author: aphilop
+unlisted: true
+---
+
+## Prerequisites
+
+Install these tools before starting:
+
+1. **[Node.js](https://nodejs.org/en/download) >= 20.**
+   There is no `.nvmrc` file, so manage your Node version yourself.
+
+2. **[rumdl](https://rumdl.dev/getting-started/installation/)**
+   (Markdown structure linter):
+
+   Install rumdl on your system.
+
+3. **[Vale](https://docs.vale.sh/topics/installation)** (prose linter).
+   See [Vale prose linting](/docs/meta/Vale-integration) for full install steps,
+   including `Vale sync` and the required npm dependencies.
+
+After installing Vale, run:
+
+```bash
+npm install  # installs all JS dependencies, including mdx2vast for Vale MDX support
+```
+
+## Day-to-day development
+
+Run these commands for common tasks:
+
+```bash
+npm run start       # dev server at http://localhost:3000
+npm run lint        # ESLint across JS/TS files
+npm run lint:fix    # auto-fix ESLint issues
+npm run lint:md     # rumdl check across all .md/.mdx files
+npm run lint:md:fix # rumdl auto-fix
+npm run format      # Prettier over JS/TS/JSON (not Markdown)
+npm run type-check
+Vale docs/          # prose lint a path manually
+npm run Vale:test   # run Vale rule unit tests
+```
+
+## Dependency updates
+
+The project doesn't use Dependabot or Renovate.
+Handle updates manually.
+
+- **Frequency:** check monthly; audit after any security advisory.
+- **Docusaurus:** update all `@docusaurus/*` packages together.
+  They're tightly coupled.
+  Check the Docusaurus changelog before bumping.
+- **React:** pinned at `^19`.
+  Upgrade with care; Docusaurus has its own React compatibility constraints.
+- **TypeScript:** pinned with `~5.6.2` (patch-only).
+  Only widen after verifying `@typescript-eslint` support for the new version.
+- After any update, run `npm run build && npm run type-check` to verify
+  nothing broke.
+
+## Adding new content
+
+Both rumdl and Vale lint all files under `docs/` and `blog/`.
+Every file must:
+
+- Start with YAML frontmatter containing `title` and `description`.
+- Use `##` as the first heading; the `title` frontmatter field is the H1.
+- Use `###` (not bold text) for sub-section headings.
+- Stay within 80 characters per line; code blocks and tables are exempt.
+- Use `-` for unordered list markers.
+- Use `*` for bold and italic emphasis.
+- Use fenced code blocks with backtick delimiters.
+- Have no duplicate headings, no empty URLs, and no trailing spaces.
+- Apply semantic line breaks: each sentence on its own line.
+
+Files outside `docs/` and `blog/` are still linted by rumdl for structure,
+but Vale's `RequiredFrontmatter` rule doesn't apply to them.
+
+For linting configuration details,
+see [MDX and Markdown linting](/docs/meta/mdx-linting).
+For prose quality standards,
+see [Vale prose linting](/docs/meta/vale-integration).
+
+## Pre-commit hook
+
+The hook runs lint-staged on every commit.
+
+**For `.md`/`.mdx` files:**
+
+1. `bash vale/scripts/vale-check.sh` — prose lint.
+   Vale errors block the commit.
+   Warnings appear but don't block the commit.
+2. `rumdl check --fix` — structure lint with auto-fix applied before
+   committing.
+
+**For `.js`/`.ts`/`.jsx`/`.tsx` files:** ESLint + Prettier.
+
+**For `.json` files:** Prettier.
+
+**For `.ts`/`.tsx` files:** `tsc --noEmit --skipLibCheck`.
+
+If the hook blocks you:
+
+- **rumdl failure:** run `npm run lint:md:fix`, re-stage, retry.
+- **Vale error:** fix the flagged prose issue manually.
+  Vale errors don't auto-fix.
+  Run `vale <file>` to inspect alerts first.
+- **ESLint/Prettier failure:** run `npm run lint:fix`, re-stage, retry.
+- **TypeScript error:** fix the type error — don't skip the hook.
+
+## Non-obvious things
+
+- **Vale requires a local install.**
+  Vale is not an npm package.
+  If it's missing, `vale-check.sh` warns and exits cleanly (non-blocking).
+  See [Vale prose linting](/docs/meta/vale-integration) for setup instructions.
+- **Vale ignores test fixtures.**
+  `.valeignore` excludes `vale/tests/**`.
+  rumdl also excludes `vale/tests/fixtures` via `.rumdl.toml`.
+- **ESLint doesn't process `.md`/`.mdx`.**
+  `eslint.config.mjs` only covers JS/TS/JSX/TSX.
+- **Prettier doesn't process Markdown.**
+  `npm run format` covers JS/TS/JSON.
+  rumdl handles Markdown formatting.
+- **No CI pipeline exists.**
+  The pre-commit hook is the only automated quality gate.
+  There is no build check on pull requests.
+- **`npm run clear`** wipes the Docusaurus cache.
+  Run it when the development server shows stale content or build errors
+  that don't match your code.
