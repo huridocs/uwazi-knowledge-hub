@@ -1,0 +1,161 @@
+---
+title: Vale prose linting
+description: >-
+  How to set up Vale and how it checks prose quality in the Uwazi Knowledge Hub
+author: aphilop
+last_update:
+  date: 2026-05-21
+  author: aphilop
+unlisted: true
+---
+
+## Overview
+
+Vale checks `.md` and `.mdx` files for prose quality before each commit.
+It enforces the Uwazi style guide automatically.
+Error-level alerts block the commit.
+Warnings are visible but non-blocking.
+
+## Prerequisites
+
+Complete these steps before the lint chain runs on your machine.
+
+1. Install Vale.
+   [Follow the instructions](https://vale.sh/docs/vale-cli/installation/)
+   for your operating system at.
+
+2. Download the third-party style packages:
+
+   ```bash
+   vale sync
+   ```
+
+3. Install npm dependencies (includes `mdx2vast` for MDX support):
+
+   ```bash
+   npm install
+   ```
+
+## Styles loaded
+
+- `Vale` — built-in base style
+- `Uwazi` — custom rules in `vale/styles/Uwazi/`
+
+## Vocabulary
+
+`vale/styles/config/vocabularies/Uwazi/` holds `accept.txt` and `reject.txt`
+for project-specific spelling.
+Add terms to either file to extend or restrict the spelling vocabulary.
+
+## How it works
+
+Vale runs as part of `lint-staged` on every commit.
+The wrapper script `vale/scripts/vale-check.sh` runs vale twice:
+
+- First pass: shows all warnings and errors for visibility.
+- Second pass: checks for errors only.
+  A non-zero exit code blocks the commit.
+
+If Vale is not installed,
+the pre-commit hook skips prose checking and shows a warning.
+Contributors without Vale can still commit,
+but nothing catches prose errors until they install Vale.
+
+## Alert severity
+
+| Level   | Behaviour                              |
+| ------- | -------------------------------------- |
+| error   | Blocks the commit                      |
+| warning | Shown to the developer; does not block |
+
+## Required frontmatter
+
+`RequiredFrontmatter` is off by default.
+It's promoted to error for files under `docs/` or `blog/`.
+Files in those directories must have `title` and `description` frontmatter.
+
+## Ignoring files and content
+
+Vale excludes these paths and patterns from checks:
+
+- `vale/tests/**` — listed in `.valeignore`
+- URLs and lines starting with `✗` — excluded via `TokenIgnores`
+- Tables — excluded via `BlockIgnores`
+
+## Running Vale manually
+
+To check the full `docs/` directory:
+
+```bash
+vale --minAlertLevel warning docs/
+```
+
+To check a single file:
+
+```bash
+vale --minAlertLevel warning docs/how-to/my-guide.mdx
+```
+
+## Rules reference
+
+The table below lists all active rules and their alert levels.
+
+| Rule                        | Level   | Checks                                          |
+| --------------------------- | ------- | ----------------------------------------------- |
+| `Uwazi.UwaziCase`           | error   | Lowercase `uwazi` in prose                      |
+| `Uwazi.UIVerbs`             | error   | Banned UI verbs (`click`, `tap`)                |
+| `Uwazi.LinkText`            | error   | Vague link text (`here`, `link`, `read more`)   |
+| `Uwazi.Spelling`            | error   | Spelling against Oxford English dictionary      |
+| `Uwazi.ImageAltText`        | error   | Missing or generic image alt text               |
+| `Uwazi.OxfordComma`         | error   | Missing Oxford comma in lists                   |
+| `Uwazi.RequiredFrontmatter` | error   | `title` and `description` required in docs/blog |
+| `Uwazi.Contractions`        | warning | Expanded forms that should be contracted        |
+| `Uwazi.FleschReadingEase`   | warning | Score below 70                                  |
+| `Uwazi.GunningFog`          | warning | Score above 10                                  |
+| `Uwazi.HeadingPunctuation`  | warning | End punctuation in headings                     |
+| `Uwazi.HeadingSentenceCase` | warning | Title-case headings                             |
+| `Uwazi.Idioms`              | warning | Idioms and business cliches                     |
+| `Uwazi.InclusiveLanguage`   | warning | Non-inclusive terms                             |
+| `Uwazi.OrdinalNumbers`      | warning | Ordinal numerals (`1st`, `2nd`) in prose        |
+| `Uwazi.ParagraphLength`     | warning | Paragraphs longer than five sentences           |
+| `Uwazi.Passive`             | warning | Passive voice                                   |
+| `Uwazi.RespectfulTone`      | warning | Condescending or minimizing language            |
+| `Uwazi.SentenceLength`      | warning | Sentences longer than 25 words                  |
+| `Uwazi.SMOG`                | warning | SMOG grade above 10                             |
+| `Uwazi.SpelledOutNumbers`   | warning | Spelled numbers 10+ or numerals 1-9 in prose    |
+| `Uwazi.Weasel`              | warning | Hedge words (`clearly`, `obviously`, `simply`)  |
+| `Uwazi.WordSubstitutions`   | warning | Complex words with simpler alternatives         |
+
+## Not lint-checked
+
+Vale can't reliably detect these style-guide rules.
+Reviewers enforce them by eye:
+
+- Lists: five to seven item cap, intro text required, max two-level nesting.
+- Code blocks: language tag missing, explanation required after block.
+- Call-outs: max three per file, max two sentences each.
+- Highlighting: two to three bold or italic per page maximum.
+- Tables: intro text required, five columns maximum.
+- Headings: no H1 in document body (the frontmatter `title` is the H1).
+- Periods: one space (not two) after each period.
+
+## Adding a rule
+
+1. Create `vale/styles/Uwazi/RuleName.yml` with the rule definition.
+2. Create `vale/tests/fixtures/RuleName/` with `.vale.ini`, `invalid.md`, and
+   `valid.md`.
+3. Run `npm run vale:test` to confirm the rule fires correctly.
+
+## Testing rules
+
+To run all rule unit tests:
+
+```bash
+npm run vale:test
+```
+
+To test a single rule:
+
+```bash
+bash vale/scripts/test-rules.sh RuleName
+```

@@ -1,0 +1,68 @@
+---
+title: MDX and Markdown linting
+description: >-
+  How rumdl enforces Markdown structure rules across .md and .mdx files in
+  the Uwazi Knowledge Hub
+author: aphilop
+last_update:
+  date: 2026-05-21
+  author: aphilop
+unlisted: true
+---
+
+## Linting tools
+
+Two tools cover `.md` and `.mdx` files:
+
+| Tool  | Config file   | Scope                         |
+| ----- | ------------- | ----------------------------- |
+| rumdl | `.rumdl.toml` | Markdown structure (MD rules) |
+| vale  | `.vale.ini`   | Prose quality                 |
+
+ESLint/Prettier cover `.js`/`.ts`/`.jsx`/`.tsx` only
+and don't process Markdown. remark-lint, `eslint-plugin-mdx`.
+
+For Vale configuration and setup,
+see [Vale prose linting](/docs/meta/vale-integration).
+
+## rumdl
+
+rumdl enforces Markdown structure rules.
+It understands MDX syntax natively via `flavor = "mdx"` in `.rumdl.toml`.
+
+### Active rules
+
+The table below lists each active rule with its configured setting and purpose.
+Code blocks and tables are exempt from the line length rule.
+
+| Rule  | Setting                             | Purpose                                        |
+| ----- | ----------------------------------- | ---------------------------------------------- |
+| MD004 | `dash`                              | Unordered list marker style                    |
+| MD013 | `line-length = 80`, semantic reflow | Line length                                    |
+| MD041 | disabled                            | Docusaurus `title` frontmatter supplies the H1 |
+| MD046 | `fenced`                            | Fenced code blocks only                        |
+| MD048 | `backtick`                          | Backtick fence style                           |
+| MD049 | `asterisk`                          | Italic with asterisks                          |
+| MD050 | `asterisk`                          | Bold with asterisks                            |
+
+rumdl doesn't check `vale/tests/fixtures`.
+
+## Running rumdl
+
+To check all files:
+
+```bash
+npm run lint:md
+```
+
+To auto-fix structure issues:
+
+```bash
+npm run lint:md:fix
+```
+
+## Adding or modifying a rule
+
+Edit `.rumdl.toml`.
+Rules follow the `[MD###]` section format.
+To disable a rule, add its code to the `disable` array in `[global]`.

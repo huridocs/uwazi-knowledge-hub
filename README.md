@@ -7,6 +7,8 @@ for the Uwazi knowledge hub.
 
 - Node.js >= 20.0
 - npm or yarn
+- [Vale](https://vale.sh/) >= 3.14
+- [rumdl](https://rumdl.dev) >= 0.1.95
 
 ## Installation
 
@@ -36,11 +38,22 @@ This generates static content into the `build` directory.
 - `npm run build` - Build for production
 - `npm run serve` - Serve production build locally
 - `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint issues
 - `npm run format` - Format code with Prettier
 - `npm run type-check` - Run TypeScript type checking
+- `npm run lint:md` - Lint Markdown with rumdl
+- `npm run lint:md:fix` - Fix Markdown with rumdl
+- `npm run vale:test` - Run Vale prose lint tests
+
+## Contributing
+
+See [docs/meta/index.mdx](docs/meta/index.mdx) for documentation standards
+and contributor guidelines.
 
 ## Tech stack
 
 - [Docusaurus](https://docusaurus.io/) - Documentation framework
 - [React](https://reactjs.org/) - UI library
 - [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Vale](https://vale.sh/) - Prose linting
+- [rumdl](https://github.com/MarkdownTools/rumdl) - Markdown linting
