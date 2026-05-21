@@ -14,10 +14,12 @@
     "write-heading-ids": "docusaurus write-heading-ids",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md,mdx,json}\"",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json}\"",
     "type-check": "tsc --noEmit",
     "prepare": "husky",
-    "vale:test": "bash vale/scripts/test-rules.sh"
+    "vale:test": "bash vale/scripts/test-rules.sh",
+    "lint:md": "rumdl check",
+    "lint:md:fix": "rumdl fmt && rumdl npm runcheck --fix"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

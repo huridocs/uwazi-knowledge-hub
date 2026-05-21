@@ -3,6 +3,9 @@ flavor = "mdx"
 line-length = 80
 # MD041: Docusaurus frontmatter (title) supplies the H1; rule misfires here.
 disable = ["MD041"]
+exclude = [
+    "vale/tests/fixtures",   # Exclude vale test md files
+]
 
 [MD004]
 style = "dash"
