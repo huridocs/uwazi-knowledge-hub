@@ -7,13 +7,5 @@
   "useTabs": false,
   "bracketSpacing": true,
   "arrowParens": "avoid",
-  "endOfLine": "lf",
-  "overrides": [
-    {
-      "files": ["*.md", "*.mdx"],
-      "options": {
-        "proseWrap": "always"
-      }
-    }
-  ]
+  "endOfLine": "lf"
 }

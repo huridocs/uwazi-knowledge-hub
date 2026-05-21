@@ -1,7 +1,7 @@
-# Uwazi Knowledge Hub
+# Uwazi knowledge hub
 
-Documentation portal implementing the Diátaxis framework for the Uwazi knowledge
-hub.
+Documentation portal implementing the Diátaxis framework
+for the Uwazi knowledge hub.
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ This generates static content into the `build` directory.
 - `npm run format` - Format code with Prettier
 - `npm run type-check` - Run TypeScript type checking
 
-## Tech Stack
+## Tech stack
 
 - [Docusaurus](https://docusaurus.io/) - Documentation framework
 - [React](https://reactjs.org/) - UI library

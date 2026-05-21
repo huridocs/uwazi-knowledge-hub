@@ -5,15 +5,22 @@ description: How vale checks prose quality in the Uwazi Knowledge Hub
 
 ## Overview
 
-vale checks `.md` and `.mdx` files for prose quality before each commit. It
-enforces the Uwazi style guide automatically. Error-level alerts block the
-commit. Warnings are visible but non-blocking.
+vale checks `.md` and `.mdx` files for prose quality before each commit.
+It enforces the Uwazi style guide automatically.
+Error-level alerts block the commit.
+Warnings are visible but non-blocking.
+
+`rumdl` runs alongside vale and owns Markdown structure and layout.
+It replaces `ESLint` and Prettier on `.md` and `.mdx` files.
+Its configuration lives in `.rumdl.toml` at the repo root.
 
 ## Prerequisites
 
-Complete these steps before vale runs on your machine.
+Complete these steps before the lint chain runs on your machine.
 
-1. Install vale. Follow the instructions for your operating system at
+1. Install vale.
+   Follow the instructions
+   for your operating system at
    [vale.sh](https://vale.sh/docs/vale-cli/installation/).
 
 2. Download the third-party style packages:
@@ -28,17 +35,29 @@ Complete these steps before vale runs on your machine.
    npm install
    ```
 
+4. Install `rumdl`:
+
+   ```bash
+   brew install rumdl
+   ```
+
 ## How it works
 
-vale runs as part of `lint-staged` on every commit. The wrapper script
-`vale/scripts/vale-check.sh` runs vale twice:
+vale runs as part of `lint-staged` on every commit.
+The wrapper script `vale/scripts/vale-check.sh` runs vale twice:
 
 - First pass: shows all warnings and errors for visibility.
-- Second pass: checks for errors only. A non-zero exit code blocks the commit.
+- Second pass: checks for errors only.
+  A non-zero exit code blocks the commit.
 
-If vale isn't installed, the pre-commit hook skips prose checking and shows a
-warning. Contributors without vale can still commit, but prose errors won't be
-caught until vale is set up.
+`rumdl` runs after vale on the same staged files.
+`ESLint` and Prettier no longer touch Markdown,
+so structural and layout concerns now belong to `rumdl`.
+
+If vale isn't installed,
+the pre-commit hook skips prose checking and shows a warning.
+Contributors without vale can still commit,
+but nothing catches prose errors until they install vale.
 
 ## Running vale manually
 
@@ -83,8 +102,8 @@ vale --minAlertLevel warning docs/how-to/my-guide.mdx
 
 ## Not lint-checked
 
-vale can't reliably detect the following style-guide rules. Reviewers enforce
-them by eye:
+vale can't reliably detect the following style-guide rules.
+Reviewers enforce them by eye:
 
 - Lists: 5–7 item cap, intro text required, max 2-level nesting.
 - Code blocks: language tag missing, explanation required after block.

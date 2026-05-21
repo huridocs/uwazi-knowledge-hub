@@ -1,0 +1,30 @@
+[global]
+flavor = "mdx"
+line-length = 80
+# MD041: Docusaurus frontmatter (title) supplies the H1; rule misfires here.
+disable = ["MD041"]
+exclude = [
+    "vale/tests/fixtures",   # Exclude vale test md files
+]
+
+[MD004]
+style = "dash"
+
+[MD013]
+line-length = 80
+reflow = true
+reflow-mode = "semantic-line-breaks"
+code_blocks = false
+tables = false
+
+[MD049]
+style = "asterisk"
+
+[MD050]
+style = "asterisk"
+
+[MD046]
+style = "fenced"
+
+[MD048]
+style = "backtick"

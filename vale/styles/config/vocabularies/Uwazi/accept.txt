@@ -24,3 +24,5 @@ UI
 URLs?
 Uwazi
 vale
+npm
+ESLint
