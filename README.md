@@ -47,8 +47,8 @@ This generates static content into the `build` directory.
 
 ## Contributing
 
-See [docs/meta/index.mdx](docs/meta/index.mdx) for documentation standards
-and contributor guidelines.
+See the [contribution guides](docs/contribution-guides/index.mdx)
+for documentation standards and contributor guidelines.
 
 ## Tech stack
 

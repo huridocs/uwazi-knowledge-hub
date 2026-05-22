@@ -1,5 +1,5 @@
 ---
-title: Contributor maintenance guide
+title: Maintenance guide
 description: >-
   Development environment setup, day-to-day workflow, dependency management, and
   tooling for Uwazi Knowledge Hub contributors
@@ -23,7 +23,7 @@ Install these tools before starting:
    Install rumdl on your system.
 
 3. **[Vale](https://docs.vale.sh/topics/installation)** (prose linter).
-   See [Vale prose linting](/docs/meta/Vale-integration) for full install steps,
+   See [Vale prose linting](vale-prose-linting.mdx) for full install steps,
    including `Vale sync` and the required npm dependencies.
 
 After installing Vale, run:
@@ -83,9 +83,8 @@ Files outside `docs/` and `blog/` are still linted by rumdl for structure,
 but Vale's `RequiredFrontmatter` rule doesn't apply to them.
 
 For linting configuration details,
-see [MDX and Markdown linting](/docs/meta/mdx-linting).
-For prose quality standards,
-see [Vale prose linting](/docs/meta/vale-integration).
+see [MDX and Markdown linting](mdx-linting.mdx).
+For prose quality standards, see [Vale prose linting](vale-prose-linting.mdx).
 
 ## Pre-commit hook
 
@@ -119,7 +118,7 @@ If the hook blocks you:
 - **Vale requires a local install.**
   Vale is not an npm package.
   If it's missing, `vale-check.sh` warns and exits cleanly (non-blocking).
-  See [Vale prose linting](/docs/meta/vale-integration) for setup instructions.
+  See [Vale prose linting](vale-prose-linting.mdx) for setup instructions.
 - **Vale ignores test fixtures.**
   `.valeignore` excludes `vale/tests/**`.
   rumdl also excludes `vale/tests/fixtures` via `.rumdl.toml`.
