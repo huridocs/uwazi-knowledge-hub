@@ -5,6 +5,9 @@ scope:
   - text.frontmatter.title
 threshold: 1.0
 match: $sentence
+indicators:
+  - ':'
+  - '.'
 exceptions:
   - Uwazi
   - HURIDOCS
