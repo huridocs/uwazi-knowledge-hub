@@ -86,10 +86,45 @@ const config: Config = {
       //},
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'docsSidebar',
+          type: 'dropdown',
+          label: 'Get started',
           position: 'left',
+          items: [
+            { label: 'New to Uwazi', to: '/start/new-users' },
+            {
+              label: 'Administering a collection',
+              to: '/start/administrators',
+            },
+            { label: 'Self-hosting Uwazi', to: '/start/self-hosting' },
+            { label: 'Building with the API', to: '/start/developers' },
+          ],
+        },
+        {
+          type: 'dropdown',
           label: 'Docs',
+          position: 'left',
+          items: [
+            {
+              type: 'docSidebar',
+              sidebarId: 'tutorials',
+              label: 'Tutorials',
+            },
+            {
+              type: 'docSidebar',
+              sidebarId: 'howTo',
+              label: 'How-to guides',
+            },
+            {
+              type: 'docSidebar',
+              sidebarId: 'reference',
+              label: 'Reference',
+            },
+            {
+              type: 'docSidebar',
+              sidebarId: 'explanation',
+              label: 'Explanation',
+            },
+          ],
         },
         {
           type: 'docSidebar',
@@ -97,7 +132,13 @@ const config: Config = {
           position: 'left',
           label: 'API',
         },
-        { to: '/blog', label: 'Updates', position: 'left' },
+        {
+          type: 'docSidebar',
+          sidebarId: 'resources',
+          position: 'left',
+          label: 'Resources',
+        },
+        { to: '/blog', label: 'Product updates', position: 'left' },
         {
           href: 'https://github.com/huridocs/uwazi-knowledge-hub',
           label: 'GitHub',

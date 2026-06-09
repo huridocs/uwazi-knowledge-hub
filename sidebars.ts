@@ -13,47 +13,12 @@ import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
  Create as many sidebars as you want.
  */
 const sidebars: SidebarsConfig = {
-  docsSidebar: [
-    'index',
-    {
-      type: 'category',
-      label: 'Tutorials',
-      link: {
-        type: 'doc',
-        id: 'tutorials/index',
-      },
-      items: [],
-    },
-    {
-      type: 'category',
-      label: 'How-to Guides',
-      link: {
-        type: 'doc',
-        id: 'how-to/index',
-      },
-      items: [],
-    },
-    {
-      type: 'category',
-      label: 'Reference',
-      link: {
-        type: 'doc',
-        id: 'reference/index',
-      },
-      items: [],
-    },
-    {
-      type: 'category',
-      label: 'Explanations',
-      link: {
-        type: 'doc',
-        id: 'explanations/index',
-      },
-      items: [],
-    },
-  ],
-
+  tutorials: ['tutorials/index'],
+  howTo: ['how-to/index'],
+  reference: ['reference/index'],
+  explanation: ['explanation/index'],
   apiSidebar: ['api/index'],
+  resources: ['resources/index'],
 };
 
 export default sidebars;
