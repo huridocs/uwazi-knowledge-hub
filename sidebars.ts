@@ -23,7 +23,11 @@ const sidebars: SidebarsConfig = {
         title: 'Using Uwazi tutorials',
         description: 'Learn how to start using Uwazi!',
       },
-      items: ['tutorials/take-a-tour-of-uwazi', 'tutorials/find-what-you-need'],
+      items: [
+        'tutorials/take-a-tour-of-uwazi',
+        'tutorials/find-what-you-need',
+        'tutorials/add-and-connect-an-entity',
+      ],
     },
   ],
   howTo: ['how-to/index'],
