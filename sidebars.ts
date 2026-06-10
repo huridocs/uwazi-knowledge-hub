@@ -18,7 +18,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Using Uwazi',
-      items: ['tutorials/take-a-tour-of-uwazi'],
+      items: ['tutorials/take-a-tour-of-uwazi', 'tutorials/find-what-you-need'],
     },
   ],
   howTo: ['how-to/index'],
