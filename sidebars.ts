@@ -18,6 +18,11 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Using Uwazi',
+      link: {
+        type: 'generated-index',
+        title: 'Using Uwazi tutorials',
+        description: 'Learn how to start using Uwazi!',
+      },
       items: ['tutorials/take-a-tour-of-uwazi', 'tutorials/find-what-you-need'],
     },
   ],
