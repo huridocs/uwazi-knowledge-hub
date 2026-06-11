@@ -1,0 +1,161 @@
+---
+title: Set up your team
+description: Create users, assign roles, build a group, and share entities with your team.
+sidebar_label: Set up your team
+---
+
+## What you'll learn
+
+A team in Uwazi is the set of people who work in your instance.
+As an admin, you decide who joins, what each person can do,
+and which content they can reach.
+We'll add a user, group people together, and share an entity with them.
+By the end of this tutorial,
+we'll have a working team that can see and edit the content we choose.
+
+## Prerequisites
+
+- A link to a live Uwazi instance
+- An admin username and password for that instance
+
+Only an admin can add users, assign roles, and manage groups.
+If you don't see the **Settings** menu, ask your instance manager for access.
+
+## Part 1: Create a user
+
+A *user* is one person's account in your instance.
+We'll create one and give it a role.
+The role decides what that person can do.
+
+1. Go to **Settings**, then select **Users & Groups**.
+
+   The page opens on the **Users** tab and lists the accounts you already have.
+
+2. Select **Add user**.
+
+   A side panel opens with the title **New user**.
+
+3. Type a name in the **Username** field, such as `amal.haddad`.
+
+   The name can't contain spaces.
+   Uwazi marks a duplicate name with an error.
+
+4. Open the **User Role** drop-down and pick a role.
+
+   The drop-down starts on **Collaborator**.
+   The next step explains each choice.
+
+5. Type the person's address in the **Email** field.
+
+   Uwazi sends the welcome email to this address, so check it carefully.
+
+6. Leave the **Password** field blank.
+
+   The new user sets their own password from the welcome email,
+   so we don't need to choose one.
+
+7. Select **Save**.
+
+   A confirmation modal opens and asks for your own current password.
+
+8. Type your password and confirm.
+
+   Uwazi creates the account
+   and sends a **Welcome** email with a link to set a password.
+   The new user appears in the table.
+
+Each role gives a different level of access.
+This table shows what each one can do:
+
+| What they can do | Admin | Editor | Collaborator |
+| ---------------- | ----- | ------ | ------------ |
+| Create entities and upload documents | Yes | Yes | Yes |
+| See and edit every entity | Yes | Yes | No |
+| See and edit only shared entities | No | No | Yes |
+| Share entities with the public | Yes | Yes | No |
+| Manage users, settings, and templates | Yes | No | No |
+
+Admins and editors reach every entity.
+A collaborator reaches only the entities they create,
+the entities we share with them, and the public ones.
+That's why sharing matters, and we'll set it up in Part 3.
+
+## Part 2: Create a group
+
+A *group* is a named set of users.
+Sharing with a group shares with everyone in it,
+so we don't have to add people one by one.
+We'll create one and add a member.
+
+1. On the **Users & Groups** page, select the **Groups** tab.
+
+   The tab lists the groups you already have.
+
+2. Select **Add group**.
+
+   A side panel opens with the title **New group**.
+
+3. Type a name in the **Name** field, such as `Research team`.
+
+   The name must be unique.
+   Uwazi marks a duplicate name with an error.
+
+4. Open the **Members** selector and pick the user from Part 1.
+
+   The selector lists every user by username.
+   Your chosen member shows as selected.
+
+5. Select **Save**.
+
+   Uwazi saves the group, and it joins the list.
+   Group changes don't need a password.
+
+## Part 3: Share an entity
+
+Sharing gives a user or group access to one entity.
+We'll open an entity and share it, so a collaborator can finally see it.
+
+1. Go to the **Library** and open an entity, then select **Share**.
+
+   A modal opens and lists who can already reach this entity.
+
+2. Notice the **Administrators and Editors** row at the top.
+
+   This row always has edit access, and we can't change it.
+   Admins and editors reach every entity already.
+
+3. Type a name in the **Add people or groups** search box.
+   :::note
+   Uwazi finds a user only by their full, exact username or email.
+   It finds a group by the start of its name.
+   :::
+
+4. Select the user or group from the results.
+
+   Uwazi adds them to the list with **Can see** access.
+
+5. Open the access drop-down on their row and pick **Can edit**.
+
+   The row now shows **Can edit**, so this person can change the entity,
+   not only view it.
+
+6. Select **Save changes**.
+
+   Uwazi saves the access and closes the modal.
+   The user or group can now reach this entity.
+
+## What you've done
+
+- Created a user and sent them a welcome email
+- Assigned a role that sets what the user can do
+- Built a group and added a member
+- Shared an entity with a user or group
+- Gave a collaborator access to content they couldn't see before
+
+:::tip
+
+To share the same entity with your whole team at once,
+share it with the group instead of each user.
+Anyone you later add to the group gets the same access.
+
+:::

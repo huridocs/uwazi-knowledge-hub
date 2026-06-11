@@ -37,7 +37,10 @@ const sidebars: SidebarsConfig = {
         title: 'Setting up Uwazi tutorials',
         description: 'Learn how to set up your Uwazi instance.',
       },
-      items: ['tutorials/build-your-first-collection'],
+      items: [
+        'tutorials/build-your-first-collection',
+        'tutorials/set-up-your-team',
+      ],
     },
   ],
   howTo: ['how-to/index'],
