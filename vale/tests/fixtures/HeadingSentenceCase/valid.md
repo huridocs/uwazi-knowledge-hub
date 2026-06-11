@@ -15,6 +15,14 @@ Some content here.
 
 Some content here.
 
-## Documents: what they are and how to use them
+## Documents: What they are and how to use them
+
+Some content here.
+
+## Part 1: Log in to Uwazi
+
+Some content here.
+
+## A. This is a correct title
 
 Some content here.

@@ -18,3 +18,7 @@ Some content here.
 ## Documents: what they Are, how to create them, and why they matter
 
 Some content here.
+
+## Part 1: log in to Uwazi
+
+Some content here.

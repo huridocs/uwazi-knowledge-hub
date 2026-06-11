@@ -18,7 +18,7 @@ const navigationSections: NavigationSection[] = [
     description:
       'Everything you need to learn, build, and understand our product',
     link: '/docs',
-    subsections: ['Tutorials', 'How-to Guides', 'Reference', 'Explanations'],
+    subsections: ['Tutorials', 'How-to Guides', 'Reference', 'Explanation'],
   },
   {
     title: 'API',

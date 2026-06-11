@@ -13,7 +13,37 @@ import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
  Create as many sidebars as you want.
  */
 const sidebars: SidebarsConfig = {
-  tutorials: ['tutorials/index'],
+  tutorials: [
+    'tutorials/index',
+    {
+      type: 'category',
+      label: 'Using Uwazi',
+      link: {
+        type: 'generated-index',
+        title: 'Using Uwazi tutorials',
+        description: 'Learn how to start using Uwazi.',
+      },
+      items: [
+        'tutorials/take-a-tour-of-uwazi',
+        'tutorials/find-what-you-need',
+        'tutorials/add-and-connect-an-entity',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Setting up Uwazi',
+      link: {
+        type: 'generated-index',
+        title: 'Setting up Uwazi tutorials',
+        description: 'Learn how to set up your Uwazi instance.',
+      },
+      items: [
+        'tutorials/build-your-first-collection',
+        'tutorials/set-up-your-team',
+        'tutorials/publish-your-collection',
+      ],
+    },
+  ],
   howTo: ['how-to/index'],
   reference: ['reference/index'],
   explanation: ['explanation/index'],
