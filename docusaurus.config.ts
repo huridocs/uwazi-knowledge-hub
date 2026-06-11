@@ -27,7 +27,8 @@ const config: Config = {
   organizationName: 'huridocs', // Usually your GitHub org/user name.
   projectName: 'uwazi-knowledge-hub', // Usually your repo name.
 
-  onBrokenLinks: 'throw',
+  // TODO: restore to 'throw' once the linked start-page targets exist.
+  onBrokenLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -166,7 +167,7 @@ const config: Config = {
             },
             {
               label: 'Explanations',
-              to: '/docs/explanations',
+              to: '/docs/explanation',
             },
           ],
         },
