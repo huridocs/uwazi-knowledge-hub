@@ -40,6 +40,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'tutorials/build-your-first-collection',
         'tutorials/set-up-your-team',
+        'tutorials/publish-your-collection',
       ],
     },
   ],

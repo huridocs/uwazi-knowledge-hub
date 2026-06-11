@@ -1,0 +1,182 @@
+---
+title: Publish your collection
+description: Make your instance public, publish entities, and build a simple custom landing page.
+---
+
+## What you'll learn
+
+By default, a new Uwazi instance is private.
+Only people who log in can see its content.
+As an admin, you decide when to open the instance to the public and
+which entities visitors can read.
+We'll make the instance public, publish a few entities,
+and build a simple landing page for visitors to land on.
+By the end of this tutorial,
+we'll have a public instance with a welcoming front page.
+
+## Prerequisites
+
+- A link to a live Uwazi instance
+- An admin username and password for that instance
+- A few entities already in your **Library**
+
+Only an admin can change these settings.
+If you don't see the **Settings** menu, ask your instance manager for access.
+
+## Part 1: Make your instance public
+
+A *public instance* lets visitors read your content without logging in.
+We'll turn this on with a single setting.
+
+1. Go to **Settings**, then select **Collection**.
+
+   The page opens with the collection settings,
+   including toggles and text fields.
+
+2. Find the **Public instance** toggle and select it.
+
+   A tooltip explains it: non-logged-in users can now see public documents
+   and entities.
+
+3. Select **Save** at the bottom of the page.
+
+   A success message confirms the change.
+   The instance is now public.
+
+Making the instance public doesn't expose every record.
+Visitors see only the entities you publish.
+We'll publish some next.
+
+## Part 2: Publish your entities
+
+A *published* entity is one that public visitors can see.
+New entities start out private.
+We'll publish several at once from the **Library**.
+
+1. Go to the **Library**.
+
+   The library opens in card view and shows your entities as cards.
+
+2. Hold the **Control** key
+   (or **Command** on Mac) and select each entity you want to publish.
+
+   Each card you select stays highlighted.
+   To select a range, select the first card,
+   then hold **Shift** and select the last one.
+   :::note
+   A plain select without a held key opens a single entity instead of adding it
+   to your selection.
+   :::
+
+3. With two or more cards selected,
+   find the action panel on the right and select **Share**.
+
+   The **Share** modal opens and lists who can reach the selected entities.
+
+4. Select the **Public** entry, marked with a globe icon,
+   and set its access to **Can see**.
+
+   The **Public** row now shows **Can see**,
+   which means anyone can read these entities.
+
+5. Select **Save**.
+
+   A success message confirms.
+   The selected entities are now published.
+
+6. Look at the top of the filters panel on the left.
+
+   The **Published** count rises to include the entities you published.
+   Anonymous visitors can now find them.
+
+To hide an entity again, reselect it, open **Share**,
+remove the **Public** entry, and save.
+
+## Part 3: Create a custom landing page
+
+A *landing page* is the first page a visitor sees at your web address.
+We'll build a simple welcome page with plain HTML,
+then set it as the landing page.
+
+1. Go to **Settings**, then select **Pages**.
+
+   The page lists any custom pages you already have.
+
+2. Select **Add page**.
+
+   The editor opens on the **Configuration** tab.
+   It shows a **Title** field with the default text `New page`.
+
+3. In the **Title** field, replace `New page` with a title such as `Welcome`.
+
+   The title names the page in your settings.
+   It doesn't appear as a heading on the page itself.
+
+4. Select the **HTML** tab.
+
+   A note reminds you to use HTML only, since the editor doesn't read Markdown.
+   A numbered editor opens below the note.
+
+5. In the editor, type a short welcome in plain HTML:
+
+   ```html
+   <h1>Welcome to our archive</h1>
+   <p>We document cases, events, and sources from across the region.</p>
+   <p>Use the library to search and browse the records.</p>
+   ```
+
+   The editor keeps your HTML as the page body.
+   A heading and two short paragraphs are enough for a first landing page.
+
+6. Select **Save & Preview** at the bottom of the editor.
+
+   Uwazi saves the page as a draft and opens a preview in a new browser tab.
+   The preview shows your heading and two paragraphs.
+
+7. Return to the editor and select the **Configuration** tab.
+
+   The tab now shows the saved page's URL,
+   which looks like `/en/page/<id>/welcome`.
+
+8. Select **Publish**, type a short release message, and confirm.
+
+   Publishing makes the page visible to the public.
+   Without this step, visitors can't see it.
+
+9. Copy the page URL shown on the **Configuration** tab.
+
+   You'll paste it into the collection settings next.
+
+10. Go to **Settings**, then select **Collection**.
+
+    The collection settings open again.
+
+11. Paste the URL into the **Custom landing page** field.
+
+    The field shows your pasted path,
+    with a `https://yourdomain` hint before it.
+
+12. Select **Save**.
+
+    A success message confirms the change.
+
+13. Open your instance web address in a new tab.
+
+    Your welcome page now loads
+    as the landing page instead of the default library.
+
+## What you've done
+
+- Made your instance public so visitors can read content without logging in
+- Published several entities at once from the library
+- Confirmed the published count rose in the filters panel
+- Built a simple HTML page, previewed it, and published it
+- Set that page as your instance's custom landing page
+
+:::tip
+
+Want richer pages later?
+Uwazi can show live entity counts, charts, and lists on a page.
+These use a dynamic data tag and suit a follow-up guide.
+
+:::
