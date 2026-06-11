@@ -1,0 +1,213 @@
+---
+title: Build your first collection
+description: Create a thesaurus, two connected templates, and entities with documents to build a working Uwazi collection.
+---
+
+## What you'll learn
+
+A collection is the set of thesauri, templates,
+and entities that hold your content.
+We'll build a small one from scratch: a thesaurus,
+two templates linked by a relationship, and entities that carry a document.
+By the end of this tutorial,
+we'll have a working collection we can grow into a larger one.
+
+## Prerequisites
+
+- A link to a live Uwazi instance
+- An admin username and password for that instance
+
+:::note
+
+Creating thesauri, templates, and relationship types needs an admin account.
+If you don't see the **Settings** menu, ask your instance manager for access.
+
+:::
+
+## Part 1: Create a thesaurus
+
+A *thesaurus* is a reusable list of options, such as a list of countries.
+We build it first, because a template field
+that offers a choice draws its options from a thesaurus that already exists.
+
+1. Go to **Settings**, then select **Thesauri**.
+
+   The page lists the thesauri the instance already holds.
+
+2. Select **Add thesaurus** in the footer.
+
+   An editor opens with an empty name field and an empty value table.
+
+3. Type a name in the **Thesauri name** field, such as `Status`.
+
+   The name sits at the top of the table.
+   Uwazi needs it before we save.
+
+4. Select **Add item**, then type a label such as `Open`.
+
+   A new empty row appears, ready for the next label.
+
+5. Add one or two more labels, such as `Closed` and `Under review`.
+
+   Each label fills its own row in the table.
+
+6. Select **Save**.
+
+   A success message appears,
+   and the web address updates with the new thesaurus's id.
+
+## Part 2: Create the first template
+
+A *template* defines a type of entity and the fields it carries.
+We'll make one and give it a field that uses the thesaurus from Part 1.
+
+1. Go to **Settings**, then select **Templates**, then **Add template**.
+
+   The template editor opens with an empty property table.
+
+2. Pick a colour with the colour picker near the top.
+
+   Uwazi shows this colour as a dot on the entity's cards.
+
+3. Type a name in the template name field, such as `Case`.
+
+   Uwazi needs a name, and it marks a duplicate name with an inline error.
+
+4. Notice the three pinned rows at the top of the table: **Title**,
+   **Date added**, and **Date modified**.
+
+   These common fields stay on every template.
+   We can't remove or reorder them.
+
+5. Select **Add property** in the footer.
+
+   A configuration panel slides in from the right.
+
+6. Open the property type drop-down and select **Select**,
+   then type a **Label** such as `Status`.
+
+   A **Thesaurus** selector appears below the label,
+   because a select field needs a thesaurus.
+
+7. Open the **Thesaurus** selector and pick the `Status` list from Part 1.
+
+   The selector shows your chosen list.
+   The field now offers those options on every `Case` entity.
+
+8. Select the **Use as filter** checkbox.
+
+   This field will appear as a filter in the library sidebar.
+
+9. Select **Add property**, then **Save**.
+
+   A success message appears, and the `Case` template joins the list.
+
+## Part 3: Connect a second template with a relationship
+
+We'll link two templates,
+so an entity of one can point at an entity of the other.
+First we name the connection, then we build the second template around it.
+
+1. Go to **Settings**, then select **Relationship types**,
+   then **Add relationship type**.
+
+   A side panel opens with a single **Name** field.
+
+2. Type a name that reads in the connection's direction, such as `mentioned in`,
+   then select **Save**.
+
+   The side panel closes, and the new type joins the list.
+
+3. Go to **Settings**, then **Templates**, then **Add template**.
+   Give it a name such as `Report` and pick a colour.
+
+   The editor opens, ready for properties.
+
+4. Select **Add property**, open the property type drop-down,
+   and select **Relationship**.
+   Type a **Label** such as `Cases mentioned`.
+
+   Three relationship fields appear in the panel.
+
+5. Open the **Relationship type** selector and pick `mentioned in`.
+
+   The selector shows your chosen type.
+   This field now needs a target.
+
+6. Open the **Entities** selector and pick the `Case` template.
+
+   An **Inherit property** selector appears,
+   because we picked a specific template instead of leaving **Any entity**.
+
+7. Open the **Inherit property** selector and pick `Status`.
+
+   The `Report` entity will now show each linked case's status, read-only,
+   beside the link.
+
+8. Select **Add property**, then **Save**.
+
+   A success message appears, and the `Report` template joins the list.
+
+## Part 4: Create entities and connect them
+
+Now we add real content: one `Case` entity with a document, one `Report` entity,
+and a link between them that pulls the inherited status across.
+
+1. Go to the **Library** and select **Create entity** in the footer.
+
+   A side panel opens with a **Title** field and a **Type** drop-down.
+
+2. Type a title such as `Case 001`,
+   then open the **Type** drop-down and select **Case**.
+
+   The form grows to show the `Case` fields, including the `Status` field.
+
+3. Open the **Status** field and pick a value, such as `Open`.
+
+   The field shows your choice.
+   We'll watch this value travel to the `Report` later.
+
+4. In the **Primary Documents** section,
+   select **Add PDF** and choose a PDF file.
+
+   Uwazi stages the file, ready to upload when we save.
+
+5. Select **Save**.
+
+   Uwazi uploads the PDF and starts processing it.
+   The document appears in the panel,
+   then turns into a readable inline PDF once Uwazi finishes.
+
+6. Select **Create entity** again.
+   Title it `Report 001` and set its **Type** to **Report**.
+
+   The form shows the `Report` fields,
+   including the **Cases mentioned** relationship field.
+
+7. In the **Cases mentioned** field,
+   type `Case 001` in the search box and select the entity from the results.
+
+   The case joins the relationship field on the form.
+
+8. Select **Save**, then open the new `Report 001` entity.
+
+   The **Cases mentioned** field shows `Case 001`,
+   and the inherited `Status` value `Open` sits beside it, read-only.
+
+## What you've done
+
+- Built a thesaurus of fixed options
+- Created a template that offers those options as a field
+- Named a relationship and built a second template that uses it
+- Inherited a field from one template onto another
+- Created two entities, attached a document, and linked them together
+
+:::tip
+
+Open `Case 001`, change its **Status** to `Closed`, and save.
+Reopen `Report 001` and notice the inherited status now reads `Closed`.
+Uwazi keeps the inherited value in step with its source.
+To show each case's first page on its library card,
+add a **Preview** property to the `Case` template.
+
+:::
