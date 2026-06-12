@@ -1,0 +1,171 @@
+---
+title: Permissions by role
+description: Reference for Uwazi user roles, covering what each role can and can't do across settings, users, content types, entities, and sharing.
+---
+
+## Overview
+
+Every Uwazi account holds one role that sets what the user can do.
+
+Uwazi has three account roles, plus an anonymous public visitor:
+
+- **Admin**: full control of the instance, including settings, users,
+  and all content.
+- **Editor**: manages all content and entities, but not settings or users.
+- **Collaborator**: works with entities they create or that others share with
+  them, plus published ones.
+- **Public visitor**: anyone who isn't signed in; reads published content only.
+
+## Role summary
+
+The table gives the scope of each role in one line.
+
+| Role           | Scope                                                                      |
+| -------------- | -------------------------------------------------------------------------- |
+| Admin          | Configures the instance and manages every user, content type, and entity.  |
+| Editor         | Creates and edits all content and entities, but no configuration or users. |
+| Collaborator   | Creates entities, works with entities shared with them, and reads published ones.                 |
+| Public visitor | Reads published entities and public pages.                                 |
+
+## Permissions matrix
+
+The tables below list each capability and the access per role.
+**Yes** means the role has access.
+**No** means Uwazi blocks it.
+Any other cell shows a short phrase, such as **Shared only**,
+that describes the role's limited access.
+A dash (—) means the capability doesn't apply.
+
+### Configuration
+
+These capabilities live under **Settings**.
+Only admins reach them.
+
+| Capability                         | Admin | Editor | Collaborator | Public visitor |
+| ---------------------------------- | ----- | ------ | ------------ | -------------- |
+| Edit collection settings           | Yes   | No     | No           | No             |
+| Edit navigation menu and links     | Yes   | No     | No           | No             |
+| Manage languages and translations  | Yes   | No     | No           | No             |
+| Create, edit, and delete pages     | Yes   | No     | No           | No             |
+| Edit global CSS and custom uploads | Yes   | No     | No           | No             |
+| View the activity log              | Yes   | No     | No           | No             |
+| View dashboard statistics          | Yes   | No     | No           | No             |
+
+### Users and access
+
+These capabilities live under **Settings > Users & Groups**.
+
+| Capability                           | Admin | Editor | Collaborator | Public visitor |
+| ------------------------------------ | ----- | ------ | ------------ | -------------- |
+| Create, edit, and delete users       | Yes   | No     | No           | No             |
+| View the user list                   | Yes   | No     | No           | No             |
+| Unlock locked accounts               | Yes   | No     | No           | No             |
+| Create, edit, and delete user groups | Yes   | No     | No           | No             |
+| Edit own profile (Account)           | Yes   | Yes    | Yes          | No             |
+
+### Content types
+
+These capabilities define the data model under **Settings**.
+
+| Capability                                  | Admin | Editor | Collaborator | Public visitor |
+| ------------------------------------------- | ----- | ------ | ------------ | -------------- |
+| Create, edit, and delete templates          | Yes   | No     | No           | No             |
+| Create, edit, and delete thesauri           | Yes   | No     | No           | No             |
+| Create, edit, and delete relationship types | Yes   | No     | No           | No             |
+
+### Content and entities
+
+These capabilities cover creating, editing, and enriching entities.
+
+| Capability                        | Admin | Editor | Collaborator | Public visitor |
+| --------------------------------- | ----- | ------ | ------------ | -------------- |
+| Create entities                   | Yes   | Yes    | Yes          | No             |
+| Edit entities                     | Yes   | Yes    | Shared only  | No             |
+| Bulk edit entities                | Yes   | Yes    | Shared only  | No             |
+| Delete entities                   | Yes   | Yes    | Shared only  | No             |
+| Bulk delete entities              | Yes   | Yes    | Shared only  | No             |
+| Import entities from CSV          | Yes   | No     | No           | No             |
+| Upload documents and attachments  | Yes   | Yes    | Yes          | No             |
+| Create a table of contents        | Yes   | Yes    | Yes          | No             |
+| Create relationships between entities | Yes | Yes | Shared only | No |
+| Create references from text snippets  | Yes | Yes | No          | No |
+| Run metadata extraction           | Yes   | Yes    | No           | No             |
+| Run paragraph extraction          | Yes   | Yes    | No           | No             |
+
+For collaborators, **Shared only** means they need write access to the entity.
+Uwazi grants write access on every entity a collaborator creates,
+and on entities shared with them at the write level.
+
+Bulk delete and bulk edit need write access to every selected entity.
+If a collaborator selects an entity they can't write, Uwazi hides the option.
+
+### Sharing and publishing
+
+These capabilities control who sees an entity.
+
+| Capability                           | Admin | Editor | Collaborator     | Public visitor |
+| ------------------------------------ | ----- | ------ | ---------------- | -------------- |
+| Share entities with users and groups | Yes   | Yes    | Yes              | No             |
+| Publish or unpublish entities        | Yes   | Yes    | No               | No             |
+
+Collaborators open the **Share** dialog and grant access to users and groups.
+The public visibility option stays hidden from them, so they can't publish.
+
+### Public and read access
+
+These capabilities need no sign-in.
+
+| Capability                                      | Admin | Editor | Collaborator | Public visitor |
+| ----------------------------------------------- | ----- | ------ | ------------ | -------------- |
+| Read published entities and pages               | Yes   | Yes    | Yes          | Yes            |
+| View public settings (logo, languages, filters) | Yes   | Yes    | Yes          | Yes            |
+
+## Global roles vs entity sharing
+
+Two systems decide access together.
+The **role** gates whole features, such as settings and user management.
+**Entity sharing** controls access to single entities through the **Share**
+dialog.
+
+The role sets how the two systems combine for entities.
+
+| Role           | Entity access                                                                                        |
+| -------------- | ---------------------------------------------------------------------------------------------------- |
+| Admin          | Sees and edits every entity, regardless of sharing.                                                  |
+| Editor         | Sees and edits every entity, regardless of sharing.                                                  |
+| Collaborator   | Sees published entities, entities they create, and entities shared with them or their groups. Editing needs write access. |
+| Public visitor | Sees published entities only.                                                                        |
+
+Three rules follow from this:
+
+- A collaborator who creates an entity gets write access to it.
+- A collaborator sees an empty library when they have no entities of their own,
+  none shared with them, and no published content.
+- Only admins and editors can publish,
+  which is what makes an entity visible to public visitors.
+
+:::warning
+
+On a public instance, every published entity is visible to anyone on the
+internet.
+
+:::
+
+## Defaults and special cases
+
+The table lists role defaults and accounts that behave differently.
+
+| Item                 | Behaviour                                                                          |
+| -------------------- | ---------------------------------------------------------------------------------- |
+| New user role        | The **Add user** form defaults to **Collaborator**.                                |
+| Role requirement     | Every account needs a role; Uwazi accepts only Admin, Editor, or Collaborator.     |
+| Publishing rights    | Only admins and editors change an entity's published state.                        |
+| System (Public) user | A built-in account for public form submissions; no one can edit or delete it.      |
+| Private instance     | When an instance is private, visitors who aren't signed in go to the sign-in page. |
+
+:::warning
+
+Deleting a user or an entity is permanent.
+Uwazi has no undo for these actions.
+
+:::

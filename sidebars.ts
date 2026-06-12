@@ -49,6 +49,7 @@ const sidebars: SidebarsConfig = {
     'reference/index',
     'reference/property-types',
     'reference/collection-settings',
+    'reference/user-role-permissions',
   ],
   explanation: ['explanation/index'],
   apiSidebar: ['api/index'],
