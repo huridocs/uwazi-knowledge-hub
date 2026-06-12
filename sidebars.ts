@@ -45,7 +45,11 @@ const sidebars: SidebarsConfig = {
     },
   ],
   howTo: ['how-to/index'],
-  reference: ['reference/index', 'reference/property-types'],
+  reference: [
+    'reference/index',
+    'reference/property-types',
+    'reference/collection-settings',
+  ],
   explanation: ['explanation/index'],
   apiSidebar: ['api/index'],
   resources: ['resources/index'],
