@@ -1,0 +1,222 @@
+---
+title: Property types
+description:
+  Reference for Uwazi property types, covering each type's stored value,
+  configuration options, filtering, language behaviour, and constraints.
+---
+
+## Overview
+
+A property type sets the kind of value a property holds on a template.
+
+## Common properties
+
+Every template has three reserved properties.
+You can't delete them, and they stay at the top of the property list.
+
+| Property      | Type | Behaviour                                           |
+| ------------- | ---- | --------------------------------------------------- |
+| Title         | Text | Required on every entity; supports priority sorting |
+| Date added    | Date | Set once when the entity is created                 |
+| Date modified | Date | Updated on every save                               |
+
+The **Title** property offers a **Generated ID** option.
+When it's on, Uwazi fills the title with an auto-generated identifier instead of
+free text.
+
+## Property types
+
+The table lists every property type,
+the value stored in the template configuration, what it holds,
+and whether it accepts more than one value.
+
+| Type                 | Config value     | Stores                                  | Multiple values |
+| -------------------- | ---------------- | --------------------------------------- | --------------- |
+| Text                 | `text`           | One line of plain text                  | No              |
+| Rich text            | `markdown`       | One formatted text value                | No              |
+| Numeric              | `numeric`        | One number                              | No              |
+| Date                 | `date`           | One date                                | No              |
+| Multiple dates       | `multidate`      | A list of dates                         | Yes             |
+| Date range           | `daterange`      | One start-and-end date pair             | No              |
+| Multiple date ranges | `multidaterange` | A list of date pairs                    | Yes             |
+| Select               | `select`         | One value from a thesaurus              | No              |
+| Multiple select      | `multiselect`    | Many values from a thesaurus            | Yes             |
+| Relationship         | `relationship`   | Links to other entities                 | Yes             |
+| Link                 | `link`           | One URL with an optional label          | No              |
+| Image                | `image`          | One image, uploaded or by URL           | No              |
+| Media                | `media`          | One media file, uploaded or by URL      | No              |
+| Geolocation          | `geolocation`    | One latitude and longitude point        | No              |
+| Generated ID         | `generatedid`    | One auto-generated identifier           | No              |
+| Preview              | `preview`        | No value; shows a document thumbnail    | No              |
+
+## Configuration options
+
+Each option below appears in the property side panel for the listed types.
+
+| Option            | Description                                        | Available for                                                                                                                         |
+| ----------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Label             | The name shown for the property                    | All types                                                                                                                             |
+| Hide label        | Hides the label when an entity is displayed        | All types                                                                                                                             |
+| Required          | Makes a value mandatory on every entity            | All types except Preview                                                                                                              |
+| Show in cards     | Shows the property on library cards                | All types                                                                                                                             |
+| Use as filter     | Adds the property to the library filters           | Text, Rich text, Numeric, Date, Multiple dates, Date range, Multiple date ranges, Select, Multiple select, Relationship, Generated ID |
+| Default filter    | Shows the filter without expanding the filter list | Same types as Use as filter                                                                                                           |
+| Priority sorting  | Sets the property as the default library sort      | Text, Numeric, Select, Date, Relationship                                                                                             |
+| Style             | Sets image fit to Fill or Contain                  | Image, Media, Preview                                                                                                                 |
+| Full width        | Displays the image across the full width           | Image, Media, Preview                                                                                                                 |
+| Thesaurus         | The thesaurus that supplies values (required)      | Select, Multiple select                                                                                                               |
+| Relationship type | The connection type used for the link (required)   | Relationship                                                                                                                          |
+| Entities          | Restricts related entities to one template         | Relationship                                                                                                                          |
+| Inherit property  | Shows a property from the related entity inline    | Relationship                                                                                                                          |
+
+## Type-specific options
+
+### Select and multiple select
+
+Both types need a **Thesaurus**.
+Values come from that thesaurus, and Uwazi checks each value against it.
+Labels resolve to the reader's language from the thesaurus translations.
+
+### Relationship
+
+A **Relationship** property needs a **Relationship type**.
+The optional **Entities** option limits related entities to a single template.
+Once you set **Entities**,
+the **Inherit property** option shows a chosen property of the related entity
+inline on the source entity.
+
+Relationship properties in one template that share the same relationship type
+and target template always hold the same values.
+
+### Image, media, and preview
+
+These types share the **Style** and **Full width** options.
+**Style** sets the image fit to Fill or Contain.
+**Media** also supports video time segments.
+
+## Filtering, search, and sorting
+
+The table shows which types appear as filters
+and how Uwazi matches their values.
+
+| Type                 | Filterable | Search behaviour              | Priority sorting |
+| -------------------- | ---------- | ----------------------------- | ---------------- |
+| Text                 | Yes        | Exact term match              | Yes              |
+| Rich text            | Yes        | Exact term match              | No               |
+| Numeric              | Yes        | Number range                  | Yes              |
+| Date                 | Yes        | Date range                    | Yes              |
+| Multiple dates       | Yes        | Date range                    | No               |
+| Date range           | Yes        | Start and end range           | No               |
+| Multiple date ranges | Yes        | Start and end range           | No               |
+| Select               | Yes        | Value match with facet counts | Yes              |
+| Multiple select      | Yes        | Value match with facet counts | No               |
+| Relationship         | Yes        | Value match with facet counts | Yes              |
+| Generated ID         | Yes        | Exact term match              | No               |
+| Link                 | No         | —                             | No               |
+| Image                | No         | —                             | No               |
+| Media                | No         | —                             | No               |
+| Geolocation          | No         | Plotted on the library map    | No               |
+| Preview              | No         | —                             | No               |
+
+Select, Multiple select,
+and Relationship filters also show faceted value counts in the library sidebar.
+
+## Language behaviour
+
+Translatable types store a separate value for each language.
+Synced types copy one value across all languages on save.
+Label-only types share one value,
+but their displayed label translates on its own.
+
+| Type                 | Translatable | Synced across languages |
+| -------------------- | ------------ | ----------------------- |
+| Text                 | Yes          | No                      |
+| Rich text            | Yes          | No                      |
+| Numeric              | No           | Yes                     |
+| Date                 | No           | Yes                     |
+| Multiple dates       | No           | Yes                     |
+| Date range           | No           | Yes                     |
+| Multiple date ranges | No           | Yes                     |
+| Select               | Label only   | Yes                     |
+| Multiple select      | Label only   | Yes                     |
+| Relationship         | Label only   | Yes                     |
+| Link                 | Yes          | No                      |
+| Image                | Yes          | No                      |
+| Media                | Yes          | No                      |
+| Geolocation          | No           | Yes                     |
+| Generated ID         | No           | No                      |
+| Preview              | —            | —                       |
+
+For **Select** and **Multiple select**,
+the label comes from the thesaurus translation for the active language.
+For **Relationship**, the label comes from the related entity's title in
+that language.
+You translate a thesaurus under **Settings > Translations**, not on each entity.
+
+For **Link**, both parts are translatable.
+Each language stores its own URL and label, and the two can differ per language.
+
+## Constraints by type
+
+The table lists the main validation rules and limits for each type.
+
+| Type                 | Constraints                                                                  |
+| -------------------- | ---------------------------------------------------------------------------- |
+| Text                 | Holds one value. Empty values are removed.                                   |
+| Rich text            | Holds one value. Interchangeable with Text on an existing property.          |
+| Numeric              | Accepts integers or decimals. Empty input removes the value; zero stays.     |
+| Date                 | Holds one date, stored as a timestamp.                                       |
+| Multiple dates       | Holds many dates. Empty entries are removed.                                 |
+| Date range           | Needs a start or an end. The end can't come before the start.                |
+| Multiple date ranges | Each range needs a start or an end. The end can't come before the start.     |
+| Select               | Needs a thesaurus. The value must exist in that thesaurus.                   |
+| Multiple select      | Needs a thesaurus. Duplicate values are removed.                             |
+| Relationship         | Needs a relationship type. Related entities must already exist.              |
+| Link                 | The URL must include a scheme. A label needs a URL.                          |
+| Image                | Accepts an uploaded file or a valid URL.                                     |
+| Media                | Accepts an uploaded file or a valid URL. Supports video time segments.       |
+| Geolocation          | Latitude ranges from -90 to 90; longitude from -180 to 180.                  |
+| Generated ID         | Auto-filled in the format `XXX-XXXX-XXXX`. Existing entities are backfilled. |
+| Preview              | Stores no value. Shows the entity's main document thumbnail.                 |
+
+:::warning
+
+A property's type can't change after you create it.
+To switch type, delete the property and add a new one,
+which removes its stored data.
+
+:::
+
+## Property names and uniqueness
+
+Uwazi generates a property name from its label.
+The name uses lowercase letters, numbers, and underscores.
+Geolocation names end in `_geolocation`.
+
+A property name is unique within its template.
+You can't delete a property that another template inherits.
+
+## Shared properties across templates
+
+When two templates give a property the same label,
+Uwazi treats them as one shared property and keeps their configuration in sync.
+The type must match.
+**Select** and **Multiple select** must also use the same thesaurus.
+**Relationship** must also use the same relationship type, target template,
+and inherited property.
+The **Save** button stays disabled until the settings match.
+
+The examples below show which shared labels Uwazi allows or blocks:
+
+- Allowed: a **Country** Select property points to the same **Countries**
+  thesaurus in both the Case and Event templates.
+- Blocked: the Case template defines **Country** as Select, and the Event
+  template defines **Country** as Text, because the types differ.
+- Blocked: both templates define a **Country** Select property, but each points
+  to a different thesaurus.
+
+To configure two properties on their own, give them different labels.
+
+## Export behaviour
+
+CSV export includes every property type except Preview.
