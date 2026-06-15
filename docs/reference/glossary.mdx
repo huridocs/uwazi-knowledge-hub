@@ -1,0 +1,229 @@
+---
+title: Glossary
+description: Reference glossary of Uwazi terms and concepts, covering content, the library, permissions, languages, pages, settings, extraction, and sharing.
+sidebar_label: Glossary
+---
+
+## Overview
+
+This glossary defines the terms and concepts a user meets across Uwazi.
+
+Terms group by product area.
+Within each area, entries run in alphabetical order for fast lookup.
+Bold text marks the term.
+A label in a definition such
+as **Library** points to a feature you see in the interface.
+
+## Content and structure
+
+These terms describe how Uwazi stores and organizes content.
+
+| Term                  | Definition                                                                                             |
+| --------------------- | ------------------------------------------------------------------------------------------------------ |
+| **Common properties** | The three reserved fields on every template: Title, Date added, and Date modified.                     |
+| **Entity**            | The main unit of content in Uwazi: a record with a title, metadata, files, and relationships.          |
+| **Generated ID**      | An auto-generated identifier in the format `XXX-XXXX-XXXX`, available as a Title option.               |
+| **Metadata**          | The set of property values on an entity, such as its dates, locations, and linked records.             |
+| **Property**          | A single typed field on a template, such as a date, a number, or a link. Also called a metadata field. |
+| **Property type**     | The kind of value a property holds, such as Text, Date, or Select.                                     |
+| **Template**          | The structure that defines the fields for one type of entity. Also called an entity type.              |
+| **Thesaurus**         | A reusable list of values that Select and Multiple select properties draw from.                        |
+| **Title**             | The required name of an entity, shown across the library and search results.                           |
+| **Value**             | A single option in a thesaurus, such as one country in a list of countries. Also called an item.       |
+
+## Property types
+
+A property type sets the kind of value a property holds.
+The table lists the types a user meets when building a template.
+
+| Type                     | Stores                                                |
+| ------------------------ | ----------------------------------------------------- |
+| **Date**                 | One date.                                             |
+| **Date range**           | One start-and-end date pair.                          |
+| **Generated ID**         | One auto-generated identifier.                        |
+| **Geolocation**          | One latitude and longitude point for the map.         |
+| **Image**                | One image, uploaded or by URL.                        |
+| **Link**                 | One web address with an optional label.               |
+| **Media**                | One video or audio file, with optional time segments. |
+| **Multiple date ranges** | A list of date pairs.                                 |
+| **Multiple dates**       | A list of dates.                                      |
+| **Multiple select**      | Many values from a thesaurus.                         |
+| **Numeric**              | One number.                                           |
+| **Preview**              | No value; it shows a related document's thumbnail.    |
+| **Relationship**         | Links to one or more other entities.                  |
+| **Rich text**            | One formatted text value written in Markdown.         |
+| **Select**               | One value from a thesaurus.                           |
+| **Text**                 | One line of plain text.                               |
+
+For each type's options, filtering, and constraints,
+see the [property types reference](property-types.mdx).
+
+## Documents and files
+
+These terms cover the files a user attaches to an entity.
+
+| Term                  | Definition                                                                                      |
+| --------------------- | ----------------------------------------------------------------------------------------------- |
+| **Attachment**        | Any extra file on an entity that is not its main document. Also called a supporting file.       |
+| **Document**          | The main PDF attached to an entity, searchable by its full text.                                |
+| **Full text**         | The text Uwazi extracts from a PDF, which makes the document searchable.                        |
+| **OCR**               | Optical character recognition, a service that reads text from scanned PDFs.                     |
+| **Reference**         | A link between a highlighted passage in a PDF and another entity. Also called a text reference. |
+| **Table of contents** | A list of sections built from a PDF, shown beside the document.                                 |
+| **Thumbnail**         | A small preview image generated from a document's first page.                                   |
+| **Time segment**      | A start-and-end marker on a media file that points to part of a video or audio clip.            |
+
+:::warning
+
+A document can hold up to 300 text references.
+
+:::
+
+## Relationships
+
+These terms describe how Uwazi connects entities to each other.
+
+| Term                   | Definition                                                                    |
+| ---------------------- | ----------------------------------------------------------------------------- |
+| **Connection**         | A single link between two entities, created through a relationship.           |
+| **Inherited property** | A field from a related entity, shown inline on the source entity.             |
+| **Relationship**       | A link between two entities, or between a passage of text and an entity.      |
+| **Relationship type**  | A label that describes a relationship, such as "represents" or "authored by". |
+
+## Library and search
+
+These terms cover how a user browses and finds entities.
+
+| Term                 | Definition                                                              |
+| -------------------- | ----------------------------------------------------------------------- |
+| **Cards view**       | The default library layout, which shows each entity as a card.          |
+| **Default filter**   | A filter that the library shows open without expanding the filter list. |
+| **Filter**           | A sidebar control that narrows the library by a property value.         |
+| **Full-text search** | A search across the text of documents and the titles of entities.       |
+| **Library**          | The main page for browsing, searching, and filtering entities.          |
+| **Map view**         | A library layout that plots entities with a geolocation on a map.       |
+| **Priority sorting** | A property set as the library's default sort order.                     |
+| **Relevance**        | A sort order that ranks results by how well they match the search.      |
+| **Table view**       | A library layout that shows entities as rows in a table.                |
+
+## Users and permissions
+
+These terms describe who can see and change content.
+
+| Term                          | Definition                                                                              |
+| ----------------------------- | --------------------------------------------------------------------------------------- |
+| **Activity log**              | A record of important actions in the collection, available to admins.                   |
+| **Admin**                     | A role with full access to all content and to every setting, including users.           |
+| **Collaborator**              | A role that creates and edits its own or shared entities but can't publish them.        |
+| **Editor**                    | A role with full access to all entities and publishing, but not to system settings.     |
+| **Group**                     | A named set of users that share the same entity permissions.                            |
+| **Permission**                | An entry that grants a user or group read or write access to an entity.                 |
+| **Published**                 | An entity that everyone can see, including signed-out visitors on a public instance.    |
+| **Read**                      | A permission level that lets a user view an entity but not change it.                   |
+| **Restricted**                | An unpublished entity that the current user can't open or find.                         |
+| **Role**                      | A collection-wide access level: Admin, Editor, or Collaborator.                         |
+| **Share**                     | The action of granting a user or group access to an entity.                             |
+| **Two-factor authentication** | A second sign-in step using a one-time code from an authenticator app. Also called 2FA. |
+| **User**                      | A person with an account on the instance.                                               |
+| **Visitor**                   | A signed-out person who sees only published content on a public instance.               |
+| **Write**                     | A permission level that lets a user view and edit an entity.                            |
+
+## Languages and translation
+
+These terms cover how Uwazi handles many languages.
+
+| Term                      | Definition                                                                        |
+| ------------------------- | --------------------------------------------------------------------------------- |
+| **Automatic translation** | A service that translates chosen template fields into the collection's languages. |
+| **Content translation**   | A translation of entity and thesaurus content, such as titles and values.         |
+| **Default language**      | The main language of the collection, used when no other applies.                  |
+| **Inline translation**    | A mode that translates text directly on the page as a user edits it.              |
+| **Language**              | One of the languages a collection publishes content in.                           |
+| **RTL**                   | A right-to-left language, such as Arabic or Hebrew, that the interface adapts to. |
+| **System translation**    | A translation of the Uwazi interface labels and messages.                         |
+
+## Pages and navigation
+
+These terms cover custom pages and the navigation menu.
+
+| Term                 | Definition                                                             |
+| -------------------- | ---------------------------------------------------------------------- |
+| **Basic page**       | A page that uses HTML and can embed maps, charts, and entity lists.    |
+| **Entity view page** | A page set as the display layout for entities of one template.         |
+| **Landing page**     | The first page a visitor sees, which defaults to the library.          |
+| **Menu**             | The links in the top navigation bar, set under Settings.               |
+| **Page**             | A custom web page in the collection, with its own content and address. |
+| **Release**          | A published version of a page that a user can restore later.           |
+| **Rich page**        | A page that uses Markdown for simpler, text-based content.             |
+
+## Collection and settings
+
+These terms cover instance-wide configuration and branding.
+
+| Term                   | Definition                                                                                          |
+| ---------------------- | --------------------------------------------------------------------------------------------------- |
+| **Analytics**          | Settings that connect the collection to Google Analytics or Matomo.                                 |
+| **Character support**  | A setting that improves field names for non-Latin scripts.                                          |
+| **Collection**         | A single Uwazi deployment, with its own templates, entities, and settings. Also called an instance. |
+| **Cookie policy**      | A setting that shows a cookie consent banner to visitors.                                           |
+| **Custom CSS**         | A setting that adds custom styles to the collection's appearance.                                   |
+| **Custom JS**          | A setting that adds custom JavaScript to the collection.                                            |
+| **Date format**        | The setting that controls how dates appear across the interface.                                    |
+| **Favicon**            | The small icon shown in a browser tab for the collection.                                           |
+| **Favorite**           | A personal bookmark that marks an entity for quick return.                                          |
+| **Map provider**       | The map service used for geolocation display: Mapbox or Google.                                     |
+| **Public instance**    | A collection where anyone can view published content without signing in.                            |
+| **Settings**           | The area where admins configure the collection.                                                     |
+| **Site logo**          | The logo shown in the top navigation bar.                                                           |
+| **Sync**               | A feature that pulls content from another Uwazi instance.                                           |
+| **Synced template**    | A template that comes from a sync and that the receiving instance can't delete.                     |
+| **Theme and branding** | The settings that control the collection's colours, logo, and favicon.                              |
+
+:::warning
+
+A public instance exposes every published entity to anyone on the internet.
+
+:::
+
+## Information extraction
+
+These terms cover the tools that suggest metadata from documents.
+
+| Term                       | Definition                                                                    |
+| -------------------------- | ----------------------------------------------------------------------------- |
+| **Accuracy**               | A measure of how often a suggestion matches the value a person confirms.      |
+| **Auto-accept**            | An option that applies suggestions to entities without a manual review.       |
+| **Extractor**              | A configuration that pairs templates and a property with an extraction model. |
+| **Information extraction** | A feature that suggests metadata values by reading an entity's documents.     |
+| **Paragraph extraction**   | A feature that pulls paragraphs from documents and saves each as an entity.   |
+| **Segmentation**           | A service that splits a PDF into paragraphs for extraction.                   |
+| **Suggestion**             | A candidate value that an extractor proposes for an entity's property.        |
+| **Training**               | The process of teaching an extraction model from confirmed examples.          |
+
+## Importing and exporting
+
+These terms cover moving content in and out of Uwazi.
+
+| Term                 | Definition                                                           |
+| -------------------- | -------------------------------------------------------------------- |
+| **Custom uploads**   | Files uploaded for branding, such as logos and favicons.             |
+| **CSV export**       | A download of the current library results as a CSV file.             |
+| **CSV import**       | A bulk creation of entities from a CSV file mapped to one template.  |
+| **Translations CSV** | A CSV file for importing or exporting the collection's translations. |
+| **ZIP import**       | A CSV import packaged with the attachment files it refers to.        |
+
+## Public access
+
+These terms cover how signed-out people interact with a collection.
+
+| Term                     | Definition                                                                         |
+| ------------------------ | ---------------------------------------------------------------------------------- |
+| **CAPTCHA**              | A check on a public form that blocks automated spam submissions.                   |
+| **Public form**          | A form that lets signed-out people submit a new entity using an approved template. |
+| **Whitelisted template** | A template approved to accept public form submissions.                             |
+
+## Related
+
+- [Property types reference](property-types.mdx)
+- [Collection settings reference](collection-settings.mdx)
+- [User roles and permissions reference](user-role-permissions.mdx)

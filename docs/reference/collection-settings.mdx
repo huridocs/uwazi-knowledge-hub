@@ -1,0 +1,113 @@
+---
+title: Collection settings
+description:
+  Reference for the Collection settings page, covering every instance-wide
+  setting an admin can configure under Settings > Collection.
+---
+
+## Overview
+
+The Collection settings page configures instance-wide options under
+**Settings > Collection**.
+
+## Access and saving
+
+Only admins can change Collection settings.
+Editors, collaborators, and anonymous visitors can't open the page.
+
+The page has one **Save** button.
+It saves every card at once.
+There's no reset or cancel action,
+so you revert by editing a field again and saving.
+
+A successful save shows a "Settings updated" message.
+A failed save shows an error message.
+Uwazi syncs the change to other open tabs without a reload.
+
+The **Field** column in each table lists the key Uwazi stores in the settings
+document.
+These keys help you find a setting in the API.
+
+## General
+
+The General card holds naming, branding, and access settings.
+
+| Setting | Field | Type | Default | Description |
+| --- | --- | --- | --- | --- |
+| Collection Name | `site_name` | Text | `Uwazi` | Name shown in the browser tab, top bar, and emails. Required; the page won't save while it's empty. |
+| Custom Favicon | `favicon` | Image | — | Browser tab icon, chosen from Custom Uploads. Must be square, 16x16 to 512x512 pixels. |
+| Default View | `defaultLibraryView` | Option | Cards | Library layout for visitors. One of Cards, Map, or Table. |
+| Default date format | `dateFormat` | Option | `yyyy/MM/dd` | Date display format. One of `yyyy/MM/dd`, `dd/MM/yyyy`, `MM/dd/yyyy`, `yyyy-MM-dd`, `dd-MM-yyyy`, or `MM-dd-yyyy`. |
+| Custom landing page | `home_page` | Text | — | Relative path for the home page, such as `/page/xxx`. The field shows a `https://yourdomain` prefix as a hint. |
+| Public instance | `private` | Toggle | Off | When on, anyone can view the collection without signing in. Inverts the stored `private` value: on stores `private: false`, and `private: true` blocks visitors who aren't signed in. |
+| Hide restricted relationships from public | `filterUnauthorizedRelated` | Toggle | Off | Hides relationships to restricted entities from anonymous visitors. |
+| Show cookie policy | `cookiepolicy` | Toggle | Off | Shows a cookie consent banner to visitors. |
+| Global JS | `allowcustomJS` | Toggle | Off | Adds a **Custom JS** editor to the **Global CSS** settings page, under **Settings > Global CSS**. The page title becomes **Global CSS & JS**; off shows only the Custom CSS editor. |
+
+:::warning
+
+A public instance exposes every published entity to anyone on the internet.
+
+:::
+
+## Analytics
+
+The Analytics card connects external tracking services.
+
+| Setting | Field | Type | Default | Description |
+| --- | --- | --- | --- | --- |
+| Google | `analyticsTrackingId` | Text | — | Google Analytics tracking ID such as `UA-xxxxx` or `G-xxxxx`, injected as a script. |
+| Matomo | `matomoConfig` | Text (JSON) | — | Matomo configuration as a JSON string, such as `{"id":"12","url":"https://matomo.example.com"}`. Invalid JSON disables tracking without an error. |
+
+## Services
+
+The Services card appears only when the instance has an OCR service URL.
+
+| Setting | Field | Type | Default | Description |
+| --- | --- | --- | --- | --- |
+| Document OCR trigger | `ocrServiceEnabled` | Toggle | Off | Enables OCR for PDF documents. When on, admins and editors can send PDFs to the OCR service. |
+
+## Forms and email configuration
+
+The Forms and email configuration card sets email addresses
+and public form behaviour.
+Uwazi returns these fields to admins only.
+
+| Setting | Field | Type | Default | Description |
+| --- | --- | --- | --- | --- |
+| Sending email | `senderEmail` | Text | `no-reply@uwazi.io` | "From" address on system emails. Falls back to `no-reply@uwazi.io` when left blank. |
+| Contact form email | `contactEmail` | Text | — | Address that receives contact form submissions. |
+| Public Form submit URL | `publicFormDestination` | Text | — | URL of another Uwazi instance that receives public submissions. |
+| Allow captcha bypass | `openPublicEndpoint` | Toggle | Off | Accepts public submissions with a bypass header, skipping CAPTCHA. |
+| Whitelisted templates | `allowedPublicTemplates` | List | — | Template IDs that accept public form submissions. Options come from the instance's templates. |
+
+:::warning
+
+Allow captcha bypass lets the public endpoint accept submissions without
+CAPTCHA, which invites spam.
+
+:::
+
+## Map
+
+The Map card sets the tile provider and default map view.
+
+| Setting | Field | Type | Default | Description |
+| --- | --- | --- | --- | --- |
+| Map Provider | `tilesProvider` | Option | Mapbox | Map tile provider. One of Mapbox or Google. |
+| Map API key | `mapApiKey` | Text | — | Access key for the selected provider. Accepts letters, numbers, dots, and underscores only. |
+| Map Layers | `mapLayers` | List | Streets, Hybrid, Satellite | Base layers offered on maps. Any of Dark, Streets, Satellite, or Hybrid; at least one is required. |
+| Map Starting Point | `mapStartingPoint` | Coordinates | `6, 46` (Switzerland) | Default centre point for maps. Latitude ranges from -90 to 90, longitude from -180 to 180; a point needs both values. An empty value resets to the Switzerland default. |
+
+## Validation and errors
+
+Uwazi validates fields in the browser before it saves.
+The server applies the same checks and returns an error for direct API calls.
+
+| Condition | Result |
+| --- | --- |
+| **Collection Name** is empty | The field is required; the page won't save. |
+| **Map API key** has characters other than letters, numbers, dots, or underscores | The page won't save. |
+| **Map Layers** has no layer selected | The page won't save. |
+| **Map Starting Point** latitude or longitude is out of range | The save fails and shows an error message. |
+| **Matomo** holds invalid JSON | Tracking is disabled; no error appears. |
