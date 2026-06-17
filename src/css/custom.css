@@ -13,22 +13,22 @@
   --ifm-color-primary-light: #493ead;
   --ifm-color-primary-lighter: #4c41b5;
   --ifm-color-primary-lightest: #5651c5;
-  
+
   /* Enhanced color palette for Uwazi */
   --ifm-color-secondary: #6c5ce7;
   --ifm-color-success: #00b894;
   --ifm-color-info: #0984e3;
   --ifm-color-warning: #fdcb6e;
   --ifm-color-danger: #e17055;
-  
+
   /* Typography and spacing */
   --ifm-code-font-size: 95%;
   --ifm-heading-color: #2d3748;
   --ifm-font-color-base: #4a5568;
-  
+
   /* Code highlighting */
   --docusaurus-highlighted-code-line-bg: rgba(66, 56, 157, 0.1);
-  
+
   /* Custom Uwazi variables */
   --uwazi-purple-50: #f7f6fd;
   --uwazi-purple-100: #eeebfa;
@@ -51,18 +51,40 @@
   --ifm-color-primary-light: #8d7dff;
   --ifm-color-primary-lighter: #9885ff;
   --ifm-color-primary-lightest: #b3a7ff;
-  
+
   /* Dark mode enhancements */
   --ifm-color-secondary: #8b7cf6;
   --ifm-color-success: #10b981;
   --ifm-color-info: #3b82f6;
   --ifm-color-warning: #f59e0b;
   --ifm-color-danger: #ef4444;
-  
+
   /* Dark mode code highlighting */
   --docusaurus-highlighted-code-line-bg: rgba(124, 107, 255, 0.2);
-  
+
   /* Dark mode background adjustments */
   --ifm-background-color: #1a1a2e;
   --ifm-background-surface-color: #16213e;
+}
+
+/* Center images in doc content and cap their width for consistency. */
+.markdown img {
+  display: block;
+  margin-inline: auto;
+  max-width: min(100%, 960px);
+  height: auto;
+}
+
+/* Center figures and style their captions below the image. */
+.markdown figure {
+  margin-inline: auto;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.markdown figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--ifm-color-emphasis-700);
 }
