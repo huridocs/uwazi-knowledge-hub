@@ -1,15 +1,16 @@
 ---
 title: Page visualization components
-description: Reference for Uwazi page visualization components, covering each component's parameters, query syntax, defaults, and validated examples.
+description: Reference for Uwazi page visualization components, covering each component's parameters, query syntax, defaults, and examples.
 ---
 
 import barChart from './img/viz-bar-chart.png';
 import pieChart from './img/viz-pie-chart.png';
 import listChart from './img/viz-list-chart.png';
-import gaugeChart from './img/viz-gauge-chart.png';
+import freeBarChart from './img/viz-free-bar-chart.png';
 import map from './img/viz-map.png';
 import counter from './img/viz-counter.png';
 import value from './img/viz-value.png';
+import gaugeChart from './img/viz-gauge-chart.png';
 import itemList from './img/viz-item-list.png';
 import searchBox from './img/viz-search-box.png';
 import contactForm from './img/viz-contact-form.png';
@@ -26,7 +27,7 @@ content to build dashboards and entity views.
 
 ## Authoring syntax
 
-A page stores raw content as HTML. Components appear as XML-style tags, such as `<BarChart property="tipo" />`. Every attribute value arrives as a string, so boolean values use `"true"` or `"false"` and structured values use JSON strings.
+A page stores raw content as HTML. Components appear as XML-style tags, such as `<BarChart property="country" />`. Every attribute value arrives as a string, so boolean values use `"true"` or `"false"` and structured values use JSON strings.
 
 Two tags declare data without rendering anything: `<Dataset>` and `<Query>`.
 All other tags render UI that reads from a declared dataset by name.
@@ -63,13 +64,13 @@ A bare `<Dataset />` with no `url` fetches aggregations for every property acros
 
 A bare `<Dataset />` excludes unpublished entities. To aggregate drafts, add `includeUnpublished:!t` to the query, as in `url="/library/?q=(allAggregations:!t,includeUnpublished:!t)"`. Unpublished entities never appear to anonymous visitors, whatever the query holds.
 
-Validated examples:
+Examples:
 
 ```html
 <Dataset />
-<Dataset url="url?q=(key:value,limit:50)" name="dataset2" />
+<Dataset url="a-valid-libray-url" name="dataset1" />
 <Dataset entity="entityId" name="entityDataset" />
-<Dataset name="dataset3" geolocation="true" />
+<Dataset name="dataset2" geolocation="true" />
 ```
 
 ### Query
@@ -82,54 +83,74 @@ and stores the raw response under `name`.
 | `name`    | No       | `default` | Key that holds the response. |
 | `url`     | Yes      | —         | Any API endpoint path.       |
 
-Validated example:
+Example:
 
 ```html
 <Query url="users?_id=23234324" name="customQuery" />
 ```
 
-## Aggregation charts
+## Chart components
 
-These components read a thesaurus or select aggregation from a dataset
-and render a chart.
-Each chart reads a dataset declared on the same HTML page.
+These components render charts.
+`<BarChart>`, `<PieChart>`,
+and `<ListChart>` read an aggregation from a dataset.
+`<FreeBarChart>` reads inline JSON instead.
+
+Each aggregation chart reads a dataset declared on the same HTML page.
 When the `dataset` attribute is absent,
 the chart reads the dataset named `default`.
 The chart shows the loading animation until that dataset exists and resolves.
 
+For the aggregation charts, the `property` names a metadata property,
+or a built-in aggregation.
+`_types` groups entities by template, so its bucket keys are template IDs.
+`_published` groups entities by their published state,
+with the keys `true` and `false`.
+These built-in keys also work in `<Counter>`.
+They don't apply to `<FreeBarChart>`, `<Map>`, `<Value>`, or `<GaugeChart>`,
+which read inline JSON, rows, or metadata instead of aggregations.
+
 ### BarChart
 
 `<BarChart>` renders an aggregation as a bar chart.
-The default render shows horizontal bars in a single colour `#1e1c8a`,
+The default render shows vertical bars in a single colour `#1e1c8a`,
 with category labels on the axis and a tooltip on hover.
 
 <Figure
   src={barChart}
-  alt="A bar chart showing entity counts by category as horizontal bars."
+  alt="A bar chart showing entity counts by category as vertical bars."
   caption="BarChart visualization"
+  width="840"
 />
 
-| Prop              | Required | Default      | Description                                                                         |
-| ----------------- | -------- | ------------ | ----------------------------------------------------------------------------------- |
-| `property`        | Yes      | —            | Thesaurus or select property to aggregate on, given as its lowercase internal name. |
-| `dataset`         | No       | `default`    | Name of a declared dataset to read from; defaults to the dataset named `default`.   |
-| `context`         | No       | `System`     | Thesaurus context ID for label lookup.                                              |
-| `layout`          | No       | `horizontal` | Bar direction, `horizontal` or `vertical`.                                          |
-| `colors`          | No       | `#1e1c8a`    | Comma-separated hex colours, cycled across bars.                                    |
-| `classname`       | No       | —            | CSS class added to the wrapper.                                                     |
-| `excludeZero`     | No       | `false`      | A value of `true` hides zero-count buckets.                                         |
-| `scatter`         | No       | `false`      | A value of `true` renders nested values as `parent - label`.                        |
-| `maxCategories`   | No       | `0`          | Top-N count of categories to show, where `0` shows all.                             |
-| `aggregateOthers` | No       | `false`      | A value of `true` bundles the remaining categories into one "Others" bar.           |
-| `shortLabels`     | No       | `{}`         | JSON object mapping original labels to short display labels.                        |
-| `sort`            | No       | `{}`         | JSON object with `by` and `order` keys.                                             |
-| `pluckCategories` | No       | `[]`         | JSON array of labels to keep.                                                       |
+| Prop              | Required | Default      | Description                                                                                                                            |
+| ----------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `property`        | Yes      | —            | Thesaurus or select property to aggregate on, given as its lowercase internal name.                                                    |
+| `dataset`         | No       | `default`    | Name of a declared dataset to read from; defaults to the dataset named `default`.                                                      |
+| `context`         | No       | `System`     | Thesaurus context ID for label lookup.                                                                                                 |
+| `layout`          | No       | `horizontal` | Bar orientation. `horizontal` (default) draws vertical bars; `vertical` draws horizontal bars. The value names the axis, not the bars. |
+| `colors`          | No       | `#1e1c8a`    | Comma-separated hex colours, cycled across bars.                                                                                       |
+| `classname`       | No       | —            | CSS class added to the wrapper.                                                                                                        |
+| `excludeZero`     | No       | `false`      | A value of `true` hides zero-count buckets.                                                                                            |
+| `scatter`         | No       | `false`      | A value of `true` renders nested values as `parent - label`.                                                                           |
+| `maxCategories`   | No       | `0`          | Top-N count of categories to show, where `0` shows all.                                                                                |
+| `aggregateOthers` | No       | `false`      | A value of `true` bundles the remaining categories into one "Others" bar.                                                              |
+| `shortLabels`     | No       | `{}`         | JSON object mapping original labels to short display labels.                                                                           |
+| `sort`            | No       | `{}`         | JSON object with `by` and `order` keys.                                                                                                |
+| `pluckCategories` | No       | `[]`         | JSON array of labels to keep.                                                                                                          |
 
-Validated examples:
+Example:
 
 ```html
-<BarChart property="tipo" context="58ada34c299e8267485450fb" />
-<BarChart property="categor_a" scatter="true" />
+<Dataset
+  url="/library/?q=(allAggregations:!t,filters:(),from:0,includeUnpublished:!t,limit:1000,order:desc,sort:editDate,treatAs:number,types:!(%27685a1qw3erf45tghy50d4c69%27),unpublished:!t)"
+  name="dataset1"
+/>
+<BarChart
+  property="cetegories"
+  dataset="dataset1"
+  context="669w34rf56t5635ba73d11ca"
+/>
 ```
 
 The `shortLabels` object maps each full category label to a shorter label shown
@@ -139,8 +160,8 @@ The tooltip shows the full label on hover.
 
 ```html
 <BarChart
-  property="tipo"
-  context="58ada34c299e8267485450fb"
+  property="measures"
+  context="58ada3er45te8267485450fb"
   shortLabels='{"Provisional measures":"PM","Friendly settlements":"FS"}'
 />
 ```
@@ -151,14 +172,12 @@ The tooltip shows the full label on hover.
 The default render shows a solid pie in a yellow palette starting at `#ffcc00`,
 with a tooltip on hover and no slice labels.
 
-<figure>
-  <img
-    src={pieChart}
-    alt="A pie chart showing entity counts by category as coloured slices."
-    width="840"
-  />
-  <figcaption>PieChart visualization</figcaption>
-</figure>
+<Figure
+  src={pieChart}
+  alt="A pie chart showing entity counts by category as coloured slices."
+  caption="PieChart visualization"
+  width="840"
+/>
 
 | Prop              | Required | Default                                   | Description                                                                         |
 | ----------------- | -------- | ----------------------------------------- | ----------------------------------------------------------------------------------- |
@@ -178,11 +197,18 @@ with a tooltip on hover and no slice labels.
 `<PieChart>` always excludes zero-count slices.
 It has no attribute to change this.
 
-Validated examples:
+Example:
 
 ```html
-<PieChart property="tipo" context="58ada34c299e8267485450fb" />
-<PieChart property="categor_a" scatter="true" />
+<Dataset
+  url="/library/?q=(allAggregations:!t,filters:(),from:0,includeUnpublished:!t,limit:1000,order:desc,sort:editDate,treatAs:number,types:!(%2769b85a47501qwe34rfa61372%27),unpublished:!t)"
+  name="dataset2"
+/>
+<PieChart
+  property="gender"
+  dataset="dataset2"
+  context="66ec1f9a01a01qw23er491802"
+/>
 ```
 
 ### ListChart
@@ -191,14 +217,12 @@ Validated examples:
 The default render shows a vertical list with a coloured square
 and a count beside each label.
 
-<figure>
-  <img
-    src={listChart}
-    alt="A vertical list of categories, each with a coloured marker and its count."
-    width="840"
-  />
-  <figcaption>ListChart visualization</figcaption>
-</figure>
+<Figure
+  src={listChart}
+  alt="A vertical list of categories, each with a coloured marker and its count."
+  caption="ListChart visualization"
+  width="840"
+/>
 
 | Prop          | Required | Default                                   | Description                                                                         |
 | ------------- | -------- | ----------------------------------------- | ----------------------------------------------------------------------------------- |
@@ -211,84 +235,63 @@ and a count beside each label.
 | `scatter`     | No       | `false`                                   | A value of `true` renders nested values as `parent - label`.                        |
 | `baseUrl`     | No       | —                                         | Library URL that turns each item into a filtered link.                              |
 
-Validated examples:
-
-```html
-<ListChart
-  property="tipo"
-  context="58ada34c299e8267485450fb"
-  excludeZero="true"
-/>
-<ListChart property="categor_a" excludeZero="true" scatter="true" />
-```
-
-### GaugeChart
-
-`<GaugeChart>` renders a single numeric metadata value as a semicircular gauge.
-The default render shows a half circle with a `#000099` fill on a grey `#ccc`
-track, the value text in the centre, and a height of 110 pixels.
-
-<figure>
-  <img
-    src={gaugeChart}
-    alt="A semicircular gauge showing a single numeric value as text in the centre."
-    width="320"
-  />
-  <figcaption>GaugeChart visualization</figcaption>
-</figure>
-
-| Prop        | Required | Default        | Description                                                                                                                                        |
-| ----------- | -------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `property`  | Yes      | —              | Numeric metadata property to read the gauge value from, given as its lowercase internal name.                                                      |
-| `max`       | No       | `100`          | Maximum scale value, applied when the attribute is absent or non-numeric.                                                                          |
-| `height`    | No       | `110`          | Gauge height in pixels, applied when the attribute is absent or non-numeric.                                                                       |
-| `dataset`   | No       | —              | Dataset to read the metadata value from.                                                                                                           |
-| `classname` | No       | —              | CSS class added to the wrapper.                                                                                                                    |
-| `colors`    | No       | `#000099,#ccc` | Two comma-separated colours for the fill and the track.                                                                                            |
-| `children`  | No       | —              | Centre text of the gauge; a child value component receives the `dataset` and `property` and renders the number between any prefix and suffix text. |
-
-`<GaugeChart>` reads the first value of the property from the single entity
-loaded into the named dataset.
-Declare the dataset with the `entity` attribute,
-since a search dataset carries no entity metadata.
-
 Example:
 
 ```html
-<Dataset entity="a1b2c3d4" name="cases" />
-
-<GaugeChart dataset="cases" property="progress" max="100">
-  Progress <Value />%
-</GaugeChart>
+<Dataset
+  url="/library/?q=(allAggregations:!t,filters:(),from:0,includeUnpublished:!t,limit:1000,order:desc,sort:editDate,treatAs:number,types:!(%27685a1qw1qw23er4ghy50d4c69%27),unpublished:!t)"
+  name="dataset1"
+/>
+<ListChart
+  property="selectgroup"
+  dataset="dataset1"
+  context="66ddfr416e5535ba73d11ca"
+/>
 ```
-
-The `<Value />` child receives the gauge's `dataset` and `property`, so the centre text reads as the value between the prefix and suffix, such as **Progress 64%**.
 
 ### FreeBarChart
 
 `<FreeBarChart>` renders a bar chart from arbitrary JSON rather than a dataset
 aggregation.
-The default render shows horizontal bars in a single colour `#1e1c8a`.
+The default render shows vertical bars in a single colour `#1e1c8a`.
 
-| Prop        | Required | Default      | Description                                                     |
-| ----------- | -------- | ------------ | --------------------------------------------------------------- |
-| `data`      | No       | —            | JSON array of data objects, each with a `label` and value keys. |
-| `dataKeys`  | No       | `results`    | A key name, or a JSON array of key-to-button-label objects.     |
-| `colors`    | No       | `#1e1c8a`    | Comma-separated hex colours, cycled across bars.                |
-| `classname` | No       | —            | CSS class added to the wrapper.                                 |
-| `layout`    | No       | `horizontal` | Bar direction, `horizontal` or `vertical`.                      |
-| `children`  | No       | —            | Content rendered above the chart.                               |
+<Figure
+  src={freeBarChart}
+  alt="A bar chart showing arbitrary data as vertical bars."
+  caption="FreeBarChart visualization"
+  width="840"
+/>
 
-Validated example:
+| Prop        | Required | Default      | Description                                                                                                                            |
+| ----------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `data`      | No       | —            | JSON array of data objects, each with a `label` and one or more value keys.                                                            |
+| `dataKeys`  | No       | `results`    | Which value key to plot. A key name, or a JSON array of `{key: button label}` objects to toggle between keys.                          |
+| `colors`    | No       | `#1e1c8a`    | Comma-separated hex colours, cycled across bars.                                                                                       |
+| `classname` | No       | —            | CSS class added to the wrapper.                                                                                                        |
+| `layout`    | No       | `horizontal` | Bar orientation. `horizontal` (default) draws vertical bars; `vertical` draws horizontal bars. The value names the axis, not the bars. |
+| `children`  | No       | —            | Content rendered above the chart.                                                                                                      |
+
+Each `data` object can carry several value keys beside its `label`.
+`dataKeys` selects which one to plot.
+Pass a JSON array of `{key: button label}` objects to plot several keys:
+the chart adds a toggle button per key,
+and selecting one switches the plotted key.
+The buttons appear only when the array has two or more entries.
+
+Example:
 
 ```html
 <FreeBarChart
-  data='[{"label":"col1","results":3,"otherProp":5,"lastProp":2},{"label":"col2","results":4,"otherProp":2,"lastProp":3}]'
-  dataKeys='[{ "otherProp": "Button label" }]'
+  data='[{"label":"col1","results":3,"otherProp":5},{"label":"col2","results":4,"otherProp":2},{"label":"col3","results":6,"otherProp":2}]'
+  dataKeys='[{"results":"Results"},{"otherProp":"Other values"}]'
 />
 ```
 
-## Map
+This plots `results` by default and adds two toggle buttons,
+"Results" and "Other values".
+Selecting "Other values" re-plots the chart from the `otherProp` key.
+
+## Geolocation components
 
 ### Map
 
@@ -296,14 +299,12 @@ Validated example:
 The default render shows a map at zoom level 6,
 with markers and clusters for the entities that have coordinates.
 
-<figure>
-  <img
-    src={map}
-    alt="A map with clustered markers for entities that have coordinates."
-    width="840"
-  />
-  <figcaption>Map visualization</figcaption>
-</figure>
+<Figure
+  src={map}
+  alt="A map with clustered markers for entities that have coordinates."
+  caption="Map visualization"
+  width="840"
+/>
 
 | Prop           | Required | Default   | Description                                                                      |
 | -------------- | -------- | --------- | -------------------------------------------------------------------------------- |
@@ -318,29 +319,33 @@ A bare geolocation dataset plots every published entity that has coordinates.
 
 Example:
 
-```text
-<Dataset geolocation="true" />
+```html
+<Dataset
+  name="places"
+  geolocation="true"
+  url="ibrary/?q=(allAggregations:!t,filters:(),from:0,includeUnpublished:!t,limit:30,order:desc,sort:creationDate,treatAs:number,types:!(%2766a11652we34rfc325b8b353%27),unpublished:!t)"
+/>
 
-<Map zoom="4" showControls="true" />
+<map dataset="places" zoom="7" showControls="true" />
 ```
 
 ## Single-value components
 
-These components render a single number or string as inline text.
-Each shows `-` until its value resolves.
+These components each render a single value.
+`<Counter>` and `<Value>` render it as inline text and show `-`
+until the value resolves.
+`<GaugeChart>` renders it as a semicircular gauge.
 
 ### Counter
 
 `<Counter>` renders a single aggregation count.
 
-<figure>
-  <img
-    src={counter}
-    alt="A single count of matching entities rendered as inline text."
-    width="320"
-  />
-  <figcaption>Counter visualization</figcaption>
-</figure>
+<Figure
+  src={counter}
+  alt="A single count of matching entities rendered as inline text."
+  caption="Counter visualization"
+  width="320"
+/>
 
 | Prop           | Required | Default   | Description                                                                                                                                   |
 | -------------- | -------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -349,24 +354,35 @@ Each shows `-` until its value resolves.
 | `value`        | No       | —         | Aggregation key of the option to count, such as a thesaurus value ID or a template ID rather than its label; comma-separated keys are summed. |
 | `uniqueValues` | No       | —         | A value of `true` counts distinct non-zero buckets.                                                                                           |
 
-Validated example:
+The `property` also accepts the built-in `_types` and `_published` aggregations,
+described under Charts.
+
+Example:
 
 ```html
-<Counter property="_types" value="id4,id3" />
+<Dataset
+  url="/library/?q=(allAggregations:!t,filters:(),from:0,includeUnpublished:!t,limit:1000,order:desc,sort:editDate,treatAs:number,types:!(%27685a83ec533b834af50d4c69%27),unpublished:!t)"
+  name="dataset1"
+/>
+
+Number of entities:
+<Counter
+  dataset="dataset1"
+  property="_types"
+  value="685a83ec533b834af50sderf4"
+/>
 ```
 
 ### Value
 
 `<Value>` renders one metadata value or one value from the page context.
 
-<figure>
-  <img
-    src={value}
-    alt="A single metadata value rendered as inline text."
-    width="200"
-  />
-  <figcaption>Value visualization</figcaption>
-</figure>
+<Figure
+  src={value}
+  alt="A single metadata value rendered as inline text."
+  caption="Value visualization"
+  width="200"
+/>
 
 | Prop       | Required | Default   | Description                                                                             |
 | ---------- | -------- | --------- | --------------------------------------------------------------------------------------- |
@@ -381,10 +397,11 @@ The `path` mode reads any value from the page context.
 In `property` mode, declare the dataset with the `entity` attribute.
 The value comes back as a number, so this mode doesn't render text values.
 
-```html
-<Dataset entity="a1b2c3d4" name="cases" />
+Example:
 
-<Value property="progress" dataset="cases" />
+```html
+<Dataset entity="cvfxsqj93u" name="country" /> Country:
+<Value path="country.title" />
 ```
 
 In `path` mode, the dot path starts from one of the page context roots.
@@ -405,22 +422,62 @@ Root fields sit on the dataset.
 Metadata uses the property's internal name as its key
 and holds an array of value objects, so the path indexes into it.
 
+Examples:
+
 ```html
 <Dataset entity="a1b2c3d4" name="cases" />
 
 <Value path="cases.title" />
 <Value path="cases.creationDate" />
-<Value path="cases.metadata.estado.0.value" />
-<Value path="cases.metadata.estado.0.displayValue" />
+<Value path="cases.metadata.type.0.value" />
+<Value path="cases.metadata.type.0.displayValue" />
 ```
-
-Validated examples:
 
 ```html
 <Value path="entityRaw.title" />
-<Value path="entity.metadata.resumen.value" />
+<Value path="entity.metadata.type.value" />
 <Value path="template.properties.4.label" />
 ```
+
+### GaugeChart
+
+`<GaugeChart>` renders a single numeric metadata value as a semicircular gauge.
+The default render shows a half circle with a `#000099` fill on a grey `#ccc`
+track, the value text in the centre, and a height of 110 pixels.
+
+<Figure
+  src={gaugeChart}
+  alt="A semicircular gauge showing a single numeric value as text in the centre."
+  caption="GaugeChart visualization"
+  width="320"
+/>
+
+| Prop        | Required | Default        | Description                                                                                                                                        |
+| ----------- | -------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `property`  | Yes      | —              | Numeric metadata property to read the gauge value from, given as its lowercase internal name.                                                      |
+| `max`       | No       | `100`          | Maximum scale value, applied when the attribute is absent or non-numeric.                                                                          |
+| `height`    | No       | `110`          | Gauge height in pixels, applied when the attribute is absent or non-numeric.                                                                       |
+| `dataset`   | No       | —              | Dataset to read the metadata value from.                                                                                                           |
+| `classname` | No       | —              | CSS class added to the wrapper.                                                                                                                    |
+| `colors`    | No       | `#000099,#ccc` | Two comma-separated colours for the fill and the track.                                                                                            |
+| `children`  | No       | —              | Centre text of the gauge; a child value component receives the `dataset` and `property` and renders the number between any prefix and suffix text. |
+
+`<GaugeChart>` reads the first value of the property from the single entity
+loaded into the named dataset.
+Declare the dataset with the `entity` attribute,
+since a search dataset carries no entity metadata.
+
+Example:
+
+```html
+<Dataset entity="f4lwed4e5qs" name="cases" />
+
+<GaugeChart dataset="cases" property="some_number" max="100">
+  <Value />%
+</GaugeChart>
+```
+
+The `<Value />` child receives the gauge's `dataset` and `property`, so the centre text reads as the value between the prefix and suffix, such as **Progress 64%**.
 
 ## Entity view components
 
@@ -442,7 +499,7 @@ Each tag needs exactly one of `value-of` or `label-of`.
 The root values for `value-of` are `title`, `creationDate`, and `editDate`;
 all other names resolve from entity metadata.
 
-Validated examples:
+Examples:
 
 ```html
 <EntityData value-of="title" />
@@ -460,7 +517,7 @@ Validated examples:
 | `show-if`  | Yes      | —       | JSON sift.js query applied to the entity metadata. |
 | `children` | Yes      | —       | Content rendered when the query matches.           |
 
-Validated examples:
+Examples:
 
 ```html
 <EntitySection show-if='{ "title": { "$exists": true }}'>...</EntitySection>
@@ -483,7 +540,7 @@ Each iteration sets the item as the new context.
 | `path`     | Yes      | —       | Dot path to the array in the current page context. |
 | `children` | Yes      | —       | Content repeated for each item.                    |
 
-Validated example:
+Example:
 
 ```html
 <Repeat path="entityRaw.metadata.pa_s">
@@ -528,26 +585,24 @@ Example:
 
 `<ItemList>` renders a list of entity cards. An admin authors it with the legacy `{list}(url)(options)` brace syntax rather than an XML tag. The brace syntax works on HTML pages.
 
-<figure>
-  <img
-    src={itemList}
-    alt="A list of entity cards linking to entities in the library."
-    width="840"
-  />
-  <figcaption>ItemList rendering</figcaption>
-</figure>
+<Figure
+  src={itemList}
+  alt="A list of entity cards linking to entities in the library."
+  caption="ItemList rendering"
+  width="840"
+/>
 
 | Option   | Default | Description                                                      |
 | -------- | ------- | ---------------------------------------------------------------- |
 | `limit`  | `6`     | Maximum number of items to fetch.                                |
 | `slider` | —       | A truthy value wraps the items in a carousel of three at a time. |
 
-Validated examples:
+Example:
 
-```text
-{list}(http://someurl:3000/es/?parameters=values)
-{list}(http://someurl:3000/es/)(limit:6)
-{list}(http://anotherurl:5000/es/?a=b)(limit:12,other:option)
+```html
+{list}(https://<yourdomain
+  >/en/library/?q=(allAggregations:!f,filters:(),from:0,includeUnpublished:!t,limit:30,order:desc,sort:creationDate,treatAs:number,types:!(%2766a1165fw3edfr5t25b8b353%27),unpublished:!f))</yourdomain
+>
 ```
 
 ### SearchBox
@@ -555,14 +610,12 @@ Validated examples:
 `<SearchBox>` renders a search input that submits to the library.
 The default render shows a single text input.
 
-<figure>
-  <img
-    src={searchBox}
-    alt="A single-line search input that submits to the library."
-    width="640"
-  />
-  <figcaption>SearchBox rendering</figcaption>
-</figure>
+<Figure
+  src={searchBox}
+  alt="A single-line search input that submits to the library."
+  caption="SearchBox rendering"
+  width="640"
+/>
 
 | Prop          | Required | Default | Description                     |
 | ------------- | -------- | ------- | ------------------------------- |
@@ -582,14 +635,12 @@ that posts to the contact endpoint.
 The default render shows name, email, message, and captcha fields.
 It accepts no author-facing attributes.
 
-<figure>
-  <img
-    src={contactForm}
-    alt="A contact form with name, email, message, and captcha fields."
-    width="840"
-  />
-  <figcaption>ContactForm rendering</figcaption>
-</figure>
+<Figure
+  src={contactForm}
+  alt="A contact form with name, email, message, and captcha fields."
+  caption="ContactForm rendering"
+  width="840"
+/>
 
 Example:
 
@@ -601,14 +652,12 @@ Example:
 
 `<PublicForm>` renders a public entity submission form for one template.
 
-<figure>
-  <img
-    src={publicForm}
-    alt="A public submission form with fields for one entity template."
-    width="840"
-  />
-  <figcaption>PublicForm rendering</figcaption>
-</figure>
+<Figure
+  src={publicForm}
+  alt="A public submission form with fields for one entity template."
+  caption="PublicForm rendering"
+  width="840"
+/>
 
 | Prop          | Required | Default | Description                                                |
 | ------------- | -------- | ------- | ---------------------------------------------------------- |
@@ -620,21 +669,19 @@ Example:
 Example:
 
 ```html
-<PublicForm template="58ad7d240d44252fee4e6208" file attachments />
+<PublicForm template="544d7de00d342523edfr4568" file attachments />
 ```
 
 ### MarkdownMedia
 
 `<MarkdownMedia>` renders a video or audio player with optional time links. An admin authors it with the legacy `{media}`, `{vimeo}`, or `{youtube}` brace syntax rather than an XML tag. The brace syntax works on HTML pages.
 
-<figure>
-  <img
-    src={mediaPlayer}
-    alt="A media player with playback controls for an embedded video."
-    width="640"
-  />
-  <figcaption>MarkdownMedia player rendering</figcaption>
-</figure>
+<Figure
+  src={mediaPlayer}
+  alt="A media player with playback controls for an embedded video."
+  caption="MarkdownMedia player rendering"
+  width="640"
+/>
 
 | Prop      | Required | Default | Description                                                        |
 | --------- | -------- | ------- | ------------------------------------------------------------------ |
@@ -643,8 +690,8 @@ Example:
 
 Example:
 
-```text
-{media}(/api/files/video.mp4, {"timelinks": {"00:30": "Chapter 1"}})
+```html
+youtube}(https://www.youtube.com/watch?v=K8yRxMLSFQA)
 ```
 
 ### Slideshow
@@ -653,14 +700,12 @@ Example:
 The default render shows one slide at a time with auto-play on
 and navigation arrows off.
 
-<figure>
-  <img
-    src={slideShow}
-    alt="An image gallery showing one slide at a time."
-    width="640"
-  />
-  <figcaption>Slideshow rendering.</figcaption>
-</figure>
+<Figure
+  src={slideShow}
+  alt="An image gallery showing one slide at a time."
+  caption="Slideshow rendering"
+  width="640"
+/>
 
 | Prop                   | Required | Default | Description                                                   |
 | ---------------------- | -------- | ------- | ------------------------------------------------------------- |
@@ -671,28 +716,35 @@ and navigation arrows off.
 | `showPlayButton`       | No       | `false` | Shows the play and pause button when set.                     |
 | `classname`            | No       | —       | CSS class added to the gallery.                               |
 
-The four boolean flags pass to the gallery without conversion. Any non-empty value, including `false`, enables a flag. An empty value, such as `autoPlay=""`, or an omitted attribute disables it. Because `autoPlay` defaults to on, `autoPlay=""` is the only way to stop auto-play.
+The four boolean flags pass to the gallery without conversion.
+Any non-empty value, including `false`, enables a flag.
+An empty value, such as `autoPlay=""`, or an omitted attribute disables it.
+Because `autoPlay` defaults to on,
+`autoPlay=""` is the only way to stop auto-play.
 
-Every child node becomes a slide, including white-space. Place the image tags with no spaces or newlines between them, or the gaps render as blank slides.
+Every child node becomes a slide, including white-space.
+Place the image tags with no spaces or newlines between them,
+or the gaps render as blank slides.
 
 Example:
 
-```text
-<Slideshow showNav="true"><img src="/api/files/image-one.jpg" /><img src="/api/files/image-two.jpg" /></Slideshow>
+```html
+<Slideshow showNav="true" autoPlay=""
+  ><img src="/api/files/image-1.jpg" /><img src="/api/files/image-2.jpg" /><img
+    src="/api/files/image-3.jpg"
+/></Slideshow>
 ```
 
 ### Link
 
 `<Link>` renders a navigation link to an internal path or external URL.
 
-<figure>
-  <img
-    src={link}
-    alt="A navigation link rendered as clickable text."
-    width="240"
-  />
-  <figcaption>Link rendering</figcaption>
-</figure>
+<Figure
+  src={link}
+  alt="A navigation link rendered as clickable text."
+  caption="Link rendering"
+  width="200"
+/>
 
 | Prop       | Required | Default | Description              |
 | ---------- | -------- | ------- | ------------------------ |
@@ -709,10 +761,12 @@ Example:
 
 `<Icon>` renders a FontAwesome icon.
 
-<figure>
-  <img src={icon} alt="A single icon rendered inline." width="240" />
-  <figcaption>Icon rendering</figcaption>
-</figure>
+<Figure
+  src={icon}
+  alt="The fontawosme icon users rendered inline."
+  caption="Icon rendering"
+  width="120"
+/>
 
 | Prop   | Required | Default | Description            |
 | ------ | -------- | ------- | ---------------------- |
@@ -721,7 +775,7 @@ Example:
 Example:
 
 ```html
-<Icon icon="poeple" />
+<Icon icon="users" />
 ```
 
 ## Dataset query reference

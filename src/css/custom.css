@@ -45,7 +45,7 @@
   --uwazi-figure-bg: #fefeff;
   --uwazi-figure-border: #e6e8ee;
   --uwazi-figure-radius: 8px;
-  --uwazi-figure-pad: 18px;
+  --uwazi-figure-pad: 64px;
   --uwazi-figure-shadow: 0 8px 26px -14px rgba(45, 55, 72, 0.18);
   --uwazi-figure-dot: rgba(66, 56, 157, 0.075);
   --uwazi-figure-dot-size: 16px;
@@ -53,6 +53,12 @@
   --uwazi-figure-img-border: #e6e8ee;
   --uwazi-figure-img-shadow: 0 6px 16px -10px rgba(45, 55, 72, 0.25);
   --uwazi-figure-caption-color: var(--ifm-color-emphasis-700);
+
+  /* Figure 'paper' variant — warm, aged-paper backdrop */
+  --uwazi-figure-paper-bg: #f5efe0;
+  --uwazi-figure-paper-border: #e3d8bf;
+  --uwazi-figure-paper-dot: rgba(120, 90, 40, 0.06);
+  --uwazi-figure-paper-vignette: rgba(120, 90, 40, 0.05);
 }
 
 /* Dark mode with accessible purple variants */
@@ -85,6 +91,12 @@
   --uwazi-figure-dot: rgba(152, 133, 255, 0.1);
   --uwazi-figure-img-border: #2c2c4a;
   --uwazi-figure-img-shadow: 0 10px 30px -16px rgba(0, 0, 0, 0.6);
+
+  /* Figure 'paper' variant (dark) — aged parchment in low light */
+  --uwazi-figure-paper-bg: #2a2620;
+  --uwazi-figure-paper-border: #3a342a;
+  --uwazi-figure-paper-dot: rgba(220, 200, 150, 0.06);
+  --uwazi-figure-paper-vignette: rgba(0, 0, 0, 0.18);
 }
 
 /* Center images in doc content and cap their width for consistency. */

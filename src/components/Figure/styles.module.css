@@ -27,6 +27,32 @@
   background-size: var(--uwazi-figure-dot-size) var(--uwazi-figure-dot-size);
 }
 
+/* The 'paper' variant — same card structure, warm aged-paper backdrop with a
+   faint corner vignette layered over the dot grid for a 'used' feel. */
+.paper {
+  padding: var(--uwazi-figure-pad);
+  border: 1px solid var(--uwazi-figure-paper-border);
+  border-radius: var(--uwazi-figure-radius);
+  box-shadow: var(--uwazi-figure-shadow);
+  background-color: var(--uwazi-figure-paper-bg);
+  background-image:
+    radial-gradient(
+      120% 120% at 0% 0%,
+      var(--uwazi-figure-paper-vignette),
+      transparent 55%
+    ),
+    radial-gradient(
+      120% 120% at 100% 100%,
+      var(--uwazi-figure-paper-vignette),
+      transparent 55%
+    ),
+    radial-gradient(var(--uwazi-figure-paper-dot) 1px, transparent 1px);
+  background-size:
+    cover,
+    cover,
+    var(--uwazi-figure-dot-size) var(--uwazi-figure-dot-size);
+}
+
 /* Two classes (0,2,0) so this beats the global `.markdown img` (0,1,1). */
 .frame .image {
   max-width: 100%;
