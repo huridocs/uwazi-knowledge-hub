@@ -50,6 +50,7 @@ const sidebars: SidebarsConfig = {
     'reference/property-types',
     'reference/collection-settings',
     'reference/user-role-permissions',
+    'reference/page-visualization-components',
     'reference/glossary',
   ],
   explanation: ['explanation/index'],

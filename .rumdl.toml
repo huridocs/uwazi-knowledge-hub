@@ -2,7 +2,8 @@
 flavor = "mdx"
 line-length = 80
 # MD041: Docusaurus frontmatter (title) supplies the H1; rule misfires here.
-disable = ["MD041"]
+# MD033: MDX uses JSX and HTML (figures, components) by design; inline HTML is expected.
+disable = ["MD041", "MD033"]
 exclude = [
     "vale/tests/fixtures",   # Exclude vale test md files
 ]

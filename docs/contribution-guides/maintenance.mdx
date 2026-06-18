@@ -86,6 +86,24 @@ For linting configuration details,
 see [MDX and Markdown linting](mdx-linting.mdx).
 For prose quality standards, see [Vale prose linting](vale-prose-linting.mdx).
 
+### Images and assets
+
+Co-locate images with the document that uses them.
+Don't put doc images in `static/`.
+
+- Keep one `img/` folder per Diátaxis section,
+  such as `docs/reference/img/` or `docs/how-to/img/`.
+- Reference images with a relative path:
+  `![alt text](./img/name.png)`.
+- Name files in kebab-case, prefixed by topic,
+  such as `barchart-default.png`.
+- Save screenshots as PNG and diagrams as SVG.
+
+Docusaurus bundles and validates co-located images at build time,
+so a missing or misnamed file fails the build instead of breaking silently.
+Reserve `static/` for site-wide assets such as the site icon, Open Graph images,
+and downloadable files shared across many pages.
+
 ## Pre-commit hook
 
 The hook runs lint-staged on every commit.

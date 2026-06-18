@@ -22,10 +22,78 @@ if ! command -v vale &>/dev/null; then
   exit 1
 fi
 
-# Capture JSON output; suppress non-zero exit (vale exits 1 when alerts found)
-JSON=$(vale --output JSON --minAlertLevel warning "$TARGET" 2>/dev/null || true)
+# Capture stdout, stderr, and the exit code separately. Vale's exit codes:
+#   0 = ran cleanly (alerts may still be present in JSON)
+#   1 = ran with alerts at/above minAlertLevel (config dependent)
+#   2 = runtime error (e.g. MDX parse crash) — NO lint ran, stdout is empty,
+#       the E100 payload goes to stderr. This MUST NOT be read as a clean pass.
+STDOUT_FILE=$(mktemp)
+STDERR_FILE=$(mktemp)
+trap 'rm -f "$STDOUT_FILE" "$STDERR_FILE"' EXIT INT TERM
 
-if [[ -z "$JSON" ]] || [[ "$JSON" == "null" ]]; then
+set +e
+vale --output JSON --minAlertLevel warning "$TARGET" >"$STDOUT_FILE" 2>"$STDERR_FILE"
+VALE_EXIT=$?
+set -e
+
+# Runtime error: exit code >= 2, or an E100 payload on either stream.
+# Surface it as a real error so the evaluator FAILs and the writer fixes it.
+if [[ "$VALE_EXIT" -ge 2 ]] || grep -q 'E100' "$STDERR_FILE" "$STDOUT_FILE" 2>/dev/null; then
+  RUNTIME=$(python3 - "$STDERR_FILE" "$STDOUT_FILE" <<'PYEOF'
+import sys, json, re
+
+def read(p):
+    try:
+        with open(p) as f:
+            return f.read()
+    except OSError:
+        return ""
+
+text = read(sys.argv[1]) or read(sys.argv[2])
+
+# Vale wraps the runtime error as a JSON object with a "Text" field.
+payload = text
+try:
+    obj = json.loads(text)
+    payload = obj.get("Text", text)
+except (json.JSONDecodeError, ValueError):
+    pass
+
+line = "?"
+reason = ""
+m = re.search(r"\[(\d+):\d+:\s*(.+?)\]", payload, re.S)
+if m:
+    line = m.group(1)
+    reason = m.group(2)
+else:
+    rm = re.search(r"reason:\s*'(.+?)'", payload, re.S)
+    if rm:
+        reason = rm.group(1)
+if not reason:
+    reason = "Vale could not parse the file (runtime error)."
+
+reason = " ".join(reason.split())
+print(f"line: {line}")
+print(f"reason: {reason}")
+PYEOF
+)
+  RT_LINE=$(printf '%s\n' "$RUNTIME" | sed -n 's/^line: //p')
+  RT_REASON=$(printf '%s\n' "$RUNTIME" | sed -n 's/^reason: //p')
+
+  echo "## Vale result"
+  echo "errors: 1"
+  echo "warnings: 0"
+  echo ""
+  echo "## Errors (must fix — zero tolerance)"
+  echo "- Line ${RT_LINE:-?}: Vale.Runtime — ${RT_REASON:-Vale runtime error.}"
+  exit 0
+fi
+
+JSON=$(cat "$STDOUT_FILE")
+
+# Empty stdout with a clean exit means a file with zero alerts. A clean run
+# emits "{}", but treat any empty/null stdout at exit 0/1 as a genuine pass.
+if [[ -z "$JSON" ]] || [[ "$JSON" == "null" ]] || [[ "$JSON" == "{}" ]]; then
   echo "## Vale result"
   echo "errors: 0"
   echo "warnings: 0"
@@ -36,7 +104,7 @@ fi
 
 # Write JSON to a temp file so Python can read it independently of stdin
 TMPJSON=$(mktemp)
-trap 'rm -f "$TMPJSON"' EXIT INT TERM
+trap 'rm -f "$STDOUT_FILE" "$STDERR_FILE" "$TMPJSON"' EXIT INT TERM
 printf '%s' "$JSON" > "$TMPJSON"
 
 # Count errors and warnings using python3 (available on macOS by default)

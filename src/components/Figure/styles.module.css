@@ -1,0 +1,73 @@
+.figure {
+  width: 100%;
+  margin-inline: auto;
+  margin-bottom: 3rem;
+}
+
+/* Layout only — full width, centers its child on both axes. */
+.frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* The 'card' variant paints the look. Future variants are sibling classes. */
+.card {
+  padding: var(--uwazi-figure-pad);
+  border: 1px solid var(--uwazi-figure-border);
+  border-radius: var(--uwazi-figure-radius);
+  box-shadow: var(--uwazi-figure-shadow);
+  background-color: var(--uwazi-figure-bg);
+  background-image: radial-gradient(
+    var(--uwazi-figure-dot) 1px,
+    transparent 1px
+  );
+  background-size: var(--uwazi-figure-dot-size) var(--uwazi-figure-dot-size);
+}
+
+/* The 'paper' variant — same card structure, warm aged-paper backdrop with a
+   faint corner vignette layered over the dot grid for a 'used' feel. */
+.paper {
+  padding: var(--uwazi-figure-pad);
+  border: 1px solid var(--uwazi-figure-paper-border);
+  border-radius: var(--uwazi-figure-radius);
+  box-shadow: var(--uwazi-figure-shadow);
+  background-color: var(--uwazi-figure-paper-bg);
+  background-image:
+    radial-gradient(
+      120% 120% at 0% 0%,
+      var(--uwazi-figure-paper-vignette),
+      transparent 55%
+    ),
+    radial-gradient(
+      120% 120% at 100% 100%,
+      var(--uwazi-figure-paper-vignette),
+      transparent 55%
+    ),
+    radial-gradient(var(--uwazi-figure-paper-dot) 1px, transparent 1px);
+  background-size:
+    cover,
+    cover,
+    var(--uwazi-figure-dot-size) var(--uwazi-figure-dot-size);
+}
+
+/* Two classes (0,2,0) so this beats the global `.markdown img` (0,1,1). */
+.frame .image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--uwazi-figure-img-radius);
+  border: 1px solid var(--uwazi-figure-img-border);
+  box-shadow: var(--uwazi-figure-img-shadow);
+}
+
+/* Two classes (0,2,0) so this beats the global `.markdown figcaption` (0,1,1). */
+.figure .caption {
+  margin-top: 0.75rem;
+  font-size: 0.84rem;
+  font-style: italic;
+  text-align: center;
+  color: var(--uwazi-figure-caption-color);
+}

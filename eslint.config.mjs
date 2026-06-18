@@ -30,6 +30,7 @@ export default [
       globals: {
         React: 'readonly',
         JSX: 'readonly',
+        HTMLImageElement: 'readonly',
         console: 'readonly',
         process: 'readonly',
         require: 'readonly',

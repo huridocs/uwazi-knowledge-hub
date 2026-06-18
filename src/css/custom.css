@@ -13,22 +13,22 @@
   --ifm-color-primary-light: #493ead;
   --ifm-color-primary-lighter: #4c41b5;
   --ifm-color-primary-lightest: #5651c5;
-  
+
   /* Enhanced color palette for Uwazi */
   --ifm-color-secondary: #6c5ce7;
   --ifm-color-success: #00b894;
   --ifm-color-info: #0984e3;
   --ifm-color-warning: #fdcb6e;
   --ifm-color-danger: #e17055;
-  
+
   /* Typography and spacing */
   --ifm-code-font-size: 95%;
   --ifm-heading-color: #2d3748;
   --ifm-font-color-base: #4a5568;
-  
+
   /* Code highlighting */
   --docusaurus-highlighted-code-line-bg: rgba(66, 56, 157, 0.1);
-  
+
   /* Custom Uwazi variables */
   --uwazi-purple-50: #f7f6fd;
   --uwazi-purple-100: #eeebfa;
@@ -40,6 +40,25 @@
   --uwazi-purple-700: #322a76;
   --uwazi-purple-800: #2a235f;
   --uwazi-purple-900: #241e4f;
+
+  /* Figure component */
+  --uwazi-figure-bg: #fefeff;
+  --uwazi-figure-border: #e6e8ee;
+  --uwazi-figure-radius: 8px;
+  --uwazi-figure-pad: 64px;
+  --uwazi-figure-shadow: 0 8px 26px -14px rgba(45, 55, 72, 0.18);
+  --uwazi-figure-dot: rgba(66, 56, 157, 0.075);
+  --uwazi-figure-dot-size: 16px;
+  --uwazi-figure-img-radius: 6px;
+  --uwazi-figure-img-border: #e6e8ee;
+  --uwazi-figure-img-shadow: 0 6px 16px -10px rgba(45, 55, 72, 0.25);
+  --uwazi-figure-caption-color: var(--ifm-color-emphasis-700);
+
+  /* Figure 'paper' variant — warm, aged-paper backdrop */
+  --uwazi-figure-paper-bg: #f5efe0;
+  --uwazi-figure-paper-border: #e3d8bf;
+  --uwazi-figure-paper-dot: rgba(120, 90, 40, 0.06);
+  --uwazi-figure-paper-vignette: rgba(120, 90, 40, 0.05);
 }
 
 /* Dark mode with accessible purple variants */
@@ -51,18 +70,53 @@
   --ifm-color-primary-light: #8d7dff;
   --ifm-color-primary-lighter: #9885ff;
   --ifm-color-primary-lightest: #b3a7ff;
-  
+
   /* Dark mode enhancements */
   --ifm-color-secondary: #8b7cf6;
   --ifm-color-success: #10b981;
   --ifm-color-info: #3b82f6;
   --ifm-color-warning: #f59e0b;
   --ifm-color-danger: #ef4444;
-  
+
   /* Dark mode code highlighting */
   --docusaurus-highlighted-code-line-bg: rgba(124, 107, 255, 0.2);
-  
+
   /* Dark mode background adjustments */
   --ifm-background-color: #1a1a2e;
   --ifm-background-surface-color: #16213e;
+
+  /* Figure component (dark) */
+  --uwazi-figure-bg: #16213e;
+  --uwazi-figure-border: #2c2c4a;
+  --uwazi-figure-dot: rgba(152, 133, 255, 0.1);
+  --uwazi-figure-img-border: #2c2c4a;
+  --uwazi-figure-img-shadow: 0 10px 30px -16px rgba(0, 0, 0, 0.6);
+
+  /* Figure 'paper' variant (dark) — aged parchment in low light */
+  --uwazi-figure-paper-bg: #2a2620;
+  --uwazi-figure-paper-border: #3a342a;
+  --uwazi-figure-paper-dot: rgba(220, 200, 150, 0.06);
+  --uwazi-figure-paper-vignette: rgba(0, 0, 0, 0.18);
+}
+
+/* Center images in doc content and cap their width for consistency. */
+.markdown img {
+  display: block;
+  margin-inline: auto;
+  max-width: min(100%, 960px);
+  height: auto;
+}
+
+/* Center figures and style their captions below the image. */
+.markdown figure {
+  margin-inline: auto;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.markdown figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--ifm-color-emphasis-700);
 }
