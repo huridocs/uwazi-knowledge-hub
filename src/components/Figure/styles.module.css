@@ -37,7 +37,8 @@
   box-shadow: var(--uwazi-figure-img-shadow);
 }
 
-.caption {
+/* Two classes (0,2,0) so this beats the global `.markdown figcaption` (0,1,1). */
+.figure .caption {
   margin-top: 0.75rem;
   font-size: 0.84rem;
   font-style: italic;
