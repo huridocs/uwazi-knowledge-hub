@@ -1,0 +1,253 @@
+---
+title: Multi-language support
+description: Reference for configuring a multi-language Uwazi collection, covering languages, live translate, term translations, documents, and pages.
+---
+
+## Overview
+
+Multi-language support lets an admin run one collection in many languages.
+Each language has its own translations for interface terms, content labels,
+documents, and pages.
+
+## Access and permissions
+
+Most multi-language settings are admin-only.
+The table lists who can do each action.
+
+| Action                                                   | Admin | Editor | Other roles |
+| -------------------------------------------------------- | ----- | ------ | ----------- |
+| Install, uninstall, set default, or reset a language     | ✓     | ✗      | ✗           |
+| Edit term translations under **Settings > Translations** | ✓     | ✗      | ✗           |
+| Import a translation CSV                                 | ✓     | ✗      | ✗           |
+| Turn on Live Translate                                   | ✓     | ✗      | ✗           |
+| Save an edit made through Live Translate                 | ✓     | ✗      | ✗           |
+| Read translated content                                  | ✓     | ✓      | ✓           |
+
+Live Translate is admin-only.
+Only an admin sees the toggle and can save an edit.
+
+## Languages
+
+The **Settings > Languages** page lists every installed language and controls
+which ones a collection uses.
+Each row holds these actions.
+
+| Action              | Description                                                                                                           |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Install Language(s) | Opens a list of available languages and adds the selected ones. Already-installed languages don't appear in the list. |
+| Set as default      | Marks the language as the collection default. The button is disabled on the row that's already default.               |
+| Reset               | Re-imports the bundled interface translations for that language, when a bundled set exists.                           |
+| Uninstall           | Removes the language after a confirmation prompt.                                                                     |
+
+A language marked with `*` in the install list ships with bundled interface
+translations.
+Uwazi loads those translations on install.
+
+### Default language
+
+The collection has one default language, set when it's first built.
+The default language is the source for these actions:
+
+- New languages copy their entity records
+  and translations from the default language.
+- A new term starts with the default-language value
+  as a placeholder in every language.
+- New pages copy their content from the default language.
+
+:::warning
+
+You can't uninstall the default language.
+Set another language as the default first.
+
+:::
+
+### Installing a language
+
+When you install a language,
+Uwazi copies every term and entity record from the default language into the new
+one.
+The copy runs in the background.
+It also rebuilds the search index and document thumbnails.
+The language stays in an installing state until the copy finishes.
+
+- Installing an already-installed language has no effect.
+- You can't uninstall a language while it's still installing.
+- Re-installing a language never overwrites translations that already exist.
+
+### Uninstalling a language
+
+Uninstalling removes the language from settings and deletes its translations
+and per-language entity records.
+
+:::warning
+
+Uninstalling a language deletes all its entity records and translations
+for good.
+
+:::
+
+### Bundled interface languages
+
+Uwazi bundles interface translations for 11 languages: Arabic, Greek, English,
+Spanish, French, Korean, Burmese, Russian, Thai, Turkish, and Ukrainian.
+Other languages install with the default-language values as placeholders
+until an admin translates them.
+
+### Right-to-left languages
+
+Uwazi shows 10 languages right-to-left: Arabic, Maldivian, Hausa, Hebrew,
+Kashmiri, Kurdish, Pashto, Persian, Urdu, and Yiddish.
+Uwazi sets the right-to-left layout on its own.
+No other behaviour differs.
+
+## Live translate
+
+Live Translate edits interface text in place, without leaving the current page.
+An admin turns it on from the language menu.
+
+| State | Behaviour                                                                                                           |
+| ----- | ------------------------------------------------------------------------------------------------------------------- |
+| On    | Every interface string becomes clickable. Selecting a string opens an editor with one field per installed language. |
+| Off   | The default state. Interface strings render as normal text.                                                         |
+
+When an admin saves a Live Translate edit,
+the change appears in every open session at once, with no reload.
+
+## Translations
+
+The **Settings > Translations** page groups every translatable term into two
+tables.
+
+| Table                | Holds                                                                                   |
+| -------------------- | --------------------------------------------------------------------------------------- |
+| System translations  | Interface strings, sidebar filter labels, and navigation menu links.                    |
+| Content translations | Template and property labels, thesaurus names and values, and relationship type labels. |
+
+Each row opens an editor that lists every term in that group,
+with one input per installed language.
+The editor shows a per-term status of **translated**, **untranslated**,
+or **default language**.
+An **Untranslated Terms** toggle filters the list to terms
+that still hold the default-language value.
+
+### Content translation sources
+
+Uwazi creates content translations when you save the parent object.
+Each new term starts with its label as the placeholder value in every language.
+
+| Content type       | When translations are created                                                | Where you edit them  |
+| ------------------ | ---------------------------------------------------------------------------- | -------------------- |
+| Templates          | Saving a template creates entries for its name and property labels.          | Content translations |
+| Thesauri           | Saving a thesaurus creates entries for its name and value labels.            | Content translations |
+| Relationship types | Saving a relationship type creates entries for its name and property labels. | Content translations |
+| Filters            | Saving the library filters configuration creates entries for filter labels.  | System translations  |
+| Menu               | Saving the navigation links creates entries for menu labels.                 | System translations  |
+
+### Thesaurus value renames
+
+Renaming a thesaurus value updates the value in the default language only.
+Every other language keeps its current translated value.
+This way, a label change keeps the human translations.
+
+### Auto-translated metadata values
+
+Uwazi shows the translated label
+for some property types in the current language.
+Other property types show their stored value unchanged.
+
+| Property types                        | Display in entity metadata                                                   |
+| ------------------------------------- | ---------------------------------------------------------------------------- |
+| Select, Multiple select, Relationship | Shows the translated label or related entity title for the current language. |
+| Text, Markdown, and all other types   | Shows the stored value unchanged, with no translation.                       |
+
+### Constraints
+
+- A translation group can't hold duplicate term keys.
+- You can't delete a relationship type while it's still in use.
+- Importing a translation CSV updates existing terms only
+  and skips unknown terms.
+
+## Bulk interface term import
+
+The **Import** button on a System translation editor uploads a CSV
+that sets one language's values for that group.
+The CSV uses two columns.
+
+| Column        | Holds                                                                                        |
+| ------------- | -------------------------------------------------------------------------------------------- |
+| `Key`         | The term identifier.                                                                         |
+| Language name | The translated value, under a header equal to the language's English name, such as `French`. |
+
+The bundled interface translations use the same two-column format.
+The **Reset** action on the Languages page re-imports them.
+
+- The CSV covers one language per file.
+- The import updates existing terms only.
+  It adds no new terms.
+- A reset or re-import fails when no bundled set exists for that language.
+
+## Multi-language documents
+
+An entity has one record per installed language.
+The records share one identity across languages.
+A document you upload to an entity carries a detected text language.
+Uwazi sets it from the document's content.
+
+Uwazi picks the document to show on an entity in this order:
+
+1. A document whose detected language matches the entity language.
+2. A document whose detected language matches the default collection language.
+3. The first document on the entity.
+
+So an entity with one English
+and one French document shows the matching document in each language view.
+
+- Uwazi detects the language on its own.
+  There's no manual language choice at upload.
+- Detection can be wrong on short documents.
+  A wrong result shows a document in the wrong language view.
+
+### Search indexing
+
+Uwazi indexes full text in a separate field per language.
+Each language field uses its own text search rules.
+A language with no rules of its own shares a common field.
+The detected document language decides which field gets the text.
+
+## Pages
+
+A page holds separate content for each installed language.
+This covers its title, body, script, and CSS.
+The page editor shows one tab per installed language,
+labelled by the language code.
+Selecting a tab switches the editor to that language's content.
+
+| Operation               | Behaviour                                                                         |
+| ----------------------- | --------------------------------------------------------------------------------- |
+| Add a language to pages | A new installed language copies its page content from the default language.       |
+| Edit a language tab     | Each tab holds an independent title, body, script, and CSS.                       |
+| Build a release         | Saves a snapshot of every language version. Requires a non-empty release message. |
+
+### Constraints
+
+- A page must keep at least one language.
+  You can't remove its last language version.
+- Building a release needs a release message.
+  An empty message fails.
+- Applying a release to the draft overwrites the draft content
+  and keeps only installed languages.
+
+## Validation and errors
+
+The table lists the conditions that block a multi-language action.
+
+| Condition                                         | Result                                            |
+| ------------------------------------------------- | ------------------------------------------------- |
+| Uninstalling the default language                 | The action fails. Set another default first.      |
+| Uninstalling a language that's still installing   | The action fails until the install finishes.      |
+| A translation group holds duplicate term keys     | The save fails.                                   |
+| Deleting a relationship type that's still in use  | The action fails.                                 |
+| A translation CSV holds unknown terms             | Uwazi skips them and updates only existing terms. |
+| Resetting a language with no bundled translations | The reset fails.                                  |
+| Removing the last language version of a page      | The action fails.                                 |
+| Building a page release with an empty message     | The action fails.                                 |

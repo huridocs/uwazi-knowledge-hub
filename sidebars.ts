@@ -47,9 +47,10 @@ const sidebars: SidebarsConfig = {
   howTo: ['how-to/index'],
   reference: [
     'reference/index',
-    'reference/property-types',
     'reference/collection-settings',
     'reference/user-role-permissions',
+    'reference/multi-language-support',
+    'reference/property-types',
     'reference/page-visualization-components',
     'reference/glossary',
   ],
