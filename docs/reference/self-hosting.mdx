@@ -1,0 +1,362 @@
+---
+title: Self-hosting
+description: Reference for self-hosting Uwazi, covering system requirements, services, configuration, setup, and common pitfalls.
+---
+
+## Overview
+
+A self-hosted Uwazi instance runs on your own server, backed by `MongoDB`,
+`Elasticsearch`, and `Redis`.
+
+## System requirements
+
+The table lists the minimum versions and hardware for one Uwazi instance.
+
+| Requirement           | Value                                            | Source                                  |
+| --------------------- | ------------------------------------------------ | --------------------------------------- |
+| Node.js               | `>=20.19.6` (README pins `20.19.6`)              | `package.json` engines; README          |
+| Yarn                  | `4.13.0` via `packageManager`                    | `package.json`                          |
+| MongoDB               | `7.0.24`, replica set mode                       | README; `docker-compose.yml`            |
+| `mongosh`             | Any version                                      | `database/blank_state_base.sh`          |
+| Elasticsearch         | `8.18.0`                                         | README; `elastic-icu-8.18.0.Dockerfile` |
+| Redis                 | `6.0.19`                                         | `docker-compose.yml`                    |
+| `pdftotext` (Poppler) | `22.12` or later, on `PATH`                      | README; `app/api/files/PDF.ts`          |
+| RAM                   | 4 GB (2 GB for Elasticsearch, 2 GB for the rest) | README                                  |
+| CPU                   | 2 cores                                          | README                                  |
+| Disk                  | 20 GB                                            | README                                  |
+
+Run `corepack enable` before the first `yarn install` to turn on the pinned Yarn
+version.
+
+### Elasticsearch configuration
+
+These settings belong in the Elasticsearch config, not in Uwazi.
+
+| Setting                               | Value   | Reason                                                        |
+| ------------------------------------- | ------- | ------------------------------------------------------------- |
+| `xpack.ml.enabled`                    | `false` | The machine learning module blocks startup on some platforms. |
+| `xpack.security.enabled`              | `false` | Set this, or supply `ELASTICSEARCH_API_KEY`.                  |
+| `indices.query.bool.max_clause_count` | `2048`  | The default of `1024` is too low for large thesauri.          |
+
+The ICU Analysis plugin is optional.
+It improves multi-language sort.
+Turn it on with `USE_ELASTIC_ICU=true`.
+
+## Required and optional services
+
+These services must run for Uwazi to work.
+
+| Service               | Version  | Notes                                   |
+| --------------------- | -------- | --------------------------------------- |
+| MongoDB               | `7.0.24` | Replica set mode is mandatory.          |
+| `mongosh`             | Any      | The blank-state script uses it.         |
+| Elasticsearch         | `8.18.0` | Needs the three config settings above.  |
+| Redis                 | `6.0.19` | The worker connects to it on every run. |
+| `pdftotext` (Poppler) | `22.12`+ | A system binary on `PATH`.              |
+
+These services are optional.
+Most read their settings from the `settings` document in MongoDB,
+not from environment variables.
+
+| Service                      | Where it is set                                                   |
+| ---------------------------- | ----------------------------------------------------------------- |
+| `Minio` or S3 storage        | Per-tenant `s3Storage` flag; credentials in environment variables |
+| ICU plugin (Elasticsearch)   | `USE_ELASTIC_ICU=true`                                            |
+| OCR service                  | `settings.features.ocr.url`                                       |
+| Table of contents generation | `settings.features.tocGeneration.url`                             |
+| Metadata extraction          | `settings.features.metadataExtraction.url`                        |
+| PDF conversion               | `settings.features.convertToPdf.url`                              |
+| PDF segmentation             | `settings.features.segmentation.url`                              |
+| Automatic translation        | `settings.features.automaticTranslation`                          |
+| Preserve (HURIDOCS)          | `settings.features.preserve`                                      |
+| Paragraph extraction         | `PARAGRAPH_EXTRACTION_URL` plus feature flags                     |
+| Sentry                       | `SENTRY_API_DSN`                                                  |
+| Mapbox                       | `settings.mapApiKey`; a shared fallback token applies when unset  |
+| SMTP or sendmail             | `settings.mailerConfig`; local sendmail by default                |
+| Matomo analytics             | `settings.matomoConfig`                                           |
+
+## Installation methods
+
+Uwazi supports four methods.
+The release tarball suits most self-hosted setups.
+
+### Release tarball
+
+This method runs a packaged release.
+First-time setup creates the folders and a fresh database.
+
+```bash
+mkdir -p uwazi/log uwazi/uploaded_documents uwazi/custom_uploads uwazi/temporal_files
+cd uwazi
+wget https://github.com/huridocs/uwazi/releases/latest/download/uwazi.tgz
+tar xvf uwazi.tgz
+mv prod latest && rm uwazi.tgz
+cd latest
+NODE_ENV=production yarn blank-state my_db_name
+```
+
+`yarn blank-state` restores a blank database, then runs `migrate` and `reindex`.
+
+This command starts the server.
+It listens on `localhost:3000`.
+
+```bash
+DATABASE_NAME=my_db_name INDEX_NAME=my_db_name NODE_ENV=production \
+  FILES_ROOT_PATH=/path/to/uwazi/ node server.js --no-experimental-fetch
+```
+
+The first login is `admin` with the password `change this password now`.
+
+### Upgrade
+
+This method replaces the release, then migrates and rebuilds the index.
+
+```bash
+wget https://github.com/huridocs/uwazi/releases/latest/download/uwazi.tgz
+tar xvf uwazi.tgz
+mv prod latest && rm uwazi.tgz
+cd latest
+NODE_ENV=production DATABASE_NAME=my_db_name INDEX_NAME=my_db_name \
+  FILES_ROOT_PATH=/path/to/uwazi/ yarn migrate-and-reindex
+```
+
+The server restart uses the same start command as above.
+
+### Source build
+
+This method builds the `prod/` directory from source.
+The result matches the tarball.
+
+```bash
+yarn production-build
+yarn run-production
+```
+
+`yarn production-build` runs `webpack/build.sh`.
+It compiles the server code and builds the browser bundle.
+It also compiles the database scripts and installs the production packages.
+
+### Development from source
+
+This method runs the development stack with hot reload.
+
+```bash
+git clone https://github.com/huridocs/uwazi.git
+cd uwazi
+corepack enable
+yarn install
+yarn blank-state
+./run start
+yarn hot
+```
+
+`./run start` starts the Docker Compose services: Elasticsearch, MongoDB, Redis,
+and `Minio`.
+
+## Environment variables
+
+Uwazi reads these in `app/api/config.ts`.
+It loads an optional `.env` file at the project root.
+The default column reads `none` when the setting has no default.
+
+### Server
+
+| Variable               | Purpose                                    | Default          | Required          |
+| ---------------------- | ------------------------------------------ | ---------------- | ----------------- |
+| `PORT`                 | HTTP listen port                           | `3000`           | Optional          |
+| `NODE_ENV`             | Run mode: production, development, or test | `development`    | Set to production |
+| `ENVIRONMENT`          | Version string and Prometheus labels       | `development`    | Optional          |
+| `LOCALHOST_ONLY`       | Binds the server to localhost only         | none (binds all) | Optional          |
+| `SKIP_MIGRATION_CHECK` | Skips the startup migration check          | `false`          | Optional          |
+
+### MongoDB
+
+| Variable                     | Purpose                                                | Default             | Required                  |
+| ---------------------------- | ------------------------------------------------------ | ------------------- | ------------------------- |
+| `MONGO_URI`                  | Full connection string; takes precedence over `DBHOST` | none                | `MONGO_URI` or `DBHOST`   |
+| `DBHOST`                     | Hostname only; builds `mongodb://${DBHOST}/`           | `127.0.0.1`         | Optional with `MONGO_URI` |
+| `DBUSER`                     | Auth username                                          | none                | Optional                  |
+| `DBPASS`                     | Auth password                                          | none                | Optional                  |
+| `DATABASE_NAME`              | Database name for the default tenant                   | `uwazi_development` | Set in production         |
+| `MONGO_CONNECTION_POOL_SIZE` | Connection pool size                                   | `5`                 | Optional                  |
+
+### Elasticsearch
+
+| Variable                 | Purpose                                       | Default                 | Required          |
+| ------------------------ | --------------------------------------------- | ----------------------- | ----------------- |
+| `ELASTICSEARCH_URL`      | Node URLs for the single-tenant client        | `http://localhost:9200` | Optional          |
+| `ELASTICSEARCH_API_KEY`  | API key for the single-tenant client          | empty string            | Optional          |
+| `INDEX_NAME`             | Index name for the default tenant             | `uwazi_development`     | Set in production |
+| `ELASTIC_SEARCH_NODES`   | Node URLs for the multi-tenant client         | `http://localhost:9200` | Optional          |
+| `ELASTIC_SEARCH_API_KEY` | API key for the multi-tenant client           | empty string            | Optional          |
+| `USE_ELASTIC_ICU`        | Uses ICU collation for sort; needs the plugin | unset                   | Optional          |
+
+### File paths
+
+| Variable                | Purpose                    | Default                                  | Required          |
+| ----------------------- | -------------------------- | ---------------------------------------- | ----------------- |
+| `ROOT_PATH`             | App root for public assets | `server.js` directory                    | Optional          |
+| `FILES_ROOT_PATH`       | Root for all file storage  | falls back to `ROOT_PATH`                | Set in production |
+| `UPLOADS_FOLDER`        | Uploaded documents         | `${FILES_ROOT_PATH}/uploaded_documents/` | Optional          |
+| `CUSTOM_UPLOADS_FOLDER` | Custom interface assets    | `${FILES_ROOT_PATH}/custom_uploads/`     | Optional          |
+| `ACTIVITY_LOGS_FOLDER`  | Activity logs              | `${FILES_ROOT_PATH}/log/`                | Optional          |
+
+Temp files always go to `/tmp`.
+Uwazi sets this path in `app/api/files/filesystem.ts`.
+
+### Multi-tenant and cluster
+
+| Variable                | Purpose                                           | Default               | Required |
+| ----------------------- | ------------------------------------------------- | --------------------- | -------- |
+| `MULTI_TENANT`          | Turns on multi-tenant mode                        | `false`               | Optional |
+| `DEFAULT_TENANT_DOMAIN` | Default tenant identity                           | `${hostname}:${PORT}` | Optional |
+| `CLUSTER_MODE`          | Redis adapter for Socket.io across many processes | `false`               | Optional |
+
+### Redis
+
+| Variable     | Purpose        | Default     | Required |
+| ------------ | -------------- | ----------- | -------- |
+| `REDIS_HOST` | Redis hostname | `localhost` | Optional |
+| `REDIS_PORT` | Redis port     | `6379`      | Optional |
+
+### Session
+
+| Variable              | Purpose                | Default            | Required          |
+| --------------------- | ---------------------- | ------------------ | ----------------- |
+| `USER_SESSION_SECRET` | Express session secret | random per startup | Set in production |
+
+### Queue
+
+| Variable     | Purpose                            | Default      | Required |
+| ------------ | ---------------------------------- | ------------ | -------- |
+| `QUEUE_NAME` | MongoDB jobs queue collection name | `uwazi_jobs` | Optional |
+
+### S3 and object storage
+
+| Variable               | Purpose                | Default                 | Required        |
+| ---------------------- | ---------------------- | ----------------------- | --------------- |
+| `S3_ENDPOINT`          | S3 endpoint URL        | `http://127.0.0.1:9000` | With S3 storage |
+| `S3_BUCKET`            | Bucket name            | `uwazi-development`     | With S3 storage |
+| `S3_ACCESS_KEY_ID`     | Access key             | `minioadmin`            | With S3 storage |
+| `S3_SECRET_ACCESS_KEY` | Secret key             | `minioadmin`            | With S3 storage |
+| `S3_BATCH_SIZE`        | Files per batch action | `1000`                  | Optional        |
+
+### External services
+
+| Variable                            | Purpose                               | Default                 | Required            |
+| ----------------------------------- | ------------------------------------- | ----------------------- | ------------------- |
+| `EXTERNAL_SERVICES`                 | Runs the worker as a separate process | `false`                 | Optional            |
+| `PARAGRAPH_EXTRACTION_URL`          | Paragraph extraction service URL      | `http://localhost:5056` | With the feature on |
+| `FEATURE_FLAG_PARAGRAPH_EXTRACTION` | Turns on paragraph extraction         | `false`                 | Optional            |
+
+### Feature flags
+
+| Variable                           | Purpose                              | Default |
+| ---------------------------------- | ------------------------------------ | ------- |
+| `FEATURE_FLAG_FILE_CACHE_HEADERS`  | HTTP cache headers on file endpoints | `false` |
+| `FEATURE_FLAG_THEME_CUSTOMIZATION` | Theme customization interface        | `false` |
+| `FEATURE_FLAG_V2_CSV_IMPORT`       | V2 CSV import                        | `false` |
+| `NEW_HEADER`                       | New header component                 | `false` |
+| `DEV_FLAG_TESTING`                 | Development and testing flag         | `false` |
+
+### Logging and other
+
+| Variable         | Purpose                       | Default      | Required         |
+| ---------------- | ----------------------------- | ------------ | ---------------- |
+| `SENTRY_API_DSN` | Sentry DSN for error tracking | none         | Optional         |
+| `JSON_LOGS`      | Emits logs as JSON            | `false`      | Optional         |
+| `GITHUB_TOKEN`   | GitHub API token for scripts  | empty string | Optional         |
+| `HOT`            | Signals webpack hot reload    | unset        | Development only |
+| `INSPECT_PORT`   | Node inspector port           | `9229`       | Development only |
+| `BABEL_ENV`      | Babel environment             | unset        | Build only       |
+
+## Maintenance scripts
+
+These scripts come from `package.json`.
+
+| Script                     | Purpose                                                |
+| -------------------------- | ------------------------------------------------------ |
+| `yarn blank-state [db]`    | Creates a fresh database, then migrates and reindexes. |
+| `yarn migrate`             | Runs pending migrations.                               |
+| `yarn reindex`             | Rebuilds the Elasticsearch index from MongoDB.         |
+| `yarn migrate-and-reindex` | Migrates, then reindexes when needed.                  |
+| `yarn admin-user`          | Resets or creates the admin user.                      |
+| `yarn es:create:indexes`   | Creates the Elasticsearch indexes.                     |
+| `yarn dump-db`             | Dumps MongoDB.                                         |
+| `yarn restore-db`          | Restores MongoDB.                                      |
+
+`yarn blank-state` refuses to overwrite a database that already exists,
+unless you pass `--force`.
+
+## File system layout
+
+This layout matches the release tarball setup.
+
+```text
+/path/to/uwazi/
+├── latest/              # extracted release (app code)
+├── log/                 # activity logs (ACTIVITY_LOGS_FOLDER)
+├── uploaded_documents/  # uploaded files (UPLOADS_FOLDER)
+├── custom_uploads/      # custom interface assets (CUSTOM_UPLOADS_FOLDER)
+└── temporal_files/      # legacy; temp files go to /tmp
+```
+
+The `temporal_files/` folder is legacy.
+Temp files go to `/tmp` instead.
+When S3 storage is on, these paths become bucket prefixes.
+Sessions live in MongoDB, in the `uwazi_shared_db` database.
+
+## Background processes
+
+A full installation runs up to three process types.
+
+| Process                  | Command              | Role                                                        |
+| ------------------------ | -------------------- | ----------------------------------------------------------- |
+| Main server              | `node server.js`     | Serves HTTP and the frontend; always required.              |
+| External services worker | `app/worker.ts`      | Drives OCR, translation, extraction, and other timed loops. |
+| Queue worker             | `app/queueWorker.ts` | Runs async jobs from the MongoDB `jobs` collection.         |
+
+The main server embeds the queue worker when `EXTERNAL_SERVICES=false`,
+which is the default.
+With `EXTERNAL_SERVICES=true`, the worker runs as a separate process.
+The timed loops in the worker use Redis locks.
+They run on fixed cycles: sync every 10 seconds, Preserve every 30 seconds,
+and table of contents and segmentation every 60 seconds.
+
+## Errors and common pitfalls
+
+The table lists conditions that block startup or cause silent failures.
+
+| Condition                                                 | Result                                                                                       |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Pending migrations on startup                             | The server exits with code `1`, unless `SKIP_MIGRATION_CHECK=true` or `MULTI_TENANT` is set. |
+| `yarn blank-state` on an existing database                | The action fails without `--force`.                                                          |
+| `pdftotext` missing from `PATH`                           | PDF text extraction fails.                                                                   |
+| Redis not running                                         | The worker and queue worker hang or crash, even on a single node.                            |
+| MongoDB not a replica set                                 | Transactions and change streams fail in subtle ways, with no immediate crash.                |
+| Elasticsearch without `xpack.ml.enabled: false`           | Elasticsearch fails to start on some platforms.                                              |
+| Elasticsearch without `max_clause_count=2048`             | Queries on large thesauri return errors.                                                     |
+| Elasticsearch security on without `ELASTICSEARCH_API_KEY` | The client fails to connect.                                                                 |
+| `USER_SESSION_SECRET` unset                               | A random secret regenerates on each restart, which ends all sessions.                        |
+
+:::warning
+
+MongoDB must run as a replica set.
+Run `rs.initiate()` even for a single node,
+or transactions and change streams fail.
+
+:::
+
+:::warning
+
+Run `yarn migrate-and-reindex` before you start a new version.
+Pending migrations make the server exit with code `1`.
+
+:::
+
+:::warning
+
+Set `USER_SESSION_SECRET` in production.
+Without it, a random secret regenerates on each restart and logs out every user.
+
+:::
