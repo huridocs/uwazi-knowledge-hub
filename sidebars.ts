@@ -52,6 +52,7 @@ const sidebars: SidebarsConfig = {
     'reference/multi-language-support',
     'reference/property-types',
     'reference/page-visualization-components',
+    'reference/self-hosting',
     'reference/glossary',
   ],
   explanation: ['explanation/index'],
