@@ -51,6 +51,7 @@ const sidebars: SidebarsConfig = {
     'reference/user-role-permissions',
     'reference/multi-language-support',
     'reference/property-types',
+    'reference/csv-import',
     'reference/page-visualization-components',
     'reference/self-hosting',
     'reference/glossary',
