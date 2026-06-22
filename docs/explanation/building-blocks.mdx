@@ -3,6 +3,8 @@ title: Understanding Uwazi's building blocks
 description: The mental model behind entities, templates, properties, thesauri, and relationships.
 ---
 
+import Mermaid from '@theme/Mermaid';
+
 ## Overview
 
 Uwazi stores everything you collect as structured information.
@@ -109,14 +111,16 @@ Each connection carries meaning because it has a named type.
 
 The diagram below shows how the concepts relate.
 
-```mermaid
-graph TD
+<Figure caption="How entities, templates, properties, thesauri, and relationship types connect">
+  <Mermaid
+    value={`graph TD
   Entity["Entity (a record)"] -->|is an instance of| Template["Template (content type)"]
   Template -->|defines| Property["Property (a field)"]
   Property -->|select or multi-select uses| Thesaurus["Thesaurus (value list)"]
   Property -->|relationship uses| RelType["Relationship type"]
-  RelType -->|links back to| Entity
-```
+  RelType -->|links back to| Entity`}
+  />
+</Figure>
 
 Read it from the top.
 An entity is an instance of a template.

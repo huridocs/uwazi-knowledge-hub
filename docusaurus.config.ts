@@ -30,6 +30,8 @@ const config: Config = {
   // TODO: restore to 'throw' once the linked start-page targets exist.
   onBrokenLinks: 'warn',
 
+  themes: ['@docusaurus/theme-mermaid'],
+
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
@@ -40,6 +42,7 @@ const config: Config = {
 
   // Markdown configuration (v4-compatible)
   markdown: {
+    mermaid: true,
     hooks: {
       onBrokenMarkdownLinks: 'warn',
     },
