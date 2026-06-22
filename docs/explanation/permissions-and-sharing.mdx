@@ -1,0 +1,186 @@
+---
+title: How permissions and sharing work
+description: The model behind roles, groups, published entities, and instance privacy in Uwazi.
+---
+
+## Overview
+
+Uwazi controls access in layers.
+Each layer answers a different question.
+Who is this person, and what may they do across the whole instance?
+Which records may they see or change?
+May a visitor without a login enter at all?
+
+This page explains those layers and how they fit together.
+It asks nothing of you.
+Once you hold the model in your head, configuring access becomes far clearer.
+You'll know which layer to reach for, and why each one exists.
+
+## Roles set what a person can do
+
+Every user has one role.
+Uwazi offers three: admin, editor, and collaborator.
+The role travels with the person across the whole instance.
+It's the first and broadest layer of access.
+
+An admin runs the instance.
+Admins manage users, groups, templates, thesauri, translations,
+and every setting.
+Think of an admin as the person who holds the keys to the building itself,
+not only to the rooms inside it.
+
+An editor works with content at full reach.
+Editors see and change every entity, and they can publish records to the public.
+What they can't do is reshape the instance.
+They don't touch users, roles, or settings.
+
+A collaborator has the narrowest role.
+Collaborators see and change only the entities shared with them.
+They can't publish anything to the public, and they can't reach any setting.
+A collaborator is a trusted contributor, not a manager.
+
+Admins and editors share one important trait.
+Uwazi treats them as privileged,
+so they bypass the record-level checks that bind collaborators.
+This single distinction shapes much of how sharing behaves,
+as the later layers show.
+
+One more case is worth naming, though it isn't a role.
+A visitor browses without logging in and holds no role at all.
+On a public instance, a visitor can read published records and nothing more.
+They can't change anything, and restricted records stay hidden from them.
+The visitor is the baseline that the three roles build on.
+
+## Groups bundle people together
+
+A group is a named set of users.
+You might create a group for a regional team,
+or for everyone working on one investigation.
+The group itself does nothing on its own.
+Its value comes from how it joins the sharing layer.
+
+When you share a record with a group, every member inherits that access.
+Add a person to the group later, and they gain the same access at once.
+Remove them, and the access falls away.
+A group is like a shared key ring: hand someone the ring,
+and they hold every key on it.
+
+This matters for teams that change over time.
+Instead of sharing each record with each new hire,
+you share once with the group.
+Membership then does the work.
+A new investigator joins the team group
+and sees the team's records the same day.
+
+## Published and restricted entities
+
+Every entity carries a status.
+It's either published or restricted.
+This is the record-level layer,
+and it decides who may see each piece of content.
+
+A published entity is open to everyone, including visitors with no login.
+They can read it but not change it.
+A restricted entity is private.
+Only people with an explicit share, plus admins and editors, can see it at all.
+
+Sharing a restricted entity means naming who gets in.
+You add users or groups and give each one a level.
+"Can see" grants read access.
+"Can edit" grants the power to change the record
+and manage who else it's shared with.
+A new entity starts restricted,
+and its creator holds edit access from the first moment.
+
+Only admins and editors can publish.
+A collaborator can share a record with named colleagues,
+but can't open it to the public.
+This guards the line between internal work and public release,
+which matters when content is sensitive.
+
+:::info
+
+Restriction isn't a label Uwazi applies after the fact.
+A restricted record never reaches a person who lacks access.
+Uwazi filters it out of the search and the database query itself,
+so the record stays truly hidden.
+
+:::
+
+## Public and private instances
+
+The outermost layer is the instance itself.
+An instance is one organization's whole Uwazi site.
+You can run it as public or private.
+This setting decides whether a visitor without a login may enter.
+
+A public instance has an open front door.
+Anyone can browse, though they still see only published records.
+A private instance keeps the door shut.
+Uwazi sends a visitor without a login to the sign-in page,
+and they see nothing until they log in.
+
+Here lies a useful way to picture the whole system.
+The instance setting is the front door of the building.
+Each entity's status is the lock on an individual room.
+The front door decides who enters;
+the room locks decide where they go once inside.
+
+This is why publishing a record isn't the same as making the instance public.
+A published entity in a private instance is open to every logged-in user,
+but a stranger still can't reach it.
+The front door stays shut regardless of what's unlocked inside.
+
+## How the layers work together
+
+The four layers stack from broad to narrow.
+The instance setting acts first, then the role, then the group memberships,
+then each entity's status.
+A request passes through them in turn, and any one of them can stop it.
+
+Consider an investigator who logs in as a collaborator.
+The instance is public, so the front door was never a barrier for them.
+Their role gives them no blanket access, so they see only what's shared.
+
+A team group grants this investigator a set of cases.
+One extra case, shared with them by name, rounds out their view.
+Everything else stays hidden.
+
+Now picture an anonymous visitor to the same public instance.
+They cleared the open front door.
+They hold no role and belong to no group.
+So they see published records only, and they can read but never change them.
+The same layers produce a sharply different result.
+
+## Design decisions
+
+Uwazi enforces access at the layer that's hardest to bypass.
+Rather than hide restricted records only in the interface,
+it removes them from the database and search queries.
+A record a person can't reach is never fetched for them.
+This reflects the stakes of human rights work,
+where a leaked record can put people at risk.
+
+The split between privileged and ordinary roles is deliberate.
+Admins and editors carry trust across the whole instance,
+so checking each record for them would add cost with no gain.
+Collaborators carry no such trust, so Uwazi checks every record they touch.
+This keeps the common case fast and the sensitive case careful.
+
+Group membership resolves at the moment of each request,
+not at the moment of sharing.
+Some systems copy a person's access onto each record when you share it.
+Uwazi instead reads group membership live.
+The trade-off is a small cost on each request in exchange for changes
+that take effect at once, with no record to rewrite.
+
+Keeping the instance setting separate from entity status is the last key choice.
+It gives you two independent dials.
+One controls whether outsiders may enter at all.
+The other controls what's visible once they're in.
+Together they let a private team and a public archive run on the same software.
+
+## See also
+
+- [Understanding Uwazi's building blocks](building-blocks.mdx) —
+  the entity model that permissions apply to
