@@ -1,0 +1,179 @@
+---
+title: How the Library and search work
+description: The ideas behind the Library, how content becomes searchable, and why results appear as they do.
+---
+
+## Overview
+
+The Library is the main screen for finding things in Uwazi.
+It shows your entities and lets you search and filter them.
+This page explains how that works and why results look the way they do.
+It asks nothing of you.
+It builds a mental model.
+
+## One search, shown three ways
+
+The Library has three parts that work as one.
+A search box sits at the top.
+A filter sidebar sits to the side.
+The results fill the rest of the screen.
+
+You can view those results as cards, as a table, or on a map.
+All three views share the same search and the same filters.
+Switching views changes how results look, not which results you get.
+The map is the one exception, and a later section explains why.
+
+The whole state of a search lives in the page address.
+That includes your search words, every active filter, the sort order,
+and the view.
+So any search you build is a link you can share.
+Copy the address, send it to a colleague, and they see the same results.
+
+:::tip
+
+Bookmark a filtered search you run often.
+The bookmark reopens the Library with those exact filters in place.
+
+:::
+
+## How your content becomes searchable
+
+The Library doesn't read your database directly.
+It reads from a separate search index.
+Think of that index like the index at the back of a book.
+The book holds the full text, but the index is what makes finding a word fast.
+
+Uwazi keeps that index in step with your data.
+When you save an entity or upload a document,
+Uwazi updates its entry in the index.
+This happens as the final part of saving, so you rarely think about it.
+New and changed content becomes easy to find on its own, with no extra step.
+
+There's a small delay between saving and finding.
+The index refreshes about once a second.
+So an entity you saved a second ago may take a moment to appear in results.
+This explains the occasional "I saved it, but search can't find it yet" moment.
+
+Uwazi indexes three things: the title, the metadata values,
+and the text inside any attached document.
+It pulls the text out of PDFs and tags each word with its page.
+That page tag is what later lets a search result jump straight to the right
+page.
+An entity with no attached document is still searchable,
+but only by its title and metadata.
+
+## Why results appear, and in this order
+
+When you haven't typed anything, the Library shows the newest entities first.
+It sorts by each entity's creation date.
+This gives you a sensible default: recent work sits at the top.
+
+The moment you type a search term, the order changes.
+Uwazi reorders the results by relevance.
+Relevance means how well each entity matches your words.
+A close match rises to the top, and a weak match sinks.
+
+Not every match counts the same.
+A match in the title or a metadata field weighs more than a match buried deep in
+a document's text.
+So an entity whose title contains your word ranks above one
+that merely mentions it on page 40.
+This mirrors how you'd judge relevance yourself.
+
+An admin can shape these defaults.
+They can choose which property the Library sorts by
+when no search term is active.
+They can also decide which fields you're allowed to sort by at all.
+So the sort options you see reflect how an admin set up the collection.
+
+## How filters narrow what you see
+
+The filter sidebar shows one control for each filterable property.
+Which filters appear depends entirely on how an admin built the collection's
+templates.
+A collection about court cases might offer filters for date, judge, and outcome.
+A different collection offers a different set.
+
+Filters stack with "and" logic.
+Pick a date range and a country, and Uwazi shows only entities that match both.
+Each filter narrows the results further, like sieves placed one after another.
+
+Next to each filter option sits a live count.
+That count tells you how many results you'd get if you also picked that option.
+The counts shift as you change other filters,
+because they always reflect your current search.
+This lets you see where the results are before you commit to a choice.
+
+## What a result shows
+
+A result card shows an entity's title, its type, and a few key details.
+An admin decides which metadata appears on the card through a "show in cards"
+setting.
+So a card stays focused on the details that matter for that collection.
+When your search matches text inside a document,
+the card also shows a short snippet with the match highlighted.
+
+The table view shows the same chosen details as columns.
+You can hide columns you don't need.
+It suits moments when you want to scan many entities at once and compare values.
+
+The map view is different, and here's the exception mentioned earlier.
+It shows only entities that carry a location.
+Uwazi runs a separate search for places,
+so the map can plot every located entity at once.
+Entities with no location don't appear,
+which is why the map's count can differ from the list's.
+
+When a collection is brand new and holds no data yet,
+the Library shows a welcome panel instead of results.
+A search that finds nothing is different.
+It shows an empty result area and a count of zero, with no special message.
+
+## How this connects to other Uwazi features
+
+Almost everything in the Library traces back to templates and properties.
+The filters you see come from the properties an admin marked as filterable.
+The details on a card come from the properties marked to show there.
+The sort options come from the properties an admin marked for sorting.
+Learn more in [Understanding Uwazi's building blocks](building-blocks.mdx).
+
+Permissions shape results too.
+A visitor who isn't logged in only ever sees published entities.
+Restricted entities and the filters for them stay hidden from the public.
+So two people can run the same search and see different totals.
+
+Language adds one more layer.
+Uwazi keeps one version of each entity per language.
+When you search, it looks in the language you're viewing.
+The same entity can match different words in different languages.
+
+## Design decisions
+
+The split between your database and the search index is deliberate.
+A database keeps data safe, but it searches text slowly.
+A search index does the opposite, and it finds text fast.
+By keeping both, Uwazi gives you safe storage and quick search at the same time.
+
+Updating the index as part of saving is also a choice.
+Uwazi could batch the work and run it later.
+Instead it updates right away, so your changes show up almost at once.
+The cost is that tiny refresh delay, which most people never notice.
+
+Weighting titles and metadata above document text reflects how people search.
+A word in a case title usually matters more than the same word deep in an
+attachment.
+Uwazi could treat every match equally,
+but that would bury the strongest results.
+The current balance keeps the most likely answers near the top.
+
+The map's separate search is a trade-off worth knowing about.
+Plotting points needs every located entity at once, not one page of them.
+So the map gathers locations on its own, apart from the paged list.
+This is why a map can show more points than the list shows rows.
+
+## See also
+
+- [Understanding Uwazi's building blocks](building-blocks.mdx) — how entities,
+  templates, and properties fit together
+- [Property types reference](../reference/property-types.mdx) —
+  which property types support filtering and sorting

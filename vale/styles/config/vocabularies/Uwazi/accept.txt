@@ -30,6 +30,7 @@ HURIDOCS
 husky
 ItemList
 JSON
+(?i)Library
 lint-staged
 ListChart
 MDX

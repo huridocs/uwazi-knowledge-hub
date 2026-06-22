@@ -56,7 +56,11 @@ const sidebars: SidebarsConfig = {
     'reference/self-hosting',
     'reference/glossary',
   ],
-  explanation: ['explanation/index', 'explanation/building-blocks'],
+  explanation: [
+    'explanation/index',
+    'explanation/building-blocks',
+    'explanation/library-and-search',
+  ],
   apiSidebar: ['api/index'],
   resources: ['resources/index'],
 };
