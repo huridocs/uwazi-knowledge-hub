@@ -61,6 +61,7 @@ const sidebars: SidebarsConfig = {
     'explanation/building-blocks',
     'explanation/library-and-search',
     'explanation/permissions-and-sharing',
+    'explanation/multilingual-content',
   ],
   apiSidebar: ['api/index'],
   resources: ['resources/index'],
