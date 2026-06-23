@@ -1,0 +1,228 @@
+---
+title: Building pages with live data
+description: The model behind custom pages, the components that draw charts, and how those charts pull their numbers from your collection.
+---
+
+import Mermaid from '@theme/Mermaid';
+
+## Overview
+
+A page in Uwazi is a custom screen you build yourself.
+You write it as plain web markup,
+and you drop in special tags that Uwazi turns into live parts, such as charts,
+maps, or lists of records.
+
+This page explains the model behind that.
+It covers how a page mixes markup with components, how charts get their numbers,
+and the limits that shape what a chart can show.
+The goal is understanding, not a set of steps to follow.
+
+## Pages are markup plus components
+
+Think of a page as a printed poster with empty frames on it.
+You design the poster yourself: the headings, the text, the layout.
+The frames are the special tags.
+When a reader opens the page,
+Uwazi fills each frame with a live part drawn from your data.
+
+The poster itself is web markup, the same language that describes any web page.
+Around that markup you place component tags.
+A tag looks like a markup
+element, for example `<BarChart property="country" />`. Each tag names a
+component and gives it some settings.
+
+When the page loads, Uwazi reads the markup, finds every component tag,
+and swaps each one for the real part it describes.
+The plain markup stays as you wrote it.
+The tags become charts, maps, search boxes, or lists.
+This mix is why a single page can hold both your own words
+and live views of your records.
+
+:::info
+
+Pages are an admin-only tool,
+so Uwazi trusts their markup and runs it as written.
+This gives you freedom to shape a page,
+and it means a stray tag can break the page until you correct it.
+
+:::
+
+### What you can build with markup
+
+A page is plain web markup, so almost any layout you can picture is open to you.
+You write the headings, paragraphs, and sections yourself.
+You can arrange content in columns, add images, and link to other pages.
+The markup renders as you wrote it, and the component tags work inside it.
+
+Two extra layers give you more control.
+You can attach your own styling rules to change colours, spacing, and fonts.
+You can also add small scripts for behaviour that markup alone can't express.
+Together with the component tags,
+this lets one page range from a simple notice to a rich dashboard over your
+collection.
+
+This freedom comes with a matching duty.
+Because Uwazi runs your markup as written, a mistake shows up on the live page.
+The reward is that a page can look and behave exactly as your story needs,
+rather than fitting a fixed template.
+
+## How visualizations get their numbers
+
+A chart on a page holds no data of its own.
+Instead, it reads from a named batch of results that the page fetches first.
+Uwazi calls each batch a *dataset*.
+You declare a dataset with its own tag, and the chart points to it by name.
+
+Here lies the key idea.
+A dataset rarely fetches whole records.
+It asks your collection a counting question instead.
+A counting question groups your records
+and returns how many fall into each group.
+
+Uwazi calls this an *aggregation*.
+For example, "how many cases do we have per country" returns one count per
+country, not the cases themselves.
+
+This is why charts and your library search feel related.
+A dataset runs the same kind of search your readers run in the library.
+The difference is that the dataset keeps the group counts
+and drops the matching records, because a chart needs the totals,
+not the documents behind them.
+
+You can point a dataset at everything in your collection,
+or narrow it with a filter copied from a library search.
+A chart then reads one group of counts from that dataset and draws it.
+Pair a chart with the wrong dataset name, and it finds nothing to show.
+
+### A map of the parts
+
+The diagram below shows how the parts connect.
+
+<Figure caption="How a page turns a dataset query into a chart the reader sees">
+  <Mermaid
+    value={`graph TD
+  accTitle: From page to chart
+  accDescr: A page's markup declares a dataset tag, which is a counting question. The dataset runs a library search that groups the results. The search returns group counts, called an aggregation. A chart component reads those counts, and the reader sees the finished chart.
+  Page["Page (your markup)"] --> Dataset["Dataset tag (a counting question)"]
+  Dataset -->|runs| Search["Library search and grouping"]
+  Search -->|returns| Counts["Group counts (an aggregation)"]
+  Counts --> Chart["Chart component reads the counts"]
+  Chart --> Reader["Reader sees the chart"]`}
+  />
+</Figure>
+
+Read it from the top.
+Your page declares a dataset.
+The dataset runs a search and groups the results.
+The search returns one count per group.
+The chart reads those counts and draws them for the reader.
+
+## The visualization components
+
+Uwazi ships a fixed set of components you can place on a page.
+Most draw a view of grouped counts.
+A few show a single number, a map, or a list of records.
+Knowing the family helps you pick the right one.
+
+The chart components include a bar chart, a pie or doughnut chart,
+and a list chart that shows counts as a bulleted list.
+A gauge shows one number against a ceiling, like a fuel dial.
+A free bar chart is the odd one out: it draws from numbers you type in by hand,
+not from a search.
+
+Beyond charts, a map plots records that carry coordinates,
+a counter shows a single total inline,
+and a list component shows matching records as cards.
+Other components handle search boxes, public submission forms,
+and embedded video.
+Together they let one page act as a small dashboard over your collection.
+For the full list of components and every setting each one accepts, see the
+[page visualization components reference](../reference/page-visualization-components.mdx).
+
+## What limits a chart
+
+Charts in Uwazi don't have a fixed maximum of their own.
+The real ceiling comes from the search behind them.
+When a dataset groups your records,
+it returns up to 2,000 groups for a single field.
+That cap lives deep in the search engine,
+and it's generous enough that most collections never reach it.
+
+By default, a chart shows every group the search returns.
+There's no built-in trimming.
+If a field has 200 distinct values, the chart tries to draw 200 bars.
+This keeps the chart honest, but it can crowd the screen.
+
+To keep a chart readable, you set its own limits.
+You can cap the number of groups it draws, name the exact groups to include,
+or fold the rest into a single "others" slice.
+These choices live on the chart, not the dataset,
+so two charts reading the same dataset can show different amounts.
+
+:::tip
+
+Record lists work the other way around.
+A list component shows six records by default and waits
+for you to raise the number.
+Charts start unlimited and ask you to narrow them.
+
+:::
+
+## How this connects to other Uwazi features
+
+Pages rest on the same model as the rest of Uwazi.
+Every record is an entity, and every dataset search runs over those entities.
+The filters you can copy into a dataset come straight from the library,
+so the search you tune for readers becomes the search that feeds a chart.
+To go deeper on that model,
+see the explanation of [Uwazi's building blocks](building-blocks.mdx).
+
+Pages also follow Uwazi's language model.
+Each page stores a separate version per language,
+so a chart's labels and your headings can read in the reader's language.
+A page can even serve as the detail layout for a template,
+showing one entity's own data through the same components.
+For how language shapes content,
+see [multilingual content](multilingual-content.mdx).
+
+A page keeps a draft and a published history,
+much like a document with saved versions.
+Readers see the published version,
+while you preview the draft before it goes live.
+This split lets you build a page in private and release it when it's ready.
+
+## Design decisions
+
+The biggest choice is the markup-plus-components model itself.
+Uwazi could have offered a fixed dashboard builder with preset widgets.
+Instead it lets you write a page and embed live parts anywhere in it.
+This trades a little extra effort for near-total control over layout,
+which matters when a page tells a specific story about a collection.
+
+Letting datasets return counts rather than records is a deliberate match to how
+charts think.
+A bar chart wants totals per group, not a pile of documents.
+By asking the search for counts and dropping the records,
+a page stays fast even over a large collection.
+The same search that would return thousands of records returns a short list of
+totals instead.
+
+The 2,000-group cap reflects a balance.
+A higher limit would let rare edge cases draw enormous charts
+that no reader could parse, and would strain the search.
+A lower limit would quietly hide real values.
+The 2,000 ceiling sits far above normal use,
+so it protects the system without distorting honest data.
+Leaving charts unlimited by default, then giving you tools to narrow them,
+keeps the choice of focus in your hands rather than the software's.
+
+## See also
+
+- [Page visualization components reference](../reference/page-visualization-components.mdx)
+  — every component and the settings each one accepts
+- [Understanding Uwazi's building blocks](building-blocks.mdx) —
+  the entity model that every dataset searches over
+- [Library and search](library-and-search.mdx) —
+  how the searches and filters behind datasets work
+- [Multilingual content](multilingual-content.mdx) —
+  how a page serves readers in many languages
