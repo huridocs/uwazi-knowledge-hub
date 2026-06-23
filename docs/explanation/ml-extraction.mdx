@@ -1,0 +1,240 @@
+---
+title: How machine-learning (ML) extraction works
+description: How Uwazi uses machine learning to pull facts out of your documents, and how metadata and paragraph extraction differ.
+---
+
+import Mermaid from '@theme/Mermaid';
+
+## Overview
+
+Uwazi can read your documents and find facts inside them.
+It does this with machine learning.
+Two features share this skill: metadata extraction and paragraph extraction.
+They use the same engine.
+But they answer different questions.
+
+This page explains how that engine works.
+It won't ask you to do anything.
+It builds the mental model you need.
+
+## What ML extraction means in Uwazi
+
+Machine learning means software learns patterns from examples.
+It doesn't follow fixed rules someone writes by hand.
+Both features here rely on a model built this way.
+But they differ in who teaches that model.
+
+Metadata extraction learns from your examples.
+You label some entities, and its model studies them.
+Paragraph extraction works differently.
+Its model already learned its task before it reached you.
+It splits documents the same way each time, whatever you do.
+
+In both cases, the learning doesn't run inside Uwazi.
+Uwazi sends your documents to another service.
+That service does the machine-learning work.
+Then it sends the answer back.
+
+Think of that service as a helper in another room.
+Uwazi gets the work ready and hands it over.
+The helper does the thinking.
+Uwazi files what comes back.
+This split shapes everything else on this page.
+
+## The shared pipeline
+
+Both features follow the same path.
+The details differ, but the shape is the same.
+Seeing it once makes each feature clearer.
+
+First, a document arrives in Uwazi, like any other.
+Before learning starts, Uwazi prepares the PDF in the background.
+A service called PDF segmentation maps the page layout.
+It marks where each block of text sits.
+You don't run this step by hand.
+
+Scanned PDFs need one more step.
+A scan is an image, so it holds no text to read.
+OCR pulls the text out of that image.
+You start OCR yourself, one PDF at a time,
+so it isn't part of the background prep.
+
+Next, Uwazi packs the text and sends it out.
+It uses a background queue to reach the service.
+A queue is a waiting line for work.
+
+Uwazi drops a task on it.
+The service picks it up, does the work, and sends back the answer.
+Uwazi checks the line often and stores each result.
+
+Because the work waits in line, results don't appear at once.
+You see live progress instead of a frozen screen.
+The queue, the service, and the prep work stay the same for both features.
+What happens to the result is where they split.
+
+<Figure caption="How a document moves through the shared ML extraction pipeline">
+  <Mermaid
+    value={`graph LR
+  accTitle: The shared ML extraction pipeline
+  accDescr: A document flows through four stages in order. First, Uwazi prepares the PDF in the background. Next, Uwazi sends it over a background queue. Then an external ML service does the work. Finally, Uwazi stores the result.
+  Doc["Your document"] --> Prep["Uwazi prepares the PDF in the background"]
+  Prep --> Queue["Uwazi sends it over a background queue"]
+  Queue --> Service["External ML service does the work"]
+  Service --> Result["Uwazi stores the result"]`}
+  />
+</Figure>
+
+## Two kinds of extraction
+
+The pipeline carries two jobs.
+Knowing which one you use tells you what to expect.
+
+### Metadata extraction
+
+Metadata extraction fills in a field for many entities.
+You build an extractor.
+It points at one field, like a "Date signed" field.
+
+It also names the templates it covers.
+The model learns from entities you've already filled in.
+Then it guesses the value where the field is empty.
+
+Each guess becomes a suggestion.
+You review it.
+Nothing reaches your data until you accept it.
+The model proposes, and you decide.
+Better examples make it learn better.
+
+### Paragraph extraction
+
+Paragraph extraction splits a document into paragraphs.
+Each paragraph becomes a new entity.
+Uwazi links it back to the source document.
+There's no training here.
+There's no model to teach and nothing to review.
+
+You set up the extractor once.
+You run it on a document.
+The paragraph entities then appear.
+
+It works more like an import than a learning model.
+The same pipeline carries it.
+But the model never learns from your fixes.
+
+### How the two compare
+
+The table below shows the core differences side by side.
+
+| Aspect              | Metadata extraction         | Paragraph extraction                 |
+| ------------------- | --------------------------- | ------------------------------------ |
+| Question it answers | What is this field's value? | What are this document's paragraphs? |
+| Does it learn?      | Yes, from your examples     | No                                   |
+| What it produces    | Suggestions you review      | New linked entities, directly        |
+
+Here's a plain way to remember it.
+Metadata extraction is a helper that proposes answers for you to approve.
+Paragraph extraction is a machine.
+It cuts a document into pieces and files them.
+
+## Choosing a source: PDF or rich text
+
+Metadata extraction reads from a source you pick.
+The choice matters more than it looks.
+The source is the entity's PDF, or one of its text fields.
+
+With a **PDF source**, the model reads the pages.
+It learns from the words and where they sit.
+To teach it, you draw a box over the value in the PDF.
+You might frame the signing date, for example.
+
+That box is the label it learns from.
+Later, when the model finds a value, it returns the spot on the page.
+Uwazi then highlights it for you.
+
+With a **rich text source**, the model reads a text field.
+This could be the entity title or a rich text field.
+It learns from the words alone.
+
+There's no page and no box to draw.
+The suggestion shows the source text and the guess.
+But it can't point to a place in a document.
+
+So a PDF source can show you where a value came from.
+A text source can't.
+For human rights work, that proof often matters.
+A researcher can check each date against the page it sits on.
+They don't have to trust a value with no source.
+
+:::tip
+
+A PDF source suits work where you must check each value against its page.
+A rich text source suits facts that already live in a text field.
+It needs no PDF.
+
+:::
+
+## How this connects to other Uwazi features
+
+ML extraction doesn't stand alone.
+It rests on templates and entities.
+These run through all of Uwazi.
+An extractor can only target a property, a field on a template.
+So your data model sets the limits of what a model can learn.
+
+Language shapes extraction too.
+Uwazi keeps one copy of content per language.
+So a single entity can exist in several languages at once.
+Extraction then handles each language copy on its own.
+
+Metadata extraction keeps a separate guess per language.
+Paragraph extraction returns the text in every installed language at once.
+
+## Design decisions
+
+A few chosen trade-offs shape how these features behave.
+Knowing the reasons helps you work with them.
+
+The model lives outside Uwazi on purpose.
+Training and prediction run on a separate service.
+A queue links them, so heavy work stays off the main app.
+
+This also means the features wait on that service.
+HURIDOCS sets up the service for your instance.
+You don't switch it on yourself.
+
+If a feature isn't active, contact your HURIDOCS representative.
+You won't find a setting for it.
+
+Keeping a person in the loop is the other big choice.
+It applies to metadata extraction.
+Uwazi could write guesses straight into your entities.
+By default, it doesn't.
+
+Extracted data is often sensitive.
+In human rights work, a wrong date or place can mislead a case.
+So the design favours review over speed.
+A suggestion waits until someone accepts it.
+
+Paragraph extraction makes the opposite trade.
+It does so for a good reason.
+Run it again on a document, and Uwazi deletes the old paragraphs.
+Then it makes them fresh.
+
+This keeps the paragraphs true to the current document.
+But edits to those entities don't survive a re-run.
+The feature trusts the document, not your later changes.
+
+:::info
+
+Metadata extraction is also called information extraction.
+Some screens use that name.
+Both names mean the same feature.
+
+:::
+
+## See also
+
+- [Understanding Uwazi's building blocks](building-blocks.mdx) —
+  the templates and entities that extraction rests on
+- [Multilingual content](multilingual-content.mdx) —
+  why each language is a separate copy of an entity

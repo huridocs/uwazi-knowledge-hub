@@ -4,9 +4,14 @@ import styles from './styles.module.css';
 
 type Variant = 'card' | 'paper';
 
-export interface FigureProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  src: string;
-  alt: string;
+export interface FigureProps extends Omit<
+  React.ImgHTMLAttributes<HTMLImageElement>,
+  'children'
+> {
+  /** Image source. Omit when passing custom content via `children`. */
+  src?: string;
+  /** Alt text. Required when `src` is set; ignored for `children`. */
+  alt?: string;
   caption?: React.ReactNode;
   /**
    * Fixed aspect-ratio for the card, e.g. "16/9". When omitted (default), the
@@ -15,6 +20,11 @@ export interface FigureProps extends React.ImgHTMLAttributes<HTMLImageElement> {
    */
   ratio?: string;
   variant?: Variant;
+  /**
+   * Arbitrary content to frame instead of an image, such as a Mermaid diagram.
+   * When provided, `src` is ignored.
+   */
+  children?: React.ReactNode;
 }
 
 export default function Figure({
@@ -23,6 +33,7 @@ export default function Figure({
   caption,
   ratio,
   variant = 'card',
+  children,
   ...rest
 }: FigureProps): React.JSX.Element {
   return (
@@ -31,7 +42,9 @@ export default function Figure({
         className={clsx(styles.frame, styles[variant])}
         style={ratio ? { aspectRatio: ratio } : undefined}
       >
-        <img className={styles.image} src={src} alt={alt} {...rest} />
+        {children ?? (
+          <img className={styles.image} src={src} alt={alt} {...rest} />
+        )}
       </div>
       {caption && <figcaption className={styles.caption}>{caption}</figcaption>}
     </figure>

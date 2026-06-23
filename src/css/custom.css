@@ -120,3 +120,11 @@
   font-style: italic;
   color: var(--ifm-color-emphasis-700);
 }
+
+/* Center Mermaid diagrams on the page */
+.docusaurus-mermaid-container {
+  justify-content: center;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}

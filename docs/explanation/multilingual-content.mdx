@@ -1,0 +1,178 @@
+---
+title: Multilingual content
+description: How Uwazi separates interface translation from your content, so one collection can run in many languages.
+---
+
+import Mermaid from '@theme/Mermaid';
+
+## Overview
+
+Uwazi can run one collection in many languages.
+To use that well, you need to know what "language" means inside Uwazi.
+
+People use the word "translation" for two different things.
+One is the Uwazi interface itself.
+The other is the content you collect.
+This page explains the difference and how the pieces fit together.
+
+## Two meanings of translation
+
+Think of your instance as a building.
+The interface is the signage: the menus, buttons, and labels Uwazi shows.
+The content is what lives inside the rooms: your cases, people, and events.
+You can translate the signage without touching the contents, and the reverse.
+Keeping these two ideas apart is the heart of language work in Uwazi.
+
+In practice, Uwazi works in three layers.
+The first is the interface.
+The second is the structure of your data, such as template and field names.
+The third is the records themselves.
+Each layer answers a different question,
+so it helps to look at them one at a time.
+
+## The interface layer
+
+The interface layer is every word Uwazi shows that you didn't write.
+It covers buttons like **Save**, menu links, and filter labels.
+HURIDOCS keeps these words current, not you.
+
+Uwazi ships ready-made interface translations for 11 languages.
+When you install one of those languages,
+Uwazi loads its interface words for you.
+If no ready-made set exists,
+the new language starts with the default-language words in place,
+ready for you to translate.
+You can change any interface word under **Settings > Translations**,
+or edit it in place, right where it sits on the page.
+
+## The structure layer
+
+The structure layer sits between the interface and your records.
+It's the names you give your data: a template called "Court case",
+a field called "Date of incident", or a value in a list.
+You write these names, so Uwazi can't translate them for you.
+
+When you add a language, Uwazi seeds each of these names with the original text.
+It then waits for you to replace each one with a real translation.
+You do this under **Settings > Translations**, in the content table.
+A filter there shows only the terms nobody has translated yet,
+so you can see what's left.
+This layer matters because a French reader should see French field names,
+not English ones.
+
+## The content layer
+
+Your records are the third layer, and the one your readers care about most.
+When you add a language, Uwazi copies every entity into that language.
+So a collection in three languages keeps three copies of each entity.
+
+These copies aren't separate records.
+They share one identity, called a shared ID.
+Uwazi treats them as a single entity shown in three languages.
+When someone switches language,
+they see the same record wearing different words.
+
+Not every field changes from one language to the next.
+Some values mean the same thing everywhere.
+When you change a date, a number, a selection, or a link to another entity,
+Uwazi updates that value in all languages at once.
+Free text is different.
+A title or a description can hold a true translation,
+so Uwazi keeps those separate in each language.
+
+:::info
+
+This split has a real effect.
+You translate titles and descriptions language by language,
+but you set a date or a category once and it holds everywhere.
+
+:::
+
+## How documents pick a language
+
+Documents follow a rule of their own.
+When you upload a file, Uwazi reads its text and guesses the language.
+It then matches that file to the entity language that fits.
+
+Picture one entity with an English report and a French report attached.
+The English view shows the English file,
+and the French view shows the French one.
+Uwazi pairs each reader with the document in their language,
+with no manual step from you.
+
+## A map of the layers
+
+The diagram below shows where each layer sits.
+
+<Figure caption="The three layers of a collection in many languages, all tied to one shared ID">
+  <Mermaid
+    value={`graph TD
+  accTitle: The three layers of a multilingual collection
+  accDescr: A collection in many languages branches into three layers: an interface layer of Uwazi's own words, a structure layer of template and field names, and a content layer of your entities. The content layer holds one copy per language tied to a single shared ID, plus attached documents matched by their detected language.
+  Collection["Your collection in many languages"] --> Interface["Interface layer (Uwazi's own words)"]
+  Collection --> Structure["Structure layer (template and field names)"]
+  Collection --> Content["Content layer (your entities)"]
+  Content -->|one shared ID| Copies["One copy per language"]
+  Content --> Docs["Attached documents matched by detected language"]`}
+  />
+</Figure>
+
+Read it from the top.
+A collection in many languages rests on three layers.
+HURIDOCS owns the interface words, you own the structure names,
+and your team writes the content.
+The content layer holds one copy of each entity per language,
+all tied to a single shared ID.
+
+## How this connects to other Uwazi features
+
+The content layer builds on Uwazi's core idea that every record is an entity.
+Because each language is a copy of the same entity,
+sharing and links follow the shared ID, not the single language version.
+Share a record once, and the share covers every language of it.
+
+Search also bends to language.
+Uwazi keeps a separate full-text search field for each language,
+each tuned to that language's grammar.
+An Arabic search reads Arabic the way an Arabic reader would,
+and a French search reads French.
+Right-to-left languages such as Arabic, Hebrew, and Persian flip the layout too,
+so the interface mirrors how people read.
+
+To go deeper on the pieces this page touches,
+see the explanation of [Uwazi's building blocks](building-blocks.mdx)
+and the [property types reference](../reference/property-types.mdx).
+
+## Design decisions
+
+The biggest choice is copying each entity per language instead of storing one
+record with translated fields tucked inside.
+Copies cost more storage, but they keep each language apart.
+Each language gets its own searchable text,
+indexed with the right rules for that language.
+A reader in one language never trips over stray words from another.
+
+The split between synced values and free text reflects meaning.
+A date or a category means the same thing in every language,
+so letting them drift apart would invite errors.
+A title carries nuance that a translator should shape by hand.
+Uwazi syncs the first kind and frees the second,
+matching how people think about the two.
+
+One language always holds the role of default.
+It's the source every new language copies from,
+and the fallback when a translation is missing.
+This is why you can't delete the default language without naming a new one
+first.
+Deleting any language is permanent,
+since it removes that language's copy of every record,
+so Uwazi guards the step with a clear warning.
+
+## See also
+
+- [Understanding Uwazi's building blocks](building-blocks.mdx) —
+  the entity model the content layer rests on
+- [Property types reference](../reference/property-types.mdx) —
+  which fields sync across languages and which don't
+- [Permissions and sharing](permissions-and-sharing.mdx) —
+  how a share covers every language of one record

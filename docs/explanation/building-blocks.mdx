@@ -1,0 +1,169 @@
+---
+title: Understanding Uwazi's building blocks
+description: The mental model behind entities, templates, properties, thesauri, and relationships.
+---
+
+import Mermaid from '@theme/Mermaid';
+
+## Overview
+
+Uwazi stores everything you collect as structured information.
+This page explains the model behind that structure.
+It builds a mental model and asks nothing of you.
+Once you grasp it, configuring an instance becomes far easier.
+
+## Everything is an entity
+
+In Uwazi, every record is an entity.
+An entity can be a person, an organization, a court case, or an event.
+A document you upload is also an entity.
+There is no separate document type.
+A document is an entity that holds a file.
+
+This reframe matters for admins.
+You don't design around files.
+You design around the things you track.
+A PDF report, the organization that wrote it,
+and the incident it describes are all entities.
+What makes them different is their template.
+
+:::info
+
+Documents are optional.
+An entity can exist with no file at all, such as a person or an organization.
+
+:::
+
+## Templates define the shape
+
+A template is a content type.
+It defines which fields an entity has.
+Every entity belongs to exactly one template.
+The template acts like a blueprint, and Uwazi builds each entity from it.
+
+Think of a template as a blank form, and each entity as one filled-in copy.
+A Court case template might define a case number, a date, and a judge.
+Every court case you create shares that shape.
+Change the template, and every entity of that type follows.
+
+One template in your instance is the default.
+Uwazi uses it when you create an entity without picking a type.
+You can also give each template a colour,
+which helps you tell types apart in the interface.
+
+## Properties hold the values
+
+Properties are the fields on a template.
+Each property has a type that controls what it holds and how it behaves.
+A date property holds a date.
+A text property holds free text.
+A select property holds a value from a fixed list.
+
+Uwazi offers many property types.
+These include text, rich text, numeric, date, select, multi-select,
+relationship, link, image, media, and geolocation.
+Each type shapes how people enter the value and how Uwazi displays, filters,
+and sorts it.
+
+Each property also has two names.
+The label is what people see, like Date of incident.
+The internal name is a machine key that Uwazi generates from the label.
+The internal name stays fixed even when you rename the label.
+So renaming a field never breaks the data you already stored.
+
+An entity keeps its values in a metadata record.
+Each value sits under the property it belongs to.
+The template decides which properties exist, and the entity supplies the values.
+
+## Thesauri supply controlled vocabularies
+
+Some properties draw from a controlled vocabulary.
+A thesaurus is that vocabulary: a reusable list of allowed values.
+Select and multi-select properties point to one.
+Instead of typing a country by hand, you pick it from the list.
+
+Thesauri keep your data consistent.
+Many properties across many templates can share one thesaurus.
+A thesaurus can also group values one level deep,
+so you can nest cities under a country.
+When someone picks a value, Uwazi stores a link to that list entry,
+not loose text.
+
+## Relationships connect entities
+
+Relationships link one entity to another.
+A relationship type gives that link a name, like works for or witnessed.
+You might connect a person to the organization they belong to.
+You might connect a witness to an event.
+
+A relationship property surfaces these links on a template.
+It uses a relationship type to decide which connections to show.
+You can also limit it to one target template,
+so a judge field only links to people.
+Through relationships, your entities form a connected web rather than isolated
+records.
+
+This web is what lets investigators trace patterns.
+You can follow a person to their cases, and a case to its locations.
+Each connection carries meaning because it has a named type.
+
+## How the pieces fit together
+
+The diagram below shows how the concepts relate.
+
+<Figure caption="How entities, templates, properties, thesauri, and relationship types connect">
+  <Mermaid
+    value={`graph TD
+  accTitle: How Uwazi's building blocks connect
+  accDescr: An entity is an instance of a template. A template defines properties. A property that is select or multi-select uses a thesaurus, a value list. A property that is a relationship uses a relationship type, which links back to an entity.
+  Entity["Entity (a record)"] -->|is an instance of| Template["Template (content type)"]
+  Template -->|defines| Property["Property (a field)"]
+  Property -->|select or multi-select uses| Thesaurus["Thesaurus (value list)"]
+  Property -->|relationship uses| RelType["Relationship type"]
+  RelType -->|links back to| Entity`}
+  />
+</Figure>
+
+Read it from the top.
+An entity is an instance of a template.
+The template defines properties.
+Some properties draw on a thesaurus,
+and others link entities through a relationship type.
+The chain always starts with the entity and its template.
+
+## How this connects to other Uwazi features
+
+This model underlies almost everything in Uwazi.
+Search filters come from the properties you mark as filterable.
+Entity cards in the library show the properties you choose.
+Permissions apply to entities, so you control access one record at a time.
+
+Multilingual instances add one more layer.
+Uwazi keeps one version of each entity per language,
+and all versions share a single identity.
+Uwazi translates the title and a few text fields per language.
+Values like dates and selections stay in step across every language.
+
+## Design decisions
+
+Uwazi treats documents as entities on purpose.
+Early document tools kept files and data apart,
+which made it hard to connect them.
+By making everything an entity, Uwazi lets a file, its author,
+and its subject link together.
+This unified model is the core idea behind the platform.
+
+The split between label and internal name is another deliberate choice.
+It lets you rename fields freely without losing data or breaking links.
+Some systems tie the stored key to the visible name, which makes renaming risky.
+Uwazi favours stability, so your past work stays intact.
+
+Keeping vocabularies in thesauri reflects the needs of human rights work.
+Consistent terms matter when you compare cases across regions and years.
+A shared list stops the same place from appearing under five spellings.
+The small effort of building a thesaurus pays off in cleaner analysis.
+
+## See also
+
+- [Property types reference](../reference/property-types.mdx) —
+  every property type and how each one behaves
