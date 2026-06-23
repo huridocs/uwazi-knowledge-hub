@@ -114,6 +114,8 @@ The diagram below shows how the concepts relate.
 <Figure caption="How entities, templates, properties, thesauri, and relationship types connect">
   <Mermaid
     value={`graph TD
+  accTitle: How Uwazi's building blocks connect
+  accDescr: An entity is an instance of a template. A template defines properties. A property that is select or multi-select uses a thesaurus, a value list. A property that is a relationship uses a relationship type, which links back to an entity.
   Entity["Entity (a record)"] -->|is an instance of| Template["Template (content type)"]
   Template -->|defines| Property["Property (a field)"]
   Property -->|select or multi-select uses| Thesaurus["Thesaurus (value list)"]
