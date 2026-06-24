@@ -83,8 +83,9 @@ const config: Config = {
     // Replace with your project's social card
     //image: 'img/docusaurus-social-card.jpg',
     navbar: {
+      title: 'HELP',
       logo: {
-        alt: 'Uwazi Knowledge Hub',
+        alt: 'Uwazi help portal',
         src: 'img/uwazi-logo.svg',
         srcDark: 'img/uwazi-logo-dark.svg',
         width: 96,

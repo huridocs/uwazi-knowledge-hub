@@ -256,6 +256,20 @@ div[class^='codeBlockContainer'] {
 .navbar__link--active {
   color: var(--uw-ink);
 }
+/* Site title rendered as an Ink "Help" pill so it reads as the site label */
+.navbar__title {
+  display: inline-block;
+  margin-left: 4px;
+  background: var(--uw-ink);
+  color: var(--uw-parchment);
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 13px;
+  border-radius: 6px;
+}
 
 /* ---- Footer (light, page-matched, Syne Mono) ---- */
 .footer {
