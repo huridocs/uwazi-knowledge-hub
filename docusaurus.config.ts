@@ -151,45 +151,29 @@ const config: Config = {
       ],
     },
     footer: {
-      style: 'dark',
+      style: 'light',
       links: [
         {
-          title: 'Documentation',
+          title: 'Docs',
           items: [
-            {
-              label: 'Tutorials',
-              to: '/docs/tutorials',
-            },
-            {
-              label: 'How-to Guides',
-              to: '/docs/how-to',
-            },
-            {
-              label: 'Reference',
-              to: '/docs/reference',
-            },
-            {
-              label: 'Explanations',
-              to: '/docs/explanation',
-            },
+            { label: 'Tutorials', to: '/docs/tutorials' },
+            { label: 'How-to guides', to: '/docs/how-to' },
+            { label: 'Reference', to: '/docs/reference' },
+            { label: 'Explanation', to: '/docs/explanation' },
+          ],
+        },
+        {
+          title: 'Resources',
+          items: [
+            { label: 'API', to: '/docs/api' },
+            { label: 'Glossary', to: '/docs/reference/glossary' },
+            { label: 'Contribution guides', to: '/docs/contribution-guides' },
           ],
         },
         {
           title: 'Community',
           items: [
-            {
-              label: 'Support',
-              href: '#',
-            },
-            {
-              label: 'Feedback',
-              href: '#',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
+            { label: 'Uwazi.io', href: 'https://www.uwazi.io' },
             {
               label: 'GitHub',
               href: 'https://github.com/huridocs/uwazi-knowledge-hub',
@@ -197,7 +181,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} HURIDOCS. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} HURIDOCS.`,
     },
     prism: {
       theme: prismThemes.github,

@@ -246,3 +246,44 @@ div[class^='codeBlockContainer'] {
 .uw-kicker--muted {
   color: var(--uw-muted);
 }
+
+/* ---- Navbar ---- */
+.navbar {
+  background: var(--uw-parchment);
+  border-bottom: 1px solid var(--uw-border-strong);
+  box-shadow: none;
+}
+.navbar__item,
+.navbar__link {
+  font-family: var(--ifm-font-family-base);
+  font-weight: 500;
+  color: var(--uw-text-2);
+}
+.navbar__link:hover,
+.navbar__link--active {
+  color: var(--uw-ink);
+}
+
+/* ---- Footer (light, page-matched, Syne Mono) ---- */
+.footer {
+  background: var(--uw-parchment);
+  border-top: 1px solid var(--uw-border-strong);
+  font-family: 'Syne Mono', ui-monospace, monospace;
+  color: var(--uw-text-2);
+  --ifm-footer-link-color: var(--uw-text-2);
+  --ifm-footer-title-color: var(--uw-muted);
+  --ifm-footer-link-hover-color: var(--uw-ink);
+}
+.footer__title {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.footer__link-item {
+  font-size: 13px;
+}
+.footer__copyright {
+  color: var(--uw-muted);
+  font-size: 12px;
+  margin-top: 12px;
+}
