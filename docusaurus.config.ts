@@ -92,59 +92,29 @@ const config: Config = {
       },
       items: [
         {
-          type: 'dropdown',
-          label: 'Get started',
+          type: 'docSidebar',
+          sidebarId: 'tutorials',
           position: 'left',
-          items: [
-            { label: 'New to Uwazi', to: '/start/new-users' },
-            {
-              label: 'Administering a collection',
-              to: '/start/administrators',
-            },
-            { label: 'Self-hosting Uwazi', to: '/start/self-hosting' },
-            { label: 'Building with the API', to: '/start/developers' },
-          ],
-        },
-        {
-          type: 'dropdown',
-          label: 'Docs',
-          position: 'left',
-          items: [
-            {
-              type: 'docSidebar',
-              sidebarId: 'tutorials',
-              label: 'Tutorials',
-            },
-            {
-              type: 'docSidebar',
-              sidebarId: 'howTo',
-              label: 'How-to guides',
-            },
-            {
-              type: 'docSidebar',
-              sidebarId: 'reference',
-              label: 'Reference',
-            },
-            {
-              type: 'docSidebar',
-              sidebarId: 'explanation',
-              label: 'Explanation',
-            },
-          ],
+          label: 'Tutorials',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'apiSidebar',
+          sidebarId: 'howTo',
           position: 'left',
-          label: 'API',
+          label: 'How-to guides',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'resources',
+          sidebarId: 'reference',
           position: 'left',
-          label: 'Resources',
+          label: 'Reference',
         },
-        { to: '/blog', label: 'Product updates', position: 'left' },
+        {
+          type: 'docSidebar',
+          sidebarId: 'explanation',
+          position: 'left',
+          label: 'Explanation',
+        },
         {
           href: 'https://github.com/huridocs/uwazi-knowledge-hub',
           label: 'GitHub',
