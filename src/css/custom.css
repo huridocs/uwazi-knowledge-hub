@@ -318,6 +318,39 @@ div[class^='codeBlockContainer'] {
   border-radius: 6px;
 }
 
+/* ---- Navbar search (local search plugin) ---- */
+/* Raise contrast of the placeholder and the Cmd/Ctrl-K key hint so both meet
+   WCAG against the parchment navbar. The plugin's .searchHint (a hashed
+   CSS-module class we cannot target) reads its glyph color from the
+   placeholder variable and its border from --ifm-color-emphasis-500. Both
+   default to faint Infima grays. Scope the overrides to .navbar__search so the
+   emphasis change does not leak to other components. --uw-text-3 already flips
+   per theme, so this covers light and dark. */
+.navbar__search {
+  --ifm-navbar-search-input-placeholder-color: var(--uw-text-3);
+  --ifm-color-emphasis-500: var(--uw-text-3);
+
+  /* Search dropdown result legibility (both themes). The plugin paints the
+     active/hover row with --ifm-color-primary, which the rebrand inverts to
+     light parchment in dark mode, leaving the default white hit text
+     unreadable. --uw-parchment always resolves opposite the highlight (light
+     text on the ink row in light mode, dark text on the light row in dark
+     mode), so the active row stays high-contrast in both themes. The muted
+     token lifts the low-contrast subtitles, hit icons, and "See all results"
+     link. */
+  --search-local-hit-active-color: var(--uw-parchment);
+  --search-local-muted-color: var(--uw-text-3);
+}
+
+/* The magnifier is an Infima background-image SVG with fill="currentColor";
+   as a background image currentColor renders black in both themes, so it is
+   invisible on the dark field. Re-supply the same SVG with a light fill in
+   dark mode. The hex mirrors --uw-text-3 (dark) #aaa195 (vars can't be used
+   inside a data URI). */
+[data-theme='dark'] .navbar__search {
+  --ifm-navbar-search-input-icon: url("data:image/svg+xml;utf8,<svg fill='%23aaa195' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' height='16px' width='16px'><path d='M6.02945,10.20327a4.17382,4.17382,0,1,1,4.17382-4.17382A4.15609,4.15609,0,0,1,6.02945,10.20327Zm9.69195,4.2199L10.8989,9.59979A5.88021,5.88021,0,0,0,12.058,6.02856,6.00467,6.00467,0,1,0,9.59979,10.8989l4.82338,4.82338a.89729.89729,0,0,0,1.29912,0,.89749.89749,0,0,0-.00087-1.29909Z' /></svg>");
+}
+
 /* ---- Footer (light, page-matched, Syne Mono) ---- */
 .footer {
   background: var(--uw-parchment);
