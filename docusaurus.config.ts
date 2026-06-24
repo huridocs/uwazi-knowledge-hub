@@ -67,21 +67,20 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl: 'https://github.com/huridocs/uwazi-knowledge-hub/tree/main/',
+          // Keep the API and Resources docs in source but out of the build
+          // (no routes, no sitemap) until they are surfaced in the navigation.
+          // Defaults are repeated because `exclude` replaces them.
+          exclude: [
+            '**/_*.{js,jsx,ts,tsx,md,mdx}',
+            '**/_*/**',
+            '**/*.test.{js,jsx,ts,tsx}',
+            '**/__tests__/**',
+            'api/**',
+            'resources/**',
+          ],
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/huridocs/uwazi-knowledge-hub/tree/main/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        // Blog (Product updates) kept in source but disabled until needed.
+        blog: false,
         theme: {
           customCss: ['./src/css/fonts.css', './src/css/custom.css'],
         },

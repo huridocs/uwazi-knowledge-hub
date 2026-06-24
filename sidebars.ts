@@ -65,8 +65,8 @@ const sidebars: SidebarsConfig = {
     'explanation/pages-and-visualizations',
     'explanation/ml-extraction',
   ],
-  apiSidebar: ['api/index'],
-  resources: ['resources/index'],
+  // apiSidebar and resources are intentionally omitted: their docs are excluded
+  // from the build (see docs.exclude) until surfaced in the navigation.
 };
 
 export default sidebars;
