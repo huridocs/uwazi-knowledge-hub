@@ -1,0 +1,21 @@
+/* Self-hosted fonts (bundled by webpack via @fontsource, no third-party). */
+
+/* Inter - headings + UI */
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/inter/800.css';
+
+/* Merriweather - body/reading + subtitles */
+@import '@fontsource/merriweather/400.css';
+@import '@fontsource/merriweather/400-italic.css';
+@import '@fontsource/merriweather/700.css';
+
+/* JetBrains Mono - code + mono labels */
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+@import '@fontsource/jetbrains-mono/600.css';
+
+/* Syne Mono - footer */
+@import '@fontsource/syne-mono/400.css';
