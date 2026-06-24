@@ -57,21 +57,21 @@
   --docusaurus-highlighted-code-line-bg: rgba(232, 67, 42, 0.1);
 
   /* Figure component */
-  --uwazi-figure-bg: #fefeff;
-  --uwazi-figure-border: #e6e8ee;
-  --uwazi-figure-radius: 8px;
+  --uwazi-figure-bg: var(--uw-paper);
+  --uwazi-figure-border: var(--uw-border);
+  --uwazi-figure-radius: var(--uw-radius-card);
   --uwazi-figure-pad: 64px;
-  --uwazi-figure-shadow: 0 8px 26px -14px rgba(45, 55, 72, 0.18);
-  --uwazi-figure-dot: rgba(66, 56, 157, 0.075);
+  --uwazi-figure-shadow: 0 8px 26px -14px rgba(26, 26, 26, 0.14);
+  --uwazi-figure-dot: rgba(232, 67, 42, 0.06);
   --uwazi-figure-dot-size: 16px;
   --uwazi-figure-img-radius: 6px;
-  --uwazi-figure-img-border: #e6e8ee;
-  --uwazi-figure-img-shadow: 0 6px 16px -10px rgba(45, 55, 72, 0.25);
-  --uwazi-figure-caption-color: var(--ifm-color-emphasis-700);
+  --uwazi-figure-img-border: var(--uw-border);
+  --uwazi-figure-img-shadow: 0 6px 16px -10px rgba(26, 26, 26, 0.2);
+  --uwazi-figure-caption-color: var(--uw-text-3);
 
   /* Figure 'paper' variant — warm, aged-paper backdrop */
-  --uwazi-figure-paper-bg: #f5efe0;
-  --uwazi-figure-paper-border: #e3d8bf;
+  --uwazi-figure-paper-bg: var(--uw-vellum);
+  --uwazi-figure-paper-border: var(--uw-border-strong);
   --uwazi-figure-paper-dot: rgba(120, 90, 40, 0.06);
   --uwazi-figure-paper-vignette: rgba(120, 90, 40, 0.05);
 }
@@ -112,15 +112,15 @@
   --docusaurus-highlighted-code-line-bg: rgba(242, 96, 63, 0.18);
 
   /* Figure component (dark) */
-  --uwazi-figure-bg: #16213e;
-  --uwazi-figure-border: #2c2c4a;
-  --uwazi-figure-dot: rgba(152, 133, 255, 0.1);
-  --uwazi-figure-img-border: #2c2c4a;
+  --uwazi-figure-bg: var(--uw-paper);
+  --uwazi-figure-border: var(--uw-border);
+  --uwazi-figure-dot: rgba(60, 198, 250, 0.1);
+  --uwazi-figure-img-border: var(--uw-border);
   --uwazi-figure-img-shadow: 0 10px 30px -16px rgba(0, 0, 0, 0.6);
 
   /* Figure 'paper' variant (dark) — aged parchment in low light */
-  --uwazi-figure-paper-bg: #2a2620;
-  --uwazi-figure-paper-border: #3a342a;
+  --uwazi-figure-paper-bg: var(--uw-vellum);
+  --uwazi-figure-paper-border: var(--uw-border-strong);
   --uwazi-figure-paper-dot: rgba(220, 200, 150, 0.06);
   --uwazi-figure-paper-vignette: rgba(0, 0, 0, 0.18);
 }
