@@ -32,7 +32,7 @@ const cards: DiataxisCard[] = [
     number: '02',
     category: 'How-to guides',
     title: 'Get things done',
-    description: 'Practical recipes for the tasks you handle day to day.',
+    description: 'Practical recipes for your daily tasks.',
     links: [
       { label: 'Article 1', to: '/docs/how-to' },
       { label: 'Article 2', to: '/docs/how-to' },
@@ -56,7 +56,7 @@ const cards: DiataxisCard[] = [
       },
       {
         label: 'Property types',
-        to: '/docs/reference/uproperty-types',
+        to: '/docs/reference/property-types',
       },
     ],
     count: '8 articles',
