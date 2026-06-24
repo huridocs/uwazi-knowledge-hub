@@ -57,3 +57,6 @@ Thumbs.db
 
 # Git worktrees
 .worktrees/
+
+# Subagent-driven dev scratch
+.superpowers/
