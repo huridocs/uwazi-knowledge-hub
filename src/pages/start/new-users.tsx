@@ -1,78 +1,86 @@
 import React from 'react';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
-import styles from '../index.module.css';
+import StartPage, { type StartPageData } from '@site/src/components/StartPage';
 
-type PathLink = { label: string; to: string };
-type PathSection = { heading: string; links: PathLink[] };
-
-const title = 'New to Uwazi';
-const intro = 'Start here to learn the basics and find your way around.';
-const sections: PathSection[] = [
-  {
-    heading: 'Start with a tutorial',
-    links: [
-      {
-        label: 'Get started with Uwazi',
-        to: '/tutorials/using-uwazi/get-started-with-uwazi',
-      },
-    ],
-  },
-  {
-    heading: 'Understand the basics',
-    links: [
-      {
-        label: 'How Uwazi models information',
-        to: '/explanation/how-uwazi-models-information',
-      },
-    ],
-  },
-  {
-    heading: 'Common tasks',
-    links: [
-      {
-        label: 'Search and filter the Library',
-        to: '/how-to/library-search-filters',
-      },
-      {
-        label: 'Upload documents',
-        to: '/how-to/documents-files',
-      },
-    ],
-  },
-];
+const data: StartPageData = {
+  audience: 'New to Uwazi',
+  title: 'New to Uwazi',
+  kicker: 'Get started · New to Uwazi',
+  heading: 'Your first hour with Uwazi',
+  subtitle: 'Five short steps, in order. Each one builds on the last.',
+  steps: [
+    {
+      title: 'Understand the basics',
+      description:
+        'How Uwazi organizes information — entities, templates, and libraries — in five minutes of reading.',
+      minutes: '10 min',
+      type: 'Concept',
+      to: '/docs/explanation/building-blocks',
+    },
+    {
+      title: 'Set up your collection',
+      description:
+        'Create your workspace and decide what kind of records you want to store.',
+      minutes: '10 min',
+      type: 'Tutorial',
+      to: '/docs/tutorials',
+    },
+    {
+      title: 'Add your first documents',
+      description:
+        'Upload files and turn them into searchable, organized entities.',
+      minutes: '15 min',
+      type: 'Tutorial',
+      to: '/docs/tutorials',
+    },
+    {
+      title: 'Design a template',
+      description:
+        'Define the fields and structure that describe each record in your collection.',
+      minutes: '15 min',
+      type: 'Tutorial',
+      to: '/docs/reference/property-types',
+    },
+    {
+      title: 'Publish your library',
+      description:
+        'Make your collection public and shareable — or keep it private to your team.',
+      minutes: '10 min',
+      type: 'Tutorial',
+      to: '/docs/tutorials',
+    },
+  ],
+  goFurther: [
+    {
+      category: 'Tutorials',
+      title: 'Learn the basics',
+      description: 'Step-by-step lessons beyond the first hour.',
+      count: '8 lessons',
+      countTo: '/docs/tutorials',
+    },
+    {
+      category: 'How-to guides',
+      title: 'Get things done',
+      description: 'Recipes for everyday tasks once you are set up.',
+      count: '24 guides',
+      countTo: '/docs/how-to',
+    },
+    {
+      category: 'Reference',
+      title: 'Look it up',
+      description: 'Precise details for every feature and setting.',
+      count: '60+ entries',
+      countTo: '/docs/reference',
+    },
+    {
+      category: 'Explanation',
+      title: 'Understand the why',
+      description: 'The ideas behind how Uwazi works.',
+      count: '12 articles',
+      countTo: '/docs/explanation',
+    },
+  ],
+};
 
 export default function NewUsers(): React.JSX.Element {
-  return (
-    <Layout title={title} description={intro}>
-      <main className={styles.main}>
-        <div className={styles.container}>
-          <header className={styles.header}>
-            <h1 className={styles.title}>{title}</h1>
-            <p className={styles.subtitle}>{intro}</p>
-          </header>
-
-          <nav className={styles.navigation}>
-            {sections.map(section => (
-              <div key={section.heading} className={styles.section}>
-                <h2 className={styles.sectionTitle}>{section.heading}</h2>
-                <div className={styles.subsections}>
-                  {section.links.map((link, index) => (
-                    <span key={link.to} className={styles.subsection}>
-                      <Link to={link.to} className={styles.footerLink}>
-                        {link.label}
-                      </Link>
-                      {index < section.links.length - 1 && (
-                        <span className={styles.separator}>•</span>
-                      )}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </nav>
-        </div>
-      </main>
-    </Layout>
-  );
+  return <StartPage {...data} />;
 }

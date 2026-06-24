@@ -1,78 +1,82 @@
 import React from 'react';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
-import styles from '../index.module.css';
+import StartPage, { type StartPageData } from '@site/src/components/StartPage';
 
-type PathLink = { label: string; to: string };
-type PathSection = { heading: string; links: PathLink[] };
-
-const title = 'Administering an Uwazi instance';
-const intro = 'Start here to learn how to best configure your instance.';
-const sections: PathSection[] = [
-  {
-    heading: 'Start with a tutorial',
-    links: [
-      {
-        label: 'Build your first collection',
-        to: '/tutorials/setting-up-uwazi/build-first-collection',
-      },
-    ],
-  },
-  {
-    heading: 'Understand the basics',
-    links: [
-      {
-        label: 'Permissions and sharing',
-        to: '/explanation/permissions-sharing',
-      },
-    ],
-  },
-  {
-    heading: 'Common tasks',
-    links: [
-      {
-        label: ' Account & security',
-        to: '/how-to/account-security',
-      },
-      {
-        label: 'Collection settings',
-        to: '/how-to/collection-settings',
-      },
-    ],
-  },
-];
+const data: StartPageData = {
+  audience: 'Administering a collection',
+  title: 'Administering a collection',
+  kicker: 'Get started · Administering a collection',
+  heading: 'Run a well-organized collection',
+  subtitle: 'Five stops to a structured, secure, maintainable instance.',
+  steps: [
+    {
+      title: 'Set up your team',
+      description: 'Invite users, assign roles and groups.',
+      minutes: '10 min',
+      type: 'How-to',
+      to: '/docs/reference/user-role-permissions',
+    },
+    {
+      title: 'Shape your data',
+      description: 'Design templates, properties and thesauri.',
+      minutes: '15 min',
+      type: 'Reference',
+      to: '/docs/reference/property-types',
+    },
+    {
+      title: 'Control access',
+      description: 'Set public, shared and private permissions.',
+      minutes: '10 min',
+      type: 'How-to',
+      to: '/docs/explanation/permissions-and-sharing',
+    },
+    {
+      title: 'Bring in content',
+      description: 'Bulk import via CSV and connect entities.',
+      minutes: '10 min',
+      type: 'Reference',
+      to: '/docs/reference/csv-import',
+    },
+    {
+      title: 'Keep it healthy',
+      description: 'Backups, languages, and routine upkeep.',
+      minutes: 'ongoing',
+      type: 'Reference',
+      to: '/docs/reference',
+      ongoing: true,
+    },
+  ],
+  goFurther: [
+    {
+      category: 'Tutorials',
+      title: 'Setting up Uwazi',
+      description: 'Guided setup for new administrators.',
+      count: 'Tutorials',
+      countTo: '/docs/tutorials',
+    },
+    {
+      category: 'How-to guides',
+      title: 'Get things done',
+      description: 'Recipes for everyday admin tasks.',
+      count: '24 guides',
+      countTo: '/docs/how-to',
+    },
+    {
+      category: 'Reference',
+      title: 'Settings & roles',
+      description: 'Collection settings and permissions detail.',
+      count: '60+ entries',
+      countTo: '/docs/reference/collection-settings',
+    },
+    {
+      category: 'Explanation',
+      title: 'How it fits together',
+      description: 'The model behind permissions and sharing.',
+      count: '12 articles',
+      countTo: '/docs/explanation',
+    },
+  ],
+};
 
 export default function Administrators(): React.JSX.Element {
-  return (
-    <Layout title={title} description={intro}>
-      <main className={styles.main}>
-        <div className={styles.container}>
-          <header className={styles.header}>
-            <h1 className={styles.title}>{title}</h1>
-            <p className={styles.subtitle}>{intro}</p>
-          </header>
-
-          <nav className={styles.navigation}>
-            {sections.map(section => (
-              <div key={section.heading} className={styles.section}>
-                <h2 className={styles.sectionTitle}>{section.heading}</h2>
-                <div className={styles.subsections}>
-                  {section.links.map((link, index) => (
-                    <span key={link.to} className={styles.subsection}>
-                      <Link to={link.to} className={styles.footerLink}>
-                        {link.label}
-                      </Link>
-                      {index < section.links.length - 1 && (
-                        <span className={styles.separator}>•</span>
-                      )}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </nav>
-        </div>
-      </main>
-    </Layout>
-  );
+  return <StartPage {...data} />;
 }
