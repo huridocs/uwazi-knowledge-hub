@@ -1,0 +1,36 @@
+.wrap {
+  max-width: var(--uw-content-max);
+  margin: 0 auto;
+  padding: 34px 26px 40px;
+}
+.heading {
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--uw-ink);
+  margin: 6px 0 4px;
+  letter-spacing: -0.01em;
+}
+.subtitle {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--uw-text-2);
+  margin: 0;
+  max-width: 560px;
+}
+.rule {
+  border: none;
+  border-top: 1px solid var(--uw-border-strong);
+  margin: 30px 0 24px;
+}
+.afterLabel {
+  display: block;
+  margin-bottom: 6px;
+}
+.afterHeading {
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--uw-ink);
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+}
