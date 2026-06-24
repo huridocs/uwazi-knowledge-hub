@@ -155,35 +155,16 @@ const config: Config = {
     footer: {
       style: 'light',
       links: [
+        { label: 'Tutorials', to: '/docs/tutorials' },
+        { label: 'How-to guides', to: '/docs/how-to' },
+        { label: 'Reference', to: '/docs/reference' },
+        { label: 'Explanation', to: '/docs/explanation' },
+        { label: 'uwazi.io', href: 'https://www.uwazi.io' },
         {
-          title: 'Docs',
-          items: [
-            { label: 'Tutorials', to: '/docs/tutorials' },
-            { label: 'How-to guides', to: '/docs/how-to' },
-            { label: 'Reference', to: '/docs/reference' },
-            { label: 'Explanation', to: '/docs/explanation' },
-          ],
-        },
-        {
-          title: 'Resources',
-          items: [
-            { label: 'API', to: '/docs/api' },
-            { label: 'Glossary', to: '/docs/reference/glossary' },
-            { label: 'Contribution guides', to: '/docs/contribution-guides' },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            { label: 'Uwazi.io', href: 'https://www.uwazi.io' },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/huridocs/uwazi-knowledge-hub',
-            },
-          ],
+          label: 'GitHub',
+          href: 'https://github.com/huridocs/uwazi-knowledge-hub',
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} HURIDOCS.`,
     },
     prism: {
       theme: prismThemes.github,
