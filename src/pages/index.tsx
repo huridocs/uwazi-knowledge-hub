@@ -93,7 +93,7 @@ export default function Home(): React.JSX.Element {
           Browse the documentation
         </span>
         <div className={styles.gridWrap}>
-          <DiataxisGrid cards={cards} columns={2} />
+          <DiataxisGrid cards={cards} columns={2} headingLevel={2} />
         </div>
       </main>
     </Layout>

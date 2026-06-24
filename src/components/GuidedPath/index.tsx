@@ -29,7 +29,7 @@ export default function GuidedPath({
             <Link to={step.to} className={styles.start}>
               Start →
             </Link>
-            <h4 className={styles.title}>{step.title}</h4>
+            <h2 className={styles.title}>{step.title}</h2>
             <p className={styles.desc}>{step.description}</p>
             <div className={styles.meta}>
               {step.minutes} <span>·</span>{' '}

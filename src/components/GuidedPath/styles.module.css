@@ -24,10 +24,10 @@
   height: 36px;
   border-radius: 50%;
   background: var(--uw-seal);
-  color: #fff;
+  color: var(--uw-ink);
   font-family: var(--ifm-font-family-monospace);
-  font-weight: 600;
-  font-size: 13px;
+  font-weight: 700;
+  font-size: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,7 +92,7 @@
     left: -48px;
     width: 30px;
     height: 30px;
-    font-size: 11px;
+    font-size: 13px;
   }
   .start {
     position: static;

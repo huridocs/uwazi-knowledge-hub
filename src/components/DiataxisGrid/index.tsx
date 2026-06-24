@@ -21,10 +21,13 @@ export interface DiataxisCard {
 export default function DiataxisGrid({
   cards,
   columns,
+  headingLevel = 3,
 }: {
   cards: DiataxisCard[];
   columns: 2 | 4;
+  headingLevel?: 2 | 3;
 }): React.JSX.Element {
+  const Title = `h${headingLevel}` as 'h2' | 'h3';
   return (
     <div
       className={`${styles.grid} ${columns === 2 ? styles.cols2 : styles.cols4}`}
@@ -44,7 +47,7 @@ export default function DiataxisGrid({
               {card.title}
             </Link>
           ) : (
-            <h3 className={styles.title}>{card.title}</h3>
+            <Title className={styles.title}>{card.title}</Title>
           )}
           <p className={styles.desc}>{card.description}</p>
           {card.links && card.links.length > 0 && (
