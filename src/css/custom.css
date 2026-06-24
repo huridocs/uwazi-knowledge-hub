@@ -154,3 +154,95 @@
   width: 100%;
   height: auto;
 }
+
+/* ---- Base typography ---- */
+html,
+body {
+  font-family: var(--ifm-font-family-base);
+  background: var(--uw-parchment);
+  color: var(--uw-text-2);
+}
+
+/* Inter for all headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-family: var(--ifm-heading-font-family);
+  color: var(--uw-ink);
+  letter-spacing: -0.01em;
+}
+
+/* Merriweather for long-form doc prose */
+.markdown p,
+.markdown li {
+  font-family: 'Merriweather', Georgia, serif;
+  line-height: 1.75;
+}
+
+/* Links */
+.markdown a {
+  color: var(--uw-carbon-link);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.markdown a:hover {
+  color: var(--uw-ink);
+  border-bottom-color: var(--uw-carbon);
+}
+
+/* Inline + block code */
+code {
+  font-family: var(--ifm-font-family-monospace);
+  background: var(--uw-warm);
+  border: 1px solid var(--uw-border);
+  border-radius: 5px;
+}
+.theme-code-block,
+div[class^='codeBlockContainer'] {
+  border: 1px solid var(--uw-border);
+  border-radius: var(--uw-radius-card);
+}
+
+/* Admonitions - Vellum bg, accent left border */
+.theme-admonition,
+.admonition {
+  background: var(--uw-vellum);
+  border: 1px solid var(--uw-border);
+  border-left: 3px solid var(--uw-carbon);
+  border-radius: var(--uw-radius-card);
+}
+.theme-admonition-danger,
+.admonition-danger {
+  border-left-color: var(--uw-seal);
+}
+
+/* Tables */
+.markdown table thead {
+  background: var(--uw-warm);
+}
+.markdown table th,
+.markdown table td {
+  border-color: var(--uw-border);
+}
+
+/* Reusable mono kicker/label */
+.uw-kicker {
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--uw-seal);
+}
+.uw-kicker--muted {
+  color: var(--uw-muted);
+}
