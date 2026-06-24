@@ -11,14 +11,22 @@ const cards: DiataxisCard[] = [
     number: '01',
     category: 'Tutorials',
     title: 'Learn the basics',
-    description:
-      'Step-by-step lessons that take you from zero to your first published collection.',
+    description: 'From zero to your first published collection.',
     links: [
-      { label: 'Build your first collection', to: '/docs/tutorials' },
-      { label: 'Publish a public library', to: '/docs/tutorials' },
-      { label: 'Create a document template', to: '/docs/tutorials' },
+      {
+        label: 'Take a tour of Uwazi',
+        to: '/docs/tutorials/take-a-tour-of-uwazi',
+      },
+      {
+        label: 'Build your first collection',
+        to: '/docs/tutorials/build-your-first-collection',
+      },
+      {
+        label: 'Publish your collection',
+        to: '/docs/tutorials/publish-your-collection',
+      },
     ],
-    count: '8 lessons',
+    count: '6 lessons',
   },
   {
     number: '02',
@@ -26,46 +34,53 @@ const cards: DiataxisCard[] = [
     title: 'Get things done',
     description: 'Practical recipes for the tasks you handle day to day.',
     links: [
-      { label: 'Upload & organize documents', to: '/docs/how-to' },
-      { label: 'Set user permissions', to: '/docs/how-to' },
-      { label: 'Translate your collection', to: '/docs/how-to' },
+      { label: 'Article 1', to: '/docs/how-to' },
+      { label: 'Article 2', to: '/docs/how-to' },
+      { label: 'Article 3', to: '/docs/how-to' },
     ],
-    count: '24 guides',
+    count: 'TBD guides',
   },
   {
     number: '03',
     category: 'Reference',
     title: 'Look it up',
-    description:
-      'Precise details for every feature, field, and setting in Uwazi.',
+    description: 'Precise details for features and settings in Uwazi.',
     links: [
-      { label: 'Templates & properties', to: '/docs/reference/property-types' },
-      { label: 'Search filters', to: '/docs/reference' },
       {
-        label: 'User roles & access',
-        to: '/docs/reference/user-role-permissions',
+        label: 'Collection settings',
+        to: '/docs/reference/collection-settings',
+      },
+      {
+        label: 'Multi-language support',
+        to: '/docs/reference/multi-language-support',
+      },
+      {
+        label: 'Property types',
+        to: '/docs/reference/uproperty-types',
       },
     ],
-    count: '60+ entries',
+    count: '8 articles',
   },
   {
     number: '04',
     category: 'Explanation',
     title: 'Understand the why',
-    description:
-      'The ideas and structure behind how Uwazi organizes information.',
+    description: 'The ideas and structure behind how Uwazi works.',
     links: [
-      { label: 'What is an entity?', to: '/docs/explanation/building-blocks' },
       {
-        label: 'Public vs. private libraries',
+        label: "Understanding Uwazi's building blocks",
+        to: '/docs/explanation/building-blocks',
+      },
+      {
+        label: 'How permissions and sharing work',
         to: '/docs/explanation/permissions-and-sharing',
       },
       {
-        label: 'Thesauri & classification',
-        to: '/docs/explanation/building-blocks',
+        label: 'Building pages with live data',
+        to: '/docs/explanation/pages-and-visualizations',
       },
     ],
-    count: '12 articles',
+    count: '6 articles',
   },
 ];
 
@@ -78,10 +93,9 @@ export default function Home(): React.JSX.Element {
     >
       <main className={styles.wrap}>
         <div className={styles.hero}>
-          <span className="uw-kicker">Uwazi · Documentation</span>
+          <span className="uw-kicker">Uwazi · Help</span>
           <h1 className={styles.headline}>
-            Everything you need to <em>publish</em> and <em>defend</em> your
-            document collections.
+            Everything you need to get Uwazi working for you.
           </h1>
           <p className={styles.subtitle}>
             Tutorials, guides, and reference for the open-source platform human
