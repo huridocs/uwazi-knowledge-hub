@@ -1,65 +1,74 @@
 import React from 'react';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
-import styles from '../index.module.css';
+import StartPage, { type StartPageData } from '@site/src/components/StartPage';
 
-type PathLink = { label: string; to: string };
-type PathSection = { heading: string; links: PathLink[] };
+const data: StartPageData = {
+  audience: 'Building with the API',
+  title: 'Building with the API',
+  kicker: 'Get started · Building with the API',
+  heading: 'From an API token to your first integration',
+  subtitle: 'Four stops, each with a code sample.',
+  steps: [
+    {
+      title: 'Authenticate',
+      description: 'Create a key and sign your requests.',
+      minutes: '5 min',
+      type: 'Reference',
+      to: '/docs/api',
+    },
+    {
+      title: 'Make your first call',
+      description: 'Query the Library and read entities.',
+      minutes: '10 min',
+      type: 'Tutorial',
+      to: '/docs/api',
+    },
+    {
+      title: 'Write data',
+      description: 'Create and update entities in code.',
+      minutes: '15 min',
+      type: 'How-to',
+      to: '/docs/api',
+    },
+    {
+      title: 'Automate',
+      description: 'Batch jobs and scheduled tasks.',
+      minutes: '10 min',
+      type: 'How-to',
+      to: '/docs/api',
+    },
+  ],
+  goFurther: [
+    {
+      category: 'API',
+      title: 'API reference',
+      description: 'Every endpoint, parameter and response.',
+      count: 'API docs',
+      countTo: '/docs/api',
+    },
+    {
+      category: 'How-to guides',
+      title: 'Integration recipes',
+      description: 'Common automation patterns.',
+      count: '24 guides',
+      countTo: '/docs/how-to',
+    },
+    {
+      category: 'Reference',
+      title: 'Data model',
+      description: 'Templates, entities and properties.',
+      count: '60+ entries',
+      countTo: '/docs/reference/property-types',
+    },
+    {
+      category: 'Explanation',
+      title: 'How Uwazi models data',
+      description: 'The concepts behind the API.',
+      count: '12 articles',
+      countTo: '/docs/explanation/building-blocks',
+    },
+  ],
+};
 
-const title = 'Building with the API';
-const intro = 'Start here to learn how to use the Uwazi API';
-const sections: PathSection[] = [
-  {
-    heading: 'API portal',
-    links: [
-      {
-        label: 'Make your first API request',
-        to: '/api/first-api-request',
-      },
-    ],
-  },
-  {
-    heading: 'Understand the basics',
-    links: [
-      {
-        label: 'How Uwazi models information',
-        to: '/explanation/how-uwazi-models-information',
-      },
-    ],
-  },
-];
-
-export default function NewUsers(): React.JSX.Element {
-  return (
-    <Layout title={title} description={intro}>
-      <main className={styles.main}>
-        <div className={styles.container}>
-          <header className={styles.header}>
-            <h1 className={styles.title}>{title}</h1>
-            <p className={styles.subtitle}>{intro}</p>
-          </header>
-
-          <nav className={styles.navigation}>
-            {sections.map(section => (
-              <div key={section.heading} className={styles.section}>
-                <h2 className={styles.sectionTitle}>{section.heading}</h2>
-                <div className={styles.subsections}>
-                  {section.links.map((link, index) => (
-                    <span key={link.to} className={styles.subsection}>
-                      <Link to={link.to} className={styles.footerLink}>
-                        {link.label}
-                      </Link>
-                      {index < section.links.length - 1 && (
-                        <span className={styles.separator}>•</span>
-                      )}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </nav>
-        </div>
-      </main>
-    </Layout>
-  );
+export default function Developers(): React.JSX.Element {
+  return <StartPage {...data} />;
 }

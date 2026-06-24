@@ -1,99 +1,113 @@
-// src/pages/index.tsx
 import React from 'react';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import DiataxisGrid, {
+  type DiataxisCard,
+} from '@site/src/components/DiataxisGrid';
 import styles from './index.module.css';
 
-interface NavigationSection {
-  title: string;
-  description: string;
-  link: string;
-  subsections?: string[];
-}
-
-const navigationSections: NavigationSection[] = [
+const cards: DiataxisCard[] = [
   {
-    title: 'Documentation',
-    description:
-      'Everything you need to learn, build, and understand our product',
-    link: '/docs',
-    subsections: ['Tutorials', 'How-to Guides', 'Reference', 'Explanation'],
+    number: '01',
+    category: 'Tutorials',
+    title: 'Learn the basics',
+    description: 'From zero to your first published collection.',
+    links: [
+      {
+        label: 'Take a tour of Uwazi',
+        to: '/docs/tutorials/take-a-tour-of-uwazi',
+      },
+      {
+        label: 'Build your first collection',
+        to: '/docs/tutorials/build-your-first-collection',
+      },
+      {
+        label: 'Publish your collection',
+        to: '/docs/tutorials/publish-your-collection',
+      },
+    ],
+    count: '6 lessons',
   },
   {
-    title: 'API',
-    description:
-      'Technical specifications and integration guides for developers',
-    link: 'docs/api',
+    number: '02',
+    category: 'How-to guides',
+    title: 'Get things done',
+    description: 'Practical recipes for your daily tasks.',
+    links: [
+      { label: 'Article 1', to: '/docs/how-to' },
+      { label: 'Article 2', to: '/docs/how-to' },
+      { label: 'Article 3', to: '/docs/how-to' },
+    ],
+    count: 'TBD guides',
   },
   {
-    title: 'Product Updates',
-    description: 'Latest features, improvements, and release notes',
-    link: '/blog',
+    number: '03',
+    category: 'Reference',
+    title: 'Look it up',
+    description: 'Precise details for features and settings in Uwazi.',
+    links: [
+      {
+        label: 'Collection settings',
+        to: '/docs/reference/collection-settings',
+      },
+      {
+        label: 'Multi-language support',
+        to: '/docs/reference/multi-language-support',
+      },
+      {
+        label: 'Property types',
+        to: '/docs/reference/property-types',
+      },
+    ],
+    count: '8 articles',
+  },
+  {
+    number: '04',
+    category: 'Explanation',
+    title: 'Understand the why',
+    description: 'The ideas and structure behind how Uwazi works.',
+    links: [
+      {
+        label: "Understanding Uwazi's building blocks",
+        to: '/docs/explanation/building-blocks',
+      },
+      {
+        label: 'How permissions and sharing work',
+        to: '/docs/explanation/permissions-and-sharing',
+      },
+      {
+        label: 'Building pages with live data',
+        to: '/docs/explanation/pages-and-visualizations',
+      },
+    ],
+    count: '6 articles',
   },
 ];
 
-function NavigationSectionComponent({
-  title,
-  description,
-  link,
-  subsections,
-}: NavigationSection) {
-  return (
-    <div className={styles.section}>
-      <Link to={link} className={styles.sectionLink}>
-        <h2 className={styles.sectionTitle}>{title}</h2>
-      </Link>
-      <p className={styles.sectionDescription}>{description}</p>
-      {subsections && (
-        <div className={styles.subsections}>
-          {subsections.map((subsection, index) => (
-            <span key={index} className={styles.subsection}>
-              {subsection}
-              {index < subsections.length - 1 && (
-                <span className={styles.separator}>•</span>
-              )}
-            </span>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-export default function Home() {
+export default function Home(): React.JSX.Element {
   const { siteConfig } = useDocusaurusContext();
-
   return (
     <Layout
       title={siteConfig.title}
-      description="Product documentation, API reference, and updates"
+      description="Documentation, guides and reference for Uwazi."
     >
-      <main className={styles.main}>
-        <div className={styles.container}>
-          <header className={styles.header}>
-            <h1 className={styles.title}>{siteConfig.title}</h1>
-            <p className={styles.subtitle}>{siteConfig.tagline}</p>
-          </header>
-
-          <nav className={styles.navigation}>
-            {navigationSections.map((section, index) => (
-              <NavigationSectionComponent key={index} {...section} />
-            ))}
-          </nav>
-
-          <footer className={styles.footer}>
-            <p className={styles.footerText}>
-              Need help?{' '}
-              <Link to="/docs/tutorials" className={styles.footerLink}>
-                Start with tutorials
-              </Link>{' '}
-              or{' '}
-              <Link to="docs/api" className={styles.footerLink}>
-                explore the API
-              </Link>
-            </p>
-          </footer>
+      <main className={styles.wrap}>
+        <div className={styles.hero}>
+          <span className="uw-kicker">Uwazi · Help</span>
+          <h1 className={styles.headline}>
+            Everything you need to get Uwazi working for you.
+          </h1>
+          <p className={styles.subtitle}>
+            Tutorials, guides, and reference for the open-source platform human
+            rights organizations use to organize and share evidence.
+          </p>
+        </div>
+        <hr className={styles.rule} />
+        <span className="uw-kicker uw-kicker--muted">
+          Browse the documentation
+        </span>
+        <div className={styles.gridWrap}>
+          <DiataxisGrid cards={cards} columns={2} headingLevel={2} />
         </div>
       </main>
     </Layout>

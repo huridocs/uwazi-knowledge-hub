@@ -5,10 +5,10 @@ import { themes as prismThemes } from 'prism-react-renderer';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Knowledge Hub',
+  title: 'Uwazi Help',
   tagline:
     'Comprehensive documentation and resources for Uwazi following the Diátaxis framework',
-  //favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -27,8 +27,7 @@ const config: Config = {
   organizationName: 'huridocs', // Usually your GitHub org/user name.
   projectName: 'uwazi-knowledge-hub', // Usually your repo name.
 
-  // TODO: restore to 'throw' once the linked start-page targets exist.
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'throw',
 
   themes: ['@docusaurus/theme-mermaid'],
 
@@ -57,23 +56,34 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl: 'https://github.com/huridocs/uwazi-knowledge-hub/tree/main/',
+          // Keep the API and Resources docs in source but out of the build
+          // (no routes, no sitemap) until they are surfaced in the navigation.
+          // Defaults are repeated because `exclude` replaces them.
+          exclude: [
+            '**/_*.{js,jsx,ts,tsx,md,mdx}',
+            '**/_*/**',
+            '**/*.test.{js,jsx,ts,tsx}',
+            '**/__tests__/**',
+            'api/**',
+            'resources/**',
+          ],
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/huridocs/uwazi-knowledge-hub/tree/main/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        // Blog (Product updates) kept in source but disabled until needed.
+        blog: false,
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: ['./src/css/fonts.css', './src/css/custom.css'],
+        },
+        pages: {
+          // Keep the /start/* guided-path pages in source but exclude them from
+          // the build (no routes, no sitemap) until a "Get started" entry point
+          // links to them. Defaults are repeated because `exclude` replaces them.
+          exclude: [
+            '**/_*.{js,jsx,ts,tsx,md,mdx}',
+            '**/_*/**',
+            '**/*.test.{js,jsx,ts,tsx}',
+            '**/__tests__/**',
+            'start/**',
+          ],
         },
       } satisfies Preset.Options,
     ],
@@ -83,66 +93,38 @@ const config: Config = {
     // Replace with your project's social card
     //image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: ':uwazi Knowledge Hub',
-      //logo: {
-      //  alt: 'Uwazi Logo',
-      //  src: 'img/logo.svg',
-      //},
+      title: 'HELP',
+      logo: {
+        alt: 'Uwazi help portal',
+        src: 'img/uwazi-logo.svg',
+        srcDark: 'img/uwazi-logo-dark.svg',
+        width: 96,
+      },
       items: [
         {
-          type: 'dropdown',
-          label: 'Get started',
+          type: 'docSidebar',
+          sidebarId: 'tutorials',
           position: 'left',
-          items: [
-            { label: 'New to Uwazi', to: '/start/new-users' },
-            {
-              label: 'Administering a collection',
-              to: '/start/administrators',
-            },
-            { label: 'Self-hosting Uwazi', to: '/start/self-hosting' },
-            { label: 'Building with the API', to: '/start/developers' },
-          ],
-        },
-        {
-          type: 'dropdown',
-          label: 'Docs',
-          position: 'left',
-          items: [
-            {
-              type: 'docSidebar',
-              sidebarId: 'tutorials',
-              label: 'Tutorials',
-            },
-            {
-              type: 'docSidebar',
-              sidebarId: 'howTo',
-              label: 'How-to guides',
-            },
-            {
-              type: 'docSidebar',
-              sidebarId: 'reference',
-              label: 'Reference',
-            },
-            {
-              type: 'docSidebar',
-              sidebarId: 'explanation',
-              label: 'Explanation',
-            },
-          ],
+          label: 'Tutorials',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'apiSidebar',
+          sidebarId: 'howTo',
           position: 'left',
-          label: 'API',
+          label: 'How-to guides',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'resources',
+          sidebarId: 'reference',
           position: 'left',
-          label: 'Resources',
+          label: 'Reference',
         },
-        { to: '/blog', label: 'Product updates', position: 'left' },
+        {
+          type: 'docSidebar',
+          sidebarId: 'explanation',
+          position: 'left',
+          label: 'Explanation',
+        },
         {
           href: 'https://github.com/huridocs/uwazi-knowledge-hub',
           label: 'GitHub',
@@ -151,53 +133,19 @@ const config: Config = {
       ],
     },
     footer: {
-      style: 'dark',
+      style: 'light',
       links: [
+        { label: 'Tutorials', to: '/docs/tutorials' },
+        { label: 'How-to guides', to: '/docs/how-to' },
+        { label: 'Reference', to: '/docs/reference' },
+        { label: 'Explanation', to: '/docs/explanation' },
+        { label: 'uwazi.io', href: 'https://www.uwazi.io' },
         {
-          title: 'Documentation',
-          items: [
-            {
-              label: 'Tutorials',
-              to: '/docs/tutorials',
-            },
-            {
-              label: 'How-to Guides',
-              to: '/docs/how-to',
-            },
-            {
-              label: 'Reference',
-              to: '/docs/reference',
-            },
-            {
-              label: 'Explanations',
-              to: '/docs/explanation',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Support',
-              href: '#',
-            },
-            {
-              label: 'Feedback',
-              href: '#',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/huridocs/uwazi-knowledge-hub',
-            },
-          ],
+          label: 'GitHub',
+          href: 'https://github.com/huridocs/uwazi-knowledge-hub',
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} HURIDOCS. Built with Docusaurus.`,
+      copyright: `© ${new Date().getFullYear()} Uwazi. Built by HURIDOCS (under the MIT License).`,
     },
     prism: {
       theme: prismThemes.github,

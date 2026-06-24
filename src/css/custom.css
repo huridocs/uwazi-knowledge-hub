@@ -4,97 +4,123 @@
  * work well for content-centric websites.
  */
 
-/* Uwazi brand colors based on #42389D primary */
 :root {
-  --ifm-color-primary: #42389d;
-  --ifm-color-primary-dark: #3b328d;
-  --ifm-color-primary-darker: #382f85;
-  --ifm-color-primary-darkest: #2e276e;
-  --ifm-color-primary-light: #493ead;
-  --ifm-color-primary-lighter: #4c41b5;
-  --ifm-color-primary-lightest: #5651c5;
+  /* Uwazi rebrand palette */
+  --uw-ink: #1a1a1a;
+  --uw-seal: #e8432a;
+  --uw-carbon: #00b4f0;
+  --uw-carbon-link: #0a6585;
+  --uw-parchment: #f5f0e8;
+  --uw-paper: #ffffff;
+  --uw-vellum: #f5eed7;
+  --uw-warm: #fcfaf8;
+  --uw-text: #1a1a1a;
+  --uw-text-2: #333333;
+  --uw-text-3: #6b6b6b;
+  --uw-muted: #9a9a9a;
+  --uw-border: #e0d9c8;
+  --uw-border-strong: #d4cdb8;
 
-  /* Enhanced color palette for Uwazi */
-  --ifm-color-secondary: #6c5ce7;
-  --ifm-color-success: #00b894;
-  --ifm-color-info: #0984e3;
-  --ifm-color-warning: #fdcb6e;
-  --ifm-color-danger: #e17055;
+  /* structure tokens */
+  --uw-radius-card: 10px;
+  --uw-radius-btn: 8px;
+  --uw-radius-pill: 999px;
+  --uw-space: 8px;
+  --uw-content-max: 880px;
 
-  /* Typography and spacing */
-  --ifm-code-font-size: 95%;
-  --ifm-heading-color: #2d3748;
-  --ifm-font-color-base: #4a5568;
+  /* Infima mapping - primary uses Ink so buttons/active states are Ink */
+  --ifm-color-primary: #1a1a1a;
+  --ifm-color-primary-dark: #000000;
+  --ifm-color-primary-darker: #000000;
+  --ifm-color-primary-darkest: #000000;
+  --ifm-color-primary-light: #333333;
+  --ifm-color-primary-lighter: #404040;
+  --ifm-color-primary-lightest: #595959;
 
-  /* Code highlighting */
-  --docusaurus-highlighted-code-line-bg: rgba(66, 56, 157, 0.1);
+  --ifm-background-color: var(--uw-parchment);
+  --ifm-background-surface-color: var(--uw-paper);
+  --ifm-color-content: var(--uw-text-2);
+  --ifm-heading-color: var(--uw-ink);
+  --ifm-link-color: var(--uw-carbon-link);
+  --ifm-link-hover-color: var(--uw-ink);
 
-  /* Custom Uwazi variables */
-  --uwazi-purple-50: #f7f6fd;
-  --uwazi-purple-100: #eeebfa;
-  --uwazi-purple-200: #ddd6f3;
-  --uwazi-purple-300: #c4b5e9;
-  --uwazi-purple-400: #a688dc;
-  --uwazi-purple-500: #42389d;
-  --uwazi-purple-600: #3b328d;
-  --uwazi-purple-700: #322a76;
-  --uwazi-purple-800: #2a235f;
-  --uwazi-purple-900: #241e4f;
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-heading-font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', ui-monospace, monospace;
+  --ifm-code-font-size: 90%;
+
+  --ifm-toc-border-color: var(--uw-border);
+  --ifm-table-stripe-background: var(--uw-warm);
+  --ifm-color-emphasis-200: var(--uw-border);
+  --ifm-color-emphasis-300: var(--uw-border-strong);
+
+  --docusaurus-highlighted-code-line-bg: rgba(232, 67, 42, 0.1);
 
   /* Figure component */
-  --uwazi-figure-bg: #fefeff;
-  --uwazi-figure-border: #e6e8ee;
-  --uwazi-figure-radius: 8px;
+  --uwazi-figure-bg: var(--uw-paper);
+  --uwazi-figure-border: var(--uw-border);
+  --uwazi-figure-radius: var(--uw-radius-card);
   --uwazi-figure-pad: 64px;
-  --uwazi-figure-shadow: 0 8px 26px -14px rgba(45, 55, 72, 0.18);
-  --uwazi-figure-dot: rgba(66, 56, 157, 0.075);
+  --uwazi-figure-shadow: 0 8px 26px -14px rgba(26, 26, 26, 0.14);
+  --uwazi-figure-dot: rgba(232, 67, 42, 0.06);
   --uwazi-figure-dot-size: 16px;
   --uwazi-figure-img-radius: 6px;
-  --uwazi-figure-img-border: #e6e8ee;
-  --uwazi-figure-img-shadow: 0 6px 16px -10px rgba(45, 55, 72, 0.25);
-  --uwazi-figure-caption-color: var(--ifm-color-emphasis-700);
+  --uwazi-figure-img-border: var(--uw-border);
+  --uwazi-figure-img-shadow: 0 6px 16px -10px rgba(26, 26, 26, 0.2);
+  --uwazi-figure-caption-color: var(--uw-text-3);
 
   /* Figure 'paper' variant — warm, aged-paper backdrop */
-  --uwazi-figure-paper-bg: #f5efe0;
-  --uwazi-figure-paper-border: #e3d8bf;
+  --uwazi-figure-paper-bg: var(--uw-vellum);
+  --uwazi-figure-paper-border: var(--uw-border-strong);
   --uwazi-figure-paper-dot: rgba(120, 90, 40, 0.06);
   --uwazi-figure-paper-vignette: rgba(120, 90, 40, 0.05);
 }
 
-/* Dark mode with accessible purple variants */
 [data-theme='dark'] {
-  --ifm-color-primary: #7c6bff;
-  --ifm-color-primary-dark: #6b59ff;
-  --ifm-color-primary-darker: #6051ff;
-  --ifm-color-primary-darkest: #3f2eff;
-  --ifm-color-primary-light: #8d7dff;
-  --ifm-color-primary-lighter: #9885ff;
-  --ifm-color-primary-lightest: #b3a7ff;
+  --uw-ink: #f2ecdd;
+  --uw-seal: #f2603f;
+  --uw-carbon: #3cc6fa;
+  --uw-carbon-link: #3cc6fa;
+  --uw-parchment: #1a1815;
+  --uw-paper: #24211c;
+  --uw-vellum: #2d2a23;
+  --uw-warm: #221f1a;
+  --uw-text: #f2ecdd;
+  --uw-text-2: #c9c1ae;
+  --uw-text-3: #aaa195;
+  --uw-muted: #8e867a;
+  --uw-border: #3a352b;
+  --uw-border-strong: #4a4438;
 
-  /* Dark mode enhancements */
-  --ifm-color-secondary: #8b7cf6;
-  --ifm-color-success: #10b981;
-  --ifm-color-info: #3b82f6;
-  --ifm-color-warning: #f59e0b;
-  --ifm-color-danger: #ef4444;
+  --ifm-color-primary: #f2ecdd;
+  --ifm-color-primary-dark: #e3dcca;
+  --ifm-color-primary-darker: #d9d1bc;
+  --ifm-color-primary-darkest: #c2b89f;
+  --ifm-color-primary-light: #ffffff;
+  --ifm-color-primary-lighter: #ffffff;
+  --ifm-color-primary-lightest: #ffffff;
 
-  /* Dark mode code highlighting */
-  --docusaurus-highlighted-code-line-bg: rgba(124, 107, 255, 0.2);
+  --ifm-background-color: var(--uw-parchment);
+  --ifm-background-surface-color: var(--uw-paper);
+  --ifm-heading-color: var(--uw-ink);
+  --ifm-link-color: var(--uw-carbon-link);
+  --ifm-link-hover-color: var(--uw-ink);
+  --ifm-color-content: var(--uw-text-2);
+  --ifm-color-emphasis-200: var(--uw-border);
+  --ifm-color-emphasis-300: var(--uw-border-strong);
 
-  /* Dark mode background adjustments */
-  --ifm-background-color: #1a1a2e;
-  --ifm-background-surface-color: #16213e;
+  --docusaurus-highlighted-code-line-bg: rgba(242, 96, 63, 0.18);
 
   /* Figure component (dark) */
-  --uwazi-figure-bg: #16213e;
-  --uwazi-figure-border: #2c2c4a;
-  --uwazi-figure-dot: rgba(152, 133, 255, 0.1);
-  --uwazi-figure-img-border: #2c2c4a;
+  --uwazi-figure-bg: var(--uw-paper);
+  --uwazi-figure-border: var(--uw-border);
+  --uwazi-figure-dot: rgba(60, 198, 250, 0.1);
+  --uwazi-figure-img-border: var(--uw-border);
   --uwazi-figure-img-shadow: 0 10px 30px -16px rgba(0, 0, 0, 0.6);
 
   /* Figure 'paper' variant (dark) — aged parchment in low light */
-  --uwazi-figure-paper-bg: #2a2620;
-  --uwazi-figure-paper-border: #3a342a;
+  --uwazi-figure-paper-bg: var(--uw-vellum);
+  --uwazi-figure-paper-border: var(--uw-border-strong);
   --uwazi-figure-paper-dot: rgba(220, 200, 150, 0.06);
   --uwazi-figure-paper-vignette: rgba(0, 0, 0, 0.18);
 }
@@ -127,4 +153,191 @@
   max-width: 100%;
   width: 100%;
   height: auto;
+}
+
+/* ---- Base typography ---- */
+html,
+body {
+  font-family: var(--ifm-font-family-base);
+  background: var(--uw-parchment);
+  color: var(--uw-text-2);
+}
+
+/* Inter for all headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-family: var(--ifm-heading-font-family);
+  color: var(--uw-ink);
+  letter-spacing: -0.01em;
+}
+
+/* Merriweather for long-form doc prose */
+.markdown p,
+.markdown li {
+  font-family: 'Merriweather', Georgia, serif;
+  line-height: 1.75;
+}
+
+/* Links */
+/* Prose links only — exclude DocCard (a.card) so cards keep native styling. */
+.markdown a:not(.card) {
+  color: var(--uw-carbon-link);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.markdown a:not(.card):hover {
+  color: var(--uw-ink);
+  border-bottom-color: var(--uw-carbon);
+}
+
+/* Inline + block code */
+code {
+  font-family: var(--ifm-font-family-monospace);
+  background: var(--uw-warm);
+  border: 1px solid var(--uw-border);
+  border-radius: 5px;
+}
+.theme-code-block,
+div[class^='codeBlockContainer'] {
+  border: 1px solid var(--uw-border);
+  border-radius: var(--uw-radius-card);
+}
+
+/* Admonitions keep Docusaurus default per-type color coding (note/tip/info/
+   warning/danger). Only soften the corner to match other surfaces. */
+.theme-admonition {
+  border-radius: var(--uw-radius-card);
+}
+
+/* Tables */
+.markdown table thead {
+  background: var(--uw-warm);
+}
+.markdown table th,
+.markdown table td {
+  border-color: var(--uw-border);
+}
+
+/* Keep <DocCardList/> cards native when rendered inside a .markdown doc page:
+   reset the prose paragraph font on the card description and the heading margin
+   (the card link itself is already excluded from the prose link rules above). */
+.markdown a.card p {
+  font-family: var(--ifm-font-family-base);
+}
+.markdown a.card h2 {
+  margin-top: 0;
+}
+
+/* Reusable mono kicker/label */
+.uw-kicker {
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--uw-seal);
+}
+.uw-kicker--muted {
+  color: var(--uw-muted);
+}
+
+/* ---- Navbar ---- */
+.navbar {
+  background: var(--uw-parchment);
+  border-bottom: 1px solid var(--uw-border-strong);
+  box-shadow: none;
+}
+.navbar__item,
+.navbar__link {
+  font-family: var(--ifm-font-family-base);
+  font-weight: 500;
+  color: var(--uw-text-2);
+}
+/* Top-level nav links: Vellum hover pill + Seal active underline */
+.navbar__link {
+  position: relative;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+.navbar__link:hover {
+  background: var(--uw-vellum);
+  color: var(--uw-ink);
+}
+.navbar__link--active {
+  color: var(--uw-ink);
+  font-weight: 600;
+}
+.navbar__link--active::after {
+  content: '';
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 1px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--uw-seal);
+}
+/* Dropdown menu entries */
+.dropdown__link {
+  border-radius: 6px;
+}
+.dropdown__link:hover {
+  background: var(--uw-vellum);
+  color: var(--uw-ink);
+}
+.dropdown__link--active {
+  background: var(--uw-vellum);
+  color: var(--uw-ink);
+  font-weight: 600;
+}
+/* Site title rendered as an Ink "Help" pill so it reads as the site label */
+.navbar__title {
+  display: inline-block;
+  margin-left: 4px;
+  background: var(--uw-ink);
+  color: var(--uw-parchment);
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 13px;
+  border-radius: 6px;
+}
+
+/* ---- Footer (light, page-matched, Syne Mono) ---- */
+.footer {
+  background: var(--uw-parchment);
+  border-top: 1px solid var(--uw-border-strong);
+  font-family: 'Syne Mono', ui-monospace, monospace;
+  color: var(--uw-text-2);
+  --ifm-footer-link-color: var(--uw-text-2);
+  --ifm-footer-title-color: var(--uw-muted);
+  --ifm-footer-link-hover-color: var(--uw-ink);
+}
+.footer__title {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.footer__link-item {
+  font-size: 13px;
+}
+.footer__copyright {
+  color: var(--uw-muted);
+  font-size: 12px;
+  margin-top: 12px;
 }

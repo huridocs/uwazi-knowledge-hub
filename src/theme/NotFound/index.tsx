@@ -18,7 +18,7 @@ export default function NotFound(): React.ReactElement {
             <Link to="/" className={styles.homeButton}>
               Go Home
             </Link>
-            <Link to="/docs" className={styles.docsButton}>
+            <Link to="/docs/tutorials" className={styles.docsButton}>
               Browse Docs
             </Link>
           </div>

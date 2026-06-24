@@ -1,0 +1,112 @@
+.tl {
+  position: relative;
+  margin-top: 22px;
+  padding-left: 70px;
+}
+.step {
+  position: relative;
+  margin-bottom: 18px;
+}
+/* Connector runs from each badge down to the next; the last step draws none. */
+.step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  /* centered under the 42px badge: badge.left(-70) + r(21) = -49 */
+  left: -50px;
+  top: 42px;
+  bottom: -18px;
+  width: 2px;
+  background: var(--uw-border-strong);
+}
+.badge {
+  position: absolute;
+  left: -70px;
+  top: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--uw-seal);
+  color: var(--uw-ink);
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 700;
+  /* >=18.66px bold qualifies as WCAG large text so Ink-on-Seal (4.39:1) passes */
+  font-size: 18.7px;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 5px var(--uw-parchment);
+}
+.card {
+  position: relative;
+  background: var(--uw-paper);
+  border: 1px solid var(--uw-border);
+  border-radius: var(--uw-radius-card);
+  padding: 18px 20px;
+}
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--uw-ink);
+  margin: 0 0 7px;
+  padding-right: 60px;
+}
+.desc {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--uw-text-2);
+  margin: 0 0 13px;
+  padding-right: 60px;
+}
+.meta {
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--uw-muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tag {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--uw-text-3);
+  border: 1px solid var(--uw-border-strong);
+  border-radius: var(--uw-radius-pill);
+  padding: 3px 10px;
+}
+.start {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-family: var(--ifm-font-family-base);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--uw-carbon-link);
+  text-decoration: none;
+}
+@media (max-width: 768px) {
+  .tl {
+    padding-left: 56px;
+  }
+  .step:not(:last-child)::before {
+    /* centered under the 38px badge: badge.left(-56) + r(19) = -37 */
+    left: -38px;
+    top: 38px;
+  }
+  .badge {
+    left: -56px;
+    width: 38px;
+    height: 38px;
+    font-size: 18.7px;
+  }
+  .start {
+    position: static;
+    display: inline-block;
+    margin-top: 8px;
+  }
+  .title,
+  .desc {
+    padding-right: 0;
+  }
+}
