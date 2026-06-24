@@ -3,8 +3,24 @@ title: Reference
 description: Information-oriented technical specifications
 ---
 
+import DocCardList from '@theme/DocCardList';
+import { useCurrentSidebarSiblings } from '@docusaurus/plugin-content-docs/client';
+
+export function ReferenceCards() {
+  const items = useCurrentSidebarSiblings().filter(
+    item =>
+      !(
+        item.type === 'link' &&
+        item.href.replace(/\/$/, '') === '/docs/reference'
+      )
+  );
+  return <DocCardList items={items} />;
+}
+
 This section provides comprehensive technical information for quick lookup
 and detailed specifications.
+
+<ReferenceCards />
 
 ## What is reference documentation? {/* #what-is-reference-documentation */}
 
