@@ -35,7 +35,6 @@ const data: StartPageData = {
       minutes: 'ongoing',
       type: 'Reference',
       to: '/docs/reference/self-hosting',
-      ongoing: true,
     },
   ],
   goFurther: [

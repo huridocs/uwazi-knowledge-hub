@@ -6,7 +6,8 @@
 .tl::before {
   content: '';
   position: absolute;
-  left: 25px;
+  /* centered under the 36px badge: padding(64) + badge.left(-64) + r(18) = 18 */
+  left: 17px;
   top: 18px;
   bottom: 30px;
   width: 2px;
@@ -32,9 +33,6 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 0 5px var(--uw-parchment);
-}
-.badgeOngoing {
-  background: var(--uw-carbon);
 }
 .card {
   position: relative;
@@ -87,6 +85,10 @@
 @media (max-width: 768px) {
   .tl {
     padding-left: 48px;
+  }
+  .tl::before {
+    /* centered under the 30px badge: padding(48) + badge.left(-48) + r(15) = 15 */
+    left: 14px;
   }
   .badge {
     left: -48px;

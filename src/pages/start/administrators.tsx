@@ -42,7 +42,6 @@ const data: StartPageData = {
       minutes: 'ongoing',
       type: 'Reference',
       to: '/docs/reference',
-      ongoing: true,
     },
   ],
   goFurther: [

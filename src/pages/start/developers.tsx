@@ -35,7 +35,6 @@ const data: StartPageData = {
       minutes: '10 min',
       type: 'How-to',
       to: '/docs/api',
-      ongoing: true,
     },
   ],
   goFurther: [

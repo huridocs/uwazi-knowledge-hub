@@ -8,7 +8,6 @@ export interface GuidedStep {
   minutes: string;
   type: string;
   to: string;
-  ongoing?: boolean;
 }
 
 export default function GuidedPath({
@@ -20,11 +19,7 @@ export default function GuidedPath({
     <div className={styles.tl}>
       {steps.map((step, i) => (
         <div key={step.title} className={styles.step}>
-          <div
-            className={`${styles.badge} ${step.ongoing ? styles.badgeOngoing : ''}`}
-          >
-            {String(i + 1).padStart(2, '0')}
-          </div>
+          <div className={styles.badge}>{String(i + 1).padStart(2, '0')}</div>
           <div className={styles.card}>
             <Link to={step.to} className={styles.start}>
               Start →
