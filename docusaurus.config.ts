@@ -74,6 +74,18 @@ const config: Config = {
         theme: {
           customCss: ['./src/css/fonts.css', './src/css/custom.css'],
         },
+        pages: {
+          // Keep the /start/* guided-path pages in source but exclude them from
+          // the build (no routes, no sitemap) until a "Get started" entry point
+          // links to them. Defaults are repeated because `exclude` replaces them.
+          exclude: [
+            '**/_*.{js,jsx,ts,tsx,md,mdx}',
+            '**/_*/**',
+            '**/*.test.{js,jsx,ts,tsx}',
+            '**/__tests__/**',
+            'start/**',
+          ],
+        },
       } satisfies Preset.Options,
     ],
   ],
