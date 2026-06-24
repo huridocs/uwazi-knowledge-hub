@@ -29,7 +29,8 @@
   color: var(--uw-ink);
   font-family: var(--ifm-font-family-monospace);
   font-weight: 700;
-  font-size: 19px;
+  /* >=18.66px bold qualifies as WCAG large text so Ink-on-Seal (4.39:1) passes */
+  font-size: 18.7px;
   letter-spacing: 0.04em;
   display: flex;
   align-items: center;
