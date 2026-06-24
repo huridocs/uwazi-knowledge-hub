@@ -4,42 +4,57 @@
  * work well for content-centric websites.
  */
 
-/* Uwazi brand colors based on #42389D primary */
 :root {
-  --ifm-color-primary: #42389d;
-  --ifm-color-primary-dark: #3b328d;
-  --ifm-color-primary-darker: #382f85;
-  --ifm-color-primary-darkest: #2e276e;
-  --ifm-color-primary-light: #493ead;
-  --ifm-color-primary-lighter: #4c41b5;
-  --ifm-color-primary-lightest: #5651c5;
+  /* Uwazi rebrand palette */
+  --uw-ink: #1a1a1a;
+  --uw-seal: #e8432a;
+  --uw-carbon: #00b4f0;
+  --uw-carbon-link: #0a86b8;
+  --uw-parchment: #f5f0e8;
+  --uw-paper: #ffffff;
+  --uw-vellum: #f5eed7;
+  --uw-warm: #fcfaf8;
+  --uw-text: #1a1a1a;
+  --uw-text-2: #333333;
+  --uw-text-3: #6b6b6b;
+  --uw-muted: #9a9a9a;
+  --uw-border: #e0d9c8;
+  --uw-border-strong: #d4cdb8;
 
-  /* Enhanced color palette for Uwazi */
-  --ifm-color-secondary: #6c5ce7;
-  --ifm-color-success: #00b894;
-  --ifm-color-info: #0984e3;
-  --ifm-color-warning: #fdcb6e;
-  --ifm-color-danger: #e17055;
+  /* structure tokens */
+  --uw-radius-card: 10px;
+  --uw-radius-btn: 8px;
+  --uw-radius-pill: 999px;
+  --uw-space: 8px;
+  --uw-content-max: 880px;
 
-  /* Typography and spacing */
-  --ifm-code-font-size: 95%;
-  --ifm-heading-color: #2d3748;
-  --ifm-font-color-base: #4a5568;
+  /* Infima mapping - primary uses Ink so buttons/active states are Ink */
+  --ifm-color-primary: #1a1a1a;
+  --ifm-color-primary-dark: #000000;
+  --ifm-color-primary-darker: #000000;
+  --ifm-color-primary-darkest: #000000;
+  --ifm-color-primary-light: #333333;
+  --ifm-color-primary-lighter: #404040;
+  --ifm-color-primary-lightest: #595959;
 
-  /* Code highlighting */
-  --docusaurus-highlighted-code-line-bg: rgba(66, 56, 157, 0.1);
+  --ifm-background-color: var(--uw-parchment);
+  --ifm-background-surface-color: var(--uw-paper);
+  --ifm-color-content: var(--uw-text-2);
+  --ifm-heading-color: var(--uw-ink);
+  --ifm-link-color: var(--uw-carbon-link);
+  --ifm-link-hover-color: var(--uw-ink);
 
-  /* Custom Uwazi variables */
-  --uwazi-purple-50: #f7f6fd;
-  --uwazi-purple-100: #eeebfa;
-  --uwazi-purple-200: #ddd6f3;
-  --uwazi-purple-300: #c4b5e9;
-  --uwazi-purple-400: #a688dc;
-  --uwazi-purple-500: #42389d;
-  --uwazi-purple-600: #3b328d;
-  --uwazi-purple-700: #322a76;
-  --uwazi-purple-800: #2a235f;
-  --uwazi-purple-900: #241e4f;
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-heading-font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', ui-monospace, monospace;
+  --ifm-code-font-size: 90%;
+
+  --ifm-toc-border-color: var(--uw-border);
+  --ifm-table-stripe-background: var(--uw-warm);
+  --ifm-color-emphasis-200: var(--uw-border);
+  --ifm-color-emphasis-300: var(--uw-border-strong);
+
+  --docusaurus-highlighted-code-line-bg: rgba(232, 67, 42, 0.1);
 
   /* Figure component */
   --uwazi-figure-bg: #fefeff;
@@ -61,29 +76,40 @@
   --uwazi-figure-paper-vignette: rgba(120, 90, 40, 0.05);
 }
 
-/* Dark mode with accessible purple variants */
 [data-theme='dark'] {
-  --ifm-color-primary: #7c6bff;
-  --ifm-color-primary-dark: #6b59ff;
-  --ifm-color-primary-darker: #6051ff;
-  --ifm-color-primary-darkest: #3f2eff;
-  --ifm-color-primary-light: #8d7dff;
-  --ifm-color-primary-lighter: #9885ff;
-  --ifm-color-primary-lightest: #b3a7ff;
+  --uw-ink: #f2ecdd;
+  --uw-seal: #f2603f;
+  --uw-carbon: #3cc6fa;
+  --uw-carbon-link: #3cc6fa;
+  --uw-parchment: #1a1815;
+  --uw-paper: #24211c;
+  --uw-vellum: #2d2a23;
+  --uw-warm: #221f1a;
+  --uw-text: #f2ecdd;
+  --uw-text-2: #c9c1ae;
+  --uw-text-3: #aaa195;
+  --uw-muted: #8e867a;
+  --uw-border: #3a352b;
+  --uw-border-strong: #4a4438;
 
-  /* Dark mode enhancements */
-  --ifm-color-secondary: #8b7cf6;
-  --ifm-color-success: #10b981;
-  --ifm-color-info: #3b82f6;
-  --ifm-color-warning: #f59e0b;
-  --ifm-color-danger: #ef4444;
+  --ifm-color-primary: #f2ecdd;
+  --ifm-color-primary-dark: #e3dcca;
+  --ifm-color-primary-darker: #d9d1bc;
+  --ifm-color-primary-darkest: #c2b89f;
+  --ifm-color-primary-light: #ffffff;
+  --ifm-color-primary-lighter: #ffffff;
+  --ifm-color-primary-lightest: #ffffff;
 
-  /* Dark mode code highlighting */
-  --docusaurus-highlighted-code-line-bg: rgba(124, 107, 255, 0.2);
+  --ifm-background-color: var(--uw-parchment);
+  --ifm-background-surface-color: var(--uw-paper);
+  --ifm-heading-color: var(--uw-ink);
+  --ifm-link-color: var(--uw-carbon-link);
+  --ifm-link-hover-color: var(--uw-ink);
+  --ifm-color-content: var(--uw-text-2);
+  --ifm-color-emphasis-200: var(--uw-border);
+  --ifm-color-emphasis-300: var(--uw-border-strong);
 
-  /* Dark mode background adjustments */
-  --ifm-background-color: #1a1a2e;
-  --ifm-background-surface-color: #16213e;
+  --docusaurus-highlighted-code-line-bg: rgba(242, 96, 63, 0.18);
 
   /* Figure component (dark) */
   --uwazi-figure-bg: #16213e;
