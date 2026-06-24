@@ -8,7 +8,7 @@ const config: Config = {
   title: 'Knowledge Hub',
   tagline:
     'Comprehensive documentation and resources for Uwazi following the Diátaxis framework',
-  //favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -83,11 +83,12 @@ const config: Config = {
     // Replace with your project's social card
     //image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: ':uwazi Knowledge Hub',
-      //logo: {
-      //  alt: 'Uwazi Logo',
-      //  src: 'img/logo.svg',
-      //},
+      logo: {
+        alt: 'Uwazi Knowledge Hub',
+        src: 'img/uwazi-logo.svg',
+        srcDark: 'img/uwazi-logo-dark.svg',
+        width: 96,
+      },
       items: [
         {
           type: 'dropdown',
