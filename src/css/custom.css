@@ -189,12 +189,13 @@ h6,
 }
 
 /* Links */
-.markdown a {
+/* Prose links only — exclude DocCard (a.card) so cards keep native styling. */
+.markdown a:not(.card) {
   color: var(--uw-carbon-link);
   text-decoration: none;
   border-bottom: 1px solid transparent;
 }
-.markdown a:hover {
+.markdown a:not(.card):hover {
   color: var(--uw-ink);
   border-bottom-color: var(--uw-carbon);
 }
@@ -227,14 +228,9 @@ div[class^='codeBlockContainer'] {
   border-color: var(--uw-border);
 }
 
-/* Keep <DocCardList/> cards native when rendered inside a .markdown doc page
-   (prose link/paragraph rules above must not bleed into DocCard). */
-.markdown a.card,
-.markdown a.card:hover {
-  color: var(--ifm-color-emphasis-800);
-  border-bottom: none;
-  text-decoration: none;
-}
+/* Keep <DocCardList/> cards native when rendered inside a .markdown doc page:
+   reset the prose paragraph font on the card description and the heading margin
+   (the card link itself is already excluded from the prose link rules above). */
 .markdown a.card p {
   font-family: var(--ifm-font-family-base);
 }
