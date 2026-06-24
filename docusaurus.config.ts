@@ -5,7 +5,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Knowledge Hub',
+  title: 'Uwazi Help',
   tagline:
     'Comprehensive documentation and resources for Uwazi following the Diátaxis framework',
   favicon: 'img/favicon.svg',
@@ -27,8 +27,7 @@ const config: Config = {
   organizationName: 'huridocs', // Usually your GitHub org/user name.
   projectName: 'uwazi-knowledge-hub', // Usually your repo name.
 
-  // TODO: restore to 'throw' once the linked start-page targets exist.
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'throw',
 
   themes: ['@docusaurus/theme-mermaid'],
 
