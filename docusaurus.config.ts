@@ -31,6 +31,17 @@ const config: Config = {
 
   themes: ['@docusaurus/theme-mermaid'],
 
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        // The home page (/) is the docs hub, so the old /docs landing is
+        // redundant — redirect it to the home page.
+        redirects: [{ from: '/docs', to: '/' }],
+      },
+    ],
+  ],
+
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
