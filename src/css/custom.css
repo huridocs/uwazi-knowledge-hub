@@ -227,6 +227,21 @@ div[class^='codeBlockContainer'] {
   border-color: var(--uw-border);
 }
 
+/* Keep <DocCardList/> cards native when rendered inside a .markdown doc page
+   (prose link/paragraph rules above must not bleed into DocCard). */
+.markdown a.card,
+.markdown a.card:hover {
+  color: var(--ifm-color-emphasis-800);
+  border-bottom: none;
+  text-decoration: none;
+}
+.markdown a.card p {
+  font-family: var(--ifm-font-family-base);
+}
+.markdown a.card h2 {
+  margin-top: 0;
+}
+
 /* Reusable mono kicker/label */
 .uw-kicker {
   font-family: var(--ifm-font-family-monospace);
