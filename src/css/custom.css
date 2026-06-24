@@ -212,17 +212,10 @@ div[class^='codeBlockContainer'] {
   border-radius: var(--uw-radius-card);
 }
 
-/* Admonitions - Vellum bg, accent left border */
-.theme-admonition,
-.admonition {
-  background: var(--uw-vellum);
-  border: 1px solid var(--uw-border);
-  border-left: 3px solid var(--uw-carbon);
+/* Admonitions keep Docusaurus default per-type color coding (note/tip/info/
+   warning/danger). Only soften the corner to match other surfaces. */
+.theme-admonition {
   border-radius: var(--uw-radius-card);
-}
-.theme-admonition-danger,
-.admonition-danger {
-  border-left-color: var(--uw-seal);
 }
 
 /* Tables */
