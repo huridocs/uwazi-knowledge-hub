@@ -1,34 +1,36 @@
 .tl {
   position: relative;
   margin-top: 22px;
-  padding-left: 64px;
-}
-.tl::before {
-  content: '';
-  position: absolute;
-  /* centered under the 36px badge: padding(64) + badge.left(-64) + r(18) = 18 */
-  left: 17px;
-  top: 18px;
-  bottom: 30px;
-  width: 2px;
-  background: var(--uw-border-strong);
+  padding-left: 70px;
 }
 .step {
   position: relative;
   margin-bottom: 18px;
 }
+/* Connector runs from each badge down to the next; the last step draws none. */
+.step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  /* centered under the 42px badge: badge.left(-70) + r(21) = -49 */
+  left: -50px;
+  top: 42px;
+  bottom: -18px;
+  width: 2px;
+  background: var(--uw-border-strong);
+}
 .badge {
   position: absolute;
-  left: -64px;
-  top: 14px;
-  width: 36px;
-  height: 36px;
+  left: -70px;
+  top: 0;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   background: var(--uw-seal);
   color: var(--uw-ink);
   font-family: var(--ifm-font-family-monospace);
   font-weight: 700;
   font-size: 19px;
+  letter-spacing: 0.04em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,16 +86,17 @@
 }
 @media (max-width: 768px) {
   .tl {
-    padding-left: 48px;
+    padding-left: 56px;
   }
-  .tl::before {
-    /* centered under the 30px badge: padding(48) + badge.left(-48) + r(15) = 15 */
-    left: 14px;
+  .step:not(:last-child)::before {
+    /* centered under the 38px badge: badge.left(-56) + r(19) = -37 */
+    left: -38px;
+    top: 38px;
   }
   .badge {
-    left: -48px;
-    width: 30px;
-    height: 30px;
+    left: -56px;
+    width: 38px;
+    height: 38px;
     font-size: 18.7px;
   }
   .start {
