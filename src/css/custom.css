@@ -252,9 +252,45 @@ div[class^='codeBlockContainer'] {
   font-weight: 500;
   color: var(--uw-text-2);
 }
-.navbar__link:hover,
+/* Top-level nav links: Vellum hover pill + Seal active underline */
+.navbar__link {
+  position: relative;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+.navbar__link:hover {
+  background: var(--uw-vellum);
+  color: var(--uw-ink);
+}
 .navbar__link--active {
   color: var(--uw-ink);
+  font-weight: 600;
+}
+.navbar__link--active::after {
+  content: '';
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 1px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--uw-seal);
+}
+/* Dropdown menu entries */
+.dropdown__link {
+  border-radius: 6px;
+}
+.dropdown__link:hover {
+  background: var(--uw-vellum);
+  color: var(--uw-ink);
+}
+.dropdown__link--active {
+  background: var(--uw-vellum);
+  color: var(--uw-ink);
+  font-weight: 600;
 }
 /* Site title rendered as an Ink "Help" pill so it reads as the site label */
 .navbar__title {
