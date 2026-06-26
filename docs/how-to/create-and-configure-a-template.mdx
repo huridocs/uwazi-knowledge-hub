@@ -1,0 +1,170 @@
+---
+title: How to create and configure a template
+description: Create a template and set up its properties in Uwazi.
+---
+
+## Prerequisites
+
+- Admin access to your Uwazi instance
+
+## Steps
+
+### Create a template
+
+1. Go to **Settings > Templates**.
+2. Select **Add template**.
+3. Enter a name in the **Name** field.
+   The name must be unique across all templates in your instance.
+4. Select a colour from the colour picker.
+   Uwazi picks one at random —
+   you can change it to any of the 15 preset colours.
+   The colour appears on entity cards and labels across Uwazi.
+5. To use a custom page as the entity view,
+   select **Display entity view from page**
+   and choose a page from the drop-down.
+   Only pages with the entity view setting enabled appear in the list.
+6. Select **Save**.
+
+### Add and configure properties
+
+Every template includes three locked properties: **Title**, **Date added**,
+and **Date modified**.
+You can't remove or reorder these.
+Add your own properties to capture the details your work needs.
+
+To add a property:
+
+1. Select **Add property** in the property list.
+   A settings panel opens on the right.
+2. Choose a property type from the **Type** drop-down.
+   Each type sets what kind of data users can enter — text, a date,
+   a value from a list, a file, or a link to another entity.
+   :::warning
+   You can't change a property's type after you save the template.
+   :::
+3. Enter a label in the **Label** field.
+   The label must be unique within the template.
+   If another template already has a property with the same label,
+   the type and settings must match exactly.
+   The editor highlights conflicts in red and blocks saving
+   until you resolve them.
+4. Set the options shown in the sections below.
+5. Repeat steps 1–4 for each property you want to add.
+6. Drag rows in the list to reorder properties.
+7. Select **Save**.
+
+### Configure options available on every property
+
+These options appear for every property type:
+
+**Required** — Users can't save an entity without filling in a required
+property.
+Use this for fields that must always have a value,
+such as a case number or a date.
+
+**Show in cards** — The property value appears on entity cards in the library.
+Limit this to two or three properties per template so cards stay clear.
+
+**Hide label** — The label doesn't appear in the entity view.
+Useful when the value speaks for itself, such as a full-width image.
+
+### Configure filter options
+
+For most property types,
+you can also control how the property works in the library sidebar filter.
+
+**Use as filter** — The property appears as a filter in the library sidebar.
+Users can filter entities by this property's values.
+
+**Default filter** — This option appears when **Use as filter** is on.
+Select it to turn on the filter when users open the library.
+
+**Priority sorting** — This option appears when **Use as filter** is on,
+for text, numeric, select, and date properties.
+Select it to sort library results by this property by default.
+
+### Configure select and multi-select properties
+
+Select and multi-select properties let users choose values from a *thesaurus* —
+a shared list of set values.
+
+- **Select** — users choose one value.
+- **Multi-select** — users can choose more than one value.
+
+To set up either type:
+
+1. Choose a thesaurus from the **Thesaurus** drop-down.
+   If the thesaurus you need doesn't exist yet,
+   select **Add thesaurus** to create one without leaving the template editor.
+
+### Configure relationship properties
+
+Relationship properties connect entities to other entities through a named
+connection type.
+
+1. Choose a type from the **Relationship type** drop-down.
+   If you need a new type,
+   select **Add relationship type** to create one without leaving the editor.
+2. To limit which entities users can link to,
+   choose a template from the **Entities** drop-down.
+   Leave it empty to allow links to any entity.
+3. To show a property from the linked entity inline,
+   choose it from the **Inherit property** drop-down.
+   You must select a value in **Entities** before this option appears.
+
+### Configure image and media properties
+
+Image and media properties have two display options:
+
+**Style** — Choose **Fill** to scale the image or video to cover its container.
+Choose **Fit** to scale it without cropping.
+
+**Full width** — Select this to make the image
+or video span the full width of the entity view.
+
+### Remove a property
+
+:::warning
+Removing a property deletes its values from all existing entities.
+Uwazi runs this in the background after you save,
+and the change can't be undone.
+:::
+
+1. Select the checkbox next to one or more properties.
+2. Select **Remove**.
+3. Select **Save**.
+
+### Set a default template
+
+The default template is pre-selected when a user creates a new entity.
+To set one:
+
+1. Go to **Settings > Templates**.
+2. Find the template in the list.
+3. Select **Set as default**.
+
+### Delete a template
+
+You can only delete a template that has no entities linked to it
+and isn't the default template.
+
+1. Go to **Settings > Templates**.
+2. Select the checkbox next to the template.
+3. Select **Delete** and confirm.
+
+## Result
+
+Uwazi saves your template.
+It's now ready to use.
+
+:::tip
+If your instance has more than 3,000 entities on this template,
+Uwazi warns you before saving that the update will take time to process.
+A progress bar appears in the editor header.
+Uwazi locks the template for editing until the job finishes.
+:::
+
+## See also
+
+- [Property types](../reference/property-types.mdx) —
+  full list of property types and their options

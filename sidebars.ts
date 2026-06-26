@@ -44,7 +44,7 @@ const sidebars: SidebarsConfig = {
       ],
     },
   ],
-  howTo: ['how-to/index'],
+  howTo: ['how-to/index', 'how-to/create-and-configure-a-template'],
   reference: [
     'reference/index',
     'reference/collection-settings',
