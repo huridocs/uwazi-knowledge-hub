@@ -44,7 +44,12 @@ const sidebars: SidebarsConfig = {
       ],
     },
   ],
-  howTo: ['how-to/index', 'how-to/create-and-configure-a-template'],
+  howTo: [
+    'how-to/index',
+    'how-to/create-and-configure-a-template',
+    'how-to/create-and-manage-a-thesaurus',
+    'how-to/link-a-thesaurus-to-a-template',
+  ],
   reference: [
     'reference/index',
     'reference/collection-settings',
