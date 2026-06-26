@@ -46,9 +46,21 @@ const sidebars: SidebarsConfig = {
   ],
   howTo: [
     'how-to/index',
-    'how-to/create-and-configure-a-template',
-    'how-to/create-and-manage-a-thesaurus',
-    'how-to/link-a-thesaurus-to-a-template',
+    {
+      type: 'category',
+      label: 'Structuring your collection',
+      link: {
+        type: 'generated-index',
+        title: 'Structuring your collection',
+        description: 'How-to guides on how to structure your collection',
+      },
+      items: [
+        'how-to/create-and-configure-a-template',
+        'how-to/create-and-manage-a-thesaurus',
+        'how-to/link-a-thesaurus-to-a-template',
+        'how-to/relationship-properties',
+      ],
+    },
   ],
   reference: [
     'reference/index',
