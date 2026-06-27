@@ -1,0 +1,97 @@
+---
+title: How to manage filters for the library
+description: Control which metadata properties appear as filters in the library sidebar, and which entity types appear in the type selector.
+---
+
+## Prerequisites
+
+- Admin access to your Uwazi instance
+
+## Steps
+
+Filters in Uwazi have two parts you control on their own.
+One part is the metadata properties that appear
+as filter widgets in the library sidebar.
+The other is the templates that appear in the library's template selector.
+
+### Enable or disable a property as a filter
+
+These steps control which metadata properties appear
+as filters in the library sidebar.
+
+1. Go to **Settings > Templates** and open the template you want to edit.
+2. Select a property row to open its settings panel.
+3. Select **Use as filter** to make the property a filter.
+   If the option isn't visible, the property type doesn't support filtering.
+   Image, media, link, geolocation,
+   and preview properties don't have this option.
+   The built-in **Title**, **Date added**,
+   and **Date modified** properties don't have it either.
+4. To show the filter by default in the library, select **Default filter**.
+   This option appears only when **Use as filter** is on.
+   :::note
+   Clearing **Use as filter** also clears **Default filter**
+   and **Priority sorting**.
+   :::
+5. Select **Accept** to apply your changes to the property.
+6. Check the conflict table if it appears below the settings panel.
+   Rows in red mean the property name matches a property in another template,
+   but the types or thesauri don't match.
+   Uwazi blocks saving until you resolve all conflicts.
+7. Select **Save** to save the template.
+   If the template has more than 3,000 entities, a dialog appears first.
+
+To disable a property as a filter, open its settings panel,
+clear **Use as filter**, and select **Save**.
+
+### Add and remove templates from the library template selector
+
+These steps control which templates users can choose from in the library.
+Once you add at least one template here,
+a **Featured** / **All** toggle appears in the library.
+**Featured** shows only the templates you set up here, in the order you chose.
+**All** shows every template in A-to-Z order.
+If you haven't added any templates,
+the library shows all templates and the toggle doesn't appear.
+
+1. Go to **Settings > Filters**.
+2. Select **Add entity type**.
+   A dialog opens with all templates not already in the list.
+   Select one or more and select **Add**.
+   The selected templates appear at the bottom of the list.
+3. To create a named group, select **Add group**.
+   A side panel opens.
+   Enter a name in the **Name** field.
+   To add templates now, select them from the **Entity types** field.
+   Select **Add** to save the group.
+4. Drag rows to set the order.
+   This order matches what users see in the library template selector.
+5. To edit a group, select **Edit** on its row.
+   Change the name or members in the side panel and select **Update**.
+6. To remove an entry, select its checkbox and select **Delete selected**.
+   You can remove templates from inside a group the same way.
+   Uwazi removes empty groups when you save.
+7. Select **Save**.
+   Uwazi shows "Filters saved" and updates all open sessions in real time.
+
+To clear all templates, delete all entries and select **Save**.
+The library returns to showing all templates in A-to-Z order.
+
+## Result
+
+The library sidebar shows the filter properties you set up.
+The template selector shows the templates you added.
+
+:::tip
+If you rename a template,
+Uwazi updates its name in the top-level list but not inside groups.
+Groups store a separate copy of the name,
+so open each affected group and select **Update** to sync it.
+:::
+
+## See also
+
+- [How to create and configure a template](create-and-configure-a-template.mdx)
+  — full steps for creating templates and managing properties
+- [Property types reference](../reference/property-types.mdx) —
+  which property types support filtering

@@ -59,6 +59,7 @@ const sidebars: SidebarsConfig = {
         'how-to/create-and-manage-a-thesaurus',
         'how-to/link-a-thesaurus-to-a-template',
         'how-to/relationship-properties',
+        'how-to/manage-filters',
       ],
     },
   ],
