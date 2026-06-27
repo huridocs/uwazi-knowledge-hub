@@ -1,0 +1,153 @@
+---
+title: How to translate the contents of a collection
+description: Translate entity text, thesauri, relationship types, filters, menu links, pages, and primary documents into each language.
+---
+
+## Prerequisites
+
+- At least two languages installed in your collection
+- Admin access for thesauri, relationship types, menu links, filters, and pages
+- Write access to an entity for its text and primary documents
+
+You install and set languages in
+[How to manage the languages of a collection](manage-languages.mdx).
+This guide assumes you already did that.
+
+## Steps
+
+You translate a collection's content in three places:
+
+1. You translate entity text inside each entity.
+2. You translate pages in the page editor.
+3. You translate the rest from **Settings > Translations**.
+
+The table below shows the role each task needs.
+
+| Task                                                           | Role needed                |
+| -------------------------------------------------------------- | -------------------------- |
+| Translate entity text                                          | Write access to the entity |
+| Upload a translated primary document                           | Write access to the entity |
+| Translate thesauri, relationship types, menu links, or filters | Admin                      |
+| Translate a page                                               | Admin                      |
+
+Write access covers admin, editor,
+and collaborator users with edit rights on the entity.
+
+### Translate the text of an entity
+
+These steps translate the title and text fields of one entity.
+
+1. Open the entity you want to translate.
+2. Select the language button in the top-right header.
+   Choose the language you want.
+   The page reloads with that language's copy of the entity.
+3. Select **Edit** to open the entity for editing.
+4. Edit the title and any text fields with the translated wording.
+5. Select **Save**.
+
+Other field types work differently.
+Handle each one as follows:
+
+- **Link** fields store a display text and a web address for each language.
+  Translate the display text.
+  Keep the same web address, or point to a localized one for that language.
+- **Image** and **Media** fields hold a separate file for each language.
+  Uwazi doesn't copy them across languages.
+  Reuse the same file, or add a localized one for that language.
+- **Date**, **Numeric**, **Geolocation**,
+  and **Generated ID** fields stay the same in every language.
+  You don't translate them.
+- **Select** and **Multiple select** fields show values from a thesaurus.
+  You translate those values in the thesaurus, not in the entity.
+- **Relationship** fields show the titles of the entities they link to.
+  You translate each linked entity on its own with these same steps.
+
+Repeat these steps for each language you support.
+
+### Translate the labels of a thesaurus
+
+Uwazi creates a translation entry for a thesaurus once you save it.
+The entry holds the thesaurus name and each of its item labels.
+
+1. Go to **Settings > Translations**.
+2. Under **Content translations**, find the thesaurus by its name.
+3. Select the edit icon on its row.
+4. To show only labels that still need work, turn on **Untranslated Terms**.
+5. Type the translated wording for each label in each language column.
+6. Select **Save**.
+
+### Translate the name of a relationship type
+
+Uwazi creates a translation entry for a relationship type once you save it.
+
+1. Go to **Settings > Translations**.
+2. Under **Content translations**, find the relationship type by its name.
+   Its row carries the **Relationship Type** tag.
+3. Select the edit icon on its row.
+4. Type the translated name in each language column.
+5. Select **Save**.
+
+### Translate navigation menu links
+
+Uwazi creates a translation entry for your menu once you save it.
+
+1. Add your links in **Settings > Menu** and save.
+2. Go to **Settings > Translations**.
+3. Under **System translations**, select the edit icon on the **Menu** row.
+4. Type the translated title for each link in each language column.
+5. Select **Save**.
+
+### Translate filter labels
+
+:::note
+Only named filter groups appear here.
+A plain filter row without a group name has no label to translate.
+:::
+
+1. Set up named groups in **Settings > Filters** and save.
+2. Go to **Settings > Translations**.
+3. Under **System translations**, select the edit icon on the **Filters** row.
+4. Type the translated wording for each group name in each language column.
+5. Select **Save**.
+
+### Translate a page
+
+A page stores its title and content once per language.
+You edit each language from the language tabs in the page editor.
+
+1. Go to **Settings > Pages** and open the page.
+2. Select the language tab you want at the top-right of the editor.
+3. Edit the title and content for that language.
+4. Select **Save** to keep a draft, or **Publish** to make it live.
+
+### Upload a translated primary document
+
+A primary document is the main PDF attached to an entity.
+You can add a copy in another language and label it with that language.
+
+1. Open the entity.
+   The **Primary Documents** section lists its main documents.
+2. Select **Add PDF** in the **Primary Documents** section.
+3. Choose the file.
+   Uwazi accepts PDF files only.
+   It uploads the file and detects its language from the text.
+4. Check the language label on the new document.
+5. If the language is wrong or missing, select **Edit**,
+   choose the right **Language**, and select **Save**.
+
+## Result
+
+Your collection's content now reads in each language you support.
+Users see the translated wording when they switch language from the header.
+
+:::tip
+Turn on **Untranslated Terms** on any translation page to find labels
+that still match the default language.
+:::
+
+## See also
+
+- [How to manage the languages of a collection](manage-languages.mdx) — install,
+  set, and remove languages
+- [Multi-language support](../../reference/multi-language-support.mdx) —
+  how interface, content, and per-language copies work together

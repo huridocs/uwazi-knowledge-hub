@@ -70,7 +70,10 @@ const sidebars: SidebarsConfig = {
         title: 'Translating your collection',
         description: 'How-to guides on how to translate your collection',
       },
-      items: ['how-to/translating-your-collection/manage-languages'],
+      items: [
+        'how-to/translating-your-collection/manage-languages',
+        'how-to/translating-your-collection/translating-collection-contents',
+      ],
     },
   ],
   reference: [
