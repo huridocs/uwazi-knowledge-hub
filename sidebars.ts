@@ -72,7 +72,8 @@ const sidebars: SidebarsConfig = {
       },
       items: [
         'how-to/translating-your-collection/manage-languages',
-        'how-to/translating-your-collection/translating-collection-contents',
+        'how-to/translating-your-collection/translate-collection-contents',
+        'how-to/translating-your-collection/translate-the-user-interface',
       ],
     },
   ],

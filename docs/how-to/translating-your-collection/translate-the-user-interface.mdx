@@ -1,0 +1,138 @@
+---
+title: How to translate the Uwazi interface
+description: Translate the buttons, menus, and messages of the Uwazi interface into any installed language.
+---
+
+## Prerequisites
+
+- Admin access to your Uwazi instance
+- At least two languages installed in your collection
+
+You install languages in
+[How to manage the languages of a collection](manage-languages.mdx).
+This guide assumes you already did that.
+
+## Steps
+
+Interface text means the buttons, menus, and messages of Uwazi itself.
+You translate it in **Settings > Translations**, under **System translations**.
+
+That section always holds the **System** row,
+which holds the main interface text.
+Two more rows can appear:
+
+- The **Menu** row holds your navigation link titles.
+  It appears once you save your navigation links.
+- The **Filters** row holds your named filter group titles.
+  It appears once you save a named filter group.
+
+You have three ways to translate this text.
+Edit each term by hand, import a batch from a file,
+or edit text in place as you browse.
+Pick the one that fits your task.
+
+### Translate interface terms by hand
+
+Use this way to translate or fix a few terms at a time.
+
+1. Go to **Settings > Translations**.
+2. Under **System translations**, select the edit icon on the **System** row.
+3. Turn on **Untranslated Terms** to show only the terms that still need work.
+4. Type the translated wording for each term in each language column.
+5. Select **Save**.
+   Uwazi shows "Translations saved".
+
+A term counts as untranslated
+while its value still matches the default language.
+You can't save an empty value.
+
+:::note
+The **Menu** and **Filters** rows work the same way.
+Uwazi adds their terms once you save your navigation links
+and named filter groups.
+:::
+
+### Import interface terms from a file
+
+Use this way to translate many terms at once.
+You upload a CSV file, so this suits a large batch
+or wording prepared outside Uwazi.
+
+First, build the file.
+The easiest way is to start from Uwazi's
+[English interface file](https://github.com/huridocs/uwazi/blob/1485728eb645c2543f8355b9a9a3c5df0b5b0cc0/contents/ui-translations/en.csv)
+on GitHub.
+It lists every `Key` with its English wording,
+so you don't have to find the keys yourself.
+
+- Download the file.
+  It already has a `Key` column and an `English` column.
+- Add one column for each language you translate.
+  Use the language name as the header,
+  exactly as it appears in **Settings > Languages**.
+  For example, `Français` or `Español`.
+  Don't use the two-letter code.
+- Type your wording for each term in its language column.
+
+Your file looks like this:
+
+```csv
+Key,English,Français,Español
+Library,Library,Bibliothèque,Biblioteca
+Search,Search,Rechercher,Buscar
+Upload,Upload,Téléverser,Subir
+```
+
+Each row pairs a term key with its wording in every language.
+
+Then import it:
+
+1. Go to **Settings > Translations**.
+2. Under **System translations**, select the edit icon on the **System** row.
+3. Select **Import** at the bottom of the editor.
+4. Choose your CSV file.
+   Uwazi imports the terms and shows "Translations imported."
+
+:::note
+Import updates terms that already exist in the **System** row.
+Uwazi skips any key it doesn't recognize and any empty cell.
+There is no button to export the current terms,
+so match your keys to the wording already in Uwazi.
+:::
+
+### Translate interface terms in place
+
+Use **Live translate** to fix wording you see on a page,
+without hunting for its term.
+
+1. Select the language button in the top-right header.
+2. Turn on **Live translate** at the bottom of the menu.
+   You can now select any interface text on the page.
+3. Select any highlighted text.
+   A **Translate** window opens with one box per language.
+4. Type the translated wording in each box.
+5. Select **Save**.
+   Uwazi shows "Translations saved".
+6. Turn off **Live translate** when you finish.
+
+## Result
+
+Your Uwazi interface now reads in each language you translated.
+Users see your wording when they switch language from the header.
+
+:::tip
+11 languages ship with ready-made interface text.
+To restore the original text for one of them,
+use **Reset** in **Settings > Languages**.
+:::
+
+## See also
+
+- [How to manage the languages of a collection](manage-languages.mdx) — install,
+  configure, and remove languages to make your Uwazi instance available in
+  multiple language
+- [How to translate the content of a collection](translate-collection-contents.mdx)
+  — translate entity text, thesauri, relationship types, filters, menu links,
+  pages, and primary documents into each language
+- [Multi-language support](../../reference/multi-language-support.mdx) —
+  reference information about languages support in Uwazi
