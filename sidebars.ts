@@ -62,6 +62,16 @@ const sidebars: SidebarsConfig = {
         'how-to/structuring-your-collection/manage-filters',
       ],
     },
+    {
+      type: 'category',
+      label: 'Translating your collection',
+      link: {
+        type: 'generated-index',
+        title: 'Translating your collection',
+        description: 'How-to guides on how to translate your collection',
+      },
+      items: ['how-to/translating-your-collection/manage-languages'],
+    },
   ],
   reference: [
     'reference/index',
