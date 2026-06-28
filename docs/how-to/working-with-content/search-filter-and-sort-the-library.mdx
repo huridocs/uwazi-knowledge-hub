@@ -1,0 +1,126 @@
+---
+title: How to search, filter, and sort the library
+description: Find specific records in the Uwazi library using keyword search, field filters, and sort options.
+---
+
+## Prerequisites
+
+- Access to a Uwazi collection with records in its library
+
+Anyone can search, filter, and sort published records.
+Signing in as an editor, collaborator,
+or admin adds filters for publishing status and permissions.
+
+## Steps
+
+### Search for records by keyword
+
+1. Go to the **Library** page.
+2. Select the search box at the top of the page.
+3. Type your search term.
+   Results update as you type.
+   The search looks across each record's title, document text,
+   and metadata fields.
+4. To narrow your search, combine your term with these operators:
+
+   | Operator          | What it does                        | Example                                       |
+   | ----------------- | ----------------------------------- | --------------------------------------------- |
+   | `"..."`           | Match an exact phrase               | `"fair trial"`                                |
+   | `*`               | Match any number of characters      | `juris*` matches "jurisdiction" and "jurists" |
+   | `?`               | Match a single character            | `198?` matches 1980 through 1989              |
+   | `AND`             | Both terms must appear              | `torture AND detention`                       |
+   | `OR`              | Either term can appear              | `asylum OR refugee`                           |
+   | `NOT`             | Exclude a term                      | `prison NOT juvenile`                         |
+   | `"term1 term2"~N` | The two terms appear within N words | `"arrested detained"~3`                       |
+
+   Select **Search tips** next to the search box to see this list inside Uwazi.
+   :::note
+   If an operator is incomplete or mistyped,
+   Uwazi still returns results using a simpler keyword match instead of showing
+   an error.
+   :::
+5. Press **Enter** or select the search icon to search at once.
+6. To clear the search, select **X** inside the search box.
+   Any active filters stay in place.
+
+### Filter by template
+
+1. In the sidebar, select one or more entity types.
+   The results update to show only records of those types.
+2. If a **Featured / All** toggle appears,
+   select **All** to see every available entity type.
+3. Selecting a group label selects or clears all types in that group at once.
+
+### Filter by metadata field
+
+1. Below the entity type list,
+   find the metadata filters for the types you've selected.
+   If you've selected more than one type,
+   only filters common to all selected types appear.
+
+2. Use the filter for each field type as follows:
+   - Fields with a list of options
+     (e.g., country, category): select one or more values.
+     Each value shows how many records match.
+   - Date range fields: enter a **From** date, a **To** date, or both.
+   - Number range fields: enter a minimum value, a maximum value, or both.
+   - Text fields: type a value to match that specific field.
+   - Linked entity fields: select one or more linked records.
+     If there are many options, type in the search box inside the filter panel.
+
+3. By default, selecting multiple values returns records that match any of them.
+   Select **AND** on the toggle next to the filter label
+   when all selected values must match.
+   This toggle appears on fields where you can pick more than one value.
+
+4. Select **No value** to show records where that field is empty.
+   Select **Any value** to show records that have a value in that field.
+
+5. Select a filter label to collapse or expand that panel.
+
+### Filter by publishing status or permission level
+
+If you're an editor, collaborator, or admin,
+you'll see extra filters at the top of the sidebar.
+
+1. Select **Published** or **Restricted** to show only published records
+   or only unpublished ones.
+2. Under **Can edit / Can view**,
+   select a permission level to show records by your access to them.
+3. Under **Assigned to**, select a person
+   or group to show records shared with them.
+
+### Sort results
+
+:::note
+When a keyword search is active and you haven't chosen a sort,
+Uwazi sorts by relevance.
+Selecting a sort field overrides this.
+:::
+
+1. Select the sort drop-down in the library header.
+   The list shows these options:
+   - **Date added** (default)
+   - **Title** (A to Z)
+   - **Date modified**
+   - **Relevance** (only when a keyword search is active)
+   - Any metadata fields your administrator has marked for sorting
+
+2. Select the arrow button next to the sort drop-down to switch between
+   ascending and descending order.
+
+### Clear all filters
+
+1. Select **Clear filters** at the bottom of the sidebar.
+   Uwazi resets all active filters, entity types, and the search term,
+   and restores the default sort order.
+
+## Result
+
+The library shows only the records that match your search term, filters,
+and sort order.
+
+:::tip
+Copy the library URL to share your exact view with others.
+The URL captures your current search and filters.
+:::

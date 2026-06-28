@@ -76,6 +76,17 @@ const sidebars: SidebarsConfig = {
         'how-to/translating-your-collection/translate-the-user-interface',
       ],
     },
+    {
+      type: 'category',
+      label: 'Working with content',
+      link: {
+        type: 'generated-index',
+        title: 'Working with content',
+        description:
+          'How-to guides on how to work with content within your collection',
+      },
+      items: ['how-to/working-with-content/search-filter-and-sort-the-library'],
+    },
   ],
   reference: [
     'reference/index',
