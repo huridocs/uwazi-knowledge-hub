@@ -94,6 +94,7 @@ const sidebars: SidebarsConfig = {
         'how-to/working-with-content/create-references-in-a-document',
         'how-to/working-with-content/create-relationships-between-entities',
         'how-to/working-with-content/paragraph-extraction',
+        'how-to/working-with-content/metadata-extraction',
       ],
     },
   ],
