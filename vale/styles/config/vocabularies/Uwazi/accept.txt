@@ -4,6 +4,8 @@
 Anthropic
 aphilop
 APIs?
+(?i)authenticator
+Authy
 backtick
 BarChart
 ContactForm

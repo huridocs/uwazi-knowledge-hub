@@ -97,6 +97,16 @@ const sidebars: SidebarsConfig = {
         'how-to/working-with-content/metadata-extraction',
       ],
     },
+    {
+      type: 'category',
+      label: 'Managing your instance',
+      link: {
+        type: 'generated-index',
+        title: 'Managing your instance',
+        description: 'How-to guides on how to manage your Uwazi instance',
+      },
+      items: ['how-to/managing-your-instance/user-account-management'],
+    },
   ],
   reference: [
     'reference/index',

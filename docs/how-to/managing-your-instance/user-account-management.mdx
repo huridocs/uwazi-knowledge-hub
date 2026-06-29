@@ -1,0 +1,115 @@
+---
+title: How to manage your user account
+description: Update your email, change your password, turn on two-factor authentication, and reset a forgotten password in Uwazi.
+---
+
+## Prerequisites
+
+- An account you can sign in to (for the email, password, and two-factor tasks)
+- An authenticator app, on your phone or computer
+  (only for two-factor authentication)
+
+You don't need any of these to reset a forgotten password.
+That task starts from the login screen.
+
+## Steps
+
+Each task below is separate.
+Go to the one you need.
+
+### Update your email address
+
+1. Go to **Settings** in the sidebar, then select **Account**.
+2. Find the **General Information** card.
+
+   Your username and user role show here too,
+   but you can't change them on this card.
+3. Type your new address in the **Email** field.
+4. Select **Update**.
+
+   If the address is empty or malformed,
+   the message "A valid email is required" appears, and Uwazi saves nothing.
+5. In the confirmation box, type your current password and select **Accept**.
+6. Wait for the "Account updated" message.
+   Your new email works right away.
+
+   If another account already uses that address, Uwazi shows an error.
+   Pick a different address.
+
+### Change your password
+
+1. Go to **Settings** in the sidebar, then select **Account**.
+2. Find the **Change Password** card.
+3. Type a new password in **New password**.
+4. Type the same password again in **Confirm new password**.
+
+   If the two don't match, the message "Passwords do not match" appears.
+   Uwazi saves nothing.
+5. Select **Update**.
+6. In the confirmation box, type your current password and select **Accept**.
+
+Uwazi doesn't set a minimum length, so choose a strong password yourself.
+If you leave both fields empty, your password stays the same.
+
+### Turn on two-factor authentication
+
+Two-factor authentication asks for a one-time code each time you sign in.
+An authenticator app generates this code on your phone or computer.
+
+:::warning
+You can't turn off two-factor authentication yourself,
+and there are no backup codes.
+If you lose access to your authenticator app,
+an administrator must reset it for you.
+:::
+
+1. Go to **Settings** in the sidebar, then select **Account**.
+2. Find the **Two-Factor Authentication** card and select **Enable**.
+
+   A side panel opens.
+3. Open your authenticator app, such as Google Authenticator,
+   Microsoft Authenticator, or Authy.
+   Some password managers generate these codes too.
+4. In the app, scan the **QR Code** shown in the panel.
+
+   If you can't scan, copy the secret key from the panel
+   and type it into the app instead.
+5. Type the 6-digit code from your app into the verification field.
+6. Select **Enable**.
+7. Wait for the "2FA Enabled" message.
+   The card now shows **Activated**.
+
+From now on, the login screen asks for your username, password,
+and a 6-digit code.
+Open your authenticator app to read the current code.
+
+### Reset a forgotten password
+
+1. On the login screen, select **Forgot Password or Username?**.
+2. Type your email address in the field.
+3. Select **Send recovery email**.
+
+   Uwazi shows the same message whether or not the address matches an account.
+   This protects your privacy.
+4. Open the email titled "Password recovery" in your inbox.
+
+   The email also reminds you of your username.
+5. Select the reset link in the email.
+   It works once and expires after 24 hours.
+6. On the set-password page, type a new password in both **Password** and
+   **Repeat Password**.
+7. Select **Save password**, then sign in with your new password.
+
+If the link expired or you already used it, the page shows an error.
+Start again from step 1 to get a fresh link.
+
+## Result
+
+You've updated the account detail you needed, whether that's your email,
+password, or two-factor security.
+
+:::tip
+After six failed sign-in attempts,
+Uwazi locks your account and emails you an unlock link.
+Resetting your password also unlocks it.
+:::
