@@ -1,0 +1,151 @@
+---
+title: How to manage users and groups
+description: Add, edit, and delete users, assign roles, handle account security, and manage groups from Settings.
+---
+
+## Prerequisites
+
+- Admin access to your Uwazi instance
+- A working email setup on your instance,
+  since new accounts and password resets rely on email
+
+## Steps
+
+Uwazi keeps user and group management on one screen.
+Go to **Settings**, then **Users & Groups**.
+The screen has two tabs: **Users** and **Groups**.
+Each tab lists its records in a table you can sort.
+Select a row's **Edit** button to open its side panel,
+or use the footer buttons to act on the rows you select.
+
+Sensitive actions ask you to confirm with your own password.
+Type your current password in the confirmation box, then select **Accept**.
+A wrong password stops the action.
+
+Each section below stands on its own.
+Go to the task you need.
+
+### Add a user
+
+1. Go to the **Users** tab and select **Add user**.
+   The **New user** side panel opens.
+2. In the **General Information** card, type a **Username** and an **Email**.
+   The username can't contain spaces, and both must be unique.
+3. Select a **User Role**.
+   New users start as **Collaborator**.
+   Select the **?**
+   button to compare what each role can do.
+4. To add the person to groups, pick them from the **Groups** list.
+5. Leave the **Password** field blank.
+   Uwazi emails the new user a link to set their own password.
+6. Select **Save**, type your password to confirm, then select **Accept**.
+
+The welcome email goes out right away.
+The set-password link works once and expires after 24 hours.
+
+### Edit a user or change a role
+
+1. On the **Users** tab, select **Edit** on the user's row.
+   The **Edit user** side panel opens.
+2. Change the username, email, role, or group membership.
+3. Select **Save**, type your password to confirm, then select **Accept**.
+
+You can't change your own role.
+Uwazi blocks it.
+
+### Reset a user's password
+
+You can reset one user from their panel, or several at once from the table.
+
+1. To reset one user, open their **Edit** panel
+   and select **Reset Password** in the **Security** card.
+2. To reset several, tick their rows on the **Users** tab
+   and select **Reset Password** in the footer.
+
+Uwazi emails each user a link to set a new password.
+This action doesn't ask for your own password.
+
+### Reset two-factor authentication
+
+Use this when someone loses access to their authenticator app.
+
+1. Open the user's **Edit** panel.
+2. In the **Security** card, select **Reset 2FA**.
+   To reset several users,
+   tick their rows and select **Reset 2FA** in the footer.
+3. Type your password to confirm, then select **Accept**.
+
+This turns two-factor authentication off and clears the user's stored secret.
+The user can set it up again from scratch.
+
+### Unlock a locked account
+
+After six failed sign-in attempts, Uwazi locks the account.
+A locked account shows a red username and a lock icon on the **Users** tab.
+
+1. Select **Edit** on the locked user's row.
+2. In the **Security** card, select **Unlock account**.
+   This button appears only on locked accounts.
+3. Type your password to confirm, then select **Accept**.
+
+The user can also unlock the account themselves through the link in the lockout
+email.
+
+### Delete a user
+
+1. On the **Users** tab, tick one or more user rows.
+2. Select **Delete** in the footer.
+3. Check the list of usernames, type your password to confirm,
+   then select **Accept**.
+
+You can't delete yourself or the last remaining user.
+Uwazi blocks both.
+
+### Create or edit a group
+
+1. Go to the **Groups** tab.
+   Select **Add group**, or select **Edit** on a group's row.
+2. In the **Group Options** card, type a **Name**.
+   Each group name must be unique.
+3. Pick the group's **Members** from the list of users.
+4. Select **Save**.
+   Groups don't need a password to confirm.
+
+### Delete a group
+
+:::warning
+
+Deleting a group doesn't remove it from entities shared with it.
+Those entities keep a dead reference that no longer grants anyone access.
+
+:::
+
+1. Go to the **Groups** tab and tick one or more group rows.
+2. Select **Delete**, then confirm.
+3. Re-share any affected entities with another group or with individual users.
+
+## When Uwazi asks for your password
+
+Some actions need you to re-enter your own password, and some don't.
+This table shows which:
+
+| Action                          | Asks for your password |
+| ------------------------------- | ---------------------- |
+| Add or edit a user              | Yes                    |
+| Delete a user                   | Yes                    |
+| Reset two-factor authentication | Yes                    |
+| Unlock an account               | Yes                    |
+| Reset a password                | No                     |
+| Add, edit, or delete a group    | No                     |
+
+## Result
+
+You've created, updated, or removed the users and groups your team needs,
+and handled account security along the way.
+
+:::tip
+
+Once you've added several users, create groups that match how your team works.
+Sharing entities with a group is faster than sharing with each person.
+
+:::

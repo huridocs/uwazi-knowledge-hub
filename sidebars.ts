@@ -105,7 +105,10 @@ const sidebars: SidebarsConfig = {
         title: 'Managing your instance',
         description: 'How-to guides on how to manage your Uwazi instance',
       },
-      items: ['how-to/managing-your-instance/user-account-management'],
+      items: [
+        'how-to/managing-your-instance/user-account-management',
+        'how-to/managing-your-instance/user-management',
+      ],
     },
   ],
   reference: [
