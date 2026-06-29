@@ -88,6 +88,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'how-to/working-with-content/search-filter-and-sort-the-library',
         'how-to/working-with-content/create-and-edit-an-entity',
+        'how-to/working-with-content/csv-import',
       ],
     },
   ],

@@ -1,0 +1,213 @@
+---
+title: How to import entities from a CSV file
+description: Import a batch of entities into Uwazi from a CSV file or ZIP package, with or without documents, supporting files, and translations.
+---
+
+## Prerequisites
+
+Before you start, make sure you have:
+
+- Admin access to your Uwazi instance
+- A template whose properties match the columns in your file
+- A `.csv` file, or a `.zip` package if you import files, up to 50 MB
+
+Every import follows the same path.
+First you prepare the file.
+Then you upload it in **Settings > Import CSV** and watch it run.
+The sections below cover the shared steps, then each variation you might need.
+
+## Steps
+
+### Format your CSV file
+
+Uwazi reads your file as plain UTF-8 text.
+Follow these rules so it parses cleanly:
+
+- The first row holds the column names.
+  Each name must match a property in your template,
+  or be a reserved column such as `title`, `file`, `files`, or `attachments`.
+- Include the `title` column.
+  Every row needs a title.
+- Separate columns with a comma or a semicolon.
+  Uwazi detects which one you use.
+- To put several values in one cell, separate them with the pipe character `|`.
+  This works for multi-select, relationship, link, and the file columns.
+- Leave a cell empty when a row has no value for that property.
+  Uwazi skips it.
+- Each row creates one entity.
+
+A few property types need a set format in the cell:
+
+- **Date:** write `2023-05-01`, `2023/05/01`, or `January 15, 2023`.
+- **Select and multi-select:** write the exact label of the value.
+  For a nested value, write `Parent::Child`.
+- **Relationship:** write the exact title of the entity you link to.
+
+The simplest import has no files.
+You upload a plain `.csv` with only metadata.
+This file creates two entities, each with a title, a description, and a date:
+
+```csv
+title,description,date
+Ahmad Al-Rashid,Witness statement,2023-05-01
+Cairo Demonstration,Public protest,2023-06-15
+```
+
+### Upload and run the import
+
+Once your file is ready, run the import:
+
+1. Go to **Settings > Import CSV**.
+2. Select **Import CSV**.
+   The upload dialog opens.
+3. Drag your file into the dialog, or select it from your computer.
+4. Select your template from the **Template** list.
+5. Select **Upload**.
+   A progress bar shows the upload.
+   Don't close the dialog while it runs.
+6. The dialog closes when the upload finishes.
+   Your import appears in the table with the status **Queued**.
+7. Watch the status column.
+   It updates on its own as the import runs through each phase.
+8. Select **View** on the import row at any time to open the detail page.
+   It shows the current phase, a progress bar while it runs,
+   and summary counts when it finishes.
+
+During the run, Uwazi creates any missing thesaurus values
+and any missing linked entities for your relationships.
+The detail page reports how many it created.
+
+### Add primary documents
+
+Primary documents are the main files of an entity,
+the kind readers open and search.
+To import them, put your files and your CSV into one ZIP package.
+
+Use the `file` column for one document per entity,
+or the `files` column for several:
+
+```csv
+title,file
+Ahmad Al-Rashid,statement-rashid.pdf
+Cairo Demonstration,protest-report.pdf
+```
+
+To attach more than one document to a row,
+use `files` and separate the names with `|`:
+
+```csv
+title,files
+Ahmad Al-Rashid,statement-rashid.pdf|annex-rashid.pdf
+```
+
+The `file` column takes only one name.
+If you put two names in it,
+Uwazi treats the whole text as a single filename and can't find it.
+Use `files` for several documents instead.
+
+:::note
+
+Name the spreadsheet inside your ZIP `import.csv` and place it at the top level.
+Put every document and supporting file at that same top level.
+Uwazi ignores any file inside a subfolder.
+
+:::
+
+### Add supporting files and connect them to media properties
+
+Supporting files are extra attachments on an entity.
+Use the `attachments` column, and separate several names with `|`:
+
+```csv
+title,attachments
+Ahmad Al-Rashid,portrait.jpg|id-card.jpg
+```
+
+You can also show one of these files in an image or media property.
+List the file in `attachments`,
+then write the same filename in the property's own column.
+Uwazi matches them and links the file to the property.
+
+In this example, `portrait` is an image property on the template:
+
+```csv
+title,attachments,portrait
+Ahmad Al-Rashid,portrait.jpg|id-card.jpg,portrait.jpg
+```
+
+If the value in an image or media column doesn't match an attachment,
+Uwazi treats it as a web address instead.
+
+### Import in multiple languages
+
+You can fill a property with a different value per language in one row.
+Add `__` and the language code to the column name,
+such as `description__en` and `description__fr`.
+Each row still creates one entity.
+
+```csv
+title,description__en,description__fr
+Cairo Demonstration,Public protest,Manifestation publique
+```
+
+Keep these rules in mind:
+
+- Language columns work for text, markdown, select, multi-select, link, and the
+  title.
+- They don't work for numbers, dates, or relationships.
+  A language suffix on those fails the import.
+- If you add a language column for a property, also add the column for your
+  default language.
+- Don't mix a plain column and a language column for the same property.
+  Pick one style.
+- A property with a plain column only gets the same value in every language.
+
+### Cancel an import
+
+You can stop an import while it still runs:
+
+1. Select **View** on the import row.
+2. Select **Cancel**.
+
+Uwazi stops at the next safe point.
+Rows it already imported stay in your instance.
+You can't cancel an import that shows **Completed**, **Failed**,
+or **Cancelled**.
+
+### Review row errors
+
+If some rows fail, an errors table appears on the detail page
+once the import finishes.
+Each entry shows the row number, the property, and what went wrong.
+The row number matches the row in your file.
+
+Common causes are:
+
+- A file named in your CSV that isn't in the ZIP package.
+- A relationship title that matches no entity, or matches more than one.
+- A value in the wrong format for its property type.
+
+To get only the rows that failed,
+select **Download failed rows** on the detail page.
+Uwazi leaves empty rows out of this file
+but still counts them in the failed total.
+
+## Result
+
+When the status shows **Completed**,
+every valid row in your file is now an entity in your instance.
+
+:::tip
+
+Uwazi may create new thesaurus values and linked entities during the import.
+The new linked entities hold only a title.
+Review your thesauri and these entities afterwards,
+and fill in any missing details.
+
+:::
+
+## See also
+
+- [CSV import](../../reference/csv-import.mdx) —
+  reference for the CSV import feature for Uwazi admins,
+  covering file requirements, cell value formats, import phases, and row errors
