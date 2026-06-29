@@ -108,6 +108,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'how-to/managing-your-instance/user-account-management',
         'how-to/managing-your-instance/user-management',
+        'how-to/managing-your-instance/share-content',
       ],
     },
   ],

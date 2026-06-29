@@ -8,6 +8,7 @@ APIs?
 Authy
 backtick
 BarChart
+Cmd
 ContactForm
 changelog
 CSOs?
