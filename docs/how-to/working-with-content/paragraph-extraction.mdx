@@ -1,0 +1,138 @@
+---
+title: How to extract paragraphs from documents
+description: Set up a paragraph extractor, run it on your documents, and review the paragraphs it creates.
+---
+
+## Prerequisites
+
+Before you start, make sure you have:
+
+- Admin or editor access to your Uwazi instance
+- A template for your source documents,
+  with PDF files already uploaded and processed
+- A template to hold the paragraphs,
+  with one rich text property and one numeric property
+- Two relationship types you can use to link each paragraph back to its document
+
+:::note
+
+The **Paragraph Extraction** page appears under **Settings** only
+when your instance has this feature turned on.
+If you don't see it, ask whoever runs your instance to enable it.
+
+:::
+
+Paragraph extraction works in three parts.
+First you create an extractor that links your documents to a paragraph template.
+Then you run the extractor on the documents you choose.
+Last, you review the paragraphs it created.
+The sections below cover each part.
+
+Paragraph extraction supports every language you've added to your instance.
+It extracts paragraphs only from documents in those languages,
+and creates the paragraphs in the same languages.
+To work with a new language, go to **Settings > Languages** and add it first,
+then upload your document in that language.
+
+## Steps
+
+### Create a paragraph extractor
+
+1. Go to **Settings > Paragraph Extraction**.
+2. Select **Add extractor**.
+   The setup wizard opens.
+3. On the **Target template** step,
+   select the template that will store your paragraphs, then select **Next**.
+
+   Only templates with one rich text property
+   and one numeric property appear here.
+   If the list is empty, add those two properties to a template first.
+4. On the **Source template** step,
+   select the template that holds your source documents, then select **Next**.
+
+   A template that already belongs to another extractor,
+   or that you picked as the target, doesn't appear in this list.
+5. On the **Extraction configuration** step, fill in all four fields:
+   - **Paragraph text extraction property (rich text)**:
+     the property that stores each paragraph's text.
+   - **Paragraph number extraction property (numeric)**:
+     the property that stores each paragraph's number.
+   - **Target relationship type**:
+     the paragraph's role in the link back to its document.
+   - **Source relationship type**: the document's role in that same link.
+     Pick a different type from the target.
+6. Select **Create**.
+   A confirmation message appears and your new extractor shows in the table.
+
+### Run the extractor
+
+1. Go to **Settings > Paragraph Extraction**.
+2. Select **View** on the extractor's row.
+   The entities table opens and lists every document on the source template.
+3. Check the **Status** column to see which documents are ready.
+   A document needs at least one processed PDF in an installed language.
+4. To extract from every new document at once,
+   select **Extract new paragraphs**.
+
+   This button works only when at least one document has the **New** status.
+   The count next to it shows how many are new.
+5. To extract from specific documents instead, select their checkboxes,
+   then select **Extract paragraphs**.
+   :::warning
+   Running the extractor again on a document deletes the paragraphs it created
+   before and makes them again.
+   :::
+6. If a confirmation dialog opens, select **Continue**.
+7. Watch the **Status** column.
+   It updates on its own every few seconds
+   as each document moves from **Processing** to **Processed**.
+
+### View the extracted paragraphs
+
+1. On the entities table, find a document with the **Processed** status.
+2. Select **View** on its row.
+   The paragraphs table opens.
+3. Read the paragraphs, sorted by their number.
+   Each paragraph is one row.
+4. Expand a row to see the same paragraph in your other languages.
+5. Select a row to open a side panel with the paragraph's full text.
+   Open the document panel to compare it with the source PDF.
+
+## Result
+
+Your documents are now split into separate paragraphs,
+each saved as an entity on your paragraph template
+and linked back to its source document.
+
+:::tip
+
+If a document's status later changes to **Obsolete**,
+its PDF changed after extraction.
+Select the document and run the extractor again to refresh its paragraphs.
+
+:::
+
+## Limitations
+
+Keep these limits in mind as you work:
+
+- Paragraph extraction works only with PDF documents.
+  Each PDF must finish text processing before you can extract from it.
+- The extractor reads the text inside each PDF.
+  For a scanned or image-based PDF, run OCR first to add that text.
+- Each source template can have only one extractor.
+- The source template and the paragraph template must be different.
+- The extractor reads only documents in the languages you've configured.
+  It skips a document in any other language.
+- Running the extractor again on a document replaces all its paragraphs.
+
+## See also
+
+- [How to create and configure a template](../structuring-your-collection/create-and-configure-a-template.mdx)
+  — create a template and set up its properties in Uwazi
+- [How to run OCR on primary documents](ocr-primary-documents.mdx) —
+  turn scanned, image-based PDFs into text-searchable documents using your
+  instance's OCR service
+- [How machine-learning (ML) extraction works](../../explanation/ml-extraction.mdx)
+  — How Uwazi uses machine learning to pull facts out of your documents, and how
+  metadata and paragraph extraction differ
