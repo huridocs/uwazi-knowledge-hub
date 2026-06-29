@@ -90,6 +90,7 @@ const sidebars: SidebarsConfig = {
         'how-to/working-with-content/create-and-edit-an-entity',
         'how-to/working-with-content/csv-import',
         'how-to/working-with-content/ocr-primary-documents',
+        'how-to/working-with-content/table-of-contents',
       ],
     },
   ],
