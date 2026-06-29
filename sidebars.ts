@@ -85,7 +85,10 @@ const sidebars: SidebarsConfig = {
         description:
           'How-to guides on how to work with content within your collection',
       },
-      items: ['how-to/working-with-content/search-filter-and-sort-the-library'],
+      items: [
+        'how-to/working-with-content/search-filter-and-sort-the-library',
+        'how-to/working-with-content/create-and-edit-an-entity',
+      ],
     },
   ],
   reference: [
