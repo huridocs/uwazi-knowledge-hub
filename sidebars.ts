@@ -121,7 +121,6 @@ const sidebars: SidebarsConfig = {
     'reference/property-types',
     'reference/csv-import',
     'reference/page-visualization-components',
-    'reference/self-hosting',
     'reference/glossary',
   ],
   explanation: [

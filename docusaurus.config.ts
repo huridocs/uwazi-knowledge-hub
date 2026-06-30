@@ -80,6 +80,8 @@ const config: Config = {
             '**/__tests__/**',
             'api/**',
             'resources/**',
+            // Kept in source but out of the build until ready to surface.
+            'reference/self-hosting.mdx',
           ],
         },
         // Blog (Product updates) kept in source but disabled until needed.
@@ -107,9 +109,9 @@ const config: Config = {
     // Replace with your project's social card
     //image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'HELP',
+      title: 'DOCS',
       logo: {
-        alt: 'Uwazi help portal',
+        alt: 'Uwazi documentation portal',
         src: 'img/uwazi-logo.svg',
         srcDark: 'img/uwazi-logo-dark.svg',
         width: 96,
@@ -159,7 +161,7 @@ const config: Config = {
           href: 'https://github.com/huridocs/uwazi-knowledge-hub',
         },
       ],
-      copyright: `© ${new Date().getFullYear()} Uwazi. Built by HURIDOCS (under the MIT License).`,
+      copyright: `© ${new Date().getFullYear()} Uwazi. Built by HURIDOCS (under the MIT License).<br />AI tools helped create this portal. A human reviewed, edited, and finalized all content, following HURIDOCS’ Internal AI Governance Policy and Framework.`,
     },
     prism: {
       theme: prismThemes.github,

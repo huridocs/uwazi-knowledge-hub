@@ -8,7 +8,6 @@ import styles from './index.module.css';
 
 const cards: DiataxisCard[] = [
   {
-    number: '01',
     category: 'Tutorials',
     title: 'Learn the basics',
     description: 'From zero to your first published collection.',
@@ -29,28 +28,26 @@ const cards: DiataxisCard[] = [
     count: '6 lessons',
   },
   {
-    number: '02',
     category: 'How-to guides',
     title: 'Get things done',
     description: 'Practical recipes for your daily tasks.',
     links: [
       {
         label: 'How to create and configure a template',
-        to: '/docs/how-to/create-and-configure-a-template',
+        to: '/docs/how-to/structuring-your-collection/create-and-configure-a-template',
       },
       {
         label: 'How to import entities from a CSV file',
-        to: '/docs/how-to/csv-import',
+        to: '/docs/how-to/working-with-content/csv-import',
       },
       {
         label: 'How to manage users and groups',
-        to: '/docs/how-to/user-management',
+        to: '/docs/how-to/managing-your-instance/user-management',
       },
     ],
     count: '21 guides',
   },
   {
-    number: '03',
     category: 'Reference',
     title: 'Look it up',
     description: 'Precise details for features and settings in Uwazi.',
@@ -71,7 +68,6 @@ const cards: DiataxisCard[] = [
     count: '8 articles',
   },
   {
-    number: '04',
     category: 'Explanation',
     title: 'Understand the why',
     description: 'The ideas and structure behind how Uwazi works.',
@@ -102,7 +98,7 @@ export default function Home(): React.JSX.Element {
     >
       <main className={styles.wrap}>
         <div className={styles.hero}>
-          <span className="uw-kicker">Uwazi · Help</span>
+          <span className="uw-kicker">Uwazi · Docs</span>
           <h1 className={styles.headline}>
             Everything you need to get Uwazi working for you.
           </h1>
