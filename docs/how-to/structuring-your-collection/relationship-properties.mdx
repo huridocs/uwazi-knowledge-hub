@@ -1,0 +1,112 @@
+---
+title: How to set up relationship properties on a template
+description: Set up relationship types and add relationship properties to templates so entities can link to each other.
+---
+
+## Prerequisites
+
+- Admin access to your Uwazi instance
+
+## Steps
+
+This guide covers relationship properties in **Settings > Templates**.
+
+### Create a relationship type
+
+A relationship type is the label that names the connection.
+Common examples are "Cites", "Filed in", and "Authored by".
+You need at least one before you can add a relationship property to a template.
+
+1. Go to **Settings > Relationship types**.
+2. Select **Add relationship type**.
+3. Enter a name in the **Name** field.
+   Names must be unique.
+4. Select **Save**.
+
+To rename a type, select **Edit** on its row.
+To delete a type, select its checkbox and select **Delete**.
+Uwazi disables the checkbox if any template uses that type.
+
+You can also create a relationship type without leaving the template editor.
+Select **Add relationship type** in the editor footer.
+The new type appears in the drop-down right away.
+
+### Add a relationship property
+
+1. Go to **Settings > Templates** and open the template you want to edit.
+2. Select **Add property**.
+   A settings panel opens on the right.
+3. Enter a label in the **Label** field.
+4. Select **Relationship** from the **Type** drop-down.
+   :::warning
+   You can't change a property's type after you save the template.
+   :::
+5. Select a type from the **Relationship type** drop-down.
+6. In the **Entities** drop-down, choose which entities users can link to:
+   - **Any entity** — users can link to any entity in your collection.
+   - A specific template — users can only link to entities on that template.
+7. If you selected a specific template in step 6,
+   an **Inherit property** drop-down appears.
+   Select a property from the linked template to show its value with the linked
+   entity's name.
+   Skip this step if you don't need to show a value from the linked entity.
+8. Check the **Matching properties** table.
+   If another template has a property with the same label,
+   its settings appear here.
+   Rows in red mean the settings don't match —
+   Uwazi blocks saving until you fix all conflicts.
+9. Select **Add property**.
+10. Select **Save**.
+
+### Show more than one property from a linked entity
+
+Each relationship property can show one value from the linked entity.
+To show more than one, add a separate relationship property for each.
+
+1. In the template editor, select **Add property** to add another property.
+2. Use the same **Relationship type** and the same template in **Entities**.
+3. Select a different property from **Inherit property**.
+4. Enter a different label.
+5. Select **Add property**.
+6. Repeat steps 1–5 for each extra value you need.
+7. Select **Save**.
+
+Both properties link to the same set of entities
+because they share the same relationship type.
+
+## When to use inherited properties
+
+Inherit a property when users need to see a value from a linked entity at a
+glance — without opening it.
+
+Common uses:
+
+- Show the **country** of a person linked to a court case
+- Show the **status** of a document linked to a proceeding
+- Show the **date** of an event linked to an incident
+
+Don't use inheritance if showing an outdated value would cause problems.
+Uwazi updates the inherited value when you save the linked entity —
+not as changes happen.
+
+## Result
+
+Uwazi saves the template.
+When users create or edit an entity,
+they can link it to other entities through the relationship field.
+If you set up inheritance,
+the linked entity's property value appears alongside its name.
+
+:::tip
+If your template has more than 3,000 entities,
+Uwazi warns you before saving that the update takes time.
+A progress bar appears in the editor header.
+Uwazi locks the template for editing until the job finishes.
+:::
+
+## See also
+
+- [How to create and configure a template](create-and-configure-a-template.mdx)
+  — full steps for creating templates and managing properties
+- [Property types reference](../../reference/property-types.mdx) —
+  all property types and their options

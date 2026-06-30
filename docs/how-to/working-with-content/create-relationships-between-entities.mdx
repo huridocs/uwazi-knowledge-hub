@@ -1,0 +1,127 @@
+---
+title: How to create relationships between entities
+description: Link an entity to other entities from its Relationships tab or through a metadata field.
+---
+
+## Prerequisites
+
+- Permission to edit the entity
+  (collaborator with write access, editor, or admin role)
+
+## Steps
+
+You can link an entity to others in two ways.
+Use the **Relationships** tab to build links by hand.
+Use a relationship field on the **Info** tab when your template has one.
+An administrator sets up that field first, as described in
+[how to set up relationship properties on a template](../structuring-your-collection/relationship-properties.mdx).
+
+Each relationship can carry a label called a relationship type,
+such as "Author of" or "Mentioned in".
+Links you make on one entity also show on the other entity.
+
+### Create a relationship
+
+1. Open the entity and select the **Relationships** tab in the right sidebar.
+2. Select **Edit** in the footer.
+3. Select **New relationships group** at the bottom of the graph.
+4. Open the relationship type drop-down on the right and select a type.
+
+   The **Add entities / documents** panel opens.
+5. Type a name in the search box, then select an entity from the results.
+   The search box matches entity titles.
+
+   Repeat to add more entities to the group.
+6. To label the current entity's side too,
+   open the left drop-down and select a type.
+   Leave it as **No Label** if you don't need one.
+7. Select **Save**.
+
+### Add entities to an existing relationship
+
+1. On the **Relationships** tab, select **Edit**.
+2. In the group you want to grow, select **Add entities / documents**.
+3. Search for an entity, then select it from the results.
+4. Select **Save**.
+
+### Create a new entity and link it at once
+
+1. On the **Relationships** tab, select **Edit**.
+2. Select **Add entities / documents**, then select **Create Entity**.
+3. Select a template, type a title, and fill in the fields.
+4. Select **Save** in the panel.
+
+   The new entity joins the group.
+5. Select **Save** in the footer to keep the relationship.
+
+### Move entities between groups
+
+1. On the **Relationships** tab, select **Edit**.
+2. Select the check mark icon on each entity you want to move.
+3. Go to the target group and select its arrow icon.
+
+   The checked entities move in and take on that group's relationship type.
+4. Select **Save**.
+
+### Change a relationship's label
+
+1. On the **Relationships** tab, select **Edit**.
+2. Open the relationship type drop-down on the left side or on a group.
+3. Select a different type, or select **No Label** to remove the label.
+4. Select **Save**.
+
+### Remove a relationship
+
+1. On the **Relationships** tab, select **Edit**.
+2. Select the trash icon to mark what to remove:
+   - On one entity, to remove a single link.
+   - On a group, to remove every link in it.
+   - On the left side, to remove the whole row.
+3. To undo a mark before saving, select the trash icon again.
+4. Select **Save**.
+
+### Create a relationship through a metadata field
+
+:::note
+A link made through a field comes back
+if you remove it on the **Relationships** tab while the field still lists
+that entity.
+Remove it from the field instead.
+:::
+
+1. Open the entity and stay on the **Info** tab.
+2. Select **Edit** in the footer.
+3. Find the relationship field, labelled with the name your administrator gave
+   it.
+4. Type to search, then select an entity to add it.
+   Select an added entity's remove control to take it out.
+5. Select **Save**.
+
+### Narrow the entities in the view
+
+When an entity has many relationships,
+use these controls on the **Relationships** tab to find what you need.
+You don't need edit mode.
+
+1. To search, type a name in the **Search related entities or documents** box
+   above the graph.
+   Select the clear icon to show all again.
+2. To reorder, use the sort buttons above the graph.
+   They sort the related entities by title or by another property.
+3. To filter, open the grouped list in the right sidebar.
+   Select a relationship type or an entity type to show only matching links.
+4. Select **Reset** in the sidebar to clear all filters.
+
+## Result
+
+The linked entities appear on the entity's **Relationships** tab,
+and field links also appear in their field on the **Info** tab.
+
+## See also
+
+- [How to set up relationship properties on a template](../structuring-your-collection/relationship-properties.mdx)
+  — set up relationship types and add relationship properties to templates so
+  entities can link to each other
+- [How to create and edit an entity](create-and-edit-an-entity.mdx) —
+  create entities one at a time or in bulk, edit them,
+  and copy field values between them in the Uwazi library

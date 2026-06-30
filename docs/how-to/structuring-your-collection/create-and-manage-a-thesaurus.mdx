@@ -1,0 +1,200 @@
+---
+title: How to create and manage a thesaurus
+description: Create a thesaurus, add and group values, sort items, and import values from a CSV file.
+---
+
+## Prerequisites
+
+Before starting, make sure you have:
+
+- Admin access to your Uwazi instance
+
+## Steps
+
+### Create a thesaurus
+
+1. Go to **Settings > Thesauri**.
+2. Select **Add thesaurus**.
+3. Type a name in the **Name** field.
+   Each name must be unique.
+4. Select **Save**.
+
+Uwazi opens the edit form for the new thesaurus.
+You can add values now or return later.
+
+### Add items
+
+Items are the individual values users see in a select field.
+
+1. Go to **Settings > Thesauri** and select **Edit** next to the thesaurus.
+2. Select **Add item**.
+   A side panel opens.
+3. Type a label.
+   A new blank row appears so you can type more items.
+4. Select **Add** to close the side panel.
+5. Select **Save**.
+
+### Group values
+
+Groups organize values under a shared heading.
+You can nest items one level deep — groups can have children,
+but children can't have their own children.
+
+Open the thesaurus by going to **Settings > Thesauri** and selecting **Edit**.
+
+**Create a new group:**
+
+1. Select **Add group**.
+   A side panel opens.
+2. Type a group name, then type at least one child label.
+   New child rows appear as you fill each one.
+3. Select **Add group** to close the side panel.
+4. Select **Save**.
+
+**Add new items to an existing group:**
+
+1. Select **Add item**.
+   A side panel opens.
+2. Type an item label.
+3. Select a group from the **Group** drop-down.
+4. Select **Add** to close the side panel.
+5. Select **Save**.
+
+### Edit an item or group
+
+1. Go to **Settings > Thesauri** and select **Edit** next to the thesaurus.
+2. Select **Edit** on the row you want to change.
+3. Update the label or child values in the side panel.
+4. Select **Save** in the side panel.
+5. Select **Save** on the main form.
+
+When you rename a value, Uwazi updates it across all entities that use it.
+This update runs in the background and may take a moment to appear everywhere.
+
+### Sort and reorder values
+
+Open the thesaurus by going to **Settings > Thesauri** and selecting **Edit**.
+
+**Sort alphabetically:**
+
+1. Select **Sort**.
+   Uwazi sorts all values A–Z and sorts children within each group too.
+2. Select **Save**.
+
+**Reorder manually:**
+
+1. Drag a row by its handle to a new position.
+   Children can move within their group but can't move outside it.
+2. Select **Save**.
+
+### Remove values
+
+1. Go to **Settings > Thesauri** and select **Edit** next to the thesaurus.
+2. Select the checkboxes next to the values you want to remove.
+   You can select items, groups, and children.
+3. Select **Remove** in the footer.
+
+   If a template uses the thesaurus and the item was saved before,
+   Uwazi asks you to confirm.
+   Removing the value affects all entities that use it.
+4. Select **Save**.
+
+Removing a group also removes all its children.
+If you remove all children from a group, Uwazi removes the group too.
+
+### Import values from a CSV file
+
+You can populate a thesaurus by importing a `.csv` file.
+Uwazi merges the new values with any values already in the thesaurus.
+
+**Prepare the CSV file:**
+
+Use a comma `,` or semicolon `;` as the delimiter.
+
+The first row is the header.
+List one column per language, using the full display name for each:
+
+```csv
+English, Spanish, French
+```
+
+Each data row is one thesaurus entry with one value per language column:
+
+```csv
+English, Spanish
+Witness, Testigo
+Suspect, Sospechoso
+```
+
+To make a row a child of the row above it, prefix every cell with a hyphen `-`.
+Uwazi strips the hyphen from the stored label:
+
+```csv
+English, Spanish
+Document type, Tipo de documento
+-Testimony, -Testimonio
+-Report, -Informe
+Evidence, Evidencia
+```
+
+This creates:
+
+- Document type
+  - Testimony
+  - Report
+- Evidence
+
+All cells in a row must either have the `-` prefix or none.
+Mixing causes an import error.
+The first data row can't be a child.
+
+Uwazi skips values that are empty or contain `null`, `N/A`, or `undefined`.
+You don't need to clean these from your file.
+
+Uwazi doesn't create duplicates.
+If a CSV value matches an existing one
+(regardless of case), it keeps the existing value.
+If a CSV group name matches an existing group, it merges their children.
+
+**Import the file:**
+
+Importing saves the thesaurus right away.
+Any unsaved changes in the form merge with the CSV before saving.
+
+1. Make sure the **Name** field has a value.
+   The **Import** button stays disabled until the name is set.
+2. Select **Import**.
+3. Select your `.csv` file.
+
+A "Thesauri updated" message confirms the import succeeded.
+If the import fails, check that your file follows the format above.
+
+### Delete a thesaurus
+
+:::warning
+You can't delete a thesaurus that a template uses.
+Remove the property from each template first, then return here to delete.
+:::
+
+1. Go to **Settings > Thesauri**.
+2. Select the checkbox next to the thesaurus.
+   The checkbox is disabled if a template uses it.
+3. Select **Delete**.
+4. Confirm in the dialog.
+
+## Result
+
+Your thesaurus is ready to use in templates as a select
+or multi-select property.
+
+:::tip
+Add the thesaurus to a template by creating a select or multi-select property
+and choosing your thesaurus as its source.
+:::
+
+## See also
+
+- [How to create and configure a template](create-and-configure-a-template.mdx)
+  — Link a thesaurus to a select or multi-select property
+- [Property types](../../reference/property-types.mdx)
+  — See which property types support thesauri as a source

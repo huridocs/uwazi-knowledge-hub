@@ -1,0 +1,75 @@
+---
+title: How to link a thesaurus to a template
+description: Add a select or multi-select property to a template and connect it to a thesaurus so users can choose from a fixed list of values.
+---
+
+## Prerequisites
+
+- Admin access to your Uwazi instance
+- A thesaurus in your instance.
+  See [How to create and manage a thesaurus](create-and-manage-a-thesaurus.mdx)
+  to set one up first.
+
+## Steps
+
+1. Go to **Settings > Templates**.
+2. Select the template you want to edit.
+   To create a new template, select **Add template**.
+3. Select **Add property** in the footer.
+   A settings panel opens on the right.
+4. Enter a name in the **Label** field.
+5. Select **Select** or **Multiple select** from the **Type** drop-down.
+   - **Select** — users choose one value from the list.
+   - **Multiple select** — users can choose more than one value.
+
+   :::warning
+   You can't change a property's type after you save the template.
+   :::
+
+6. Select a thesaurus from the **Thesaurus** drop-down.
+   The drop-down shows all thesauri in your instance, sorted A–Z.
+
+   If the thesaurus you need doesn't exist yet,
+   select **Add thesaurus** in the footer.
+   Enter a name and select **Save**.
+   The new thesaurus appears in the **Thesaurus** drop-down right away.
+   Go to **Settings > Thesauri** after saving the template to add values to it.
+
+7. Check the **Matching properties** table below the drop-down.
+   This table shows properties in other templates with the same label.
+   If a row appears in red,
+   another template uses the same label with a different thesaurus.
+
+   To fix a conflict, do one of the following:
+   - Select the same thesaurus the other template uses.
+   - Change this property's label so it no longer matches.
+
+   Uwazi blocks saving until you fix all conflicts.
+
+8. Select **Add property**.
+9. Select **Save** in the template editor footer.
+
+   If your template has more than 3,000 entities,
+   a dialog warns that the update will take time.
+   Select **Confirm** to continue.
+   Uwazi shows a progress bar in the editor header while it runs the update.
+
+## Result
+
+The template now has a select property linked to your thesaurus.
+When users create or edit an entity on this template,
+they can choose from the thesaurus values in that field.
+
+:::tip
+To add or change the thesaurus values, go to **Settings > Thesauri**.
+Uwazi updates all entities that use the thesaurus when you rename a value.
+:::
+
+## See also
+
+- [How to create and manage a thesaurus](create-and-manage-a-thesaurus.mdx) —
+  Set up a thesaurus and add values before linking it to a template
+- [How to create and configure a template](create-and-manage-a-thesaurus.mdx) —
+  Full steps for creating templates and all property types
+- [Property types](../../reference/property-types.mdx) —
+  All property types and their options

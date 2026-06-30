@@ -1,0 +1,132 @@
+---
+title: How to share your content
+description: Share entities with users and groups, publish entities, and make your instance public.
+---
+
+## Prerequisites
+
+- A logged-in Uwazi account
+- The right permission level for the task you want to do
+
+Each task on this page needs a different permission level.
+This table shows who can do what:
+
+| Task                                 | Who can do it                                                                                     |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| Share an entity with a user or group | Admins and editors on any entity; collaborators only on entities shared with them as **Can edit** |
+| Publish an entity to the public      | Admins and editors only                                                                           |
+| Make the instance public             | Admins only                                                                                       |
+
+:::note
+
+Making the instance public and publishing an entity are two separate settings.
+The instance setting decides
+whether visitors without a login can reach your site.
+Each entity's published status then decides what those visitors see.
+For the public to see an entity, you need both:
+a public instance and a published entity.
+
+:::
+
+## Steps
+
+Each section below stands on its own.
+Go to the task you need.
+
+### Share an entity with a user or group
+
+Use this to give named people or groups access to one entity.
+
+1. Open the entity.
+2. Select the **Share** button.
+   The Share panel opens and lists who has access.
+3. In the lookup field, type a username, email, or group name.
+   Matching users and groups appear.
+4. Select a match to add it to the list.
+5. Open the member's drop-down and choose **Can see** to grant read access, or
+   **Can edit** to grant write access.
+6. Repeat for other people or groups.
+7. To remove someone, choose **Remove** from their drop-down.
+8. Select **Save**.
+
+Access takes effect right away.
+If you share with a group,
+anyone you later add to that group gets the same access with no extra step.
+
+### Share several entities at once
+
+Use this to set access on many entities together from the Library.
+
+1. Go to the **Library**.
+2. Select two or more entities.
+   Hold **Cmd** (Mac) or **Ctrl** (Windows) and select each card,
+   or hold **Shift** and select a range.
+3. With two or more selected, a panel opens on the right.
+4. Select the **Share** button in that panel.
+5. Add users or groups and set each level, the same way as for one entity.
+6. Select **Save**.
+
+:::note
+
+Sharing one entity replaces its whole access list.
+Sharing several entities at
+once adds your new grants without removing the access those entities already
+have.
+
+:::
+
+### Publish entities to the public
+
+Publishing makes an entity visible to anyone who can reach your instance.
+You publish through the same Share panel, not a separate control.
+
+1. Open one entity, or select several entities in the **Library**.
+2. Select the **Share** button.
+3. Add the **Public** entry.
+   It shows a globe icon and the label **Public**.
+4. Set the **Public** entry to **Can see**.
+5. Select **Save**.
+
+The entities are now published.
+The **Published** count in the Library filters updates to match.
+To unpublish, reopen the Share panel, remove the **Public** entry,
+and select **Save**.
+
+Publishing changes every language version of an entity together,
+so its published status stays the same across all languages.
+
+### Make the whole instance public
+
+This lets visitors without a login reach your site and see published content.
+
+1. Go to **Settings > Collection**.
+2. Find the **Public instance** toggle.
+3. Select the toggle to turn it on.
+4. Select **Save**.
+
+A success message confirms the change.
+Visitors without a login can now see your published entities.
+
+## Result
+
+You've shared entities with the people who need them,
+published the entities you want the public to see,
+and set whether your whole instance is open to visitors.
+
+:::tip
+
+Share with groups instead of individual people where you can.
+When your team changes, you update one group rather than re-sharing every
+entity.
+
+:::
+
+## See also
+
+- [Permissions by role](../../reference/user-role-permissions.mdx) —
+  reference for Uwazi user roles,
+  covering what each role can and can't do across settings, users,
+  content types, entities, and sharing
+- [How permissions and sharing work](../../explanation/permissions-and-sharing.mdx)
+  — the model behind roles, groups, published entities, and instance privacy in
+  Uwazi.

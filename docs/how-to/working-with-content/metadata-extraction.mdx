@@ -1,0 +1,216 @@
+---
+title: How to extract metadata from your documents
+description: Create an extractor, train a model, and review the values it suggests for your entities.
+---
+
+## Prerequisites
+
+Before you start, make sure you have:
+
+- Admin or editor access to your Uwazi instance
+- One or more templates with the property you want to fill
+- Entities on those templates, each with its document or text already processed
+- Some entities where you have already filled in that property by hand
+
+:::note
+
+The **Metadata extraction** page appears under **Settings** only
+when your instance has this feature turned on.
+
+:::
+
+Metadata extraction works in four parts.
+First, you create an extractor for one property.
+Then you train a model on values you have already filled in.
+Next, the model suggests values for the rest.
+Last, you review each suggestion and accept the ones you want.
+
+## Steps
+
+### Create an extractor
+
+1. Go to **Settings > Metadata extraction**.
+2. Select **Create Extractor**.
+   The **Add Extractor** window opens.
+3. Type a name in the **Extractor name** field.
+4. In the template list, select the property you want to fill.
+   Each property shows its type, and only supported types appear.
+
+   Once you pick a property,
+   the list keeps only that same property across your other templates.
+5. Select **Next**.
+
+   The **Next** button stays off until you select at least one property.
+6. Under **Common sources**, choose where the model should read from.
+   The first option is always **PDF**, the second is always **Title**,
+   and any others are text properties the templates share.
+7. Select **Create**.
+   A confirmation message appears and your extractor shows in the table.
+
+### Train the model
+
+You train and run an extractor from its own dashboard.
+Open it first.
+
+1. Select **Review** on the extractor's row.
+   The suggestions dashboard opens.
+2. In the footer, select **Train model**.
+
+   This button appears only when the model is not already training
+   or finding suggestions.
+   If you have any rows selected, clear them first.
+   Selecting rows switches the footer to the process action.
+3. Choose a **Training sample**.
+   Pick **Marked for training only**,
+   or pick **Marked for training + all labeled entries** to include every value
+   you have filled in.
+4. To get suggestions right after training, select **Find suggestions after
+   training** and set an **Amount**.
+5. Select **Train**.
+   The footer shows the model's progress and a **Cancel** button while it runs.
+
+### Find suggestions
+
+Run the model to create suggestions for entities that have none yet.
+
+1. Select **Review** on the extractor's row.
+2. In the footer, select **Process extractor**.
+3. Keep **Find suggestions for** selected and set an **Amount**.
+4. Select at least one filter: **Non processed**, **Obsolete**, or **Error**.
+5. To save the values for you, select **Auto-accept suggestions**.
+   Then choose whether to apply them to entities with blank values
+   or to all entities.
+6. Select **Process**.
+   The footer shows a live `processed / total` counter and a **Cancel** button.
+
+   To run on specific rows instead, select their checkboxes first,
+   then select **Process selected**.
+   This run skips the amount and filter options.
+
+### Review and accept suggestions
+
+Each row has a **Current value/suggestion** column.
+It shows the current value in grey, with the model's suggested value below it.
+The suggested value is green when it matches the current value,
+and orange when it differs.
+Work through the rows and decide which suggestions to keep.
+
+1. Read each row's suggested value to see whether it matches, differs,
+   or is missing.
+   The next section explains each status.
+
+2. To apply a suggestion that differs, select the **Accept** button on its row.
+   The model's value replaces the current value, and a message confirms it.
+
+   There is no bulk-accept button.
+   Accept suggestions one row at a time.
+
+3. To set a value yourself, select **Open** on the row.
+   A side panel opens beside the source.
+
+   For a PDF extractor, the panel shows the document.
+   Text you saved from the PDF before opens highlighted,
+   and a row with no saved text opens with no highlight.
+   For a text extractor, the panel shows the source property text instead.
+
+4. To copy a value from the source, select the text you want,
+   then select `Click to fill`.
+   Uwazi puts that text in the field and highlights it.
+   You can also type the value straight into the field.
+
+   For a date or number property,
+   Uwazi shows an error if the text can't convert to that type.
+
+5. Select **Accept** to save.
+   This saves your value and marks the row for training.
+   It doesn't run the row's **Accept** button in the table.
+   To drop a highlight you added, select **Clear**.
+
+6. To use a row as an example the next time you train,
+   select the **+** control in the **Use for training** column.
+   It turns into a green check once you add the row.
+   Editing a value in the side panel adds the row on its own.
+
+## Reading the suggestion status
+
+Each row shows its status in the **Current value/suggestion** column
+and its accept control.
+Use this table to read it:
+
+| What you see                                | What it means                                                  |
+| ------------------------------------------- | -------------------------------------------------------------- |
+| The suggested value in green, a green check | The suggestion matches the current value. Nothing to do.       |
+| The suggested value in orange, **Accept**   | The suggestion differs. Select **Accept** to apply it.         |
+| A red dot and no suggested value            | No suggestion yet. You can't accept this row.                  |
+| The word **Error** in red                   | The model couldn't read this row. You can't accept it.         |
+
+A suggestion can also turn obsolete,
+for example after you retrain the model or change a template.
+You can't accept it until you run the model again.
+
+## Filter and read the statistics
+
+Use the filter panel to narrow the table and check how the model is doing.
+
+1. Select **Stats & Filters** (the funnel icon) to open the panel.
+2. Tick any filters you want, then select **Apply**.
+   A badge on the funnel icon shows how many filters are active.
+3. Select **Clear all** to reset the filters.
+
+The panel groups the filters into four cards.
+Each filter shows a count, so you can see how many rows fall into it.
+
+The **All data** card sorts rows by what you have filled in:
+
+| Filter           | What it shows                                            |
+| ---------------- | ------------------------------------------------------- |
+| Labeled          | Entities that already have a value in this property.     |
+| Non-labeled      | Entities with no value in this property yet.             |
+| Use for training | Rows you marked to include the next time you train.      |
+
+The **Status** card sorts rows by where the model got to:
+
+| Filter        | What it shows                                          |
+| ------------- | ----------------------------------------------------- |
+| Non processed | Rows the model hasn't suggested a value for yet.       |
+| Obsolete      | Suggestions that are out of date and need a new run.   |
+| Error         | Rows the model couldn't process.                       |
+
+The **Processed** card sorts the rows the model has suggested values for:
+
+| Filter     | What it shows                                            |
+| ---------- | ------------------------------------------------------- |
+| Match      | Suggestions that equal the current value.               |
+| Mismatch   | Suggestions that differ from the current value.         |
+| No context | Suggestions with no supporting text from the source.    |
+
+The **Statistics** card shows the model's accuracy.
+Accuracy is the share of matches against mismatches across labeled rows the
+model has processed.
+
+You can also select a column header to sort the table,
+and use the pager to move through the rows.
+
+## Result
+
+Your extractor now suggests values for the chosen property,
+and you can review and accept them one entity at a time.
+
+:::tip
+
+Accept or correct a batch of suggestions, then retrain the model.
+Each round of review gives the model more examples
+and sharpens its next suggestions.
+
+:::
+
+## See also
+
+- [How to create and configure a template](../structuring-your-collection/create-and-configure-a-template.mdx)
+  — create a template and set up its properties in Uwazi
+- [How to run OCR on primary documents](ocr-primary-documents.mdx) —
+  turn scanned, image-based PDFs into text-searchable documents using your
+  instance's OCR service
+- [How machine-learning (ML) extraction works](../../explanation/ml-extraction.mdx)
+  — How Uwazi uses machine learning to pull facts out of your documents, and how
+  metadata and paragraph extraction differ

@@ -1,0 +1,82 @@
+---
+title: How to run OCR on primary documents
+description: Turn scanned, image-based PDFs into text-searchable documents using your instance's OCR service.
+---
+
+## Prerequisites
+
+Before you start, make sure you have:
+
+- Admin access to your Uwazi instance
+- A primary document saved as a PDF, with a supported language set
+
+OCR has two parts.
+First, an admin turns on the OCR trigger in settings.
+Then an admin or editor runs OCR on a PDF from the document viewer.
+The sections below cover each part.
+
+## Steps
+
+### Turn on the OCR trigger
+
+1. Go to **Settings > Collection**.
+2. Find the **Services** card.
+
+   If you don't see this card, your instance isn't connected to an OCR service.
+3. Turn on the **Document OCR trigger** toggle.
+4. Select **Save**.
+
+### Run OCR on a document
+
+1. Open a PDF primary document in the document viewer.
+2. Find the OCR control in the toolbar at the top of the document.
+   It sits next to the page navigator and the **Plain text** link.
+
+   The control appears only for admin and editor roles,
+   and only when the trigger is on.
+3. Check the control's label.
+   If it reads **Unsupported OCR language**,
+   set a supported language on the document first, then reopen it.
+4. Select **OCR PDF**.
+5. The control changes to **In OCR queue**.
+   The OCR service now works in the background, so you can leave the page.
+6. Wait for the control to show **OCR completed** with a check mark.
+   The document reloads on its own.
+
+:::note
+
+OCR can't be undone from the interface.
+Uwazi keeps your original PDF as an attachment on the same entity,
+and moves any linked references to the new file.
+
+:::
+
+## Reading the OCR control
+
+The control shows the document's current state.
+Use this table to read it:
+
+| What you see             | What it means                                         |
+| ------------------------ | ----------------------------------------------------- |
+| OCR PDF                  | Ready to start. Select it to begin.                   |
+| In OCR queue             | Submitted. The service is processing the document.    |
+| OCR completed            | Done. The document is now text-searchable.            |
+| Unsupported OCR language | The service can't read the document's language.       |
+| OCR error                | The service couldn't process the document. Try again. |
+
+If the control stays on **In OCR queue** for a long time,
+the OCR service or its background worker may be down.
+
+## Result
+
+Your primary document is now a text-searchable PDF.
+Readers can search and select its text,
+and the original scan stays on the entity as an attachment.
+
+:::tip
+
+Set the right language on each document before you run OCR.
+The service uses that language to recognize the text,
+and an unsupported language blocks the run.
+
+:::

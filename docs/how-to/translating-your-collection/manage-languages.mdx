@@ -1,0 +1,106 @@
+---
+title: How to manage the languages of a collection
+description: Install, configure, and remove languages to make your Uwazi instance available in multiple languages.
+---
+
+## Prerequisites
+
+- Admin access to your Uwazi instance
+
+## Steps
+
+### Install a language
+
+Uwazi supports 183 languages.
+The install dialog marks 11 of them with `*`.
+These 11 ship with pre-built interface translations.
+For all other languages,
+Uwazi seeds the interface with English text at install time.
+
+1. Go to **Settings > Languages**.
+2. Select **Install Language(s)** at the bottom of the table.
+3. Choose one or more languages from the list.
+   A `*` marks languages with pre-built translations.
+   The button updates to show the count, for example **Install (2)**.
+4. Select **Install (N)** to confirm.
+   Uwazi adds each language to the table and starts a background job.
+   The job copies your content into the new language.
+   A task notice appears at the top of the page while the job runs.
+   Uwazi locks the new row until the job finishes.
+
+If you install a right-to-left language like Arabic or Hebrew,
+Uwazi adapts the page layout.
+Users see right-to-left text when they select that language.
+
+### Set a default language
+
+The default language is the source Uwazi copies from
+when you add a new language.
+It's also the fallback for users who haven't chosen a language.
+Changing the default doesn't translate your existing content.
+
+1. Go to **Settings > Languages**.
+2. Select the star icon in the **Default language** column next to your chosen
+   language.
+   The star fills in on the new default and clears on the old one.
+   Uwazi shows "Default language change success".
+
+### Reset interface translations
+
+Reset restores the pre-built interface text for a language.
+Use it if you've edited any interface text and want the originals back.
+The **Reset** button only appears for languages with a `*` mark.
+
+1. Go to **Settings > Languages**.
+2. Select **Reset** in the **Reset language** column.
+3. Type `CONFIRM` in the dialog and select **Reset**.
+   Uwazi shows "Language reset success".
+
+### Switch the interface language
+
+Any user can switch the language they see the interface in from the header.
+
+1. Select the language button in the top-right header.
+   The drop-down lists every installed language using its local name,
+   for example "Español" or "Français".
+2. Select a language.
+   The page reloads with the interface in that language.
+
+### Uninstall a language
+
+:::warning
+Uninstalling a language deletes all entity records and translations for
+that language.
+This can't be undone.
+:::
+
+You can't uninstall the default language.
+Set another language as default first.
+
+1. Go to **Settings > Languages**.
+2. Select **Uninstall** in the **Uninstall language** column.
+3. Type `CONFIRM` in the dialog and select **Uninstall**.
+   Uwazi removes the language and all its data.
+
+## Result
+
+Your collection is now available in the languages you installed.
+Users switch between languages from the header.
+
+:::tip
+To translate interface text like button labels or menu items,
+go to **Settings > Translations** and select a context to edit.
+You can also enable **Live translate** from the language drop-down to edit text
+in place on any page.
+:::
+
+## See also
+
+- [How to translate the content of a collection](translate-collection-contents.mdx)
+  — translate entity text, thesauri, relationship types, filters, menu links,
+  pages, and primary documents into each language
+- [How to translate the Uwazi interface](translate-the-user-interface.mdx) —
+  translate the buttons, menus, and messages of the Uwazi interface into any
+  installed language
+- [Multi-language support](../../reference/multi-language-support.mdx) —
+reference information about languages support in Uwazi

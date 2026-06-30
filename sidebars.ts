@@ -44,7 +44,75 @@ const sidebars: SidebarsConfig = {
       ],
     },
   ],
-  howTo: ['how-to/index'],
+  howTo: [
+    'how-to/index',
+    {
+      type: 'category',
+      label: 'Structuring your collection',
+      link: {
+        type: 'generated-index',
+        title: 'Structuring your collection',
+        description: 'How-to guides on how to structure your collection',
+      },
+      items: [
+        'how-to/structuring-your-collection/create-and-configure-a-template',
+        'how-to/structuring-your-collection/create-and-manage-a-thesaurus',
+        'how-to/structuring-your-collection/link-a-thesaurus-to-a-template',
+        'how-to/structuring-your-collection/relationship-properties',
+        'how-to/structuring-your-collection/manage-filters',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Translating your collection',
+      link: {
+        type: 'generated-index',
+        title: 'Translating your collection',
+        description: 'How-to guides on how to translate your collection',
+      },
+      items: [
+        'how-to/translating-your-collection/manage-languages',
+        'how-to/translating-your-collection/translate-collection-contents',
+        'how-to/translating-your-collection/translate-the-user-interface',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Working with content',
+      link: {
+        type: 'generated-index',
+        title: 'Working with content',
+        description:
+          'How-to guides on how to work with content within your collection',
+      },
+      items: [
+        'how-to/working-with-content/search-filter-and-sort-the-library',
+        'how-to/working-with-content/create-and-edit-an-entity',
+        'how-to/working-with-content/csv-import',
+        'how-to/working-with-content/ocr-primary-documents',
+        'how-to/working-with-content/table-of-contents',
+        'how-to/working-with-content/create-references-in-a-document',
+        'how-to/working-with-content/create-relationships-between-entities',
+        'how-to/working-with-content/paragraph-extraction',
+        'how-to/working-with-content/metadata-extraction',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Managing your instance',
+      link: {
+        type: 'generated-index',
+        title: 'Managing your instance',
+        description: 'How-to guides on how to manage your Uwazi instance',
+      },
+      items: [
+        'how-to/managing-your-instance/user-account-management',
+        'how-to/managing-your-instance/user-management',
+        'how-to/managing-your-instance/share-content',
+        'how-to/managing-your-instance/create-and-manage-pages',
+      ],
+    },
+  ],
   reference: [
     'reference/index',
     'reference/collection-settings',

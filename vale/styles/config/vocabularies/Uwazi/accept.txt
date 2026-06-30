@@ -4,8 +4,11 @@
 Anthropic
 aphilop
 APIs?
+(?i)authenticator
+Authy
 backtick
 BarChart
+Cmd
 ContactForm
 changelog
 CSOs?
