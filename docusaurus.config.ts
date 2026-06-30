@@ -161,7 +161,7 @@ const config: Config = {
           href: 'https://github.com/huridocs/uwazi-knowledge-hub',
         },
       ],
-      copyright: `© ${new Date().getFullYear()} Uwazi. Built by HURIDOCS (under the MIT License).`,
+      copyright: `© ${new Date().getFullYear()} Uwazi. Built by HURIDOCS (under the MIT License).<br />AI tools helped create this portal. A human reviewed, edited, and finalized all content, following HURIDOCS’ Internal AI Governance Policy and Framework.`,
     },
     prism: {
       theme: prismThemes.github,

@@ -371,10 +371,12 @@ div[class^='codeBlockContainer'] {
   text-transform: uppercase;
 }
 .footer__link-item {
-  font-size: 13px;
+  font-size: 15px;
 }
 .footer__copyright {
-  color: var(--uw-muted);
-  font-size: 12px;
+  /* High-contrast on parchment so the AI disclosure stays readable (AA) */
+  color: var(--uw-text-2);
+  font-size: 13px;
+  line-height: 1.6;
   margin-top: 12px;
 }
