@@ -10,7 +10,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 const canonical = process.env.READTHEDOCS_CANONICAL_URL;
 
 const config: Config = {
-  title: 'Uwazi Help',
+  title: 'Uwazi Docs',
   tagline:
     'Comprehensive documentation and resources for Uwazi following the Diátaxis framework',
   favicon: 'img/favicon.svg',
