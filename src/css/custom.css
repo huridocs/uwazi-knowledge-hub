@@ -8,6 +8,8 @@
   /* Uwazi rebrand palette */
   --uw-ink: #1a1a1a;
   --uw-seal: #e8432a;
+  /* Darker seal for small text labels to meet WCAG AA on light paper */
+  --uw-seal-text: #c5341d;
   --uw-carbon: #00b4f0;
   --uw-carbon-link: #0a6585;
   --uw-parchment: #f5f0e8;
@@ -17,7 +19,7 @@
   --uw-text: #1a1a1a;
   --uw-text-2: #333333;
   --uw-text-3: #6b6b6b;
-  --uw-muted: #9a9a9a;
+  --uw-muted: #6f6f6f;
   --uw-border: #e0d9c8;
   --uw-border-strong: #d4cdb8;
 
@@ -79,6 +81,8 @@
 [data-theme='dark'] {
   --uw-ink: #f2ecdd;
   --uw-seal: #f2603f;
+  /* Dark-mode seal already clears AA on dark paper, reuse it for text */
+  --uw-seal-text: #f2603f;
   --uw-carbon: #3cc6fa;
   --uw-carbon-link: #3cc6fa;
   --uw-parchment: #1a1815;
@@ -245,7 +249,7 @@ div[class^='codeBlockContainer'] {
   font-size: 12px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--uw-seal);
+  color: var(--uw-seal-text);
 }
 .uw-kicker--muted {
   color: var(--uw-muted);
