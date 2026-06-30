@@ -34,6 +34,7 @@ export default [
         console: 'readonly',
         process: 'readonly',
         require: 'readonly',
+        URL: 'readonly',
       },
     },
     settings: {

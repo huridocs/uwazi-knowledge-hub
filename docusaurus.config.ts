@@ -4,6 +4,11 @@ import { themes as prismThemes } from 'prism-react-renderer';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+// Read the Docs sets READTHEDOCS_CANONICAL_URL at build time. Deriving url and
+// baseUrl from it keeps PR previews (served under a path) and the production
+// custom domain (served at /) correct from one config.
+const canonical = process.env.READTHEDOCS_CANONICAL_URL;
+
 const config: Config = {
   title: 'Uwazi Help',
   tagline:
@@ -17,10 +22,14 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://knowledge-hub.uwazi.io',
+  url: canonical ? new URL(canonical).origin : 'https://docs.uwazi.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: canonical ? new URL(canonical).pathname : '/',
+
+  // Read the Docs recommends trailing slashes so directory index.html files
+  // resolve. onBrokenLinks: 'throw' guards against link regressions.
+  trailingSlash: true,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
