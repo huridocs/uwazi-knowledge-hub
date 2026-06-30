@@ -36,15 +36,15 @@ const cards: DiataxisCard[] = [
     links: [
       {
         label: 'How to create and configure a template',
-        to: '/docs/how-to/create-and-configure-a-template',
+        to: '/docs/how-to/structuring-your-collection/create-and-configure-a-template',
       },
       {
         label: 'How to import entities from a CSV file',
-        to: '/docs/how-to/csv-import',
+        to: '/docs/how-to/working-with-content/csv-import',
       },
       {
         label: 'How to manage users and groups',
-        to: '/docs/how-to/user-management',
+        to: '/docs/how-to/managing-your-instance/user-management',
       },
     ],
     count: '21 guides',
