@@ -102,7 +102,7 @@ export default function Home(): React.JSX.Element {
     >
       <main className={styles.wrap}>
         <div className={styles.hero}>
-          <span className="uw-kicker">Uwazi · Help</span>
+          <span className="uw-kicker">Uwazi · Docs</span>
           <h1 className={styles.headline}>
             Everything you need to get Uwazi working for you.
           </h1>
