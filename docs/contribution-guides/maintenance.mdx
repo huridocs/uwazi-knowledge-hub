@@ -145,9 +145,10 @@ If the hook blocks you:
 - **Prettier doesn't process Markdown.**
   `npm run format` covers JS/TS/JSON.
   rumdl handles Markdown formatting.
-- **No CI pipeline exists.**
-  The pre-commit hook is the only automated quality gate.
-  There is no build check on pull requests.
+- **CI runs on pull requests and pushes to `main`.**
+  `.github/workflows/ci.yml` runs ESLint, type-check, rumdl, Vale,
+  and a production build.
+  The pre-commit hook is the first quality gate; CI is the second.
 - **`npm run clear`** wipes the Docusaurus cache.
   Run it when the development server shows stale content or build errors
   that don't match your code.
