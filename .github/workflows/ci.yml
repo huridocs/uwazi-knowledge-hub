@@ -1,5 +1,6 @@
 name: CI
 
+# Test PR: confirm the required `check` gates merging. Safe to revert.
 on:
   pull_request:
   push:
