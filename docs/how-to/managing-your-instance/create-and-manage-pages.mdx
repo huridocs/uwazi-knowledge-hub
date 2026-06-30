@@ -1,0 +1,142 @@
+---
+title: How to create and manage pages
+description: Create custom pages, add visualizations and forms, organize pages in menus, and set a landing page.
+---
+
+## Prerequisites
+
+- Admin access to your Uwazi instance
+- Basic knowledge of HTML and CSS to write page content
+
+Only administrators can create or edit pages.
+Each task below stands on its own.
+Go to the one you need.
+
+## Steps
+
+### Create and edit a page
+
+A page holds three editable areas: an HTML body, a block of CSS,
+and a block of JavaScript.
+New pages start as HTML only.
+
+1. Go to **Settings**, then **Pages**.
+2. Select **Add page**, or select **Edit** on an existing page.
+3. In the **Configuration** tab, enter a **Title** for the current language.
+4. Select the **Html** tab and write the page body.
+5. Select the **CSS** tab and add styles, if you want them.
+6. Select the **JavaScript** tab and add custom behaviour, if you need it.
+7. Select **Save** to store the page as a draft.
+8. Select **Save & Preview** to open the draft in a new tab and check it.
+9. Select **Publish**, enter a release message, then confirm to make it live.
+
+If your site has more than one language,
+use the language selector at the top and edit each language version.
+
+To roll back, select **Restore**, pick an earlier release,
+then confirm to copy it into the draft.
+
+:::warning
+
+Custom HTML and JavaScript run on the page exactly as written,
+so a mistake can stop the page from loading.
+
+:::
+
+### Add visualizations to a page
+
+Charts read their numbers from a dataset you declare in the page body.
+You add both inside the HTML.
+
+1. Edit the page and select the **Html** tab.
+2. Add a `<Dataset />` tag and give it a name to define the data.
+3. Add a chart tag, such as `<BarChart />`, and point it at that dataset name.
+4. Select **Save**, then **Save & Preview** to check the result.
+
+Uwazi offers bar charts, pie charts, lists, gauges, maps, counters,
+single values, and entity lists.
+For each visual and its options, see
+[Page visualization components](../../reference/page-visualization-components.mdx).
+
+### Add a contact form to a page
+
+1. Edit the page and select the **Html** tab.
+2. Add a `<ContactForm />` tag where you want the form to appear.
+3. Select **Save**, then **Publish**.
+
+### Add a submission form to a page
+
+A submission form lets public visitors send you new entries.
+
+1. Edit the page and select the **Html** tab.
+2. Add a `<PublicForm />` tag where you want the form to appear.
+3. Select **Save**, then **Publish**.
+
+For the form's options, see
+[Page visualization components](../../reference/page-visualization-components.mdx#publicform).
+
+### Turn a page into an entity view page
+
+An entity view page becomes the layout for a template's entities.
+
+1. Go to **Settings**, then **Pages**, and edit the page.
+2. In the **Configuration** tab, turn on **Enable this page as entity view
+   page**.
+3. Select **Save**.
+4. Assign the page to a template in that template's settings.
+
+The **Save & Preview** button is off for entity view pages,
+since they need an entity to render.
+
+You can't turn off entity view while a template still uses the page.
+Remove it from the template first.
+
+### Add a page to the navigation menu
+
+1. Open the page and copy its address from the **Configuration** tab.
+2. Go to **Settings**, then **Menu**.
+3. Select **Add link**, enter a **Title**, and paste the address in the **URL**
+   field.
+4. To group links in a drop-down, select **Add group**, enter a **Title**, then
+   assign links to it.
+5. Drag the rows to set the order links appear in.
+6. Select **Save**.
+7. To translate a link title, go to **Settings**, then **Translations**, and
+   open the **Menu** context.
+
+The header already shows a built-in **Library** button.
+So Uwazi removes any menu link
+that points to the plain library address `/library`, to avoid a duplicate.
+To add a library link anyway, point it at a filtered search,
+such as `/library/?q=...`.
+
+### Set a page as the landing page
+
+The landing page is the first thing visitors see at your site address.
+By default, Uwazi shows the library.
+
+1. Open the page and copy its address, such as `/page/<sharedId>`.
+2. Go to **Settings**, then **Collection**.
+3. In the **General** card, paste the address in the **Custom landing page**
+   field.
+4. Select **Save**.
+5. To restore the library, clear the field, then select **Save** again.
+
+Use a relative address only.
+Uwazi rejects full web addresses that start with `http`.
+An invalid address silently falls back to the library.
+
+## Result
+
+You've created a page, added the content and forms you need,
+placed it in the menu, and chosen what visitors see first.
+
+:::tip
+
+After you publish a page, add it to the navigation menu so visitors can find it.
+
+:::
+
+## See also
+
+- [Page visualization components](../../reference/page-visualization-components.mdx)
