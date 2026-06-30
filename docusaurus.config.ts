@@ -80,6 +80,8 @@ const config: Config = {
             '**/__tests__/**',
             'api/**',
             'resources/**',
+            // Kept in source but out of the build until ready to surface.
+            'reference/self-hosting.mdx',
           ],
         },
         // Blog (Product updates) kept in source but disabled until needed.
