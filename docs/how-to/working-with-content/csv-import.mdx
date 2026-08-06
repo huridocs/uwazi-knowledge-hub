@@ -145,6 +145,8 @@ Add `__` and the language code to the column name,
 such as `description__en` and `description__fr`.
 Each row still creates one entity.
 
+This file works on an instance with English and French installed:
+
 ```csv
 title,description__en,description__fr
 Cairo Demonstration,Public protest,Manifestation publique
@@ -152,15 +154,30 @@ Cairo Demonstration,Public protest,Manifestation publique
 
 Keep these rules in mind:
 
-- Language columns work for text, markdown, select, multi-select, link, and the
-  title.
-- They don't work for numbers, dates, or relationships.
+- Language columns work for text, markdown, link, image, media, preview,
+  select, multi-select, and the title.
+- They don't work for numbers, dates, relationships, geolocation,
+  or generated IDs.
   A language suffix on those fails the import.
-- If you add a language column for a property, also add the column for your
-  default language.
+- Once you add a language column for a property,
+  add a column for every language installed in your instance.
 - Don't mix a plain column and a language column for the same property.
   Pick one style.
 - A property with a plain column only gets the same value in every language.
+- Every title column needs a value.
+  An empty title cell fails that row.
+
+:::warning
+
+A missing language column stops the whole import.
+Uwazi checks the header row before it reads any data, so no rows import at all.
+
+Say your instance runs English, French, and Spanish.
+A file with `description__en` and `description__fr` fails,
+because `description__es` is missing.
+Add the third column, then upload the file again.
+
+:::
 
 ### Cancel an import
 
@@ -186,6 +203,9 @@ Common causes are:
 - A file named in your CSV that isn't in the ZIP package.
 - A relationship title that matches no entity, or matches more than one.
 - A value in the wrong format for its property type.
+- An empty title cell.
+  With language columns, an empty `title__fr` fails the row even
+  when `title__en` holds a value.
 
 To get only the rows that failed,
 select **Download failed rows** on the detail page.

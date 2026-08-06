@@ -12,13 +12,13 @@ or `.zip` file mapped to a template.
 
 The table lists the format rules for an upload.
 
-| Property     | Value                                                       |
-| ------------ | ----------------------------------------------------------- |
-| File formats | `.csv` or `.zip`                                            |
-| Encoding     | UTF-8; Uwazi accepts files exported from Excel              |
-| Delimiters   | Comma (`,`) or semicolon (`;`)                              |
-| Template     | Required; an admin selects it at upload                     |
-| Access       | Admin only                                                  |
+| Property     | Value                                          |
+| ------------ | ---------------------------------------------- |
+| File formats | `.csv` or `.zip`                               |
+| Encoding     | UTF-8; Uwazi accepts files exported from Excel |
+| Delimiters   | Comma (`,`) or semicolon (`;`)                 |
+| Template     | Required; an admin selects it at upload        |
+| Access       | Admin only                                     |
 
 Uwazi reads each cell as plain text.
 Quoted fields keep commas, line breaks, and quote marks inside them.
@@ -45,6 +45,7 @@ A header problem sets the status to **Failed** and stops the import.
 | Same property with and without a language suffix      | Import fails |
 | Language suffix on a type that doesn't support it     | Import fails |
 | Multilingual property with no default-language column | Import fails |
+| Multilingual property missing any installed language  | Import fails |
 | Language suffix on the `files` column                 | Import fails |
 
 A language suffix uses the format `<property>__<code>`,
@@ -52,17 +53,49 @@ where `<code>` is a language code installed in the instance,
 such as `title__en` or `description__es`.
 The separator is two underscores.
 
+A property that carries any language suffix needs a column
+for every language installed in the instance.
+Uwazi names the missing codes in the failure message.
+
+### Language suffix support by property type
+
+| Property type        | Language suffix |
+| -------------------- | --------------- |
+| Title                | Supported       |
+| Text                 | Supported       |
+| Markdown             | Supported       |
+| Link                 | Supported       |
+| Image                | Supported       |
+| Media                | Supported       |
+| Preview              | Supported       |
+| Select               | Supported       |
+| Multi-select         | Supported       |
+| Nested               | Supported       |
+| Numeric              | Rejected        |
+| Date                 | Rejected        |
+| Date range           | Rejected        |
+| Multiple dates       | Rejected        |
+| Multiple date ranges | Rejected        |
+| Geolocation          | Rejected        |
+| Relationship         | Rejected        |
+| Generated ID         | Rejected        |
+
+Select and multi-select accept the suffixed headers,
+but the value itself doesn't vary by language.
+Uwazi reads the default-language column
+and applies the matched thesaurus value to every language.
+
 ### Reserved columns
 
 Some headers have a fixed meaning and don't map to a custom property.
 
-| Column        | Holds                                                                          |
-| ------------- | ------------------------------------------------------------------------------ |
-| `id`          | The shared ID of an existing entity; controls create or update                 |
-| `title`       | The entity title; supports language suffixes such as `title__en`               |
-| `file`        | One document filename from the ZIP; a pipe doesn't split this column            |
-| `files`       | Document filenames from the ZIP, separated by `\|`                              |
-| `attachments` | Attachment filenames from the ZIP, separated by `\|`                            |
+| Column        | Holds                                                                |
+| ------------- | -------------------------------------------------------------------- |
+| `id`          | The shared ID of an existing entity; controls create or update       |
+| `title`       | The entity title; supports language suffixes such as `title__en`     |
+| `file`        | One document filename from the ZIP; a pipe doesn't split this column |
+| `files`       | Document filenames from the ZIP, separated by `\|`                   |
+| `attachments` | Attachment filenames from the ZIP, separated by `\|`                 |
 
 ## Cell value formats
 
@@ -70,27 +103,27 @@ Each property type expects a specific cell value format.
 The **On invalid input** column shows what Uwazi does with a value it can't
 read.
 
-| Property type        | Format                                                       | On invalid input                          |
-| -------------------- | ------------------------------------------------------------ | ----------------------------------------- |
-| Title                | Plain text                                                   | —                                         |
-| Text                 | Plain text                                                   | Uwazi skips an empty cell                 |
-| Markdown             | Markdown-formatted text                                      | Uwazi skips an empty cell                 |
-| Numeric              | Integer or decimal, such as `42`, `3.14`, or `-100`          | An invalid number fails the row           |
-| Date                 | The instance date format, or `YYYY-MM-DD`, `YYYY/MM/DD`, `YYYY MM DD`, or `YYYY` | Uwazi skips an invalid date    |
-| Date range           | `<from>:<to>`, such as `2020-01-01:2021-12-31`               | Uwazi skips an incomplete range           |
-| Multiple dates       | Dates separated by `\|`, such as `2020-01-01\|2021-06-15`    | Uwazi skips invalid dates, keeps valid ones |
-| Multiple date ranges | Date ranges separated by `\|`, each as `<from>:<to>`         | Uwazi skips invalid ranges, keeps valid ones |
-| Select               | One thesaurus label; nested value as `<parent>::<child>`     | Uwazi skips a value with no match         |
-| Multi-select         | Labels separated by `\|` or `;`                              | Uwazi skips values with no match, keeps matches |
-| Relationship         | One entity title; many titles separated by `\|`             | Not found or ambiguous fails the row      |
-| Link                 | `<label>\|<url>`, or a `<url>` on its own                    | Uwazi skips a URL with no host            |
-| Geolocation          | `<latitude>\|<longitude>`, such as `40.7128\|-74.0060`       | Uwazi skips an incomplete value           |
-| Image                | A filename from the ZIP, or a URL                            | Uwazi skips a missing file                |
-| Media                | A filename from the ZIP, or a URL                            | Uwazi skips a missing file                |
-| Generated ID         | Any text; an empty cell makes Uwazi generate an ID           | —                                         |
-| File                 | One document filename from the ZIP                           | A missing file fails the row              |
-| Files                | Document filenames from the ZIP, separated by `\|`           | Any missing file fails the row            |
-| Attachments          | Attachment filenames from the ZIP, separated by `\|`         | Any missing file fails the row            |
+| Property type        | Format                                                                           | On invalid input                                |
+| -------------------- | -------------------------------------------------------------------------------- | ----------------------------------------------- |
+| Title                | Plain text                                                                       | An empty cell fails the row                     |
+| Text                 | Plain text                                                                       | Uwazi skips an empty cell                       |
+| Markdown             | Markdown-formatted text                                                          | Uwazi skips an empty cell                       |
+| Numeric              | Integer or decimal, such as `42`, `3.14`, or `-100`                              | An invalid number fails the row                 |
+| Date                 | The instance date format, or `YYYY-MM-DD`, `YYYY/MM/DD`, `YYYY MM DD`, or `YYYY` | Uwazi skips an invalid date                     |
+| Date range           | `<from>:<to>`, such as `2020-01-01:2021-12-31`                                   | Uwazi skips an incomplete range                 |
+| Multiple dates       | Dates separated by `\|`, such as `2020-01-01\|2021-06-15`                        | Uwazi skips invalid dates, keeps valid ones     |
+| Multiple date ranges | Date ranges separated by `\|`, each as `<from>:<to>`                             | Uwazi skips invalid ranges, keeps valid ones    |
+| Select               | One thesaurus label; nested value as `<parent>::<child>`                         | Uwazi skips a value with no match               |
+| Multi-select         | Labels separated by `\|` or `;`                                                  | Uwazi skips values with no match, keeps matches |
+| Relationship         | One entity title; many titles separated by `\|`                                  | Not found or ambiguous fails the row            |
+| Link                 | `<label>\|<url>`, or a `<url>` on its own                                        | Uwazi skips a URL with no host                  |
+| Geolocation          | `<latitude>\|<longitude>`, such as `40.7128\|-74.0060`                           | Uwazi skips an incomplete value                 |
+| Image                | A filename from the ZIP, or a URL                                                | Uwazi skips a missing file                      |
+| Media                | A filename from the ZIP, or a URL                                                | Uwazi skips a missing file                      |
+| Generated ID         | Any text; an empty cell makes Uwazi generate an ID                               | —                                               |
+| File                 | One document filename from the ZIP                                               | A missing file fails the row                    |
+| Files                | Document filenames from the ZIP, separated by `\|`                               | Any missing file fails the row                  |
+| Attachments          | Attachment filenames from the ZIP, separated by `\|`                             | Any missing file fails the row                  |
 
 The pipe character (`\|`) separates values in a multi-value cell.
 A Link URL needs a scheme and host, such as `https://example.com`.
@@ -118,11 +151,11 @@ or updates an existing one.
 The cell holds the shared ID of an entity, which appears in that entity's URL.
 Uwazi trims spaces from the value, so a blank cell counts as empty.
 
-| Row condition                                      | Result                          |
-| -------------------------------------------------- | ------------------------------- |
-| No `id` column, or an empty `id` cell              | Uwazi creates a new entity      |
-| `id` matches an entity in the selected template    | Uwazi updates that entity       |
-| `id` matches no entity in the selected template    | The row fails with **ID not found** |
+| Row condition                                   | Result                              |
+| ----------------------------------------------- | ----------------------------------- |
+| No `id` column, or an empty `id` cell           | Uwazi creates a new entity          |
+| `id` matches an entity in the selected template | Uwazi updates that entity           |
+| `id` matches no entity in the selected template | The row fails with **ID not found** |
 
 An `id` that belongs to an entity in another template counts as not found.
 The row fails; Uwazi doesn't create a new entity instead.
@@ -184,11 +217,11 @@ Uwazi stops an import on its own when failures pass a set limit.
 The status becomes **Failed**,
 and the failed-rows report still covers the rows it processed.
 
-| Limit              | Threshold                                            |
-| ------------------ | ---------------------------------------------------- |
-| Failure rate       | 60% of processed rows fail, after the first 50 rows  |
-| Consecutive failures | 25 rows fail in a row                              |
-| Total failures     | 500 rows fail                                        |
+| Limit                | Threshold                                           |
+| -------------------- | --------------------------------------------------- |
+| Failure rate         | 60% of processed rows fail, after the first 50 rows |
+| Consecutive failures | 25 rows fail in a row                               |
+| Total failures       | 500 rows fail                                       |
 
 ## Row errors
 
@@ -197,18 +230,25 @@ Failed rows appear in the errors list on the import detail page.
 Each entry shows the row number, the property, and the cause.
 The row number matches the row in the CSV file.
 
-| Error                  | Code                       | Cause                                                       |
-| ---------------------- | -------------------------- | ----------------------------------------------------------- |
-| Empty row              | `ROW_EMPTY_OR_MALFORMED`   | The row has no data; Uwazi skips it                         |
-| Invalid value          | `VALUE_INVALID_FORMAT`     | A cell value doesn't match the format the property expects   |
-| ID not found           | `ID_NOT_FOUND_IN_TEMPLATE` | The `id` value matches no entity in the selected template   |
-| Relationship not found | `RELATIONSHIP_NOT_FOUND`   | No entity title matches an any-template relationship value  |
-| Relationship ambiguous | `RELATIONSHIP_AMBIGUOUS`   | More than one entity shares the title in a relationship     |
-| File not found         | `FILE_NOT_FOUND`           | A filename in the CSV file isn't in the uploaded ZIP        |
-| Processing error       | `INTERNAL_ERROR`           | An unexpected error; check the server logs for details      |
+| Error                  | Code                       | Cause                                                      |
+| ---------------------- | -------------------------- | ---------------------------------------------------------- |
+| Empty row              | `ROW_EMPTY_OR_MALFORMED`   | The row has no data; Uwazi skips it                        |
+| Invalid value          | `VALUE_INVALID_FORMAT`     | A cell value doesn't match the format the property expects |
+| Value required         | `VALUE_REQUIRED`           | A title cell is empty in one of the languages              |
+| ID not found           | `ID_NOT_FOUND_IN_TEMPLATE` | The `id` value matches no entity in the selected template  |
+| Relationship not found | `RELATIONSHIP_NOT_FOUND`   | No entity title matches an any-template relationship value |
+| Relationship ambiguous | `RELATIONSHIP_AMBIGUOUS`   | More than one entity shares the title in a relationship    |
+| File not found         | `FILE_NOT_FOUND`           | A filename in the CSV file isn't in the uploaded ZIP       |
+| Processing error       | `INTERNAL_ERROR`           | An unexpected error; check the server logs for details     |
 
 Uwazi records the first error it finds on a row.
 A row with several problems shows one error.
+
+A **Value required** error names the exact column,
+such as `title` or `title__fr`.
+Uwazi checks the title once per language,
+so an empty translation fails the row even
+when the default-language title holds a value.
 
 A CSV file of the failed rows is on the detail page.
 Empty rows don't appear in this file.
