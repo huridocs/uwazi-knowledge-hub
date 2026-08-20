@@ -37,7 +37,7 @@ Hunspell
 HURIDOCS
 husky
 ItemList
-Javascript
+Java[Ss]cript
 JSON
 (?i)Library
 lint-staged
