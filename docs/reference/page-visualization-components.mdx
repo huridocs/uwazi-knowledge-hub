@@ -25,6 +25,25 @@ import icon from './img/viz-icon.png';
 Page visualization components are custom tags an admin embeds in a page's
 content to build dashboards and entity views.
 
+:::info
+
+The chart components on this page — `BarChart`, `PieChart`, `ListChart`,
+`FreeBarChart`, and `GaugeChart` — still work.
+Uwazi keeps supporting them.
+`Counter`'s single count is close to the newer Metric chart type, too.
+
+For a new chart, try **Settings > Data visualizations** instead.
+It offers more chart types, filters, scheduled refresh, and external embedding,
+saved as a definition instead of markup.
+See [Data visualizations reference](data-visualizations.mdx) and
+[Create data visualizations](../how-to/managing-your-instance/create-data-visualizations.mdx).
+
+Every other component on this page — `Map`, `Value`, the entity view components,
+and the forms, lists, and media components — has no match there.
+Use them the same way as before.
+
+:::
+
 ## Authoring syntax
 
 A page stores raw content as HTML. Components appear as XML-style tags, such as `<BarChart property="country" />`. Every attribute value arrives as a string, so boolean values use `"true"` or `"false"` and structured values use JSON strings.
@@ -855,6 +874,8 @@ never to public visitors, so a broken component on a public page stays silent.
 
 ## Related
 
+- [Data visualizations reference](data-visualizations.mdx)
+- [Create data visualizations](../how-to/managing-your-instance/create-data-visualizations.mdx)
 - [Property types reference](property-types.mdx)
 - [Collection settings reference](collection-settings.mdx)
 - [Glossary](glossary.mdx)
