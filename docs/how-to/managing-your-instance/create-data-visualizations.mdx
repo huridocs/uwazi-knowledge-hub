@@ -1,0 +1,219 @@
+---
+title: How to create and publish data visualizations
+description:
+  Build charts from your collection, choose how often they update, and add them
+  to a page or an outside website.
+---
+
+## Prerequisites
+
+- Admin access to your Uwazi instance
+- At least one template with entities, if you want a chart to read your
+  collection
+
+Only admins can open **Settings > Data visualizations**.
+Editors don't see the menu entry.
+
+## Steps
+
+Each task below stands on its own.
+Go to the one you need.
+
+### Create a visualization
+
+Every chart starts as a named record in the settings list.
+
+1. Go to **Settings**, then **Data visualizations**.
+2. Select **Create visualization**.
+3. Select the **Info** tab and enter a **Name**.
+4. Set up the data, chart type, and colours in the other tabs.
+5. Select **Save**.
+
+Give each chart a name no other chart uses.
+If you save with a name already taken,
+Uwazi switches to the **Info** tab and marks the **Name** field
+so you can fix it.
+
+The preview on the right updates shortly after you stop typing,
+so you can see each change before you save.
+
+To edit a chart later, select **Edit** on its row in the list.
+To delete charts, select their checkboxes, then select **Delete**.
+
+### Choose the data for a chart
+
+A chart reads your collection, or it reads numbers you type yourself.
+
+1. Select the **Data** tab.
+2. Keep the source set to query to read your collection.
+3. Under **Entity scope**, choose whether the chart counts every entity or
+   only published ones.
+4. Choose a template as the data source.
+5. Add more templates if you want to combine or compare them.
+6. Add filters to narrow the entities the chart counts.
+7. Choose a property for **X-axis / categories**.
+8. Add a second property for series or stacks, if you want them.
+9. Choose a measure, such as count, sum, average, lowest, or highest.
+
+A new chart counts every entity, published or not,
+until you choose **Include only public**.
+Live and snapshot charts both follow this setting,
+so pick **Include only public** for any chart the public can see.
+
+:::warning
+
+For a chart you saved before this control existed,
+select an option under **Entity scope** yourself,
+even when **Include all entities** already looks selected.
+An untouched chart excludes unpublished entities no matter what the control
+shows.
+
+:::
+
+Only some property types work as a dimension.
+You can choose select, multi-select, numeric, date, date range, multi-date,
+multi-date range, and generated ID properties.
+Filters accept text properties as well.
+
+To type your own numbers instead, set the source to manual and edit the JSON.
+Each series needs a name, a label, and at least one point.
+Each point needs a label and a number.
+Uwazi hides the **Refresh** tab while you use manual data.
+
+### Choose a chart type
+
+The **Chart** tab offers 12 types, from pie and bar to heatmap and gauge.
+
+1. Select the **Chart** tab.
+2. Select a chart type.
+3. Select or clear **Show legend**, **Show tooltip**, and **Show labels on
+   chart**.
+4. For a pie or donut chart, set the label format, the largest number of slices,
+   and the label for the rest.
+5. For a list chart, set whether empty and zero values appear.
+
+Uwazi disables the types your current data can't produce.
+Hold the pointer over a disabled type to read why.
+Add or remove a dimension to unlock more types.
+
+### Set the colours
+
+The **Appearance** tab decides where the chart takes its colours from.
+
+1. Select the **Appearance** tab.
+2. Choose a **Color mode**.
+3. To pick your own colours, choose the custom mode and map each value to a
+   colour.
+4. Set the background and foreground under the theme colours.
+
+Some chart types ignore custom colours.
+Uwazi shows a message in the tab when your choice doesn't apply.
+
+### Choose when Uwazi updates the data
+
+The **Refresh** tab decides whether a chart runs its query for every visitor,
+or serves a stored copy.
+
+| Mode                 | What happens                                  |
+| -------------------- | --------------------------------------------- |
+| Live                 | Uwazi runs the query for each visitor         |
+| Snapshot (manual)    | Uwazi stores a copy that you update by hand   |
+| Snapshot (scheduled) | Uwazi stores a copy and updates it on a timer |
+
+The **Entity scope** setting on the **Data** tab, not the refresh mode,
+decides whether unpublished entities count.
+See [Choose the data for a chart](#choose-the-data-for-a-chart).
+
+1. Select the **Refresh** tab.
+2. Select a mode.
+3. For a scheduled snapshot, choose a frequency and a time.
+4. Select **Save**.
+5. For a manual snapshot, select **Update from collection** to refresh it now.
+
+Uwazi turns off the **Live** option
+when a query costs too much to run each time.
+This happens when the chart uses more than one data source, uses two dimensions,
+covers more than 10,000 entities, or takes 10 seconds or longer.
+The tab lists the reasons that apply.
+
+Save the chart before you use **Update from collection**.
+The button then rests for 10 seconds after each refresh.
+
+Schedules run in UTC, and the day comes from the moment you save.
+A weekly schedule repeats on the weekday you saved on.
+A monthly schedule repeats on that day of the month.
+A schedule set for day 31 moves to day 28 after February, and stays there.
+
+### Add a chart to a page
+
+Charts reach your readers through a page in your instance.
+
+1. Save the chart, then find the embed panel in the editor.
+2. Copy the snippet from the **Embed in pages** section.
+3. Go to **Settings**, then **Pages**, and edit the page.
+4. Paste the snippet in the **Html** tab where you want the chart.
+5. Select **Save**, then **Publish**.
+
+The snippet names the chart by its identifier:
+
+```html
+<Dataviz id="ac4d75bf92ac6a7bbd4f2672" />
+```
+
+Uwazi looks up the saved chart and draws it where you paste the tag.
+
+### Embed a chart in another website
+
+You can also place a chart on a site outside Uwazi.
+
+1. Open the chart and find the external embed section.
+2. On a private instance, turn on **Allow public embedding without login**.
+3. Select **Save**.
+4. Copy the frame snippet.
+5. Paste it into the other website.
+
+A public instance needs no toggle.
+On a private instance, visitors without a login see nothing
+until you turn the setting on.
+
+### Fine-tune a chart with overrides
+
+The **Advanced** tab takes raw chart options in JSON
+for anything the **Chart** tab doesn't offer.
+
+1. Select a chart type other than list or metric.
+2. Select the **Advanced** tab in the preview panel.
+3. Enter your options as JSON.
+4. Read the resolved settings below the editor to check the result.
+5. Select **Save**.
+
+Uwazi merges your options into the ones it generates, key by key.
+It keeps the last valid version and tells you when the JSON breaks.
+
+Two habits save time here.
+Uwazi merges lists by position,
+so a change to the first series leaves the second one alone,
+and you can't remove an entry this way.
+A heatmap also keeps its own legend, scale, and values,
+so it drops overrides aimed at those.
+
+## Result
+
+You've built a chart from your collection, chosen how often it updates,
+and placed it where your readers can see it.
+
+:::tip
+
+Open the external embed address in a private browser window to check what
+visitors see.
+
+:::
+
+## See also
+
+- [Data visualizations reference](../../reference/data-visualizations.mdx)
+- [How to create and manage pages](create-and-manage-pages.mdx)
+- [How to share your content](share-content.mdx)
+- [Page visualization components](../../reference/page-visualization-components.mdx)
+- [Pages and visualizations](../../explanation/pages-and-visualizations.mdx)
+- [Property types](../../reference/property-types.mdx)
