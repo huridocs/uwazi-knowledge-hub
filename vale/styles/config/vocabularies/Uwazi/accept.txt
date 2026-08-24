@@ -9,6 +9,7 @@ Authy
 backtick
 BarChart
 Cmd
+(?i)colou?rs?
 ContactForm
 changelog
 CSOs?
@@ -18,6 +19,9 @@ devDependencies
 dialogs
 Diátaxis
 Docusaurus
+(?i)Dataviz
+(?i)donut
+ECharts
 EntityData
 EntityInfo
 EntityLink
@@ -28,10 +32,12 @@ FreeBarChart
 frontmatter
 GaugeChart
 GitHub
+(?i)heatmap
 Hunspell
 HURIDOCS
 husky
 ItemList
+Java[Ss]cript
 JSON
 (?i)Library
 lint-staged

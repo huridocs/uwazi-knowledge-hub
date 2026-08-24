@@ -1,0 +1,719 @@
+---
+title: Data visualizations
+description:
+  Reference for the Uwazi Data visualizations feature, covering chart types,
+  data and chart options, appearance, refresh modes, embedding, and defaults.
+---
+
+## Overview
+
+An admin builds a chart in **Settings > Data visualizations**,
+then adds it to a page or to an external site.
+
+## Access
+
+Only admins reach this section.
+Uwazi hides the menu entry from every other role.
+No toggle turns the section on or off, so it shows on every instance.
+
+| Item                     | Value                              |
+| ------------------------ | ---------------------------------- |
+| Location                 | **Settings > Data visualizations** |
+| Role                     | Admin                              |
+| Charts on a new instance | None; the list starts empty        |
+
+A chart built from a query needs at least one template.
+On an instance with no template,
+the editor opens with no data source and the save fails.
+
+## Visualization list
+
+The list page shows one row per saved visualization.
+
+| Column       | Holds                                                         |
+| ------------ | ------------------------------------------------------------- |
+| Name         | The visualization name                                        |
+| Chart        | The chart type                                                |
+| Refresh      | Live, Snapshot (manual), Snapshot (scheduled), or Manual data |
+| Last updated | The time of the last change                                   |
+| Action       | The **Edit** link                                             |
+
+Row checkboxes turn the footer into a bar with a **Delete** button
+and a **Selected N of M** count.
+With no row chosen, the footer shows **Create visualization**.
+
+:::warning
+
+Deleting a chart is permanent,
+and it breaks every page and external site that holds it.
+
+:::
+
+## Editor layout
+
+The editor has a tabbed panel on the left and a preview on the right.
+
+| Panel         | Tabs                                                       |
+| ------------- | ---------------------------------------------------------- |
+| Configuration | **Info**, **Data**, **Chart**, **Appearance**, **Refresh** |
+| Preview       | **Preview**, **Query**, **Advanced**                       |
+
+The **Refresh** and **Query** tabs drop out for manual data.
+The **Advanced** tab shows only for the chart types that use ECharts,
+so List and Metric never show it.
+
+Uwazi keeps each edit in the browser.
+The preview redraws 300 milliseconds after the last keystroke.
+The **Save** button writes the chart.
+
+## Info tab
+
+| Field       | Type | Required | Notes                                         |
+| ----------- | ---- | -------- | --------------------------------------------- |
+| Name        | Text | Yes      | Trimmed, and unique across all visualizations |
+| Embed panel | —    | —        | Empty until the first save                    |
+
+The breadcrumb shows **Untitled visualization** while the name is empty.
+
+## Data tab
+
+The **Data** tab sets where the numbers come from.
+An **Input type** toggle chooses between them.
+
+| Data source | Behaviour                                                       |
+| ----------- | --------------------------------------------------------------- |
+| Query       | Uwazi builds the numbers from entities in one or more templates |
+| Manual      | Uwazi renders values typed into a JSON editor                   |
+
+### Entity scope
+
+Query mode only.
+
+| Field            | Values                                    | Default                                                              |
+| ---------------- | ----------------------------------------- | -------------------------------------------------------------------- |
+| **Entity scope** | Include all entities, Include only public | Include all entities |
+
+Uwazi applies this setting the same way to Live and Snapshot charts.
+**Include only public** filters every query to published entities.
+**Include all entities** counts every entity, everywhere the chart appears.
+
+### Data sources
+
+Each data source names one template and has a short alias.
+A chart can hold any number of sources.
+The alias column and the remove action show only with two or more sources.
+Uwazi rebuilds the aliases each time the set of sources changes.
+
+### Join mode
+
+The join mode appears only with two or more data sources.
+
+| Mode    | Label                    | Result                                                |
+| ------- | ------------------------ | ----------------------------------------------------- |
+| Compare | **Compare side by side** | Each data source becomes its own series               |
+| Union   | **Combine counts**       | Uwazi merges buckets from all sources into one series |
+
+**Compare side by side** is the default.
+Joins across relationships are not supported.
+
+### Filters
+
+A filter narrows the entities behind the chart.
+With two or more sources, each filter can point at one source.
+A filter reaches template properties only.
+Publication status is a state on the entity, not a template property,
+so no filter can reach it.
+The **Entity scope** setting decides which entities a chart counts,
+not a filter.
+
+The filter picker offers these property types:
+
+- Select
+- Multi-select
+- Numeric
+- Date
+- Text
+
+Each property type accepts a fixed set of operators.
+The table covers every type a stored filter can hold.
+
+| Property type                                          | Operators                                    |
+| ------------------------------------------------------ | -------------------------------------------- |
+| Select                                                 | Equals, Is not, Is any of, Is not any of     |
+| Multi-select                                           | Is any of, Is not any of                     |
+| Numeric                                                | Equals, Is not, From (≥), Up to (≤), Between |
+| Date, Date range, Multiple dates, Multiple date ranges | From (≥), Up to (≤), Between                 |
+| Generated ID                                           | Equals, Is not, Contains                     |
+| Text                                                   | Contains, Equals, Is not                     |
+
+Contains matches any part of the value and ignores case.
+A numeric bound that isn't a number drops out of the filter with no error.
+
+### Dimensions
+
+Dimensions group the entities into buckets.
+
+| Field             | Label                                       | Required                               |
+| ----------------- | ------------------------------------------- | -------------------------------------- |
+| Primary dimension | **Primary dimension (X-axis / categories)** | Yes, unless the chart is a plain count |
+| Second dimension  | **Second dimension (series / stacks)**      | No; **None** is an option              |
+
+A property in use by one dimension drops out of the other list.
+With two or more sources,
+Uwazi offers only the properties that carry the same name
+and configuration in every source.
+An **Entity type (template)** option shows for the primary dimension with two
+or more sources.
+
+Dimensions accept these property types: Select, Multi-select, Numeric, Date,
+Date range, Multiple dates, Multiple date ranges, and Generated ID.
+No other type shows in the list.
+
+Each dimension has these controls.
+
+| Control       | Values                                                          | Shown for                         |
+| ------------- | --------------------------------------------------------------- | --------------------------------- |
+| Property      | Any property the picker offers, plus **Entity type (template)** | Always                            |
+| Aggregation   | Count, Sum, Average, Min, Max                                   | A numeric property                |
+| Date interval | Year, Month, Week, Computed years                               | A date property                   |
+| Max buckets   | A number, 10 by default                                         | Every property except entity type |
+
+The cap on the primary dimension limits the query itself.
+The cap on the second one trims the result after the query runs.
+
+Uwazi orders the buckets by value, from high to low.
+A numeric or date dimension orders by its own value instead, from low to high.
+
+### Measures
+
+A measure is the number the chart plots.
+A chart holds one measure.
+
+| Aggregation | Result                                  |
+| ----------- | --------------------------------------- |
+| Count       | The number of entities in each bucket   |
+| Sum         | The total of a numeric property         |
+| Average     | The mean of a numeric property          |
+| Min         | The lowest value of a numeric property  |
+| Max         | The highest value of a numeric property |
+
+The **Aggregation** control on a numeric dimension sets the measure below,
+not the dimension itself.
+
+Each chart needs one data source and one measure.
+It also needs a dimension, unless the measure is a plain count.
+
+## Chart types
+
+Uwazi offers 12 chart types in the order below.
+
+| Chart type     | Shows as                              | Advanced tab |
+| -------------- | ------------------------------------- | ------------ |
+| Pie            | A circle split into slices            | Yes          |
+| Donut          | A ring split into segments            | Yes          |
+| Bar            | Vertical bars                         | Yes          |
+| Horizontal bar | Horizontal bars                       | Yes          |
+| Stacked bar    | Bars split into segments              | Yes          |
+| Heatmap        | A grid shaded by value                | Yes          |
+| Line           | A line across the categories          | Yes          |
+| Area           | A line with the space below it filled | Yes          |
+| List           | A table of categories and values      | No           |
+| Gauge          | A dial                                | Yes          |
+| Metric         | A single number                       | No           |
+| Scatter        | Points on two axes                    | Yes          |
+
+List and Metric are the two types with no **Advanced** tab.
+
+### Chart type availability
+
+The **Chart** tab disables any chart type that doesn't fit the data,
+and gives the reason on hover.
+Manual data makes every chart type available.
+
+The next table covers a query with one dimension or none.
+
+| Chart type     | Available when                                              | Reason shown when unavailable                                  |
+| -------------- | ----------------------------------------------------------- | -------------------------------------------------------------- |
+| Pie, Donut     | A Select dimension and a Count measure                      | Requires select dimension + count                              |
+| Bar            | Any dimension and a Count measure                           | Requires dimension + count                                     |
+| Horizontal bar | A Select dimension and a Count measure                      | Requires select dimension + count                              |
+| List           | A Select dimension and a Count measure                      | Requires select dimension + count                              |
+| Gauge          | Any dimension and a Count measure                           | Requires dimension + count                                     |
+| Metric         | A Count measure and no dimension                            | Count without dimension                                        |
+| Line           | A date or numeric dimension and a Count or Sum measure      | Requires date or numeric dimension                             |
+| Area           | A date or numeric dimension and a Count measure             | Requires date or numeric dimension                             |
+| Scatter        | A numeric dimension and a Sum, Average, Min, or Max measure | Requires numeric dimension                                     |
+| Stacked bar    | Never with one dimension                                    | Add a second categorical dimension (e.g. sex split by country) |
+| Heatmap        | Never with one dimension                                    | Add a second categorical dimension                             |
+
+The table covers a query with two dimensions.
+
+| Dimension pair             | Available chart types                                                                       |
+| -------------------------- | ------------------------------------------------------------------------------------------- |
+| Select by Select           | Stacked bar, Heatmap, List                                                                  |
+| Date or numeric by numeric | Scatter, Heatmap, List, and Line, Area, Bar when the primary dimension is a date or numeric |
+| Date or numeric by Select  | Line, Heatmap, List, Stacked bar, and Area with a Count measure                             |
+| Any other pair             | Heatmap and List only                                                                       |
+
+With two dimensions, an unavailable chart type gives one of these reasons.
+
+| Reason                                     | Shown for                                    |
+| ------------------------------------------ | -------------------------------------------- |
+| Requires a single dimension                | Pie, Donut, and Bar, in most dimension pairs |
+| Requires a single date dimension           | Line and Area, with two Select dimensions    |
+| Requires a single categorical dimension    | Horizontal bar, with a date or numeric pair  |
+| Requires two categorical dimensions        | Stacked bar, outside a Select by Select pair |
+| Requires numeric cross-tab dimensions      | Scatter, with two Select dimensions          |
+| Requires date/numeric × numeric dimensions | Scatter, with any other unsupported pair     |
+| Not available with two dimensions          | Gauge and Metric                             |
+
+Area needs a Count measure in the cases where Line also takes Sum.
+
+Uwazi swaps the chart type on its own
+when an edit to the query rules the current type out.
+It picks the first available type, in the order shown above.
+
+## Chart tab
+
+The **Chart** tab holds the chart type grid and the display options.
+Each option shows only for the chart types that support it.
+
+| Option                      | Type     | Default                                    |
+| --------------------------- | -------- | ------------------------------------------ |
+| Show legend                 | Checkbox | Selected                                   |
+| Show tooltip                | Checkbox | Selected                                   |
+| Show labels on chart        | Checkbox | Selected, except on types that hide labels |
+| Show empty values (No data) | Checkbox | Cleared                                    |
+| Exclude zero values         | Checkbox | Cleared                                    |
+| Empty value label           | Text     | No data                                    |
+| Label format                | Select   | Percentage                                 |
+| Max number of slices        | Number   | 10                                         |
+| Others label                | Text     | Other                                      |
+
+**Label format** accepts Percentage, Value, or Value and percentage.
+
+The next table shows which options each chart type displays.
+
+| Chart type                       | Legend | Tooltip | Labels | Empty value options |
+| -------------------------------- | ------ | ------- | ------ | ------------------- |
+| Pie, Donut                       | Yes    | Yes     | Yes    | Yes                 |
+| Bar, Horizontal bar, Stacked bar | Yes    | Yes     | Yes    | Yes                 |
+| Line, Area                       | Yes    | Yes     | Yes    | Yes                 |
+| Heatmap                          | No     | Yes     | Yes    | Yes                 |
+| Scatter                          | Yes    | Yes     | No     | No                  |
+| Gauge                            | No     | Yes     | No     | No                  |
+| List                             | No     | No      | No     | Yes                 |
+| Metric                           | No     | No      | No     | No                  |
+
+**Label format**, **Max number of slices**,
+and **Others label** show for Pie and Donut only.
+A switch to Scatter also clears **Show labels on chart**
+and can change the primary dimension.
+
+## Appearance tab
+
+### Colour modes
+
+| Mode     | Label               | Source of each colour                                     |
+| -------- | ------------------- | --------------------------------------------------------- |
+| Theme    | **Chart palette**   | The built-in palette of eight colours, cycled by position |
+| Template | **Template colors** | The brand colour of each template                         |
+| Custom   | **Custom colors**   | A colour picked for each value                            |
+
+The built-in palette holds `#4A90D9`, `#7B68EE`, `#E67E22`, `#2ECC71`,
+`#E74C3C`, `#1ABC9C`, `#9B59B6`, and `#F39C12`.
+Uwazi falls back to this palette when a template has no brand colour,
+or a value has no colour of its own.
+
+**Template colors** apply when the chart compares two or more data sources,
+or when the primary dimension is the entity type.
+Heatmap and Stacked bar never support **Template colors**.
+
+The tab shows a warning in two cases.
+
+| Case                                             | Message                                                                                                                                  |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **Template colors** on a chart with one source   | Template colors apply when comparing data sources or when the dimension is entity type. Otherwise the chart palette is used as fallback. |
+| **Custom colors** on a chart that can't use them | Custom colors are not available for this chart type. Use the chart palette or template colors instead.                                   |
+
+### Custom colour support
+
+Custom colours cover different targets depending on the chart.
+
+| Chart type or shape                                               | Custom colour target   |
+| ----------------------------------------------------------------- | ---------------------- |
+| Pie, Donut, Scatter, single-series Bar and Horizontal bar         | Each category or slice |
+| Stacked bar and Heatmap with a second dimension                   | Each stack segment     |
+| Line and Area with a second dimension, and any compare-mode chart | Each series or segment |
+| Line and Area with one series and no second dimension             | Unsupported            |
+| List, Metric, Gauge                                               | Unsupported            |
+
+The colour map stays empty until a preview loads.
+
+### Theme colours
+
+| Setting                | Type     | Default                                              |
+| ---------------------- | -------- | ---------------------------------------------------- |
+| Transparent background | Checkbox | Cleared                                              |
+| Background             | Colour   | Transparent until set; the picker displays `#ffffff` |
+| Foreground             | Colour   | `#1a1a1a`                                            |
+
+Selecting the transparent checkbox disables the **Background** picker
+and remembers the last solid colour.
+
+## Advanced tab
+
+The **Advanced** tab holds a JSON editor for the ECharts options
+that the **Chart** tab leaves out.
+It sits in the preview panel,
+and it shows only for the chart types that use ECharts.
+Below the editor, a read-only panel shows the resolved option
+for the current preview data.
+
+Uwazi merges the JSON deeply into the option it builds.
+
+| Behaviour    | Result                                                       |
+| ------------ | ------------------------------------------------------------ |
+| Arrays       | Merged by position; an entry can't be removed                |
+| Objects      | Merged key by key                                            |
+| Scalars      | Replaced                                                     |
+| `null`       | Overwrites the base value                                    |
+| Invalid JSON | The last valid value stays, and the editor reports the error |
+
+The JSON field carries three limits.
+It holds data only, so it can't carry an option that needs a function.
+Nothing checks the keys, so a bad option saves cleanly and can break the chart.
+On a Heatmap, Uwazi puts back its own colour scale, legend,
+and series data after the merge.
+Uwazi drops any change to those three keys.
+
+The merged option drives the external embed and the preview alike.
+A change here forces a new snapshot on a snapshot chart.
+
+## Refresh tab
+
+The **Refresh** tab appears for query-based charts only.
+
+| Mode               | Label                        | Behaviour                                                         |
+| ------------------ | ---------------------------- | ----------------------------------------------------------------- |
+| Live               | **Live (always up to date)** | Uwazi runs the query on every view                                |
+| Manual snapshot    | **Snapshot (manual)**        | Uwazi stores the result and serves it until an admin refreshes it |
+| Scheduled snapshot | **Snapshot (scheduled)**     | Uwazi stores the result and refreshes it on a schedule            |
+
+Both snapshot modes show **Update from collection**
+and the time of the last refresh.
+
+| Control                | State                                                             |
+| ---------------------- | ----------------------------------------------------------------- |
+| Update from collection | Disabled until the first save, and for 10 seconds after a refresh |
+| Frequency              | Daily, Weekly, or Monthly                                         |
+| Time (UTC)             | A time of day, with the matching local time shown below it        |
+
+### Live mode limits
+
+Uwazi disables **Live** and falls back to **Snapshot (manual)** in these cases.
+
+| Condition                 | Threshold                   |
+| ------------------------- | --------------------------- |
+| More than one data source | Two or more                 |
+| Two dimensions            | Both dimensions set         |
+| Relationship join         | Any                         |
+| Preview entity count      | More than 10,000            |
+| Preview results truncated | Any                         |
+| Preview duration          | 10,000 milliseconds or more |
+| Preview timed out         | Any                         |
+
+The editor lists the reasons under the option.
+Uwazi checks the same rules again on save.
+
+### Schedule timing
+
+A schedule has a frequency and a time, and no day field.
+Uwazi takes the day from the moment of the save.
+
+| Frequency | First run                                           | Later runs              |
+| --------- | --------------------------------------------------- | ----------------------- |
+| Daily     | The chosen time, today if it hasn't passed          | Every day               |
+| Weekly    | The chosen time on the weekday of the save          | The same weekday        |
+| Monthly   | The chosen time on the day of the month of the save | The same day each month |
+
+Every schedule runs in UTC.
+A weekly schedule saved before its time runs the same day.
+A monthly schedule set near the end of a month moves to the last day of a short
+month.
+It then stays on that earlier day, because each run sets the next one.
+A late run shifts the day in the same way.
+
+### Snapshots and publication status
+
+The **Entity scope** setting on the **Data** tab decides
+whether unpublished entities count,
+the same way for a Live chart and a Snapshot chart.
+See [Entity scope](#entity-scope).
+
+## Manual data
+
+Manual data swaps the query for JSON typed into the editor.
+A switch to Manual fills the editor with an example.
+The **Load example** action then loads one that fits the current chart type.
+
+```json
+{
+  "series": [
+    {
+      "id": "main",
+      "label": "Series 1",
+      "points": [
+        { "key": "a", "label": "Category A", "value": 10 },
+        { "key": "b", "label": "Category B", "value": 25 },
+        { "key": "c", "label": "Category C", "value": 15 }
+      ]
+    }
+  ],
+  "meta": { "totalEntities": 50, "truncated": false }
+}
+```
+
+The block above holds one series of three points.
+The `meta` block is optional, and Uwazi works it out when it's absent.
+
+| Field                | Type            | Required                                    |
+| -------------------- | --------------- | ------------------------------------------- |
+| `series`             | Array           | Yes, and non-empty                          |
+| `series[].id`        | String          | Yes, and non-empty                          |
+| `series[].label`     | String          | Yes, and non-empty                          |
+| `series[].points`    | Array           | Yes, and non-empty                          |
+| `points[].label`     | String          | Yes                                         |
+| `points[].value`     | Number          | Yes                                         |
+| `points[].key`       | Any             | No                                          |
+| `points[].breakdown` | Array of points | No; needed for stacked and cross-tab charts |
+| `meta`               | Object          | No                                          |
+
+A point value that isn't a number fails the save.
+When `meta.totalEntities` is absent, Uwazi adds up the top point values.
+It skips the ones under `breakdown`.
+
+The **Load example** action offers five shapes across the 12 chart types.
+
+| Example shape                            | Chart types                            |
+| ---------------------------------------- | -------------------------------------- |
+| Five flat points                         | Pie, Donut, Bar, Horizontal bar, Gauge |
+| Three points with a breakdown each       | List, Stacked bar, Heatmap             |
+| Five points keyed by year                | Line, Area                             |
+| Three points with numeric breakdown keys | Scatter                                |
+| One point                                | Metric                                 |
+
+## Embedding
+
+The embed panel sits in the **Info** tab.
+It stays empty until the first save.
+
+| Target           | Snippet                                               |
+| ---------------- | ----------------------------------------------------- |
+| A Uwazi page     | `<Dataviz id="<id>" />`                               |
+| An external site | An `iframe` element pointing at `/embed/dataviz/<id>` |
+
+```html
+<iframe
+  src="https://example.org/embed/dataviz/abc123?locale=en"
+  width="100%"
+  height="400"
+  frameborder="0"
+  loading="lazy"
+></iframe>
+```
+
+The snippet above adds a chart to an external page at a height of 400 pixels.
+
+| Setting                              | Applies to        | Effect                                |
+| ------------------------------------ | ----------------- | ------------------------------------- |
+| Allow public embedding without login | Private instances | Serves the chart to anonymous viewers |
+
+On a public instance the external snippet always shows.
+On a private instance it shows only when the toggle is on.
+Otherwise the panel reads "Enable public embedding to use this chart in external
+sites on private instances."
+
+:::warning
+
+Public embedding hands the chart to anyone with the link,
+with no login and no permission check.
+
+:::
+
+The embed page loads its chart library from a public content delivery network.
+An instance that blocks external scripts draws List and Metric embeds,
+and nothing else.
+The `locale` value in the address sets the language of the data,
+not the language of the page.
+
+## Filters from the surrounding page
+
+A page or an external site can filter a chart at view time.
+A Uwazi page sends a `uwazi:dataviz-filter` event.
+An external site posts a message of the same type to the frame.
+
+Both carry the same `detail` object.
+
+| Field        | Holds                                                                         |
+| ------------ | ----------------------------------------------------------------------------- |
+| `targets`    | The chart identifiers to filter, or `*` for all; omit it to reach every chart |
+| `property`   | The property name to filter on                                                |
+| `properties` | A property name for each chart, which overrides `property`                    |
+| `value`      | `{min, max}`, `{from, to}`, `{values: []}`, `{value}`, or `null` to clear     |
+
+A chart identifier is the same value the embed panel puts in its snippet.
+A date range takes ISO dates or timestamps in seconds.
+Filters build up one property at a time,
+so clearing one leaves the others in place.
+
+A filter of this kind forces the chart to run live and bypasses the snapshot.
+A manual data chart ignores it.
+
+### On a Uwazi page
+
+The page content holds the chart and the controls.
+
+```html
+<Dataviz id="6706f4a1d2b3c40012ab34cd" />
+
+<button type="button" id="ages-20-40">Ages 20 to 40</button>
+<button type="button" id="ages-clear">Clear</button>
+```
+
+The **Javascript** tab of the page editor holds the code that sends the event.
+
+```js
+const sendFilter = value => {
+  document.dispatchEvent(
+    new CustomEvent('uwazi:dataviz-filter', {
+      detail: { property: 'age', value },
+    })
+  );
+};
+
+document.getElementById('ages-20-40').addEventListener('click', () => {
+  sendFilter({ min: 20, max: 40 });
+});
+
+document.getElementById('ages-clear').addEventListener('click', () => {
+  sendFilter(null);
+});
+```
+
+The example above filters every chart on the page, because it omits `targets`.
+To reach one chart, add `targets: ['6706f4a1d2b3c40012ab34cd']` to the `detail`
+object.
+
+### On an external site
+
+The page needs the `parentOrigin` parameter on the frame address,
+and the Uwazi address as the second argument to `postMessage`.
+
+```html
+<iframe
+  id="cases-chart"
+  src="https://uwazi.example.org/embed/dataviz/6706f4a1d2b3c40012ab34cd?locale=en&parentOrigin=https://mysite.example.org"
+  width="100%"
+  height="400"
+  frameborder="0"
+></iframe>
+
+<button type="button" id="since-2020">From 2020</button>
+<button type="button" id="dates-clear">Clear</button>
+
+<script>
+  const chart = document.getElementById('cases-chart');
+  const uwaziOrigin = 'https://uwazi.example.org';
+
+  const sendFilter = value => {
+    chart.contentWindow.postMessage(
+      { type: 'uwazi:dataviz-filter', detail: { property: 'date', value } },
+      uwaziOrigin
+    );
+  };
+
+  document.getElementById('since-2020').addEventListener('click', () => {
+    sendFilter({ from: '2020-01-01', to: '2024-12-31' });
+  });
+
+  document.getElementById('dates-clear').addEventListener('click', () => {
+    sendFilter(null);
+  });
+</script>
+```
+
+The example above sends a date range to one chart in a frame.
+
+Three things stop a message from arriving.
+The frame ignores a message from any address other than its own
+or the one in `parentOrigin`,
+and that value has to match the site address exactly.
+The frame also ignores a message that arrives before it finishes loading,
+so sending from a button is safer than sending as the page loads.
+A `property` that matches no property on the chart's template drops out,
+unless the template holds exactly one property of a matching type.
+
+## Limits
+
+| Limit                     | Value                             |
+| ------------------------- | --------------------------------- |
+| Buckets per dimension     | 50 when the dimension sets no cap |
+| Live entity count         | 10,000                            |
+| Live query duration       | 10,000 milliseconds               |
+| Live query timeout        | 30,000 milliseconds               |
+| Snapshot refresh cooldown | 10 seconds                        |
+| Data sources per chart    | No limit                          |
+| Measures per chart        | One                               |
+
+## Defaults
+
+A new visualization starts with these values.
+
+| Setting                                         | Default                                                              |
+| ----------------------------------------------- | -------------------------------------------------------------------- |
+| Name                                            | Untitled visualization                                               |
+| Data source                                     | Query                                                                |
+| Entity scope                                    | Include all entities, for a chart created after this control shipped |
+| Data sources                                    | The first template in the instance                                   |
+| Dimensions                                      | None                                                                 |
+| Measure                                         | Count                                                                |
+| Chart type                                      | Pie                                                                  |
+| Show legend, Show tooltip, Show labels on chart | Selected                                                             |
+| Show empty values, Exclude zero values          | Cleared                                                              |
+| Empty value label                               | No data                                                              |
+| Label format                                    | Percentage                                                           |
+| Max number of slices                            | 10                                                                   |
+| Others label                                    | Other                                                                |
+| Colour mode                                     | Chart palette                                                        |
+| Background                                      | Transparent                                                          |
+| Foreground                                      | `#1a1a1a`                                                            |
+| Refresh mode                                    | Live                                                                 |
+| Frequency                                       | Daily                                                                |
+| Time (UTC)                                      | A random time between 01:00 and 08:00 local, in 15-minute steps      |
+| Allow public embedding without login            | Cleared                                                              |
+
+## Errors and unsupported cases
+
+| Condition                                                         | Result                                                          |
+| ----------------------------------------------------------------- | --------------------------------------------------------------- |
+| Empty name                                                        | "Dataviz name is required"                                      |
+| Duplicate name                                                    | Uwazi switches to the **Info** tab and marks the **Name** field |
+| No data source                                                    | "At least one data source is required"                          |
+| No measure                                                        | "At least one measure is required"                              |
+| No dimension on a chart that needs one                            | "At least one dimension is required for this measure"           |
+| Relationship join                                                 | "Relationship joins are not supported yet"                      |
+| Live mode against a blocked condition                             | The save fails                                                  |
+| A refresh in progress                                             | Viewers see an error until it finishes                          |
+| A snapshot chart with no snapshot yet                             | Viewers see an error                                            |
+| A private instance, an anonymous viewer, and public embedding off | The embed refuses to load                                       |
+| A snapshot built from an older query                              | The chart still renders, with the older numbers                 |
+
+## Related
+
+- [Create data visualizations](../how-to/managing-your-instance/create-data-visualizations.mdx)
+- [How to create and manage pages](../how-to/managing-your-instance/create-and-manage-pages.mdx)
+- [How to share your content](../how-to/managing-your-instance/share-content.mdx)
+- [Page visualization components](page-visualization-components.mdx)
+- [Pages and visualizations](../explanation/pages-and-visualizations.mdx)
+- [Property types](property-types.mdx)
