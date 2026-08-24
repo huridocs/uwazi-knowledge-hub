@@ -110,6 +110,7 @@ const sidebars: SidebarsConfig = {
         'how-to/managing-your-instance/user-management',
         'how-to/managing-your-instance/share-content',
         'how-to/managing-your-instance/create-and-manage-pages',
+        'how-to/managing-your-instance/create-data-visualizations',
       ],
     },
   ],
@@ -121,6 +122,7 @@ const sidebars: SidebarsConfig = {
     'reference/property-types',
     'reference/csv-import',
     'reference/page-visualization-components',
+    'reference/data-visualizations',
     'reference/glossary',
   ],
   explanation: [

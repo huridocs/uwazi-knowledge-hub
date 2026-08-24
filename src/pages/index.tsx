@@ -45,7 +45,7 @@ const cards: DiataxisCard[] = [
         to: '/docs/how-to/managing-your-instance/user-management',
       },
     ],
-    count: '21 guides',
+    count: '22 guides',
   },
   {
     category: 'Reference',
@@ -65,7 +65,7 @@ const cards: DiataxisCard[] = [
         to: '/docs/reference/property-types',
       },
     ],
-    count: '8 articles',
+    count: '9 articles',
   },
   {
     category: 'Explanation',

@@ -17,6 +17,23 @@ It covers how a page mixes markup with components, how charts get their numbers,
 and the limits that shape what a chart can show.
 The goal is understanding, not a set of steps to follow.
 
+:::info
+
+This explanation covers the charts
+and components you write directly into a page's markup,
+the model Uwazi has offered since pages existed.
+For a chart with more chart types, saved definitions, filters,
+and scheduled refresh, Uwazi also offers **Settings > Data visualizations**,
+a separate admin-managed system.
+See [Data visualizations reference](../reference/data-visualizations.mdx) and
+[Create data visualizations](../how-to/managing-your-instance/create-data-visualizations.mdx).
+Most of the rest of this page — maps, forms, and entity view helpers —
+has no equivalent there.
+`Counter`'s single aggregated count is the exception:
+it's close to the newer system's Metric chart type.
+
+:::
+
 ## Pages are markup plus components
 
 Think of a page as a printed poster with empty frames on it.
@@ -220,6 +237,10 @@ keeps the choice of focus in your hands rather than the software's.
 
 - [Page visualization components reference](../reference/page-visualization-components.mdx)
   — every component and the settings each one accepts
+- [Data visualizations reference](../reference/data-visualizations.mdx)
+  — the newer, admin-managed alternative for charts
+- [Create data visualizations](../how-to/managing-your-instance/create-data-visualizations.mdx)
+  — build and embed a chart with Settings > Data visualizations
 - [Understanding Uwazi's building blocks](building-blocks.mdx) —
   the entity model that every dataset searches over
 - [Library and search](library-and-search.mdx) —

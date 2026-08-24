@@ -30,6 +30,9 @@
       "bash vale/scripts/vale-check.sh",
       "rumdl check --fix"
     ],
+    "vale/styles/{config,Uwazi}/**": [
+      "bash vale/scripts/vale-check-full.sh"
+    ],
     "*.json": [
       "prettier --write"
     ],
