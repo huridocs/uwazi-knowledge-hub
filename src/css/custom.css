@@ -192,6 +192,19 @@ h6,
   line-height: 1.75;
 }
 
+/* Mermaid wraps each node label in a real <p> inside an SVG foreignObject.
+   The prose rule above targets <p> directly, which beats inheritance from
+   Mermaid's own font/line-height rules regardless of specificity, swapping
+   labels to the wider, taller Merriweather metrics after node boxes are
+   already sized for Mermaid's font. foreignObject clips overflow by default,
+   so the extra size gets cut off (horizontally and vertically, e.g.
+   descenders) instead of reflowing. Restore inheritance so measurement and
+   paint agree. */
+.docusaurus-mermaid-container p {
+  font-family: inherit;
+  line-height: inherit;
+}
+
 /* Links */
 /* Prose links only — exclude DocCard (a.card) so cards keep native styling. */
 .markdown a:not(.card) {
