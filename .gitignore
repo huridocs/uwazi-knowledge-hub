@@ -58,5 +58,8 @@ Thumbs.db
 # Git worktrees
 .worktrees/
 
+# playwright-cli session output
+.playwright-cli/
+
 # Subagent-driven dev scratch
 .superpowers/
