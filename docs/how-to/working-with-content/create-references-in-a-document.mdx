@@ -4,24 +4,28 @@ description: Connect selected text in a document to another entity or to a speci
 ---
 
 A reference links a passage in your document to another entity.
-You can link to a whole entity, to a paragraph in another document,
-or to a paragraph in the same document.
+The interface calls it a relationship.
+You can link to a whole entity, or to an exact paragraph in any document.
 
 ## Prerequisites
 
 - The collaborator, editor, or admin role
-- An entity with at least one document, opened in the document viewer
+- An entity with at least one document
 - At least one relationship type set up in your instance
 
 :::note
-If no relationship type exists, the connect buttons don't appear.
-Ask an admin to add a relationship type first.
+With no relationship type in your instance,
+Uwazi stops you at the **Choose relation type** step.
+Admins can add a type there.
+Everyone else reads "An admin needs to add relationship types
+before you can create a relationship."
 :::
 
 ## Steps
 
-Open the entity in the document viewer.
-The document opens with the side panel on the right.
+Open the entity.
+The document sits on the **Document** tab.
+The **Relationships** tab sits beside it and shows a count.
 
 ### Reference another entity
 
@@ -29,17 +33,18 @@ Use this path to link selected text to an entity as a whole.
 The target entity doesn't need a document of its own.
 
 1. In the document, select (highlight) the text you want to link.
-2. In the small menu that appears, select **Connect to an entity**.
-3. The **Create Reference** panel opens and lists every relationship type.
-4. Select a relationship type.
-   A check mark marks your choice.
-5. Type a name in the search box,
-   then select the target entity from the results.
-   Leave the box empty to list every entity.
-6. Select **Save**.
+2. In the small menu that appears, select **Create relationship**.
+3. On the **Select target entity** step, type a name in the
+   **Search entities...** box.
+4. Select the target entity from the results.
+5. If that entity has PDF files, the **Select target document** step opens.
+   Select **Connect to entity** to skip it.
+6. On the **Choose relation type** step, select a type.
+   Uwazi selects the first type for you, so change it if you need another one.
+7. Select **Create relationship**.
 
-Uwazi saves the reference and opens the **References** tab.
-Your selected text turns yellow in the document.
+Uwazi saves the reference and flashes a "Relationship created" message.
+The reference joins the list on the **Relationships** tab.
 
 ### Reference a specific paragraph
 
@@ -48,45 +53,73 @@ The target paragraph can sit in another entity's document
 or in the one you're reading.
 
 1. In the document, select (highlight) the text you want to link.
-2. In the small menu, select **Connect to a paragraph**.
-3. In the **Create Reference** panel, select a relationship type.
-4. Search for the target entity, then select it.
-   Only entities that have a document appear here.
-   To link within the same document, select the entity you're already viewing.
-5. Select **Next**.
-   The target document opens beside yours.
-   If you chose the same entity, the same document opens again.
-6. In that document, select (highlight) the target paragraph.
+2. In the small menu, select **Create relationship**.
+3. On the **Select target entity** step, search for the entity, then select it.
+   Pick the entity you're reading to link within the same document.
+4. On the **Select target document** step,
+   select the file that holds the paragraph.
+   Only PDF files appear here.
+5. On the **Choose relation type** step, select a type, then select
+   **Continue**.
+6. On the **Select text in target document** step, select (highlight) the target
+   paragraph.
 7. Select **Save**.
 
-   To stop and go back, select **Back** instead.
-   This returns you to the single document view.
+To step back at any point, select **Back**.
+The **Select target document** step appears only for entities that have a PDF,
+so an entity without one can't be a paragraph target.
 
-Uwazi saves the reference and highlights the text on both ends.
+### Create the target entity as you go
+
+1. On the **Select target entity** step, select
+   **Create new entity from selection**.
+2. Uwazi opens the **New entity** step
+   and fills the title from your selected text.
+   Edit the title if you want.
+3. Select a template.
+4. Select **Create entity**.
+
+Uwazi creates the entity, then carries on with it as your target.
+
+### Find and read your references
+
+1. Open the **Relationships** tab.
+2. Select a row to jump to its text in the document.
+3. Select **View** to switch between **List**, **Tree**, and **Graph**.
+4. Select **Display options** to group, sort, or resize the rows.
+5. Use the rail down the side of the document.
+   Each marker stands for one reference.
+   Select a marker to open its reference.
+
+With no references yet, the tab reads **No Relationships**.
+When a search or a filter matches nothing, it reads **No relationships found**.
 
 ### Delete a reference
 
 :::warning
-Deleting a reference removes the connection for everyone,
-with no way to undo it.
+Deleting a reference removes the link for everyone, and you can't undo it.
 :::
 
-1. Open the **References** tab in the side panel.
+1. Open the **Relationships** tab.
 2. Point at the reference you want to remove.
 3. Select the trash button on its row.
-4. In the dialog, confirm the deletion.
+4. In the **Delete relationship** dialog, select **Delete**.
 
-Only editors and admins see the trash button.
+To remove several at once:
+
+1. In the footer of the **Relationships** tab, select **Edit**.
+2. Select each row you want to remove, or use **Select all**.
+3. Select **Delete**.
+4. In the **Delete relationships** dialog, select **Delete**.
+5. Select **Save** to leave edit mode.
+
+Only editors and admins can delete a reference.
+Edit mode holds no draft, so each deletion takes effect as you confirm it.
 
 ## Result
 
 Your document now links to the entity or paragraph you chose,
-and the reference appears in the **References** tab.
-
-:::tip
-Select a reference in the **References** tab to jump to its highlighted text in
-the document.
-:::
+and the reference appears on the **Relationships** tab.
 
 ## See also
 
