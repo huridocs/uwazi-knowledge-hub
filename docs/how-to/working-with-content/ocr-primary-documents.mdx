@@ -1,6 +1,6 @@
 ---
 title: How to run OCR on primary documents
-description: Turn scanned, image-based PDFs into text-searchable documents using your instance's OCR service.
+description: Turn scanned, image-based PDFs into text-searchable documents from the Document tab in the Uwazi viewer.
 ---
 
 ## Prerequisites
@@ -8,11 +8,13 @@ description: Turn scanned, image-based PDFs into text-searchable documents using
 Before you start, make sure you have:
 
 - Admin access to your Uwazi instance
+- An OCR service connected to your instance,
+  which an operator sets up at install time
 - A primary document saved as a PDF, with a supported language set
 
 OCR has two parts.
 First, an admin turns on the OCR trigger in settings.
-Then an admin or editor runs OCR on a PDF from the document viewer.
+Then an admin or editor runs OCR from the entity's **Document** tab.
 The sections below cover each part.
 
 ## Steps
@@ -28,58 +30,72 @@ The sections below cover each part.
 
 ### Run OCR on a document
 
-1. Open a PDF primary document in the document viewer.
-2. Find the OCR control in the toolbar at the top of the document.
-   It sits next to the page navigator and the **Plain text** link.
+1. Open the entity and select the **Document** tab.
 
-   The control appears only for admin and editor roles,
+   The tab behaves the same way in the main area and in the side panel.
+2. Look at the footer below the document.
+   The OCR button sits on the left, and the page navigator on the right.
+
+   The button shows only for admin and editor roles,
    and only when the trigger is on.
-3. Check the control's label.
+3. Read the button's label.
    If it reads **Unsupported OCR language**,
-   set a supported language on the document first, then reopen it.
+   change the document's language first.
 4. Select **OCR PDF**.
-5. The control changes to **In OCR queue**.
+5. The button changes to **In OCR queue** and stops responding.
    The OCR service now works in the background, so you can leave the page.
-6. Wait for the control to show **OCR completed** with a check mark.
-   The document reloads on its own.
+6. Wait for the button to show **OCR** with a check mark.
+   Uwazi reloads the entity on its own.
 
-:::note
+:::warning
 
-OCR can't be undone from the interface.
-Uwazi keeps your original PDF as an attachment on the same entity,
-and moves any linked references to the new file.
+You can't undo OCR from the interface,
+and you can't run it twice on the same file.
 
 :::
 
-## Reading the OCR control
+### Change a document's language
 
-The control shows the document's current state.
+1. Select the **Files** tab.
+2. Find the file under **Primary documents**.
+3. Open the menu on its row and select **Change language**.
+4. In the side panel, pick a language in the **Language** field.
+5. Select **Done**.
+6. Go back to the **Document** tab and read the button again.
+
+The list holds every Uwazi language, not only the ones your OCR service reads.
+So a language you pick here can still come back as unsupported.
+
+## Reading the OCR button
+
+The button shows the document's current state.
 Use this table to read it:
 
-| What you see             | What it means                                         |
-| ------------------------ | ----------------------------------------------------- |
-| OCR PDF                  | Ready to start. Select it to begin.                   |
-| In OCR queue             | Submitted. The service is processing the document.    |
-| OCR completed            | Done. The document is now text-searchable.            |
-| Unsupported OCR language | The service can't read the document's language.       |
-| OCR error                | The service couldn't process the document. Try again. |
+| What you see             | What it means                                      |
+| ------------------------ | -------------------------------------------------- |
+| OCR PDF                  | Ready to start. Select it to begin.                |
+| In OCR queue             | Submitted. The service is processing the document. |
+| OCR with a check mark    | Done. The document is now text-searchable.         |
+| Unsupported OCR language | The service can't read the document's language.    |
+| OCR error                | The service couldn't process the document.         |
 
-If the control stays on **In OCR queue** for a long time,
-the OCR service or its background worker may be down.
+Hover over the button for a tooltip.
+It gives the date of the last change, or the reason the run failed.
+
+:::note
+
+The button responds only when it reads **OCR PDF**.
+After an error, you can't start another run from the interface.
+Ask your instance administrator for help.
+
+:::
 
 ## Result
 
 Your primary document is now a text-searchable PDF.
-Readers can search and select its text,
-and the original scan stays on the entity as an attachment.
-
-:::tip
-
-Set the right language on each document before you run OCR.
-The service uses that language to recognize the text,
-and an unsupported language blocks the run.
-
-:::
+Readers can search and select its text.
+The original scan moves to **Supporting files** on the **Files** tab,
+and Uwazi points any references in the old file at the new one.
 
 ## See also
 
