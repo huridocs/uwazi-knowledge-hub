@@ -1,7 +1,12 @@
 ---
 title: How to create and edit an entity
-description: Create entities one at a time or in bulk, edit them, and copy field values between them in the Uwazi library.
+description: Create entities in the library, edit their title, type, and properties on the Metadata tab, and manage their files on the Files tab.
 ---
+
+Create entities from the library footer, one at a time or from a batch of PDFs.
+Once an entity exists, open it and work from its tabs.
+The **Metadata** tab holds the title, the type, and the properties.
+The **Files** tab holds the documents and the supporting material.
 
 ## Prerequisites
 
@@ -33,26 +38,61 @@ New entities stay private until you publish or share them.
 
 ### Edit an entity
 
+1. Open the entity and select the **Metadata** tab.
+2. Select **Edit** in the footer.
+   The footer swaps to **Cancel** and **Save**.
+3. Change the **Title**, pick a different **Template**, or edit any property.
+   An icon picker sits between the two fields.
+4. Select **Save**, or select **Cancel** to drop your changes.
+
+Both **Title** and **Template** need a value before Uwazi accepts the form.
+If the server rejects a value,
+the message appears under the field it belongs to.
+Leave the page with unsaved changes and Uwazi stops you first.
+
+### Add files to an entity
+
+1. Open the entity and select the **Files** tab.
+   It lists **Primary documents** and **Supporting files**.
+2. Select **Add file**.
+3. Select the file box to open a picker, or drag a file onto it.
+4. Edit the **Name** if you want a different label.
+   Select **Remove** to drop the file and pick another.
+5. Set **Add as**:
+   - **Supporting file** takes a file of any type.
+     Uwazi picks this for you.
+   - **New primary doc** takes a PDF.
+     The option stays disabled for every other type.
+6. Select **Add file**.
+   A progress line runs while the file uploads.
+
+To make a supporting file primary, delete it,
+then add it again as **New primary doc**.
+
+### Add a translated primary document
+
+1. In the side panel file list, under **Primary documents**, select **Add
+   translation**.
+2. Choose a PDF.
+
+Uwazi files the result as a primary document.
+The picker takes PDF files only.
+
+### Rename or delete a file
+
 :::warning
-Changing an entity's type erases all its relationships to other entities.
+Deleting a file removes it for everyone, and you can't undo it.
 :::
 
-1. In the library, select the entity.
-   The side panel opens in view mode.
-2. Select **Edit**.
-3. Change the title, type, or any metadata field.
-4. Add or remove primary documents and supporting files as needed.
-5. Select **Save**.
-
-### Add files to a saved entity
-
-Add files to an existing entity without opening the full edit form.
-
-1. Open the entity in view mode.
-2. Under **Primary Documents**, select **Add PDF**, then choose a PDF.
-   It uploads at once and shows its progress.
-3. Under **Supporting files**, add a file from your computer or a web address.
-   It uploads at once.
+1. On the **Files** tab, open the menu on the file's row.
+2. Pick an action:
+   - **View** opens the file.
+   - **Rename** changes its name.
+   - **Change language** appears on primary documents only.
+   - **Delete** removes it.
+3. To remove several files at once, select their rows, then select **Delete**
+   in the toolbar.
+4. Confirm in the dialog.
 
 ### Create entities by uploading PDFs
 
@@ -76,7 +116,7 @@ Uwazi sets the title to the file name and the type to the default template.
    - In card view, hold Ctrl (or Command) and select each entity.
      Hold Shift to select a range.
    - In table view, select the checkbox on each row.
-   - Select **Select all** to add every entity loaded on the page.
+   - Use **Select all** to add every entity loaded on the page.
 2. With two or more entities selected, a panel opens.
    It shows the count and the selected titles.
 3. Select **Edit**.
