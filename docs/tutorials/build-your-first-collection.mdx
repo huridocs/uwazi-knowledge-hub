@@ -141,8 +141,8 @@ First we name the connection, then we build the second template around it.
 
 7. Open the **Inherit property** selector and pick `Status`.
 
-   The `Report` entity will now show each linked case's status, read-only,
-   beside the link.
+   Every `Report` entity will now carry each linked case's status,
+   which we'll read back in Part 4.
 
 8. Select **Add property**, then **Save**.
 
@@ -174,39 +174,57 @@ and a link between them that pulls the inherited status across.
 
 5. Select **Save**.
 
-   Uwazi uploads the PDF and starts processing it.
-   The document appears in the panel,
-   then turns into a readable inline PDF once Uwazi finishes.
+   An **Entity created** message appears, and `Case 001` joins the library.
 
-6. Select **Create entity** again.
+6. Select **View** on the `Case 001` card.
+
+   The entity opens in two panes.
+   Four tabs sit above the left pane: **Document**, **Metadata**,
+   **Relationships**, and **Files**.
+   Our case carries a PDF, so it opens on **Document** and shows the file.
+
+7. Go back to the **Library** and select **Create entity** again.
    Title it `Report 001` and set its **Type** to **Report**.
 
    The form shows the `Report` fields,
    including the **Cases mentioned** relationship field.
 
-7. In the **Cases mentioned** field,
+8. In the **Cases mentioned** field,
    type `Case 001` in the search box and select the entity from the results.
 
    The case joins the relationship field on the form.
 
-8. Select **Save**, then open the new `Report 001` entity.
+9. Select **Save**, then select **View** on the `Report 001` card.
 
-   The **Cases mentioned** field shows `Case 001`,
-   and the inherited `Status` value `Open` sits beside it, read-only.
+   The report carries no document, so it opens on **Metadata**.
+
+10. Find the **Cases mentioned** card in the left pane.
+
+    A caption under its title reads **via mentioned in**,
+    then **inherits Status**.
+    Below the caption sits a table headed **Entity** and **Status**.
+    Its one row holds `Case 001` and the status we picked, `Open`.
+    Uwazi carried that value across from the case.
+
+11. Select `Case 001` in the table.
+
+    A panel slides in from the right and shows the case's own metadata.
+    Its footer holds **Close** and **Open entity**.
+    Select **Close** to go back to the report.
 
 ## What you've done
 
 - Built a thesaurus of fixed options
 - Created a template that offers those options as a field
-- Named a relationship and built a second template that uses it
-- Inherited a field from one template onto another
+- Named a relationship and built a second template that inherits through it
 - Created two entities, attached a document, and linked them together
+- Read the link and its inherited status in the entity viewer
 
 :::tip
 
-Open `Case 001`, change its **Status** to `Closed`, and save.
-Reopen `Report 001` and notice the inherited status now reads `Closed`.
-Uwazi keeps the inherited value in step with its source.
+Open `Case 001`, select the **Metadata** tab, then select **Edit**.
+Change **Status** to `Closed` and select **Save**.
+Reopen `Report 001` and notice the **Status** column now reads `Closed`.
 To show each case's first page on its library card,
 add a **Preview** property to the `Case` template.
 
