@@ -69,77 +69,99 @@ We'll fill a few and save.
    A **Entity created** message appears,
    and your new entity shows up in the library.
 
-## Part 3: Open the entity and its relationships
+## Part 3: Open the entity and read it back
 
-Now let's open the record we made and find its connections.
+Now let's open the record we made.
+Uwazi shows every entity in the same viewer, split into two panes.
 
 1. Select **View** on your entity's card.
 
-   The entity page opens.
-   The title sits at the top left,
-   and a badge showing its type sits at the top right.
-   The metadata fills the main area as label and value pairs.
+   The entity opens in two panes.
+   A row of tabs sits above the left pane: **Metadata**, **Relationships**,
+   and **Files**.
+   Our entity carries no file yet, so no **Document** tab appears.
 
-2. Select the **Relationships** tab, marked with an exchange icon.
+2. Look at the header above the left pane.
 
-   A small number badge shows how many links the entity has.
-   A new entity starts with none, so the panel reads **No Relationships**.
+   You'll see a small tag above the title we typed.
+   The tag names the *template* our entity uses,
+   which is the entity type we picked in Part 1.
+
+3. Read the **Metadata** tab.
+
+   The left pane lists each field we filled as a label and a value.
+   Empty fields don't appear, so the list stays short.
+
+4. Select the **Relationships** tab.
+
+   A badge on the tab counts the entity's links.
+   Our entity has none, so the panel reads **No Relationships**.
 
 ## Part 4: Add a connection
 
 A *relationship* links two entities, such as a person to an event.
-We'll add one and save it.
+We'll create one and watch it land in the panel.
 
-1. Select **Edit**, marked with a pencil icon, in the footer.
+1. Select **Edit** in the footer below the panel.
 
-   The page enters edit mode.
-   New controls appear for adding connections.
+   The footer swaps its buttons.
+   It now shows **Create relationship** on the left,
+   with **Cancel** and **Save** on the right.
 
-2. Select **New relationships group**, marked with a plus icon.
+2. Select **Create relationship**.
 
-   A new row appears with a drop-down that reads **New relationship type**.
+   A window opens on the step **Select target entity**.
 
-3. Open the drop-down and select a relationship type, such as **Witnessed**.
-
-   The **Add entities / documents** panel opens on the right.
-
-4. Type in the search box to find the entity you want to link,
+3. Type in the **Search entities...** box to find the entity you want,
    such as `Cairo Demonstration`.
 
-   A list of matching entities appears as you type.
+   Matching entities appear below the box, gathered by type.
 
-5. Select the entity you want in the results.
+4. Select the entity you want in the results.
 
-   A short message confirms: "added to hub.
-   Save your work to make change permanent."
-   The entity now sits in your relationship group.
+   The window moves to the step **Choose relation type**.
+   A line reading **Target:** shows the entity we picked.
 
-6. Select **Save** in the footer.
+5. Select a relationship type, such as **Witnessed**.
 
-   A **Relationships saved** message appears.
-   Your two entities are now linked.
+   The type you pick stays highlighted.
+
+6. Select **Create relationship**.
+
+   A **Relationship created** message appears with the target entity's title.
+   The window closes, the new row shows in the panel,
+   and the badge on the **Relationships** tab counts one more.
+
+7. Rest on the arrow at the start of the new row.
+
+   The arrow shows the way the link runs.
+   It reads **Incoming**, **Outgoing**, or **Bidirectional**.
+
+8. Select **Save** in the footer.
+
+   The footer returns to a single **Edit** button.
+   Uwazi created the link in step 6, so **Save** here closes edit mode.
 
 ## What you've done
 
 - Created a new entity from the library
 - Gave it a type and filled in its metadata
-- Saved it and opened its entity page
-- Added a relationship to another entity
-- Saved the connection so it stays
+- Opened it in the entity viewer and read its metadata back
+- Connected it to another entity from the **Relationships** tab
+- Watched the new link land in the panel
 
 :::tip
 
-Open the entity you linked to and check its **Relationships** tab.
-The connection shows on both entities,
-so you can travel between them either way.
+Open the entity you linked to and select its **Relationships** tab.
+The link shows on both entities, so you can travel between them either way.
 
 :::
 
 ## Next steps
 
 - [How to create and edit an entity](../how-to/working-with-content/create-and-edit-an-entity.mdx)
-  — create entities in bulk, edit them, and copy values between them
+  — edit entities, add files, and share them
 - [How to create relationships between entities](../how-to/working-with-content/create-relationships-between-entities.mdx)
-  — every way to link entities, including through a metadata field
+  — every way to link entities, including from a passage in a document
 - [Understanding Uwazi's building blocks](../explanation/building-blocks.mdx) —
   the model behind entities and relationships
