@@ -84,82 +84,130 @@ Each entity has a type, called a *template*, shown as a small label on its card.
 ## Part 3: Open an entity and read its metadata
 
 Now let's open one record and read its details.
+Uwazi shows every entity in the same viewer, split into two panes.
 The fields on an entity are its *metadata*,
 and the template decides which fields appear.
 
 1. Select the **View** button on any card.
 
-   The entity page opens.
-   The title sits at the top, with its template label right below.
+   The entity opens in two panes.
+   A row of tabs sits above the left pane: **Document**, **Metadata**,
+   **Relationships**, and **Files**.
+   The **Document** tab shows up only when the entity carries a document.
 
-2. Find the **Info** tab in the right side panel.
+2. Look at the header above the left pane.
 
-   The tab is open by default.
-   It lists each metadata field as a label and a value, such as a date, a place,
-   or a linked name.
+   You'll see a tag with the template name, an icon, and the title.
 
-3. Scroll down the **Info** tab.
+3. Select the **Metadata** tab.
 
-   Below the fields you'll see **Primary Documents** and any attachments.
+   The left pane lists each field as a label and a value, such as a date,
+   a place, or a linked name.
    Empty fields don't appear, so the list stays short.
+   An entity with nothing filled in reads **No metadata for this entity yet**.
+
+4. Scroll to the bottom of the **Metadata** tab.
+
+   You'll see **Created** and **Edited**, each with a date.
+
+5. Select a linked name in the metadata.
+
+   A panel slides in over the right pane and shows that entity's fields.
+
+6. Select **Open entity**.
+
+   The linked entity opens in the viewer, ready to explore.
+   Use your browser's back button to return.
+
+7. Drag the divider between the two panes.
+
+   The panes grow and shrink as you drag.
+   The right pane carries its own tabs,
+   so you can read a document on the left and its details on the right.
 
 ## Part 4: Follow relationships between entities
 
 Entities can link to one another.
-Uwazi calls these links *relationships*,
-and they let you move from one record to a connected one.
+Uwazi calls these links *relationships*.
+A link can point to a whole entity, or to an exact passage in a document.
 
-1. Select the **Relationships** tab in the side panel.
+1. Select the **Relationships** tab above the left pane.
 
-   A small number badge shows how many links the entity has.
+   A badge on the tab shows how many links the entity has.
+   A line at the top counts the relationships, entities,
+   and references the panel holds.
+   An entity with no links reads **No Relationships**.
 
-2. Look at the connected entities.
+2. Rest on the arrow at the start of a row.
 
-   Uwazi groups them by relationship type,
-   so links of the same kind sit together.
+   The arrow shows the way the link runs.
+   It reads **Incoming**, **Outgoing**, or **Bidirectional**.
 
-3. Select one connected entity.
+3. Select **View**, then select **Tree**.
 
-   Its own page opens, with its metadata and relationships ready to explore.
+   The rows nest under the entity they belong to.
 
-## Part 5: Open and read a primary document
+4. Select **View**, then select **List** to come back.
 
-Many entities have a PDF attached, called a *primary document*.
-When an entity has one, Uwazi opens it in the document viewer instead of the
-info page.
-An entity can also hold other file types, such as images or spreadsheets,
-as *attachments*.
+5. Select **Display options**.
 
-1. Open an entity that has a document.
+   A menu opens with **Group by**, **Then by**, **Sort**, and **Density**.
+   Pick a value under **Group by**.
+   The rows gather into groups of the same kind.
 
-   The PDF fills the main area.
-   If an entity has no document,
-   you'll see a short prompt with a **view** link to its metadata instead.
+6. Find a row that carries a page tag, then select the tag.
 
-2. Select **Previous** or **Next** above the document.
+   The document scrolls to that page,
+   and a marker lights up in the rail beside it.
 
-   The viewer moves one page at a time and shows your place in the file.
+## Part 5: Read a document and its files
 
-3. Select the **Table of Contents** tab in the side panel.
+Many entities carry a PDF, called a *primary document*.
+An entity can also hold other files, such as images or spreadsheets.
 
-   If this document has a table of contents, the tab lists its sections,
-   each with a page number.
-   Select a section to jump straight to that page.
-   Not every document has one,
-   so the tab may show a short empty message instead.
+1. Select the **Document** tab above the left pane.
 
-4. Select the **References** tab.
+   The PDF fills the left pane.
+   The header above it shows the file name.
 
-   A *reference* is a highlighted passage in the document.
-   It can point to another passage in the same document,
-   to a passage in a different document, or to another entity.
-   If this document has references, you'll see them listed here.
-   A document without references shows a short empty message instead.
+2. Select **Next** in the footer, then select **Previous**.
 
-5. Select **Plain text**, then **Normal view**.
+   The viewer moves one page at a time.
+   A counter shows the page you're on and the total.
+
+3. Select **Plain text** in the view selector, then select **PDF**.
 
    The first shows the raw text of the file.
-   The second brings back the PDF.
+   The second brings back the pages.
+
+4. Select the **ToC** tab in the right pane.
+
+   The panel reads **Table of contents** and lists the document's sections.
+   Select an entry to jump to its page.
+   A document without one reads **No Table of contents**.
+
+5. Select the **Search** tab in the right pane.
+
+6. Type a word in the **Search this document** box and press **Enter**.
+
+   Each match shows the passage and the page it sits on.
+   Select a match to jump there.
+   A word with no match reads **No matches**
+   and offers a **Clear search** button.
+
+7. Select the **Files** tab above the left pane.
+
+   Two tables appear: **Primary documents** and **Supporting files**.
+
+8. Select a row under **Primary documents**.
+
+   The right pane opens the **File** tab.
+   It shows the **Name**, **Type**, **Size**, and **Modified** date,
+   with a badge reading **Active primary**.
+
+9. Select **Download**.
+
+   The file saves to your computer.
 
 ## Part 6: Find content with search and filters
 
@@ -182,8 +230,6 @@ select **Library** in the top menu to return.
 
 3. In the filters panel, select a type under the templates filter.
 
-   If you've opened an entity, its details cover the filters panel.
-   Close that panel to bring the filters back.
    The list narrows to that type.
    Each filter shows a count of matching entities.
 
@@ -200,15 +246,15 @@ select **Library** in the top menu to return.
 
 - Logged in to a Uwazi instance
 - Explored the library in cards, table, and map views
-- Opened an entity and read its metadata
-- Followed a relationship to a connected entity
-- Opened a document and used its table of contents
+- Opened an entity and read its metadata in the viewer
+- Followed a link to a connected entity
+- Sorted and grouped an entity's relationships
+- Read a document, its table of contents, and its files
 - Narrowed the library with search and filters
 
 :::tip
 
-Try opening a second entity and comparing its template
-and metadata to the first.
+Open a second entity and compare its template and metadata to the first.
 Spotting the pattern is the fastest way to learn how a collection fits together.
 
 :::
