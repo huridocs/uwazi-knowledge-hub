@@ -1,6 +1,6 @@
 ---
 title: How to create a table of contents for a document
-description: Add, rename, re-order by level, and delete table of contents headings on a document in the Uwazi viewer.
+description: Add, rename, indent, and delete table of contents entries for a document in the Uwazi viewer.
 ---
 
 ## Prerequisites
@@ -9,76 +9,90 @@ description: Add, rename, re-order by level, and delete table of contents headin
 - An entity that has at least one document
 
 A table of contents belongs to a single document.
-If an entity has several documents, each one has its own table of contents.
+The panel always shows the document you're reading,
+in the language you're reading it in.
 
 ## Steps
 
-Open the entity in the document viewer.
-The document opens with the side panel on the right.
+Open the entity.
+The viewer opens on the **Document** tab, with the right pane beside it.
 
 ### Open the table of contents
 
-1. In the side panel, select the **Table of Contents** tab.
-2. The panel lists the document's headings.
-   If there are none yet, it shows a "No table of contents" message.
+1. In the right pane, select the **ToC** tab.
+2. The panel lists the document's entries.
+   If there are none yet, it shows a **No Table of contents** message.
 3. If you can edit this document, an **Edit** button shows at the bottom of the
    panel.
 
-People without edit access still see the headings,
-but as plain text rather than buttons.
+People without edit access still see the entries, but no buttons to change them.
 
-### Add a heading
+:::note
+Some instances build the table of contents for you when you upload a document.
+The footer then shows **Mark as reviewed**,
+which you select once you've checked the entries.
+:::
 
-1. In the document, select (highlight) the text you want as a heading.
-2. In the small menu that appears, select **Add to table of contents**.
-3. The text becomes a new heading, and the panel opens in edit mode.
+### Add an entry
 
-Uwazi lists headings in the order they appear in the document.
-You can't drag them to re-order.
+1. In the document, select (highlight) the text you want as an entry.
+2. In the small menu that appears, select **Add to ToC**.
+3. Uwazi adds the entry, opens the **ToC** tab, and turns on edit mode.
 
-### Rename a heading
+Uwazi sorts entries by page, then by their place on the page.
+You can't drag them into a different order.
 
-1. If you aren't in edit mode, open the **Table of Contents** tab and select
-   **Edit**.
-2. Find the heading in the list.
-3. Type a new label in its text box.
+### Rename an entry
 
-### Change a heading's level
+1. If you aren't in edit mode, open the **ToC** tab and select **Edit**.
+2. Select the entry's label.
+   It turns into a text box.
+3. Type the new label.
+4. Press **Enter**, or select the check button.
+   To drop the change, press **Escape**.
 
-Levels show structure, such as a main heading with subheadings under it.
+### Change an entry's level
 
-1. In edit mode, find the heading.
+Levels show structure, such as a main entry with sub-entries under it.
+A table of contents can hold three levels.
+
+1. In edit mode, find the entry.
 2. Select the right arrow to move it one level deeper.
 3. Select the left arrow to move it one level back.
 
-### Delete a heading
+The first entry in the list always stays at the top level.
 
-:::warning
-Deleting a heading happens at once, with no confirmation prompt.
-:::
+### Delete an entry
 
-1. In edit mode, find the heading.
-2. Select the trash button on its row.
+1. In edit mode, select the trash button on the entry's row.
+2. In the **Delete?**
+   prompt, select **Yes**.
+   To keep the entry, select **No**.
 
-To bring a deleted heading back before you save, select **Cancel**.
-This also discards your other unsaved changes.
+To bring a deleted entry back before you save, select **Cancel**.
+This also drops your other unsaved changes.
 
 ### Save or discard your changes
 
 Your changes stay as a draft until you save them.
 
 1. To keep your changes, select **Save**.
-   Uwazi shows a "Document updated" message.
-2. To discard every change, select **Cancel**.
+   Uwazi flashes a "Table of contents saved successfully" message in the header,
+   and keeps it in the **Notifications** panel.
+2. To drop every change, select **Cancel**.
 
-Leaving the document before you save also discards your unsaved changes.
+Leaving the entity before you save also drops your unsaved changes.
 
-### Jump to a heading
+### Jump to an entry
 
-1. Open the **Table of Contents** tab, and don't select **Edit**.
-2. Select any heading.
-   Each heading shows its page number.
-3. Uwazi scrolls the document to that point.
+1. Open the **ToC** tab, and don't select **Edit**.
+2. Select any entry, or the page tag on its right.
+   Uwazi scrolls the document to that page.
+3. If an entry has sub-entries, selecting it also opens them.
+   Select **Expand All** or **Collapse All** to open
+   or close every entry at once.
+
+Uwazi marks the entry that matches the page on screen.
 
 ## Result
 
@@ -86,7 +100,7 @@ The document has a table of contents
 that readers can use to jump to each section.
 
 :::tip
-After you save, select each heading to confirm it jumps to the right place.
+After you save, select each entry to confirm it jumps to the right place.
 :::
 
 ## See also

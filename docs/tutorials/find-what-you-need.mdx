@@ -1,13 +1,13 @@
 ---
 title: Find what you need
-description: Search and filter an Uwazi collection to find any entity or document.
+description: Search and filter an Uwazi collection, then find the exact passage inside an entity's document.
 ---
 
 ## What you'll learn
 
 We'll search a whole collection, sharpen the search with operators,
 and narrow the results with filters.
-We'll also search inside one document to find an exact passage.
+Then we'll open one entity and search inside it.
 By the end of this tutorial,
 we'll have found a specific entity
 and jumped to the matching page in its document.
@@ -41,9 +41,9 @@ The search box at the top looks across the whole collection at once.
    Cards with a single match don't display it,
    so scan the results for one that does before you continue.
 
-   The entity's side panel opens on the **Search text** tab.
-   It groups every match by field and document text, so you see them together.
-   We'll jump from a match into the document itself in Part 4.
+   The preview panel opens on the **Search text** tab.
+   It groups the matches by field.
+   Matches in the document sit under **Document contents**, with page numbers.
 
 4. Select the clear (**×**) button in the search box.
 
@@ -56,9 +56,10 @@ Operators help you match more entities or fewer, so you reach the right ones.
 
 1. Select **Search Tips** near the search box.
 
-   A small window opens.
-   It lists operators for wildcards, exact phrases, and word combinations.
-   Close it when you're done.
+   A window opens, titled **Narrow down your searches**.
+   It lists operators for wildcards, exact phrases, proximity,
+   and word combinations.
+   Select **Accept** to close it.
 
 2. Type `detain*` in the **Search** box and press **Enter**.
 
@@ -75,17 +76,12 @@ Operators help you match more entities or fewer, so you reach the right ones.
 Filters trim the list without a search word.
 The filters panel sits beside the results, and the filters stack on each other.
 
-:::note
-
-If you've opened an entity, its details cover the filters panel.
-Close that panel to bring the filters back.
-
-:::
-
 1. Look at the filters panel beside the results.
 
-   The panel shows entity types at the top and property filters below it.
-   It stays in place as you browse, so your filters are always within reach.
+   Its title reads **Filters configuration**.
+   The panel shows entity types at the top and property filters below them.
+   Selecting a card swaps this panel for the preview panel,
+   so close the preview to bring the filters back.
 
 2. Select an entity type, such as **Case**, under the types filter.
 
@@ -97,10 +93,10 @@ Close that panel to bring the filters back.
    The results narrow again.
    The counts on the other filters update to match what's left.
 
-4. Set a list filter's **And / Or** switch to **And**.
+4. Find a list filter with an **AND** / **OR** switch and set it to **AND**.
 
-   The results now show only entities that carry every value you picked,
-   instead of any one of them.
+   The switch starts on **OR**, so the filter matches any value you pick.
+   On **AND**, the results show only entities that carry every value.
 
 5. Copy the page address from your browser's address bar.
 
@@ -111,28 +107,68 @@ Close that panel to bring the filters back.
 
    Every filter resets, and the full collection returns.
 
-## Part 4: Search inside one document
+## Part 4: Search inside one entity
 
-Many entities hold a PDF.
-The **Search text** tab links each match to its page,
-so you jump straight to the spot you need.
+A library search tells you which entities match.
+The entity's own **Search** tab tells you where inside them the words sit,
+and takes you to the page.
 
-1. Select the **View** button on a card that has a document.
+:::note
 
-   The document opens in the viewer.
-   Its pages fill the main area, and the side panel sits on the right.
+The **Search** tab appears only beside **Document** and **Metadata**.
+Switch the left pane to **Relationships** or **Files** and it goes away.
 
-2. Open the **Search text** tab, type a word such as `witness` in its box,
-   then press **Enter**.
+:::
 
-   Uwazi searches the text of this one document.
-   Under **Document contents**, it lists each match with its page number.
-   If nothing matches, you'll see a short **No text match** message.
+1. Type `detention` in the **Search** box, press **Enter**,
+   then select **View** on a card that has a document.
 
-3. Select a match under **Document contents**.
+   The entity opens in two panes.
+   The right pane opens on the **Search** tab,
+   with `detention` already in the **Search this document** box
+   and the matches already listed.
 
-   The viewer jumps to that page and marks your word in the text.
-   You've now found an exact passage inside the document.
+2. Read the line above the results.
+
+   It counts them, such as `4 matches for “detention”`.
+
+3. Look at the two headings below that line.
+
+   **PROPERTIES** holds matches in the entity's own fields.
+   **DOCUMENT** holds matches in the text of its document.
+   Each **DOCUMENT** row ends with a page label, such as `p.4`.
+   A page carrying more than one match reads `p.4 · 3×`.
+
+4. Select a row under **DOCUMENT**.
+
+   The left pane switches to **Document**, turns to that page,
+   and marks the passage in the text.
+
+5. Select the same row again.
+
+   The mark clears, and the document stays on that page.
+
+6. Select a row under **PROPERTIES**.
+
+   The left pane switches to **Metadata**,
+   and the matching field flashes so you can spot it.
+
+7. Type `witness` in the **Search this document** box.
+
+   A moment after you stop typing, the results refresh.
+   You don't need to press **Enter**.
+
+8. Type a word the entity doesn't hold, such as `zebra`.
+
+   The panel reads **No matches for “zebra”**
+   and offers a **Clear search** button.
+   Select it to empty the box.
+
+9. Select **tips** at the foot of the panel.
+
+   A small window opens, headed **NARROW YOUR SEARCH**.
+   It lists five examples, such as `"Costa Rica"` and `198?`.
+   Select one, and it replaces whatever sits in the search box.
 
 ## What you've done
 
@@ -140,7 +176,7 @@ so you jump straight to the spot you need.
 - Sharpened a search with a wildcard and an exact phrase
 - Narrowed the results with stacked filters
 - Shared a search through its web address
-- Searched inside a document and jumped to the matching page
+- Searched inside one entity and jumped to the matching page
 
 :::tip
 

@@ -1,127 +1,134 @@
 ---
 title: How to create relationships between entities
-description: Link an entity to other entities from its Relationships tab or through a metadata field.
+description: Link an entity to other entities from its Relationships tab, or through a relationship property on the Metadata tab.
 ---
+
+A relationship links one entity to another and carries a label,
+such as "Author of" or "Mentioned in".
+Build links by hand on the **Relationships** tab.
+Use a relationship property on the **Metadata** tab when your template has one.
 
 ## Prerequisites
 
-- Permission to edit the entity
-  (collaborator with write access, editor, or admin role)
+- The editor or admin role, or permission to edit this entity
+- At least one relationship type in your collection
+
+:::note
+With no relationship type in your collection,
+Uwazi stops you at the **Choose relation type** step.
+Admins can add a type there.
+Everyone else reads "An admin needs to add relationship types
+before you can create a relationship."
+:::
 
 ## Steps
 
-You can link an entity to others in two ways.
-Use the **Relationships** tab to build links by hand.
-Use a relationship field on the **Info** tab when your template has one.
-An administrator sets up that field first, as described in
-[how to set up relationship properties on a template](../structuring-your-collection/relationship-properties.mdx).
-
-Each relationship can carry a label called a relationship type,
-such as "Author of" or "Mentioned in".
-Links you make on one entity also show on the other entity.
+Open the entity and select the **Relationships** tab.
+The tab carries a count of the relationships it lists.
 
 ### Create a relationship
 
-1. Open the entity and select the **Relationships** tab in the right sidebar.
-2. Select **Edit** in the footer.
-3. Select **New relationships group** at the bottom of the graph.
-4. Open the relationship type drop-down on the right and select a type.
+1. Select **Edit** in the footer.
+2. Select **Create relationship**.
+3. On the **Select target entity** step,
+   type a name in the **Search entities...** box.
+4. Choose the target entity from the results.
+5. On the **Choose relation type** step, pick a type.
+6. Select **Create relationship**.
 
-   The **Add entities / documents** panel opens.
-5. Type a name in the search box, then select an entity from the results.
-   The search box matches entity titles.
+Uwazi saves the link and flashes a "Relationship created" message.
 
-   Repeat to add more entities to the group.
-6. To label the current entity's side too,
-   open the left drop-down and select a type.
-   Leave it as **No Label** if you don't need one.
-7. Select **Save**.
+To point at one passage rather than a whole entity,
+highlight the text in the document before you open the wizard.
+The wizard then adds a **Select target document** step
+and a **Select text in target document** step.
+See
+[how to create references in a document](create-references-in-a-document.mdx)
+for that path.
 
-### Add entities to an existing relationship
+### Create the target entity as you go
 
-1. On the **Relationships** tab, select **Edit**.
-2. In the group you want to grow, select **Add entities / documents**.
-3. Search for an entity, then select it from the results.
-4. Select **Save**.
+1. On the **Select target entity** step,
+   use **Create new entity from selection**.
+2. Type a **Title**.
+3. Pick an **Entity type**.
+4. Select **Create entity**.
 
-### Create a new entity and link it at once
+Uwazi creates the entity, then carries on with it as your target.
 
-1. On the **Relationships** tab, select **Edit**.
-2. Select **Add entities / documents**, then select **Create Entity**.
-3. Select a template, type a title, and fill in the fields.
-4. Select **Save** in the panel.
+### Delete a relationship
 
-   The new entity joins the group.
-5. Select **Save** in the footer to keep the relationship.
-
-### Move entities between groups
-
-1. On the **Relationships** tab, select **Edit**.
-2. Select the check mark icon on each entity you want to move.
-3. Go to the target group and select its arrow icon.
-
-   The checked entities move in and take on that group's relationship type.
-4. Select **Save**.
-
-### Change a relationship's label
-
-1. On the **Relationships** tab, select **Edit**.
-2. Open the relationship type drop-down on the left side or on a group.
-3. Select a different type, or select **No Label** to remove the label.
-4. Select **Save**.
-
-### Remove a relationship
-
-1. On the **Relationships** tab, select **Edit**.
-2. Select the trash icon to mark what to remove:
-   - On one entity, to remove a single link.
-   - On a group, to remove every link in it.
-   - On the left side, to remove the whole row.
-3. To undo a mark before saving, select the trash icon again.
-4. Select **Save**.
-
-### Create a relationship through a metadata field
-
-:::note
-A link made through a field comes back
-if you remove it on the **Relationships** tab while the field still lists
-that entity.
-Remove it from the field instead.
+:::warning
+Deleting a relationship removes the link for everyone, and you can't undo it.
+Uwazi deletes it the moment you confirm, even in edit mode.
 :::
 
-1. Open the entity and stay on the **Info** tab.
+1. Point at the row you want to remove.
+2. Select the trash button on that row.
+3. In the **Delete relationship** dialog, select **Delete**.
+
+To remove several at once:
+
+1. Select **Edit** in the footer.
+2. Select each row you want to remove, or use **Select all**.
+3. Select **Delete**.
+4. In the **Delete relationships** dialog, select **Delete**.
+5. Select **Save** to leave edit mode.
+
+**Save** and **Cancel** only close edit mode.
+Neither one undoes a deletion.
+
+### Narrow the relationships in the view
+
+You don't need edit mode for any of this.
+
+1. To search, type in the search box above the list.
+   It reads `Search  •  AND, OR, NOT, "exact", wild*`,
+   and the tips button beside it lists the syntax.
+2. To change the layout, select one of the three view buttons
+   beside the search box: **List**, **Tree**, or **Graph**.
+3. To reorder the list, open **Display options**
+   and set **Group by**, **Then by**, **Sort**, or **Density**.
+4. To filter, open the filters drawer
+   and pick values under **Relation type** or **Target entity type**.
+5. Select **Clear all filters** to start again.
+
+Uwazi groups by **Relation type** and sorts by **Appearance** to begin with.
+None of these choices stick: they reset each time you open the entity.
+
+The tab lists the links tied to the document you have open,
+plus the links that sit on the entity as a whole.
+Open another document to see its links.
+
+### Link entities through a relationship property
+
+An administrator sets up the property first, as described in
+[how to set up relationship properties on a template](../structuring-your-collection/relationship-properties.mdx).
+
+1. Select the **Metadata** tab.
 2. Select **Edit** in the footer.
-3. Find the relationship field, labelled with the name your administrator gave
-   it.
-4. Type to search, then select an entity to add it.
-   Select an added entity's remove control to take it out.
-5. Select **Save**.
+3. Find the relationship property,
+   labelled with the name your administrator gave it.
+4. Select **Add entity**, type in the **Search entities…** box,
+   then pick an entity.
+5. To drop one, select the remove icon on its row.
+6. Select **Save** in the footer.
 
-### Narrow the entities in the view
-
-When an entity has many relationships,
-use these controls on the **Relationships** tab to find what you need.
-You don't need edit mode.
-
-1. To search, type a name in the **Search related entities or documents** box
-   above the graph.
-   Select the clear icon to show all again.
-2. To reorder, use the sort buttons above the graph.
-   They sort the related entities by title or by another property.
-3. To filter, open the grouped list in the right sidebar.
-   Select a relationship type or an entity type to show only matching links.
-4. Select **Reset** in the sidebar to clear all filters.
+Unlike the **Relationships** tab, this form holds a draft.
+Nothing changes until you save.
 
 ## Result
 
 The linked entities appear on the entity's **Relationships** tab,
-and field links also appear in their field on the **Info** tab.
+and property links also appear in their property on the **Metadata** tab.
 
 ## See also
 
+- [How to create references in a document](create-references-in-a-document.mdx)
+  — start a relationship from a passage of text you select in the document
 - [How to set up relationship properties on a template](../structuring-your-collection/relationship-properties.mdx)
-  — set up relationship types and add relationship properties to templates so
-  entities can link to each other
+  — set up relationship types and add relationship properties to templates
+  so entities can link to each other
 - [How to create and edit an entity](create-and-edit-an-entity.mdx) —
   create entities one at a time or in bulk, edit them,
-  and copy field values between them in the Uwazi library
+  and copy property values between them in the Uwazi library

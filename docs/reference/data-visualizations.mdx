@@ -510,7 +510,7 @@ It stays empty until the first save.
 
 | Target           | Snippet                                               |
 | ---------------- | ----------------------------------------------------- |
-| A Uwazi page     | `<Dataviz id="<id>" />`                               |
+| An Uwazi page    | `<Dataviz id="<id>" />`                               |
 | An external site | An `iframe` element pointing at `/embed/dataviz/<id>` |
 
 ```html
@@ -550,7 +550,7 @@ not the language of the page.
 ## Filters from the surrounding page
 
 A page or an external site can filter a chart at view time.
-A Uwazi page sends a `uwazi:dataviz-filter` event.
+An Uwazi page sends a `uwazi:dataviz-filter` event.
 An external site posts a message of the same type to the frame.
 
 Both carry the same `detail` object.
@@ -570,7 +570,7 @@ so clearing one leaves the others in place.
 A filter of this kind forces the chart to run live and bypasses the snapshot.
 A manual data chart ignores it.
 
-### On a Uwazi page
+### On an Uwazi page
 
 The page content holds the chart and the controls.
 

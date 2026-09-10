@@ -1,0 +1,10 @@
+# House ruling: "Uwazi" is said oo-WAH-zee, a vowel sound, so it takes "an".
+# See the brand naming section of the style guide.
+extends: substitution
+message: "Use '%s' instead of '%s'."
+ignorecase: false
+action:
+  name: replace
+swap:
+  '\ba Uwazi\b': 'an Uwazi'
+  '\bA Uwazi\b': 'An Uwazi'
